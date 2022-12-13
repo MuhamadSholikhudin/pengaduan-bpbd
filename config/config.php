@@ -2,7 +2,7 @@
 
 class Config {
     public function UrlWeb(){
-        $url = "http://localhost/pengaduan-bencana";
+        $url = "http://localhost/pengaduan-bpbd";
         return $url;
     }
 
