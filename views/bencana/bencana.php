@@ -8,13 +8,13 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-12">
-                      <a href="<?= $url ?>?bantuan=add" class="btn btn-sm btn-outline-secondary">
+                      <a href="<?= $url ?>?bencana=add" class="btn btn-sm btn-outline-secondary">
                           <i class="mdi mdi-library-plus"></i>
                           Tambah
                         </a>
                     </div>
                     <div class="col-lg-12 text-center">
-                      <h2>DATA BANTUAN</h2>
+                      <h2><?= strtoupper("Data ". array_keys($_GET)[0]) ?></h2>
                     </div>
                   </div>
                   <div class="table-responsive">
@@ -22,16 +22,16 @@
                       <thead>
                         <tr>
                           <th>
-                            Nama Bantuan
+                            Nama Bencana
                           </th>
                           <th>
-                            Kategori
+                            Kategori bencana
                           </th>
                           <th>
-                            Satuan
+                            level
                           </th>
                           <th>
-                            Batch
+                            Wilayah bencana
                           </th>
                           <th>
                             Action
@@ -56,7 +56,7 @@
                             May 15, 2015
                           </td>
                           <td>
-                            <a href="<?= $url ?>/?bantuan=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                            <a href="<?= $url ?>/?bencana=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                               Edit
                               <i class="ti-file btn-icon-append"></i>                          
                             </a>                          
@@ -79,7 +79,7 @@
                             July 1, 2015
                           </td>
                           <td>
-                            <a href="<?= $url ?>/?bantuan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
+                            <a href="<?= $url ?>/?bencana=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
                               Edit
                               <i class="ti-file btn-icon-append"></i>                          
                             </a>                          
@@ -102,7 +102,7 @@
                             Apr 12, 2015
                           </td>
                           <td>
-                            <a href="<?= $url ?>/?bantuan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
+                            <a href="<?= $url ?>/?bencana=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
                               Edit
                               <i class="ti-file btn-icon-append"></i>                          
                             </a>                          

@@ -16,15 +16,15 @@
             </a>
             <div class="collapse" id="ui-menu">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=index">Users</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan">Bantuan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bencana">Bencana</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?wilayah">Wilayah</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?distribusi">Distribusi</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?peninjauan">Peninjauan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?pelaporan">Pelapor</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan">Stok Bantuan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?publikasi_berita">Publikasi Berita</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?wilayah=wilayah">Wilayah</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?peninjauan=peninjauan">Peninjauan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan">Stok Bantuan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?publikasi_berita=publikasi_berita">Publikasi Berita</a></li>
               </ul>
             </div>
           </li>

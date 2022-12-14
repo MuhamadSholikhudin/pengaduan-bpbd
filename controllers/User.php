@@ -1,6 +1,6 @@
 <?php 
     include "function.php";
-    include "./config/Helper.php";
+    // include "./config/Helper.php";
     include "./models/Model.php";
 
     class User {

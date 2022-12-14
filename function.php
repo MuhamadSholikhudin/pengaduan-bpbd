@@ -17,7 +17,7 @@ function Page($page){
     include $page;
     include "template/partials/_footer.php";
 }
-
+/*
 $koneksi = mysqli_connect("localhost","root","","storecashier");
  
 // Check connection
@@ -38,7 +38,7 @@ function querysatudata($query){
     $query_cek = mysqli_query($koneksi, $query);
     return mysqli_fetch_array($query_cek, MYSQLI_BOTH);
 }
-
+*/
 function Redirect($link, $notif) {
     $output = "<script>alert('".$notif."')</script><meta http-equiv='refresh' content='0; url=".$link. "'>";
     return $output;
