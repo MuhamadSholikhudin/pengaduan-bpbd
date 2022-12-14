@@ -7,7 +7,9 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?user=post" method="POST" enctype="multipart/form-data">
+            
+
+                    <form class="forms-sample">
                       <div class="form-group">
                           <label for="nama_user">Nama Lengkap</label>
                           <input type="text" class="form-control p-input" id="nama_user" aria-describedby="nama_user" name="name_user" placeholder="Enter Nama Lengkap">
@@ -18,11 +20,11 @@
                         </div>
                       <div class="form-group">
                           <label for="no_telp_user">No telp User</label>
-                          <input type="text" class="form-control p-input" id="no_telp_user" aria-describedby="no_telp_user" name="no_telp_user" placeholder="Enter Nama Lengkap">
+                          <input type="text" class="form-control p-input" id="no_telp_user" aria-describedby="no_telp_user" name="name_user" placeholder="Enter Nama Lengkap">
                       </div>
                       <div class="form-group">
                           <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control p-input" id="exampleInputPassword1" name="password" placeholder="Password">
+                          <input type="password" class="form-control p-input" id="exampleInputPassword1" placeholder="Password">
                       </div>
                       <div class="form-group">
                         <?php 

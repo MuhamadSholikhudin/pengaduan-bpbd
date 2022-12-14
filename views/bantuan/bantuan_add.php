@@ -7,7 +7,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?user=post" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="<?= $url ?>/?kepala_bpbd=user_post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="nama_user">Nama Lengkap</label>
                           <input type="text" class="form-control p-input" id="nama_user" aria-describedby="nama_user" name="name_user" placeholder="Enter Nama Lengkap">

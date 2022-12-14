@@ -3,7 +3,6 @@
     $conf = new Config();
     $url = $conf->UrlWeb();
 
-
     include "controllers/User.php";
     $user = new User();
 
@@ -14,30 +13,27 @@ if($_GET){
     $param_val = $_GET[array_keys($_GET)[0]];
 
     switch ($param_key) {
-        case 'kepala_bpbd' :
-    
+        case "user":
             // USER
-            require __DIR__ . '/routes/User.php';
-    
-    
-            break;
-        case 'masyarakat' :
-            require __DIR__ . '/views/index.php';
-            break;
-    
-    
-    
-    
-        case 'petugas_kajian' :
-            require __DIR__ . '/views/about.php';
-            break;
-    
-    
-    
-        case 'petugas_logistik' :
-            require __DIR__ . '/views/about.php';
-            break;
-    
+            if($param_val == "user"){
+                $conf->TemplateAdmin("views/users/user.php");
+            }elseif($param_val == "add"){
+                $conf->TemplateAdmin("views/users/user_add.php");
+            }elseif($param_val == "edit"){
+                $conf->TemplateAdmin("views/users/user_edit.php");
+            }elseif($param_val == "post"){
+                $user->Post($_POST);
+            }
+
+        case 'bantuan' :
+
+            if($param_val == "bantuan"){
+                $conf->TemplateAdmin("views/bantuan/bantuan.php");
+            }elseif($param_val == "bantuan_add"){
+                $conf->TemplateAdmin("views/bantuan/bantuan_add.php");
+            }elseif($param_val == "bantuan_post"){
+                $user->Post($_POST);
+            }
     
         case 'pages' :
             if($param_val == "crud"){
@@ -63,7 +59,7 @@ if($_GET){
     }
 
 }else{
-    $conf->TemplateAdmin("views/partials/content.php");
+    // $conf->TemplateAdmin("views/partials/content.php");
 
 }
 
