@@ -16,7 +16,41 @@
             </a>
             <div class="collapse" id="ui-menu">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
+                <?php if(isset($_SESSION['level'])){
+                  switch ($_SESSION['level']){
+                    case 'kepala_bpbd':
+                    ?>
+                    
+                    <?php
+                    break;
+                    case 'petugas_bpbd':
+                    ?>
+                    
+                    <?php
+                    break;
+                    case 'petugas_logistik':
+                    ?>
+                    
+                    <?php
+                    break;
+                    case 'petugas_kajian_bencana':
+                    ?>
+                    
+                    <?php
+                    break;
+
+                    case 'masyarakat':
+                      ?>
+                        <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
+                    <?php
+                        break;
+
+                  }
+
+                }?>
+
+              
+                  <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?wilayah=wilayah">Wilayah</a></li>
@@ -24,7 +58,8 @@
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?peninjauan=peninjauan">Peninjauan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan">Stok Bantuan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?publikasi_berita=publikasi_berita">Publikasi Berita</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?publikasi_berita=publikasi_berita">Publikasi Berita</a></li> 
+         
               </ul>
             </div>
           </li>

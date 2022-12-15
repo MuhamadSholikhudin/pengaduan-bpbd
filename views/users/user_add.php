@@ -10,19 +10,23 @@
                     <form class="forms-sample" action="<?= $url ?>/?user=post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="nama_user">Nama Lengkap</label>
-                          <input type="text" class="form-control p-input" id="nama_user" aria-describedby="nama_user" name="name_user" placeholder="Enter Nama Lengkap">
+                          <input type="text" class="form-control p-input" id="nama_user" aria-describedby="nama_user" name="nama_user" placeholder="Enter Nama Lengkap">
                       </div>
                       <div class="form-group">
                           <label for="alamat_user">Alamat Lengkap</label>
-                          <textarea class="form-control p-input" id="alamat_user" name="alamat_user" rows="3"></textarea>
+                          <textarea class="form-control p-input" id="alamat_user" name="alamat_user" ></textarea>
                         </div>
                       <div class="form-group">
                           <label for="no_telp_user">No telp User</label>
                           <input type="text" class="form-control p-input" id="no_telp_user" aria-describedby="no_telp_user" name="no_telp_user" placeholder="Enter Nama Lengkap">
                       </div>
                       <div class="form-group">
-                          <label for="exampleInputPassword1">Password</label>
-                          <input type="password" class="form-control p-input" id="exampleInputPassword1" name="password" placeholder="Password">
+                          <label for="username">Usermame</label>
+                          <input type="text" class="form-control p-input" id="username" name="username" placeholder="username">
+                      </div>
+                      <div class="form-group">
+                          <label for="password">Password</label>
+                          <input type="password" class="form-control p-input" id="password" name="password" placeholder="Password">
                       </div>
                       <div class="form-group">
                         <?php 

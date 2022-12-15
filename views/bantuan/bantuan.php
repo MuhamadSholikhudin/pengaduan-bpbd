@@ -9,16 +9,16 @@
                   <div class="row">
                     <div class="col-lg-12">
                       <a href="<?= $url ?>?bantuan=add" class="btn btn-sm btn-outline-secondary">
-                          <i class="mdi mdi-library-plus"></i>
-                          Tambah
-                        </a>
+                        <i class="mdi mdi-library-plus"></i>
+                        Tambah
+                      </a>
                     </div>
                     <div class="col-lg-12 text-center">
                       <h2>DATA BANTUAN</h2>
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table id="myTable" class="disply table table-striped ">
                       <thead>
                         <tr>
                           <th>
@@ -39,77 +39,37 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        <?php
+                        $bantuans = Querybanyak("SELECT * FROM bantuan");
+                        foreach ($bantuans as $bantuan) { ?>
+                          <tr>
 
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            May 15, 2015
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?bantuan=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
+                            <td>
+                              <?= $bantuan['nama_bantuan'] ?>
+                            </td>
+                            <td>
+                                <?= $bantuan['kategori'] ?>
+                            </td>
+                            <td>
+                            <?= $bantuan['satuan'] ?>
+                            </td>
+                            <td>
+                            <?= $bantuan['batch'] ?>
+                            </td>
+                            <td>
+                              <a href="<?= $url ?>/?bantuan=edit&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-secondary">
+                                Edit
+                                <i class="ti-file btn-icon-append"></i>
+                              </a>
+                            </td>
+                          </tr>
 
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?bantuan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
- 
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?bantuan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
+                        <?php
+                        }
+                        ?>
                        
-                        
+
+
                       </tbody>
                     </table>
                   </div>

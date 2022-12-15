@@ -1,17 +1,26 @@
 <?php
+include "function.php";
+include "./models/Model.php";
+
 include 'config/config.php';
 $conf = new Config();
 $url = $conf->UrlWeb();
 
-include 'controllers/User.php';
-$user = new User();
-
 include 'controllers/Auth.php';
 $auth = new Auth();
 
-// $request = $_SERVER['REQUEST_URI'];
+include 'controllers/User.php';
+$user = new User();
 
-include "function.php";
+include 'controllers/Bantuan.php';
+$bantuan = new Bantuan();
+
+include 'controllers/Bencana.php';
+$bencana = new Bencana();
+
+include 'controllers/Wilayah.php';
+$wilayah = new Wilayah();
+
 
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
@@ -34,6 +43,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/users/user_edit.php');
             } elseif ($param_val == 'post') {
                 $user->Post($_POST);
+            } elseif ($param_val == 'update') {
+                $user->Update($_POST);
             }
         break;
         
@@ -46,7 +57,9 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/bantuan/bantuan_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                $bantuan->Post($_POST);
+            }elseif ($param_val == 'update') {
+                $bantuan->Update($_POST);
             }
         break;
         
@@ -59,7 +72,9 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/bencana/bencana_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                $bencana->Post($_POST);
+            } elseif ($param_val == 'update') {
+                $bencana->Update($_POST);
             }
         break;
         
@@ -71,7 +86,9 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/wilayah/wilayah_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                $wilayah->Post($_POST);
+            }elseif ($param_val == 'update') {
+                $wilayah->Post($_POST);
             }
         break;
         
@@ -127,14 +144,18 @@ if ($_GET) {
         case 'pages':
             if ($param_val == 'crud') {
                 $conf->TemplateAdmin('views/partials/content.php');
-            } else {
-
+            } elseif($param_val == 'login') {
+                require __DIR__ . '/views/login.php';
+            }elseif($param_val == 'pendaftaran') {
+                require __DIR__ . '/views/pendaftaran.php';
             }
 
             break;
 
         case 'auth':
-            if ($param_val == 'login') {
+            if ($param_val == 'pendaftaran') {
+                $auth->pendaftaran($_POST);
+            } elseif ($param_val == 'login') {
                 $auth->login($_POST);
             } elseif ($param_val == 'logout')  {
                 $auth->logout();

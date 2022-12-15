@@ -13,7 +13,7 @@
                         </a>
                     </div>
                     <div class="col-lg-12 text-center">
-                      <h2><?= strtoupper("Data ". array_keys($_GET)[0]) ?></h2>
+                      <h2><?= strtoupper("Data ". str_replace("_"," ", array_keys($_GET)[0])) ?></h2>
                     </div>
                   </div>
                   <div class="table-responsive">

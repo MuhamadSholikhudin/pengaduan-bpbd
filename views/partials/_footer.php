@@ -27,6 +27,16 @@
   <script src="<?= $url ?>/assets/js/template.js"></script>
   <script src="<?= $url ?>/assets/js/settings.js"></script>
   <script src="<?= $url ?>/assets/js/todolist.js"></script>
+
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+  </script>
+
+  
   <!-- endinject -->
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->

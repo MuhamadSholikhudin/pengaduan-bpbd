@@ -27,33 +27,58 @@
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0">
         <div class="row w-100 mx-0">
-          <div class="col-lg-4 mx-auto">
+          <div class="col-lg-6 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo text-center">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo">
               </div>
-              <h6 class="fw-light text-center">Sign in to continue.</h6>
-              <form class="pt-3" action="<?= $url ?>/?auth=login" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Username">
+              <h6 class="fw-light text-center">Daftar Untuk Mengakses.</h6>
+              <form class="pt-3" action="<?= $url ?>/?auth=pendaftaran" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control" id="nama_user" name="nama_user" placeholder="nama_user" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control" id="no_telp_user" name="no_telp_user" placeholder="no_telp_user" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control" id="password1"  placeholder="password" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                  <div class="form-group">
+                      <input type="text" class="form-control form-control" id="alamat_user" name="alamat_user" placeholder="alamat_user" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control form-control" id="username" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control" id="password2" name="password" placeholder="Ulangi Password" required>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
-                </div>
+                <script>                  
+                  function ButtonCick(){
+                    var password1 = document.getElementById("password1").value;
+                    var password2 = document.getElementById("password2").value;                    
+                    if(password1 == password2){
+                      document.getElementById("simpandaftar").click;
+                    }else{
+                      alert("Password anda tidak sama");
+                    }
+                  }
+                </script>
+
                 <div class="mt-3">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="<?= $url ?>/assets/index.html">SIGN IN</button>
+                  <button onclick="ButtonCick();" class="btn  btn-primary ">SIGN UP</button>
+                  <button type="submit" id="simpandaftar" class="btn  btn-primary d-none">SIGN UP</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
-                  <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+
                 </div>
                 <div class="text-center mt-4 fw-light">
-                  Don't have an account? <a href="<?= $url ?>/?pages=pendaftaran" class="text-primary">Create</a>
+                  have an account? <a href="<?= $url ?>/?pages=login" class="text-primary">Login</a>
                 </div>
               </form>
             </div>

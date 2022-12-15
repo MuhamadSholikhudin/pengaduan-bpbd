@@ -18,7 +18,7 @@
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table id="myTable" class=" display">
                       <thead>
                         <tr>
                           <th>
@@ -42,83 +42,36 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php 
+                            $users = Querybanyak("SELECT * FROM user");
+                            foreach($users as $user){ 
+                        ?>
                         <tr>
                           <td class="py-1">
-                            <img src="<?= $url ?>/assets/images/faces/face1.jpg" alt="image"/>
+                            <?= $user['nama_user']; ?>
                           </td>
                           <td>
-                            Herman Beck
+                            <?= $user['alamat_user']; ?>
                           </td>
                           <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <?= $user['username']; ?>
                           </td>
                           <td>
-                            $ 77.99
+                            <?= $user['level']; ?>
                           </td>
                           <td>
-                            May 15, 2015
+                            <?= $user['no_telp_user']; ?>
                           </td>
                           <td>
-                            <a href="<?= $url ?>/?user=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                            <a href="<?= $url ?>/?user=edit&id=<?= $user['id_user']; ?>" class="btn btn-outline-warning btn-icon-text">
                               Edit
-                              <i class="ti-file btn-icon-append"></i>                          
+                              <i class="ti-file btn-icon-pen"></i>                          
                             </a>                          
                           </td>
                         </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="<?= $url ?>/assets/images/faces/face2.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            July 1, 2015
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?user=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="py-1">
-                            <img src="<?= $url ?>/assets/images/faces/face3.jpg" alt="image"/>
-                          </td>
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Apr 12, 2015
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?user=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                       
-                        
+                        <?php
+                            }
+                        ?>                      
                       </tbody>
                     </table>
                   </div>

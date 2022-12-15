@@ -1,3 +1,8 @@
+        <?php 
+          $cari_bantuan_berdasarkan_id_bantuan = "SELECT * FROM bantuan WHERE id_bantuan = " . $_GET['id'] . "";
+          $satu_bantuan = Querysatudata($cari_bantuan_berdasarkan_id_bantuan);
+        ?>
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -10,29 +15,35 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?kepala_bpbd=user_post" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="<?= $url ?>/?bantuan=update" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="nama_bantuan">Nama Bantuan</label>
-                          <input type="text" class="form-control p-input" id="nama_user" aria-describedby="nama_user" name="name_user" placeholder="Enter Nama Lengkap">
+                          <input type="hidden" class="form-control p-input" id="id_bantuan"  name="id_bantuan" value="<?= $satu_bantuan['id_bantuan'] ?>">
+                          <input type="text" class="form-control p-input" id="nama_bantuan" aria-describedby="nama_bantuan" name="nama_bantuan" value="<?= $satu_bantuan['nama_bantuan'] ?>">
                       </div>
                       <div class="form-group">
                         <?php 
-                          $levels = ['langsung', 'atm'];
+                          $kategoris = ['langsung', 'atm'];
                         ?>
-                        <label for="level">Kategori</label>
-                        <select class="form-control " name="level" id="level">
-                          <?php foreach($levels as $level){?>
-                            <option value="<?= $level ?>"><?= $level ?></option>
+                        <label for="kategori">Kategori</label>
+                        <select class="form-control " name="kategori" id="kategori">
+                          <?php foreach($kategoris as $kategori){?>
+                            <?php if($kategori == $satu_bantuan['nama_bantuan'] ) {?>
+                            <option value="<?= $kategori ?>"><?= $kategori ?></option>
+                            <?php }else{?>
+                              <option value="<?= $kategori ?>"><?= $kategori ?></option>
+
+                            <?php }?>
                           <?php } ?> 
                         </select>
                       </div>
                       <div class="form-group">
                           <label for="satuan">Satuan</label>
-                          <textarea class="form-control p-input" id="satuan" name="satuan" rows="3"></textarea>
+                          <input type="text" class="form-control p-input" id="satuan" aria-describedby="satuan" name="satuan" value="<?= $satu_bantuan['satuan'] ?>" placeholder="Enter Nama Lengkap">
                         </div>
                       <div class="form-group">
                           <label for="batch">Batch</label>
-                          <input type="text" class="form-control p-input" id="batch" aria-describedby="batch" name="no_telp_user" placeholder="Enter Nama Lengkap">
+                          <input type="text" class="form-control p-input" id="batch" aria-describedby="batch" name="batch" value="<?= $satu_bantuan['batch'] ?>" placeholder="Enter Nama Lengkap">
                       </div>
 
                       

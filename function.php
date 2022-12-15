@@ -22,14 +22,14 @@ if (mysqli_connect_errno()){
 }
 
 //function query banyak
-function querybanyak($query){
+function Querybanyak($query){
     $mysqli = new mysqli("localhost","root","","pengaduan-bpbd");
     // menggunakan foreach
     return $mysqli->query($query);
 }
 
 //function query satu data
-function querysatudata($query){
+function Querysatudata($query){
     $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
     $query_cek = mysqli_query($koneksi, $query);
     return mysqli_fetch_array($query_cek, MYSQLI_BOTH);

@@ -10,14 +10,14 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?wilayah=wilayah_post" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="<?= $url ?>/?wilayah=post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="nama_wilayah">Nama wilayah</label>
-                          <input type="text" class="form-control p-input" id="nama_wilayah" aria-describedby="nama_wilayah" name="name_user" placeholder="Enter Nama Lengkap">
+                          <input type="text" class="form-control p-input" id="nama_wilayah"  name="nama_wilayah" placeholder="Nama Wilayah" required>
                       </div>
                       <div class="form-group">
                         <?php 
-                          $status_wilayahs = ['Tanah Longsor', 'Banjir'];
+                          $status_wilayahs = ['Aman', 'Siaga'];
                         ?>
                         <label for="status_wilayah">status</label>
                         <select class="form-control " name="status_wilayah" id="status_wilayah">
@@ -28,7 +28,7 @@
                       </div>
                       <div class="form-group">
                           <label for="ket_wilayah">Keterangan wilayah</label>
-                          <input type="text" class="form-control p-input" id="ket_wilayah" aria-describedby="ket_wilayah" name="name_user" placeholder="Enter Nama Lengkap">
+                          <textarea  class="form-control" name="ket_wilayah" id="ket_wilayah" style="height: 100px;" required></textarea>
                       </div>                     
                       <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>

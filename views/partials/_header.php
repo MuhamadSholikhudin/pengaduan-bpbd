@@ -1,7 +1,7 @@
 <?php 
-if (!isset($_SESSION['id_user'])) {
-  echo Redirect("http://localhost/pengaduan-bpbd/", "Silahkan Login Terlebih Dahulu");
-}
+// if (!isset($_SESSION['id_user'])) {
+//   echo Redirect("http://localhost/pengaduan-bpbd/", "Silahkan Login Terlebih Dahulu");
+// }
 ?>
   <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +25,10 @@ if (!isset($_SESSION['id_user'])) {
   <link rel="stylesheet" href="<?= $url ?>/assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?= $url ?>/assets/images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css"> -->
+  
 </head>
 
 <body>
