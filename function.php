@@ -1,12 +1,8 @@
 <?php 
+session_start();
+
+
 date_default_timezone_set('Asia/Jakarta');
-
-function Base_url($urlparam)
-{
-    $url = "http://localhost/storecashier/" . $urlparam;
-    return $url;
-}
-
 
 function Page($page){
 
@@ -17,8 +13,8 @@ function Page($page){
     include $page;
     include "template/partials/_footer.php";
 }
-/*
-$koneksi = mysqli_connect("localhost","root","","storecashier");
+
+$koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
  
 // Check connection
 if (mysqli_connect_errno()){
@@ -27,18 +23,18 @@ if (mysqli_connect_errno()){
 
 //function query banyak
 function querybanyak($query){
-    $mysqli = new mysqli("localhost","root","","storecashier");
+    $mysqli = new mysqli("localhost","root","","pengaduan-bpbd");
     // menggunakan foreach
     return $mysqli->query($query);
 }
 
 //function query satu data
 function querysatudata($query){
-    $koneksi = mysqli_connect("localhost","root","","storecashier");
+    $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
     $query_cek = mysqli_query($koneksi, $query);
     return mysqli_fetch_array($query_cek, MYSQLI_BOTH);
 }
-*/
+
 function Redirect($link, $notif) {
     $output = "<script>alert('".$notif."')</script><meta http-equiv='refresh' content='0; url=".$link. "'>";
     return $output;

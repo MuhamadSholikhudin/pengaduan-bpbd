@@ -33,15 +33,15 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo">
               </div>
               <h6 class="fw-light text-center">Sign in to continue.</h6>
-              <form class="pt-3">
+              <form class="pt-3" action="<?= $url ?>/?auth=login" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Password">
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="<?= $url ?>/assets/index.html">SIGN IN</a>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="<?= $url ?>/assets/index.html">SIGN IN</button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">

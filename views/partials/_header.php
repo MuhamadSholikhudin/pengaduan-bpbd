@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php 
+if (!isset($_SESSION['id_user'])) {
+  echo Redirect("http://localhost/pengaduan-bpbd/", "Silahkan Login Terlebih Dahulu");
+}
+?>
+  <!DOCTYPE html>
 <html lang="en">
 
 <head>

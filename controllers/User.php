@@ -1,5 +1,5 @@
 <?php 
-    include "function.php";
+    // include "function.php";
     // include "./config/Helper.php";
     include "./models/Model.php";
 
@@ -16,8 +16,8 @@
         }
 
         public function Post($request){
-            $sql = `INSERT INTO MyGuests (firstname, lastname, email)
-            VALUES ('John', 'Doe', 'john@example.com')`;
+            $sql = "INSERT INTO `user` ( `nama_user`, `alamat_user`, `no_telp_user`, `username`, `password`, `level`) 
+            VALUES ( '".$request['nama_user']."', '".$request['alamat_user']."', '".$request['no_telp_user']."', '".$request['username']."', '".$request['password']."', '".$request['level']."')";
             $this->Model->Execute($sql);
             echo Redirect("http://localhost/pengaduan-bpbd/?user=user", "Data Berhasil Di Tambah");
         }
