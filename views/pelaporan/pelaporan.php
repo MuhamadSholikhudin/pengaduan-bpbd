@@ -35,67 +35,29 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-
+                        <?php 
+                          $pelaporans = Querybanyak("SELECT * FROM pelaporan");
+                          foreach($pelaporans as $pelaporan){?>
+                                                  <tr>
                           <td>
-                            Herman Beck
+                            <?= $pelaporan['id_user'] ?>
                           </td>
                           <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                            <?= $pelaporan['tanggal_pelaporan'] ?>
                           </td>
                           <td>
-                            $ 77.99
+                            <?= $pelaporan['pelaporan'] ?>
                           </td>
                           <td>
-                            <a href="<?= $url ?>/?pelaporan=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                            <a href="<?= $url ?>/?pelaporan=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                               Edit
                               <i class="ti-file btn-icon-append"></i>                          
                             </a>                          
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?pelaporan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
- 
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?pelaporan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                       
-                        
+                        <?php
+                          }
+                        ?>                     
                       </tbody>
                     </table>
                   </div>

@@ -2,8 +2,7 @@
           $id = $_GET['id'];
           $cari_user_berdasarkan_id_user = "SELECT * FROM user WHERE id_user = " . $_GET['id'] . "";
           $satu_user = Querysatudata($cari_user_berdasarkan_id_user);
-        ?>
-        
+        ?>        
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
