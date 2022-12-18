@@ -17,7 +17,7 @@
                         '".$request['batch']."'
                     )";
             $this->Model()->Execute($sql);
-            echo Redirect("http://localhost/pengaduan-bpbd/?bantuan=bantuan", "Data Berhasil Di Tambah");
+            Redirect("http://localhost/pengaduan-bpbd/?bantuan=bantuan", "Data Berhasil Di Tambah");
         }
 
         public function Update($request){
@@ -30,6 +30,6 @@
             ";
 
             $this->Model()->Execute($sql);
-            echo Redirect("http://localhost/pengaduan-bpbd/?bantuan=bantuan", "Data Berhasil Di Ubah");
+            Redirect("http://localhost/pengaduan-bpbd/?bantuan=bantuan", "Data Berhasil Di Ubah");
         }
     }

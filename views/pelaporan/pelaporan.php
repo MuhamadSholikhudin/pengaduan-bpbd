@@ -8,12 +8,12 @@
                   <div class="row">
                     <div class="col-lg-12">
                       <a href="<?= $url ?>?pelaporan=add" class="btn btn-sm btn-outline-secondary">
-                          <i class="mdi mdi-library-plus"></i>
-                          Tambah
-                        </a>
+                        <i class="mdi mdi-library-plus"></i>
+                        Tambah
+                      </a>
                     </div>
                     <div class="col-lg-12 text-center">
-                      <h2><?= strtoupper("Data ". array_keys($_GET)[0]) ?></h2>
+                      <h2><?= strtoupper("Data " . array_keys($_GET)[0]) ?></h2>
                     </div>
                   </div>
                   <div class="table-responsive">
@@ -27,7 +27,10 @@
                             Tanggal Pelaporan
                           </th>
                           <th>
-                            Pelaporan
+                            Wilayah
+                          </th>
+                          <th>
+                            Status Pelaporan
                           </th>
                           <th>
                             Action
@@ -35,67 +38,43 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?pelaporan=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?pelaporan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
- 
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?pelaporan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                       
-                        
+                        <?php
+                        $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE id_user = ".$_SESSION['id_user']."");
+                        foreach ($pelaporans as $pelaporan) { ?>
+                          <tr>
+                            <td>
+                              <?php
+                              $user = Querysatudata("SELECT nama_user FROM user WHERE id_user = " . $pelaporan['id_user'] . "")
+                              ?>
+                              <?= $user['nama_user'] ?>
+                            </td>
+                            <td>
+                              <?= $pelaporan['tanggal_pelaporan'] ?>
+                            </td>
+                            <td>
+                              <?php
+                              $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $pelaporan['id_wilayah'] . "")
+                              ?>
+                              <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
+                            </td>
+                            <td>
+                              <?= $pelaporan['status_pelaporan'] ?>
+                            </td>
+                            <td>
+                            <a href="<?= $url ?>/?pelaporan=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-dark btn-sm text-white">
+                                <i class="ti-arrow-top-right"></i>
+                                Kirim
+                              </a>
+                              <a href="<?= $url ?>/?pelaporan=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-dark btn-sm text-white">
+                                <i class="ti-pencil"></i>
+                                Edit
+                              </a>
+                              
+                            </td>
+                          </tr>
+                        <?php
+                        }
+                        ?>
                       </tbody>
                     </table>
                   </div>

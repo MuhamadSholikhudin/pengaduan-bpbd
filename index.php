@@ -21,6 +21,9 @@ $bencana = new Bencana();
 include 'controllers/Wilayah.php';
 $wilayah = new Wilayah();
 
+include 'controllers/Pelaporan.php';
+$pelaoran = new Pelaporan();
+
 
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
@@ -100,7 +103,11 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/pelaporan/pelaporan_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                $pelaoran->Post($_POST);
+            }elseif ($param_val == 'update') {
+                $pelaoran->Update($_POST);
+            }elseif ($param_val == 'kirim') {
+                $pelaoran->Update($_GET);
             }
         break;
         

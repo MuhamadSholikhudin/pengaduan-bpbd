@@ -1,7 +1,7 @@
 <?php 
-// if (!isset($_SESSION['id_user'])) {
-//   echo Redirect("http://localhost/pengaduan-bpbd/", "Silahkan Login Terlebih Dahulu");
-// }
+if (!isset($_SESSION['id_user'])) {
+  Redirect("http://localhost/pengaduan-bpbd/", "Silahkan Login Terlebih Dahulu");
+}
 ?>
   <!DOCTYPE html>
 <html lang="en">
@@ -18,17 +18,14 @@
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/typicons/typicons.css">
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
+
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
   <link rel="stylesheet" href="<?= $url ?>/assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?= $url ?>/assets/images/favicon.png" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css"> -->
-  
+ 
 </head>
 
 <body>

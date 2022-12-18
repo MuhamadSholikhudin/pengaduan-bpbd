@@ -19,7 +19,7 @@ class Auth
                     'masyarakat'
                 )";
         $this->ModelAuth()->Execute($sql);
-        echo Redirect("http://localhost/pengaduan-bpbd/?pages=login", "Pendaftaran Berhasil Silahkan Login dengan akun yang sudah anda daftarkan");
+        Redirect("http://localhost/pengaduan-bpbd/?pages=login", "Pendaftaran Berhasil Silahkan Login dengan akun yang sudah anda daftarkan");
     }
 
     public function login($request)
@@ -37,14 +37,14 @@ class Auth
             $_SESSION['id_user'] = $data_cek['id_user'];
             $_SESSION['nama_user'] = $data_cek['nama_user'];
             $_SESSION['level'] = $data_cek['level'];
-            echo Redirect("http://localhost/pengaduan-bpbd?dashboard=dashboard", "Berhasil Login");
+            Redirect("http://localhost/pengaduan-bpbd?dashboard=dashboard", "Berhasil Login");
         } else {
-            echo Redirect("http://localhost/pengaduan-bpbd?pages=login", "Gagal Login");
+            Redirect("http://localhost/pengaduan-bpbd?pages=login", "Gagal Login");
         }
     }
 
     public function logout(){
         session_destroy();
-        echo Redirect("http://localhost/pengaduan-bpbd/?pages=login", "Untuk Masuk Silahkan Login Dahulu");
+        Redirect("http://localhost/pengaduan-bpbd/?pages=login", "Untuk Masuk Silahkan Login Dahulu");
     }
 }

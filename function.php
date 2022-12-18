@@ -36,6 +36,6 @@ function Querysatudata($query){
 }
 
 function Redirect($link, $notif) {
-    $output = "<script>alert('".$notif."')</script><meta http-equiv='refresh' content='0; url=".$link. "'>";
+    echo $output = "<script>alert('".$notif."')</script><meta http-equiv='refresh' content='0; url=".$link. "'>";
     return $output;
 }
