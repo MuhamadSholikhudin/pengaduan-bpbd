@@ -66,7 +66,6 @@ if ($_GET) {
             }
         break;
         
-
         case 'bencana':
             if ($param_val == 'bencana') {
                 $conf->TemplateAdmin('views/bencana/bencana.php');

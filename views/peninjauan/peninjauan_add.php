@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?pelaporan=pelaporan_post" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="<?= $url ?>/?pelaporan=post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
                           <label for="nama_pelapor">Nama pelapor</label>
                           <input type="text" class="form-control p-input" id="nama_pelapor" name="nama_pelapor" aria-describedby="nama_pelapor"  placeholder="Enter Nama Lengkap">
@@ -26,13 +26,8 @@
                       <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
-                  </form>
-
-                  </div>
-
-            
-                  
-
+                    </form>
+                  </div>         
                 </div>
                 <div class="card-footer">
 

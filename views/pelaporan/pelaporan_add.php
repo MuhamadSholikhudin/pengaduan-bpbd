@@ -47,7 +47,10 @@
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
                     </form>
+<<<<<<< HEAD
 
+=======
+>>>>>>> b2b8fcacb10a1cda443aec462f0900c17881a4c9
                   </div>
                 </div>
                 <div class="card-footer">
