@@ -7,47 +7,56 @@
           </div>
         </footer>
         <!-- partial -->
-      </div>
-      <!-- main-panel ends -->     
-     
-     <!-- main-panel ends -->
-      </div>
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="<?= $url ?>/assets/vendors/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="<?= $url ?>/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="<?= $url ?>/assets/js/off-canvas.js"></script>
-  <script src="<?= $url ?>/assets/js/hoverable-collapse.js"></script>
-  <script src="<?= $url ?>/assets/js/template.js"></script>
-  <script src="<?= $url ?>/assets/js/settings.js"></script>
-  <script src="<?= $url ?>/assets/js/todolist.js"></script>
+        </div>
+        <!-- main-panel ends -->
+
+        <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+        <!-- plugins:js -->
+        <script src="<?= $url ?>/assets/vendors/js/vendor.bundle.base.js"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page -->
+        <script src="<?= $url ?>/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+        <!-- End plugin js for this page -->
+        <!-- inject:js -->
+        <script src="<?= $url ?>/assets/js/off-canvas.js"></script>
+        <script src="<?= $url ?>/assets/js/hoverable-collapse.js"></script>
+        <script src="<?= $url ?>/assets/js/template.js"></script>
+        <script src="<?= $url ?>/assets/js/settings.js"></script>
+        <script src="<?= $url ?>/assets/js/todolist.js"></script>
 
 
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-  <script>
-    $(document).ready( function () {
-        $('#myTable').DataTable();
-    } );
+        <script>
+          $('.tambahpeninjauan').on('click', function() {
 
+            var id = $(this).data('id');
+            
+            console.log("MOdal" + id);
+            // $('#violation_id').val(id);
+            // $('#deladd').html(sk);
+          });
+        </script>
 
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-      // In your Javascript (external .js resource or <script> tag)
-      $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-</script>
-  
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <!-- End custom js for this page-->
-</body>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        <script>
+          $(document).ready(function() {
+            $('#myTable').DataTable();
+          });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+          // In your Javascript (external .js resource or <script> tag)
+          $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+          });
+        </script>
 
-</html>
+        <!-- endinject -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        </body>
+
+        </html>

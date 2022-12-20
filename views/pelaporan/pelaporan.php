@@ -6,12 +6,6 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-lg-12">
-                      <a href="<?= $url ?>?pelaporan=add" class="btn btn-sm btn-outline-secondary">
-                        <i class="mdi mdi-library-plus"></i>
-                        Tambah
-                      </a>
-                    </div>
                     <div class="col-lg-12 text-center">
                       <h2><?= strtoupper("Data " . array_keys($_GET)[0]) ?></h2>
                     </div>
@@ -39,7 +33,14 @@
                       </thead>
                       <tbody>
                         <?php
-                        $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE id_user = ".$_SESSION['id_user']."");
+                        switch ($_SESSION['level']) {
+                          case "petugas_bpbd":
+                            $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ");
+                            break;
+                          case "petugas_kajian":
+                            $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ");
+                            break;
+                        }
                         foreach ($pelaporans as $pelaporan) { ?>
                           <tr>
                             <td>
@@ -61,15 +62,37 @@
                               <?= $pelaporan['status_pelaporan'] ?>
                             </td>
                             <td>
-                            <a href="<?= $url ?>/?pelaporan=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-dark btn-sm text-white">
-                                <i class="ti-arrow-top-right"></i>
-                                Kirim
-                              </a>
-                              <a href="<?= $url ?>/?pelaporan=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-dark btn-sm text-white">
-                                <i class="ti-pencil"></i>
-                                Edit
-                              </a>
-                              
+                              <?php
+                              switch ($_SESSION['level']) {
+                                case "petugas_bpbd":
+                                  if ($pelaporan['status_pelaporan'] == 'terkirim') { ?>
+                                    <a href="<?= $url ?>/?pelaporan=validasi&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
+                                      <i class="ti-check"></i>
+                                      Validasi
+                                    </a>
+                                    <a href="<?= $url ?>/?pelaporan=tidak_valid&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                      <i class="ti-reload"></i>
+                                      Tidak Valid
+                                    </a>
+                                  <?php } elseif ($pelaporan['status_pelaporan'] == 'tervalidasi') { ?>
+                                    <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
+                                      <i class="ti-check-box"></i>
+                                      valid
+                                    </a>
+
+                                  <?php }
+                                  break;
+                                case "petugas_kajian":
+
+                                  ?>
+                                  <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white">
+                                    <i class="ti-plus"></i>
+                                    Tambah Peninjauan
+                                  </a>
+                              <?php
+                                  break;
+                              }
+                              ?>
                             </td>
                           </tr>
                         <?php
@@ -87,3 +110,5 @@
 
           </div>
         </div>
+
+    
