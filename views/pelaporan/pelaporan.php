@@ -35,12 +35,14 @@
                         <?php
                         switch ($_SESSION['level']) {
                           case "petugas_bpbd":
-                            $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ");
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ";
                             break;
                           case "petugas_kajian":
-                            $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ");
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ";
                             break;
                         }
+                        // $query_pelapolaran = "SELECT * FROM pelaporan ";
+                        $pelaporans = Querybanyak($query_pelapolaran);
                         foreach ($pelaporans as $pelaporan) { ?>
                           <tr>
                             <td>
@@ -57,6 +59,7 @@
                               $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $pelaporan['id_wilayah'] . "")
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
+                              <?= $pelaporan['id_wilayah'] ?>
                             </td>
                             <td>
                               <?= $pelaporan['status_pelaporan'] ?>
@@ -85,10 +88,10 @@
                                 case "petugas_kajian":
 
                                   ?>
-                                  <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white">
+                                  <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
                                     <i class="ti-plus"></i>
                                     Tambah Peninjauan
-                                  </a>
+                                </a>
                               <?php
                                   break;
                               }
@@ -103,7 +106,64 @@
                   </div>
                 </div>
                 <div class="card-footer">
-
+                  <!-- Contoh Modal -->
+                  <div class="modal  fade" id="modalSaya" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalSayaLabel">Form Peninjauan Data Bencana</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="forms-sample" action="<?= $url ?>/?peninjauan=post" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                              <label for="nama_pelapor">* Nama pelapor</label>
+                              <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>" >
+                              <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
+                              <input type="text" class="form-control p-input"  value="<?= $_SESSION['nama_user'] ?>" disabled>
+                            </div>
+                            <div class="form-group">
+                              <label for="tanggal_peninjauan">* Tanggal Peninjauan</label>
+                              <input type="date" class="form-control p-input" id="tanggal_peninjauan"  name="tanggal_peninjauan" value="<?= date("Y-m-d") ?>">
+                            </div>
+                            <div class="form-group">
+                              <label for="id_wilayah">* Wilayah</label>
+                              <select class=" form-control" id="id_wilayah" name="id_wilayah">
+                                <?php
+                                $wilayahs = Querybanyak("SELECT * FROM wilayah");
+                                foreach ($wilayahs as $wilayah) { ?>
+                                    <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
+                                <?php
+                                }
+                                ?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="jumlah_korban">* Korban</label>
+                              <input type="number" class="form-control" id="jumlah_korban" name="jumlah_korban">
+                            </div>
+                            <div class="form-group">
+                              <label for="peninjauan">* Keterangan peninjauan</label>
+                              <textarea class="form-control" id="keterangan_peninjauan" name="keterangan_peninjauan" style="height: 150px;"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="bukti_peninjauan">* Bukti Peninjauan</label>
+                              <input type="file" class="form-control" id="bukti_peninjauan" name="bukti_peninjauan" accept="image/png, image/gif, image/jpeg" >
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" class="btn btn-primary">SIMPAN</button>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                          <!-- <button type="button" class="btn btn-primary">Oke</button> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
