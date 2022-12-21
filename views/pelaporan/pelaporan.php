@@ -41,7 +41,6 @@
                             $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ";
                             break;
                         }
-                        // $query_pelapolaran = "SELECT * FROM pelaporan ";
                         $pelaporans = Querybanyak($query_pelapolaran);
                         foreach ($pelaporans as $pelaporan) { ?>
                           <tr>
@@ -59,7 +58,6 @@
                               $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $pelaporan['id_wilayah'] . "")
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
-                              <?= $pelaporan['id_wilayah'] ?>
                             </td>
                             <td>
                               <?= $pelaporan['status_pelaporan'] ?>
@@ -86,12 +84,11 @@
                                   <?php }
                                   break;
                                 case "petugas_kajian":
-
                                   ?>
-                                  <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
+                                  <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" data-idwilayah="<?= $pelaporan['id_wilayah'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
                                     <i class="ti-plus"></i>
                                     Tambah Peninjauan
-                                </a>
+                                  </a>
                               <?php
                                   break;
                               }
@@ -119,14 +116,14 @@
                         <div class="modal-body">
                           <form class="forms-sample" action="<?= $url ?>/?peninjauan=post" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
-                              <label for="nama_pelapor">* Nama pelapor</label>
-                              <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>" >
+                              <label for="nama_pelapor">* Nama Peninjau</label>
+                              <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                               <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
-                              <input type="text" class="form-control p-input"  value="<?= $_SESSION['nama_user'] ?>" disabled>
+                              <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
                             </div>
                             <div class="form-group">
                               <label for="tanggal_peninjauan">* Tanggal Peninjauan</label>
-                              <input type="date" class="form-control p-input" id="tanggal_peninjauan"  name="tanggal_peninjauan" value="<?= date("Y-m-d") ?>">
+                              <input type="date" class="form-control p-input" id="tanggal_peninjauan" name="tanggal_peninjauan" value="<?= date("Y-m-d") ?>">
                             </div>
                             <div class="form-group">
                               <label for="id_wilayah">* Wilayah</label>
@@ -134,7 +131,19 @@
                                 <?php
                                 $wilayahs = Querybanyak("SELECT * FROM wilayah");
                                 foreach ($wilayahs as $wilayah) { ?>
-                                    <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
+                                  <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
+                                <?php
+                                }
+                                ?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="id_bencana">* Bencana</label>
+                              <select class=" form-control" id="id_bencana" name="id_bencana">
+                                <?php
+                                $bencanas = Querybanyak("SELECT * FROM bencana");
+                                foreach ($bencanas as $bencana) { ?>
+                                  <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
                                 <?php
                                 }
                                 ?>
@@ -150,7 +159,7 @@
                             </div>
                             <div class="form-group">
                               <label for="bukti_peninjauan">* Bukti Peninjauan</label>
-                              <input type="file" class="form-control" id="bukti_peninjauan" name="bukti_peninjauan" accept="image/png, image/gif, image/jpeg" >
+                              <input type="file" class="form-control" id="bukti_peninjauan" name="bukti_peninjauan" accept="image/png, image/gif, image/jpeg">
                             </div>
                             <div class="col-12">
                               <button type="submit" class="btn btn-primary">SIMPAN</button>
@@ -170,5 +179,3 @@
 
           </div>
         </div>
-
-    

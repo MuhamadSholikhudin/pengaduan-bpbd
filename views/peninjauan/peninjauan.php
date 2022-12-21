@@ -8,12 +8,12 @@
                   <div class="row">
                     <div class="col-lg-12">
                       <a href="<?= $url ?>?peninjauan=add" class="btn btn-sm btn-outline-secondary">
-                          <i class="mdi mdi-library-plus"></i>
-                          Tambah
-                        </a>
+                        <i class="mdi mdi-library-plus"></i>
+                        Tambah
+                      </a>
                     </div>
                     <div class="col-lg-12 text-center">
-                      <h2><?= strtoupper("Data ". array_keys($_GET)[0]) ?></h2>
+                      <h2><?= strtoupper("Data " . array_keys($_GET)[0]) ?></h2>
                     </div>
                   </div>
                   <div class="table-responsive">
@@ -21,19 +21,22 @@
                       <thead>
                         <tr>
                           <th>
-                            ID Pelapor
+                            Pelapor
                           </th>
                           <th>
                             Tanggal peninjauan
                           </th>
                           <th>
-                            peninjauan
+                            Bencana
+                          </th>
+                          <th>
+                            Wilayah
+                          </th>
+                          <th>
+                            Korban
                           </th>
                           <th>
                             Status
-                          </th>
-                          <th>
-                            Penugasan
                           </th>
                           <th>
                             Action
@@ -41,85 +44,53 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <?php
+                        $peninjauans = Querybanyak("SELECT * FROM peninjauan ");
+                        foreach ($peninjauans as $peninjauan) { ?>
                         <tr>
+                          <td>
+                          <?php
+                              $user = Querysatudata("SELECT nama_user FROM pelaporan JOIN user ON pelaporan.id_user = user.id_user
+                               WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
+                              ?>
+                              <?= $user['nama_user'] ?> 
+                          </td>
+                          <td>
+                            <?= $peninjauan['tanggal_peninjauan'] ?>
+                          </td>
+                          <td>
+                          <?php
+                              $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . "")
+                              ?>
+                              <?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?>  
+                          </td>
+                          <td>
+                          <?php
+                              $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . "")
+                              ?>
+                              <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>  
+                          </td>
+                          <td>
+                            <?= $peninjauan['id_user'] ?>
+                          </td>
+                          <td>
+                            <?= $peninjauan['status_peninjauan'] ?>
+                          </td>
+                          <td>
+                            <a class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
+                              <i class="ti-alert"></i>
+                              Beritahu
+                            </a>
+                            <a href="<?= $url ?>/?peninjauan=edit&id=<?= $peninjauan['id_peninjauan'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                              <i class="ti-pencil"></i>
+                              Edit
+                            </a>
+                          </td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
 
-                          <td>
-                            Herman Beck
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $ 77.99
-                          </td>
-                          <td>
-                            Status
-                          </td>
-                          <td>
-                            Penugasan
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?peninjauan=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            Messsy Adam
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $245.30
-                          </td>
-                          <td>
-                            Status
-                          </td>
-                          <td>
-                            Penugasan
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?peninjauan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                        <tr>
- 
-                          <td>
-                            John Richards
-                          </td>
-                          <td>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                          </td>
-                          <td>
-                            $138.00
-                          </td>
-                          <td>
-                            Status
-                          </td>
-                          <td>
-                            Penugasan
-                          </td>
-                          <td>
-                            <a href="<?= $url ?>/?peninjauan=edit" class="btn btn-sm btn-outline-secondary btn-icon-text">
-                              Edit
-                              <i class="ti-file btn-icon-append"></i>                          
-                            </a>                          
-                          </td>
-                        </tr>
-                       
-                        
                       </tbody>
                     </table>
                   </div>

@@ -24,6 +24,9 @@ $wilayah = new Wilayah();
 include 'controllers/Pelaporan.php';
 $pelaoran = new Pelaporan();
 
+include 'controllers/Peninjauan.php';
+$peninjauan = new Peninjauan();
+
 
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
@@ -141,7 +144,9 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/peninjauan/peninjauan_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                $peninjauan->Post($_POST, $_FILES);
+            } elseif ($param_val == 'update') {
+                $peninjauan->Update($_POST, $_FILES);
             }
         break;
         

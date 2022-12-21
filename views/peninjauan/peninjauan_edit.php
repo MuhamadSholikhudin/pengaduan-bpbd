@@ -1,3 +1,8 @@
+<?php 
+          $id = $_GET['id'];
+          $cari_peninjauan_berdasarkan_id_peninjauan = "SELECT * FROM peninjauan WHERE id_peninjauan = " . $_GET['id'] . "";
+          $satu_peninjauan = Querysatudata($cari_peninjauan_berdasarkan_id_peninjauan);
+        ?>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -10,29 +15,71 @@
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?pelaporan=pelaporan_post" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="<?= $url ?>/?peninjauan=update" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
-                          <label for="nama_pelapor">Nama pelapor</label>
-                          <input type="text" class="form-control p-input" id="nama_pelapor" name="nama_pelapor" aria-describedby="nama_pelapor"  placeholder="Enter Nama Lengkap">
+                        <label for="nama_pelapor">* Nama Peninjau</label>
+                        <input type="hidden" class="form-control p-input" id="id_peninjauan" name="id_peninjauan" value="<?= $satu_peninjauan['id_peninjauan'] ?>" >
+                        <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>" >
+                        <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
+                        <input type="text" class="form-control p-input"  value="<?= $_SESSION['nama_user'] ?>" disabled>
                       </div>
                       <div class="form-group">
-                          <label for="tanggal_pelaporan">Tanggal pelaporan</label>
-                          <input type="text" class="form-control p-input" id="tanggal_pelaporan" aria-describedby="tanggal_pelaporan" name="name_user" placeholder="Enter Nama Lengkap">
-                      </div> 
+                        <label for="tanggal_peninjauan">* Tanggal Peninjauan</label>
+                        <input type="date" class="form-control p-input" id="tanggal_peninjauan"  name="tanggal_peninjauan" value="<?= $satu_peninjauan['tanggal_peninjauan'] ?>">
+                      </div>
                       <div class="form-group">
-                          <label for="pelaporan">Keterangan pelaporan</label>
-                          <textarea class="form-control" id="pelaporan" name="pelaporan" ></textarea>
-                      </div>                     
+                        <label for="id_bencana">* bencana</label>
+                        <select class="js-example-basic-single form-control" id="id_bencana" name="id_bencana">
+                          <?php
+                          $bencanas = Querybanyak("SELECT * FROM bencana");
+                          foreach ($bencanas as $bencana) { ?>
+                            <?php if( $satu_peninjauan['id_bencana'] == $bencana['id_bencana']){ ?>
+                              <option value="<?= $bencana['id_bencana'] ?>" selected><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
+                            <?php }else{ ?>
+                              <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
+                            <?php } ?>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="id_wilayah">* Wilayah</label>
+                        <select class="js-example-basic-single form-control" id="id_wilayah" name="id_wilayah">
+                          <?php
+                          $wilayahs = Querybanyak("SELECT * FROM wilayah");
+                          foreach ($wilayahs as $wilayah) { ?>
+                            <?php if( $satu_peninjauan['id_wilayah'] == $wilayah['id_wilayah']){ ?>
+                              <option value="<?= $wilayah['id_wilayah'] ?>" selected><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
+                            <?php }else{ ?>
+                              <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
+                            <?php } ?>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="jumlah_korban">* Korban</label>
+                        <input type="number" class="form-control" id="jumlah_korban" value="<?= $satu_peninjauan['jumlah_korban'] ?>" name="jumlah_korban">
+                      </div>
+                      <div class="form-group">
+                        <label for="peninjauan">* Keterangan peninjauan</label>
+                        <textarea class="form-control" id="keterangan_peninjauan" name="keterangan_peninjauan" style="height: 150px;"><?= $satu_peninjauan['keterangan_peninjauan'] ?></textarea>
+                      </div>
+                      <div class="form-group">
+                        <label for="bukti_peninjauan">* Bukti Peninjauan</label>
+                        <input type="file" class="form-control" id="bukti_peninjauan" name="bukti_peninjauan" accept="image/png, image/gif, image/jpeg" >
+                          <div class="card-img">
+                            <img src="<?= $url ?>/gambar/bukti_peninjauan/<?= $satu_peninjauan['bukti_peninjauan'] ?>" style="width:100%;" alt="" srcset="">
+                          </div>
+                      </div>
                       <div class="col-12">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
                       </div>
-                  </form>
+                    </form>
 
-                  </div>
-
-            
-                  
-
+                  </div>        
                 </div>
                 <div class="card-footer">
 

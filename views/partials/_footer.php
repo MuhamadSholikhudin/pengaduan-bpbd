@@ -44,9 +44,10 @@
         <script>
           $('.tambahpeninjauan').on('click', function() {
             var id = $(this).data('id');            
+            var id_wilayah = $(this).data('idwilayah');            
 
             $('#id_pelaporan').val(id);
-            // $('#deladd').html(sk);
+            $('#id_wilayah').val(id_wilayah);
           });
         </script>
 

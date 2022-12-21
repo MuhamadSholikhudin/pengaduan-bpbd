@@ -7,34 +7,48 @@
             return $model;
         }
 
-        public function Post($request){
-        
-            $sql = "INSERT INTO `pelaporan` ( `id_user`, `tanggal_pelaporan`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`)
+        public function Post($request, $file){
+            $bukti_peninjauan = "";
+            if($file['bukti_peninjauan']['name'] !== ""){
+                $bukti_peninjauan = (strtotime("now") . $file['bukti_peninjauan']['name']);
+                $lokasi = $file['bukti_peninjauan']['tmp_name'];    
+                move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
+            } 
+            $sql = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`, `tanggal_peninjauan`, `jumlah_korban`, `keterangan_peninjauan`,  `bukti_peninjauan`)
                     VALUES 
                     ( 
-                        ".$request['id_user'].", 
-                        '".$request['tanggal_pelaporan']."', 
+                        ".$request['id_pelaporan'].", 
+                        '".$request['id_user']."', 
                         ".$request['id_wilayah'].",
-                        '".$request['pelaporan']."',
-                        '".$request['link_maps']."',
-                        '".$request['status_pelaporan']."'
+                        '".$request['tanggal_peninjauan']."',
+                        '".$request['jumlah_korban']."',
+                        '".$request['keterangan_peninjauan']."',
+                        '".$bukti_peninjauan."'
                     )";
             $this->Model()->Execute($sql);
-            Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Tambah");
+            Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Tambah");
         }
 
-        public function Update($request){
-            $sql = "UPDATE  `pelaporan` 
-                SET   id_user =  ".$request['id_user'].", 
-                      tanggal_pelaporan =  '".$request['tanggal_pelaporan']."', 
+        public function Update($request, $file){
+            $peninjauan_lama = Querysatudata("SELECT * FROM peninjauan WHERE id_Peninjauan = ".$request['id_peninjauan']."");
+            $bukti_peninjauan = $peninjauan_lama["bukti_peninjauan"];
+            if($file['bukti_peninjauan']['name'] !== ""){
+                $bukti_peninjauan = (strtotime("now") . $file['bukti_peninjauan']['name']);
+                $lokasi = $file['bukti_peninjauan']['tmp_name'];    
+                move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
+            }
+            $sql = "UPDATE  `peninjauan` 
+                SET   id_pelaporan =  ".$request['id_pelaporan'].", 
+                      id_user =  '".$request['id_user']."', 
                       id_wilayah = ".$request['id_wilayah'].",
-                      pelaporan =  '".$request['pelaporan']."',
-                      link_maps =  '".$request['link_maps']."',
-                      status_pelaporan =  '".$request['status_pelaporan']."'
-                    WHERE id_pelaporan = ".$request['id_pelaporan']."
+                      tanggal_peninjauan =  '".$request['tanggal_peninjauan']."',
+                      jumlah_korban =  '".$request['jumlah_korban']."',
+                      keterangan_peninjauan =  '".$request['keterangan_peninjauan']."',
+                      bukti_peninjauan =  '".$bukti_peninjauan."',
+                    WHERE id_peninjauan = ".$request['id_peninjauan']."
             ";
             $this->Model()->Execute($sql);
-            Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Ubah");
+            Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Ubah");
         }
      
         public function Kirim($request){
