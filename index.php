@@ -66,6 +66,8 @@ if ($_GET) {
                 $bantuan->Post($_POST);
             }elseif ($param_val == 'update') {
                 $bantuan->Update($_POST);
+            }elseif ($param_val == 'stok') {
+                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan.php');
             }
         break;
         

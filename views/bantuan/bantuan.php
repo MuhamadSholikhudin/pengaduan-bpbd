@@ -57,9 +57,13 @@
                             <?= $bantuan['batch'] ?>
                             </td>
                             <td>
-                              <a href="<?= $url ?>/?bantuan=edit&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-secondary">
+                              <a href="<?= $url ?>/?bantuan=edit&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-success">
+                                <i class="ti-pencil"></i>
                                 Edit
-                                <i class="ti-file btn-icon-append"></i>
+                              </a>
+                              <a href="<?= $url ?>/?bantuan=stok&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-primary">
+                                <i class="ti-pencil"></i>
+                                Stok
                               </a>
                             </td>
                           </tr>

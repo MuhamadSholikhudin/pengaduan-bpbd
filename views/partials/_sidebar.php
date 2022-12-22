@@ -30,7 +30,9 @@
                     break;
                     case 'petugas_logistik':
                     ?>
-                    
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan">Stok Bantuan</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
                     <?php
                     break;
                     case 'petugas_kajian':
@@ -41,7 +43,6 @@
                     
                     <?php
                     break;
-
                     case 'masyarakat':
                       ?>
                         <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan_masyarakat=pelaporan">Pelapor</a></li>            
