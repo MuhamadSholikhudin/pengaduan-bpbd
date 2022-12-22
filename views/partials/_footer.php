@@ -41,15 +41,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 
-        <script>
-          $('.tambahpeninjauan').on('click', function() {
-            var id = $(this).data('id');            
-            var id_wilayah = $(this).data('idwilayah');            
-
-            $('#id_pelaporan').val(id);
-            $('#id_wilayah').val(id_wilayah);
-          });
-        </script>
 
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
         <script>
@@ -58,11 +49,8 @@
           });
         </script>
 
+        <script src="<?= $url ?>/assets/js/ajaxapp.js"></script>
 
-
-        <!-- endinject -->
-        <!-- Custom js for this page-->
-        <!-- End custom js for this page-->
         </body>
 
         </html>

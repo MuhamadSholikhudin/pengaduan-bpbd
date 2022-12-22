@@ -27,6 +27,9 @@ $pelaoran = new Pelaporan();
 include 'controllers/Peninjauan.php';
 $peninjauan = new Peninjauan();
 
+include 'controllers/Distribusi.php';
+$distribusi = new Distribusi();
+
 
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
@@ -173,6 +176,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/distribusi/distribusi_edit.php');
             } elseif ($param_val == 'post') {
                 $user->Post($_POST);
+            }elseif ($param_val == 'ajax_search') {
+                $distribusi->AjaxSearch($_POST);
             }
         break;
 
