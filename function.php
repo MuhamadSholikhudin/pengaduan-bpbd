@@ -38,7 +38,8 @@ function Querysatudata($query){
 function NumRows($query){
     $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
     $cari = mysqli_query($koneksi, $query);
-    return mysqli_num_rows($cari);
+    $cek = mysqli_num_rows($cari);
+    return $cek;
 }
 
 function Redirect($link, $notif) {

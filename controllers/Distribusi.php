@@ -40,34 +40,36 @@
         }
      
         public function AjaxSearch($request){
+            
+            $bantuan_loop = '';
 
-            /*
-            $sql = "SELECT * FROM bantuan WHERE LIKE nama_bantuan  '%".$request['request']."%' ";
-            $countbantuan = NumRows($sql);
-
-            if($countbantuan < 1){
-                $bantuan_loop = '<tr>Tidak Ditemukan</tr>';
-            }else{
-                $bantuan_loop = '';
-                $bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
-
-                $bantuans = Querybanyak($sql);
-                foreach ($bantuans as $bant) {
-
-                    $bantuan_loop .= '                        
-                            <tr>                            
-                                <td>'.$bant['nama_bantuan'].'</td>
-                                <td>'. $bant['satuan'].'</td>
-                                <td>'. $bant['batch'].'</td>                                   
-                            </tr>
-                    ';
+            if($request['search'] !== "" AND $request['search'] !== " " AND $request['search'] !== NULL){
+                $num_sql = "SELECT COUNT(*) as id FROM bantuan WHERE nama_bantuan LIKE '%".$request['search']."%' ";
+                $num_bantuan = Querysatudata($num_sql);
+                if($num_bantuan['id'] > 0){
+                    $sql = "SELECT * FROM bantuan WHERE nama_bantuan LIKE '%".$request['search']."%' LIMIT 10";
+                    $bantuans = Querybanyak($sql);
+                    $bantuan_loop .= '<table class="table table-stripped">';
+                    $bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
+                    $bantuans = Querybanyak($sql);
+                    foreach ($bantuans as $bant) {
+                        $bantuan_loop .= '                        
+                                <tr>                            
+                                    <td>'.$bant['nama_bantuan'].'</td>
+                                    <td>'.$bant['batch'].'</td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-primary">
+                                            <i class="ti-plus"></i>    
+                                            Add
+                                        </a>
+                                    </td>                                   
+                                </tr>
+                        ';
+                    }
+                    $bantuan_loop .= '</table>';
                 }
-
             }
-            */
-            $bantuan_loop = $request['search'];
-            return json_encode($bantuan_loop);
-
+            echo json_encode($bantuan_loop);
         }
 
     }

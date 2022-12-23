@@ -19,21 +19,20 @@ $(".tambahpeninjauan").on("click", function () {
 
 $("#search_distribusi").keyup(function () {
   var search = document.getElementById("search_distribusi").value;
-
   $.ajax({
     type: "POST",
-    url: url_web+"/?distribusi=ajax_search",
+    url: "http://localhost/pengaduan-bpbd/?distribusi=ajax_search",
     dataType: "json",
     data: {
-        search: search,
+        search:search
     },
     success: function (data) {
-        alert(data);
+        $("#result_search").html(data);
     },
     error() {
-      alert("error");
+      console.error();
     },
   });
-console.log(url_web+"/?distribusi=ajax_search");
-  $("#result_search").html(search);
+
 });
+

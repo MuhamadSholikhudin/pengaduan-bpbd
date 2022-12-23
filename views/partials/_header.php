@@ -24,10 +24,12 @@ if (!isset($_SESSION['id_user'])) {
   <link rel="stylesheet" href="<?= $url ?>/assets/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?= $url ?>/assets/images/favicon.png" />
+  
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
  
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
 
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 
 <body>
