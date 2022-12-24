@@ -99,15 +99,22 @@
                                           <label for="tanggal_distribusi">* Tanggal distribusi</label>
                                           <input type="date" class="form-control p-input" id="tanggal_distribusi" name="tanggal_distribusi" value="<?= date('Y-m-d') ?>">
                                         </div>
+                                        <div class="table_result" id="table_result">
+                                          <ul id="table_result_ul">
+                                          </ul>
+                                        </div>
                                       </div>
+
+
                                       <div class="col-lg-6">
 
-                                      <div class="form-group">
+                                        <div class="form-group">
                                           <label for="search_distribusi">Cari Data Bantuan</label>
-                                          <input type="text" class="form-control p-input" id="search_distribusi" name="search_distribusi" >
+                                          <input type="text" class="form-control p-input" id="search_distribusi" name="search_distribusi">
                                         </div>
 
-                                        <div class="result_search" id="result_search"> 
+                                        <div class="result_search" id="result_search">
+
 
 
                                         </div>

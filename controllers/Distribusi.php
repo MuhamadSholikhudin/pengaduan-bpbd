@@ -49,22 +49,21 @@
                 if($num_bantuan['id'] > 0){
                     $sql = "SELECT * FROM bantuan WHERE nama_bantuan LIKE '%".$request['search']."%' LIMIT 10";
                     $bantuans = Querybanyak($sql);
-                    $bantuan_loop .= '<table class="table table-stripped">';
+                    $bantuan_loop .= '<table class="table table-stripped" id="tablesearch">';
                     $bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
                     $bantuans = Querybanyak($sql);
                     foreach ($bantuans as $bant) {
                         $bantuan_loop .= '                        
-                                <tr>                            
-                                    <td>'.$bant['nama_bantuan'].'</td>
-                                    <td>'.$bant['batch'].'</td>
-                                    <td>
-                                        <a href="#" class="btn btn-sm btn-primary">
-                                            <i class="ti-plus"></i>    
-                                            Add
-                                        </a>
-                                    </td>                                   
-                                </tr>
-                        ';
+                                            <tr>                            
+                                                <td>'.$bant['nama_bantuan'].'</td>
+                                                <td>'.$bant['batch'].'</td>
+                                                <td>
+                                                    <button id="addedit" data-id_bantuan="'.$bant['id_bantuan'].'" class="btn btn-sm btn-primary" onclick="Klink();">
+                                                        <i class="ti-plus"></i>    
+                                                        Add
+                                                    </button>
+                                                </td>                                   
+                                            </tr>';
                     }
                     $bantuan_loop .= '</table>';
                 }
