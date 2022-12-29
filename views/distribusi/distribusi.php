@@ -90,8 +90,8 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <form class="forms-sample" action="<?= $url ?>/?stok_bantuan=post" method="POST" enctype="multipart/form-data">
-                                    <input type="hidden" class="form-control p-input" id="id_bantuan" name="id_bantuan" value="<?= $satu_bantuan['id_bantuan'] ?>">
+                                  <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" class="form-control p-input" id="id_bantuan" name="id_bantuan" value="2">
 
                                     <div class="row">
                                       <div class="col-lg-6">
@@ -104,21 +104,15 @@
                                           </ul>
                                         </div>
                                       </div>
-
-
                                       <div class="col-lg-6">
-
                                         <div class="form-group">
                                           <label for="search_distribusi">Cari Data Bantuan</label>
                                           <input type="text" class="form-control p-input" id="search_distribusi" name="search_distribusi">
                                         </div>
-
                                         <div class="result_search" id="result_search">
 
-
-
+                                
                                         </div>
-
                                       </div>
                                     </div>
 

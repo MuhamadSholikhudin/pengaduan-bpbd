@@ -42,7 +42,6 @@
         public function AjaxSearch($request){
             
             $bantuan_loop = '';
-
             if($request['search'] !== "" AND $request['search'] !== " " AND $request['search'] !== NULL){
                 $num_sql = "SELECT COUNT(*) as id FROM bantuan WHERE nama_bantuan LIKE '%".$request['search']."%' ";
                 $num_bantuan = Querysatudata($num_sql);
@@ -58,7 +57,7 @@
                                                 <td>'.$bant['nama_bantuan'].'</td>
                                                 <td>'.$bant['batch'].'</td>
                                                 <td>
-                                                    <button id="addedit" data-id_bantuan="'.$bant['id_bantuan'].'" class="btn btn-sm btn-primary" onclick="Klink();">
+                                                    <button id="addbantuan" data-id_bantuan="'.$bant['id_bantuan'].'" class="addbantuan btn btn-sm btn-primary">
                                                         <i class="ti-plus"></i>    
                                                         Add
                                                     </button>
@@ -69,6 +68,25 @@
                 }
             }
             echo json_encode($bantuan_loop);
+        }
+
+        public function AjaxAddBant($request){
+            $num_sql = "SELECT * FROM bantuan WHERE id_bantuan = ".$request['id_bantuan']." ";
+            $bantuan = Querysatudata($num_sql);
+            $table_ul = '<li>
+                            <span style="width:300px;">'.$bantuan['nama_bantuan'].'</span>
+                            &nbsp;&nbsp;&nbsp;
+                            <span>
+                                <input type="number" class="cls_bantuan" name="bantuan_id[]" value="'.$bantuan['id_bantuan'].'" style="display:none;">
+                                <input type="number" class="form-control" min="1" name="jumlah_bantuan[]" value="1" id="'.$bantuan['id_bantuan'].'" style="width: 100px;">
+                            </span>&nbsp;&nbsp;&nbsp;
+                            <span style="width: 100px;">
+                                <a href="#" id="trash_bantuan">
+                                <i id="removebant" class="ti-trash" ></i>
+                                </a>
+                            </span>
+                        </li>';
+            echo json_encode($table_ul);
         }
 
     }

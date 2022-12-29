@@ -180,13 +180,16 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/distribusi/distribusi_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                var_dump($_POST);
+                // $user->Post($_POST);
             } elseif ($param_val == 'ajax_search') {
                 $bantuan_loop = 'OKE';
                 // echo $bantuan_loop;
                 // return json_encode($bantuan_loop);
 
                 $distribusi->AjaxSearch($_POST);
+            }elseif ($param_val == 'ajax_add_bant') {
+                $distribusi->AjaxAddBant($_POST);
             }
             break;
 

@@ -7,12 +7,28 @@ $(".tambahpeninjauan").on("click", function () {
   $("#id_wilayah").val(id_wilayah);
 });
 
-var table_ul = '<li><span style="width:300px;">Promina</span>&nbsp;&nbsp;&nbsp;<span><input type="number" class="form-control" min="1" name="" id="" style="width: 100px;"></span>&nbsp;&nbsp;&nbsp;<span style="width: 100px;"><a href="" id="trash_bantuan"><i class="ti-trash" ></i></a></span></li>';
 
-function Klink(){
-  $("#table_result_ul").append(table_ul);
-  $("#result_search").html("");
-}
+$("#result_search").on('click', '#addbantuan', function() {
+  var id_bantuan = $(this).data('id_bantuan');
+  $.ajax({
+    type: "POST",
+    url: url_web+"/?distribusi=ajax_add_bant",
+    dataType: "json",
+    data: {
+        id_bantuan:id_bantuan
+    },
+    success: function (data) {
+        $("#table_result_ul").append(data);
+    },
+    error() {
+      console.log("Error");
+    },
+  });
+});
+
+$("#table_result_ul").on('click', '#removebant', function() {
+    $(this).closest('li').remove();
+});
 
 $("#search_distribusi").keyup(function () {
   var search = document.getElementById("search_distribusi").value;
