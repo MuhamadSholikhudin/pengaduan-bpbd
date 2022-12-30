@@ -90,36 +90,48 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data">
-                                    <input type="hidden" class="form-control p-input" id="id_bantuan" name="id_bantuan" value="2">
+                                  <!-- <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data"> -->
+                                  <input type="hidden" class="form-control p-input" id="id_bantuan" value="2">
 
-                                    <div class="row">
-                                      <div class="col-lg-6">
-                                        <div class="form-group">
-                                          <label for="tanggal_distribusi">* Tanggal distribusi</label>
-                                          <input type="date" class="form-control p-input" id="tanggal_distribusi" name="tanggal_distribusi" value="<?= date('Y-m-d') ?>">
-                                        </div>
-                                        <div class="table_result" id="table_result">
-                                          <ul id="table_result_ul">
-                                          </ul>
-                                        </div>
+                                  <div class="row">
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <label for="tanggal_distribusi">* Tanggal distribusi</label>
+                                        <input type="date" class="form-control p-input" id="tanggal_distribusi" value="<?= date('Y-m-d') ?>">
                                       </div>
-                                      <div class="col-lg-6">
-                                        <div class="form-group">
-                                          <label for="search_distribusi">Cari Data Bantuan</label>
-                                          <input type="text" class="form-control p-input" id="search_distribusi" name="search_distribusi">
-                                        </div>
-                                        <div class="result_search" id="result_search">
-
-                                
-                                        </div>
+                                      <div class="table_result" id="table_result">
+                                        <ul id="table_result_ul">
+                                        </ul>
                                       </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                      <div class="form-group">
+                                        <label for="search_distribusi">Cari Data Bantuan</label>
+                                        <input type="text" class="form-control p-input" id="search_distribusi">
+                                      </div>
+                                      <div class="result_search" id="result_search">
 
-                                    <div class="col-12">
-                                      <button type="submit" class="btn btn-primary">SIMPAN</button>
+
+                                      </div>
                                     </div>
-                                  </form>
+                                  </div>
+
+                                  <div class="col-12">
+                                    <button  class="btn btn-primary" onclick="Geeks()">SIMPAN</button>
+                                  </div>
+                                  <script type="text/javascript">
+                                    function Geeks() {
+                                      var bantuan_id = document.getElementsByName('bantuan_id[]');
+                                      var jumlah_bantuan = document.getElementsByName('jumlah_bantuan[]');
+
+                                      var bantuan = [];
+                                      for (var i = 0; i < bantuan_id.length; i++) {
+                                      bantuan.push(bantuan_id[i].value);                              
+                                      }
+                                      console.log(bantuan);
+                                    }
+                                  </script>
+                                  <!-- </form> -->
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
