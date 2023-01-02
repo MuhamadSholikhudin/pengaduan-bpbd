@@ -190,6 +190,9 @@ if ($_GET) {
                 $distribusi->AjaxSearch($_POST);
             }elseif ($param_val == 'ajax_add_bant') {
                 $distribusi->AjaxAddBant($_POST);
+            
+            }elseif ($param_val == 'ajax_insert') {
+                $distribusi->AjaxInsert($_POST);
             }
             break;
 

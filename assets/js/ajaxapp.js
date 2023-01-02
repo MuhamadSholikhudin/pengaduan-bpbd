@@ -15,15 +15,20 @@ $("#result_search").on('click', '#addbantuan', function() {
     url: url_web+"/?distribusi=ajax_add_bant",
     dataType: "json",
     data: {
-        id_bantuan:id_bantuan
+      id_bantuan:id_bantuan
     },
     success: function (data) {
-        $("#table_result_ul").append(data);
+      $("#table_result_ul").append(data);
     },
     error() {
       console.log("Error");
     },
   });
+});
+
+$(".addpeninjauan").on("click", function(){
+  var id_peninjauan = $(this).data('id');
+  document.getElementById('id_peninjauan').value = id_peninjauan;
 });
 
 $("#table_result_ul").on('click', '#removebant', function() {
