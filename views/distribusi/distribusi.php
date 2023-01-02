@@ -75,7 +75,6 @@
                                 <i class="ti-plus"></i>
                                 Tambah
                               </button>
-
                             </td>
                           </tr>
 
@@ -91,7 +90,7 @@
                                 </div>
                                 <div class="modal-body">
                                   <!-- <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data"> -->
-                                  <input type="hidden" class="form-control p-input" id="id_bantuan" value="2">
+                                  <input type="hidden" class="form-control p-input" id="id_peninjauan" >
 
                                   <div class="row">
                                     <div class="col-lg-6">
@@ -110,38 +109,53 @@
                                         <input type="text" class="form-control p-input" id="search_distribusi">
                                       </div>
                                       <div class="result_search" id="result_search">
-
-
                                       </div>
                                     </div>
                                   </div>
 
                                   <div class="col-12">
-                                    <button  class="btn btn-primary" onclick="Geeks()">SIMPAN</button>
+                                    <button  class="btn btn-primary" onclick="ProcessInsertLogistik()">SIMPAN</button>
                                   </div>
                                   <script type="text/javascript">
-                                    function Geeks() {
+                                    function ProcessInsertLogistik() {
+                                      var tanggal_distribusi = document.getElementById('tanggal_distribusi');
+                                      var id_peninjauan = document.getElementById('id_peninjauan');
                                       var bantuan_id = document.getElementsByName('bantuan_id[]');
                                       var jumlah_bantuan = document.getElementsByName('jumlah_bantuan[]');
-
-                                      var bantuan = [];
-                                      for (var i = 0; i < bantuan_id.length; i++) {
-                                      bantuan.push(bantuan_id[i].value);                              
+                                      var gabbantuan = {};
+                                      for (var i = 0; i < bantuan_id.length; i++) { 
+                                        gabbantuan[bantuan_id[i].value] = jumlah_bantuan[i].value;                      
                                       }
-                                      console.log(bantuan);
+                                      var payload = JSON.stringify({
+                                        tanggal_distribusi: tanggal_distribusi,
+                                        id_peninjauan: id_peninjauan,
+                                        data: gabbantuan
+                                      });
+                                      $.ajax({
+                                        type: "POST",
+                                        url: url_web+"/?distribusi=ajax_search",
+                                        dataType: "json",
+                                        data: {
+                                            data:payload
+                                        },
+                                        success: function (data) {
+                                            $("#result_search").html(data);
+                                        },
+                                        error() {
+                                          console.error();
+                                        },
+                                      });
+
                                     }
                                   </script>
                                   <!-- </form> -->
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                  <!-- <button type="button" class="btn btn-primary">Oke</button> -->
                                 </div>
                               </div>
                             </div>
                           </div>
-
-
                         <?php
                         }
                         ?>

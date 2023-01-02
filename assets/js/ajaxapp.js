@@ -46,6 +46,5 @@ $("#search_distribusi").keyup(function () {
       console.error();
     },
   });
-
 });
 
