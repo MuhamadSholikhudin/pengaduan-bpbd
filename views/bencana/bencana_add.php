@@ -35,7 +35,7 @@
                       </div>
 
                       <div class="form-group">
-                        <?php $wilayahs = ["Kota", "Winong"]; ?>
+                        <?php $wilayahs = ["Kota", "Desa"]; ?>
                         <label for="wilayah">wilayah</label>
                         <select class="form-control " name="wilayah" id="wilayah">
                           <?php foreach($wilayahs as $wilayah){?>

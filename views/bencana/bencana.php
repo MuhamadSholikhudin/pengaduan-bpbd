@@ -30,9 +30,9 @@
                           <th>
                             level
                           </th>
-                          <th>
+                          <!-- <th>
                             Wilayah bencana
-                          </th>
+                          </th> -->
                           <th>
                             Action
                           </th>
@@ -53,9 +53,9 @@
                             <td>
                               <?= $bencana['level'] ?>
                             </td>
-                            <td>
+                            <!-- <td>
                               <?= $bencana['wilayah'] ?>
-                            </td>
+                            </td> -->
                             <td>
                               <a href="<?= $url ?>/?bencana=edit&id=<?= $bencana['id_bencana'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                                 Edit

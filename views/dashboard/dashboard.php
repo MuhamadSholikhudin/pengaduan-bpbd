@@ -3,6 +3,7 @@
         <div class="content-wrapper">
           <div class="row">
 
+              <!--
               <div class="col-lg-12 d-flex flex-column">
                 <div class="statistics-details d-flex align-items-center justify-content-between">
                     <div>
@@ -38,7 +39,11 @@
                   </div>
 
                 </div>
-              </div>                 
+              </div> 
+              -->
+
+
+          </div>
           </div>
         </div>
       </div>

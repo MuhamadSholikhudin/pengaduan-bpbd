@@ -63,9 +63,9 @@
                             <?= $user['no_telp_user']; ?>
                           </td>
                           <td>
-                            <a href="<?= $url ?>/?user=edit&id=<?= $user['id_user']; ?>" class="btn btn-outline-warning btn-icon-text">
+                            <a href="<?= $url ?>/?user=edit&id=<?= $user['id_user']; ?>" class="btn btn-lg btn-outline-warning btn-icon-text">
+                              <i class="ti-pencil"></i>                          
                               Edit
-                              <i class="ti-file btn-icon-pen"></i>                          
                             </a>                          
                           </td>
                         </tr>

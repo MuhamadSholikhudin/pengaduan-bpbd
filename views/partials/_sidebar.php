@@ -25,7 +25,10 @@
                     break;
                     case 'petugas_bpbd':
                     ?>
-                        <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
+                      <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
+
                     <?php
                     break;
                     case 'petugas_logistik':
@@ -39,7 +42,6 @@
                     ?>
                       <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
                       <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?peninjauan=peninjauan">Peninjauan</a></li>
-                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
                     
                     <?php
                     break;

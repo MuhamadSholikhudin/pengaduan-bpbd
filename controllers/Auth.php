@@ -6,6 +6,7 @@ class Auth
         $model = new Model();
         return $model;
     }
+    
     public function pendaftaran($request)
     {
         $sql = "INSERT INTO `user` ( `nama_user`, `alamat_user`, `no_telp_user`, `username`, `password`, `level`) 
