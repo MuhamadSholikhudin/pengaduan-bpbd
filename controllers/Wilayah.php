@@ -8,12 +8,13 @@
         }
 
         public function Post($request){
-            $sql = "INSERT INTO `wilayah` ( `nama_wilayah`, `status_wilayah`, `ket_wilayah`)
+            $sql = "INSERT INTO `wilayah` ( `kecamatan`, `desa`, `no_telp`)
                     VALUES 
                     ( 
-                        '".$request['nama_wilayah']."', 
-                        '".$request['status_wilayah']."', 
-                        '".$request['ket_wilayah']."'
+                        '".$request['kecamatan']."', 
+                        '".$request['desa']."', 
+                        '".$request['no_telp']."', 
+                        'aman'
                     )";
             $this->Model()->Execute($sql);
             Redirect("http://localhost/pengaduan-bpbd/?wilayah=wilayah", "Data Berhasil Di Tambah");
@@ -21,9 +22,9 @@
 
         public function Update($request){
             $sql = "UPDATE  `wilayah` 
-                SET `nama_wilayah` = '".$request['nama_wilayah']."', 
-                    `status_wilayah` = '".$request['status_wilayah']."', 
-                    `ket_wilayah` = '".$request['ket_wilayah']."'
+                SET `kecamatan` = '".$request['kecamatan']."', 
+                    `desa` = '".$request['desa']."', 
+                    `no_telp` = '".$request['no_telp']."'
                     WHERE id_wilayah = ".$request['id_wilayah']."
             ";
 

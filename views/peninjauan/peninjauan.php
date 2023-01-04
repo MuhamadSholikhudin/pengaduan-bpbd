@@ -45,7 +45,7 @@
                       </thead>
                       <tbody>
                         <?php
-                        $peninjauans = Querybanyak("SELECT * FROM peninjauan ");
+                        $peninjauans = Querybanyak("SELECT * FROM peninjauan ORDER BY id_peninjauan DESC");
                         foreach ($peninjauans as $peninjauan) { ?>
                         <tr>
                           <td>
@@ -54,13 +54,14 @@
                                WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
                               ?>
                               <?= $pelaporanuser['nama_user'] ?> 
+                              <?= $pelaporanuser['id_bencana'] ?> 
                           </td>
                           <td>
                             <?= $peninjauan['tanggal_peninjauan'] ?>
                           </td>
                           <td>
                           <?php
-                              $bencana = Querysatudata("SELECT pelaporan.id_bencana as id_bencana FROM pelaporan LEFT JOIN bencana WHERE pelaporan.id_bencana = " . $pelaporanuser['id_bencana'] . " AND pelaporan.id_pelaporan = ".$peninjauan['id_pelaporan']."")
+                              $bencana = Querysatudata("SELECT nama_bencana FROM  bencana WHERE id_bencana = " . $pelaporanuser['id_bencana'] . " ");
                               ?>
                               <?= $bencana['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?>  
                           </td>

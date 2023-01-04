@@ -1,7 +1,10 @@
-<?php 
+        <?php 
           $id = $_GET['id'];
           $cari_peninjauan_berdasarkan_id_peninjauan = "SELECT * FROM peninjauan WHERE id_peninjauan = " . $_GET['id'] . "";
           $satu_peninjauan = Querysatudata($cari_peninjauan_berdasarkan_id_peninjauan);
+
+          $sql_pelaporan = "SELECT bencana.nama_bencana FROM pelaporan JOIN bencana ON pelaporan.id_bencana WHERE pelaporan.id_pelaporan = " . $satu_peninjauan['id_pelaporan'] . "";
+          $pelaporan = Querysatudata($sql_pelaporan);
         ?>
       <!-- partial -->
       <div class="main-panel">
@@ -28,22 +31,6 @@
                         <input type="date" class="form-control p-input" id="tanggal_peninjauan"  name="tanggal_peninjauan" value="<?= $satu_peninjauan['tanggal_peninjauan'] ?>">
                       </div>
                       <div class="form-group">
-                        <label for="id_bencana">* bencana</label>
-                        <select class="js-example-basic-single form-control" id="id_bencana" name="id_bencana">
-                          <?php
-                          $bencanas = Querybanyak("SELECT * FROM bencana");
-                          foreach ($bencanas as $bencana) { ?>
-                            <?php if( $satu_peninjauan['id_bencana'] == $bencana['id_bencana']){ ?>
-                              <option value="<?= $bencana['id_bencana'] ?>" selected><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
-                            <?php }else{ ?>
-                              <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
-                            <?php } ?>
-                          <?php
-                          }
-                          ?>
-                        </select>
-                      </div>
-                      <div class="form-group">
                         <label for="id_wilayah">* Wilayah</label>
                         <select class="js-example-basic-single form-control" id="id_wilayah" name="id_wilayah">
                           <?php
@@ -62,6 +49,10 @@
                       <div class="form-group">
                         <label for="jumlah_korban">* Korban</label>
                         <input type="number" class="form-control" id="jumlah_korban" value="<?= $satu_peninjauan['jumlah_korban'] ?>" name="jumlah_korban">
+                      </div>
+                      <div class="form-group">
+                        <label for="bencana">Bencana</label>
+                        <input type="text" class="form-control" id="bencana" value="<?= $pelaporan['nama_bencana'] ?>" readonly>
                       </div>
                       <div class="form-group">
                         <label for="kategori_bencana">* Kategori Bencana</label>

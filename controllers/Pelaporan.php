@@ -36,7 +36,7 @@
                     WHERE id_pelaporan = ".$request['id_pelaporan']."
             ";
             $this->Model()->Execute($sql);
-            Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Ubah");
+            Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Ubah");
         }
      
         public function Kirim($request){

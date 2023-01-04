@@ -120,7 +120,7 @@ class Distribusi
                 ".$key.",
                 ".$val.",
                 ".$val.",
-                ".$val."
+                ".date('Ymd')."
             )";
             $this->Model()->Execute($sql_distribusi_bantuan);
         }        

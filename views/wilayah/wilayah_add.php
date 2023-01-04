@@ -12,24 +12,18 @@
                   <div class="row">
                     <form class="forms-sample" action="<?= $url ?>/?wilayah=post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
-                          <label for="nama_wilayah">Nama wilayah</label>
-                          <input type="text" class="form-control p-input" id="nama_wilayah"  name="nama_wilayah" placeholder="Nama Wilayah" required>
+                          <label for="kecamatan">Kecamatan</label>
+                          <input type="text" class="form-control p-input" id="kecamatan"  name="kecamatan" placeholder="Kecamatan" required>
                       </div>
                       <div class="form-group">
-                        <?php 
-                          $status_wilayahs = ['Aman', 'Siaga'];
-                        ?>
-                        <label for="status_wilayah">status</label>
-                        <select class="form-control " name="status_wilayah" id="status_wilayah">
-                          <?php foreach($status_wilayahs as $status_wilayah){?>
-                            <option value="<?= $status_wilayah ?>"><?= $status_wilayah ?></option>
-                          <?php } ?> 
-                        </select>
+                          <label for="desa">Desa</label>
+                          <input type="text" class="form-control p-input" id="desa"  name="desa" placeholder="desa" required>
                       </div>
                       <div class="form-group">
-                          <label for="ket_wilayah">Keterangan wilayah</label>
-                          <textarea  class="form-control" name="ket_wilayah" id="ket_wilayah" style="height: 100px;" required></textarea>
-                      </div>                     
+                          <label for="no_telp">Nomer Telepon</label>
+                          <input type="text" class="form-control p-input" id="no_telp"  name="no_telp" placeholder="no_telp" required>
+                      </div>
+                             
                       <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </div>

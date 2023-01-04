@@ -18,29 +18,17 @@
                     <div class="row">
                       <form class="forms-sample" action="<?= $url ?>/?wilayah=update" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                          <label for="nama_wilayah">Nama wilayah</label>
+                          <label for="kecamatan">Kecamatan</label>
                           <input type="hidden" class="form-control p-input" id="id_wilayah" aria-describedby="id_wilayah" name="id_wilayah" value="<?= $satu_wilayah['id_wilayah'] ?>">
-                          <input type="text" class="form-control p-input" id="nama_wilayah" aria-describedby="nama_wilayah" name="nama_wilayah" value="<?= $satu_wilayah['nama_wilayah'] ?>">
+                          <input type="text" class="form-control p-input" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="<?= $satu_wilayah['kecamatan'] ?>" required>
                         </div>
                         <div class="form-group">
-                          <?php
-                          $status_wilayahs = ['Tanah Longsor', 'Banjir'];
-                          ?>
-                          <label for="status_wilayah">status</label>
-                          <select class="form-control " name="status_wilayah" id="status_wilayah">
-                            <?php foreach ($status_wilayahs as $status_wilayah) { ?>
-                              <?php if ($status_wilayah == $satu_user['status_wilayah']) { ?>
-                                <option value="<?= $status_wilayah ?>" selected><?= $status_wilayah ?></option>
-                              <?php } else { ?>
-                                <option value="<?= $status_wilayah ?>"><?= $status_wilayah ?></option>
-                              <?php } ?>
-                            <?php } ?>
-
-                          </select>
+                          <label for="desa">Desa</label>
+                          <input type="text" class="form-control p-input" id="desa" name="desa" placeholder="desa" value="<?= $satu_wilayah['desa'] ?>" required>
                         </div>
                         <div class="form-group">
-                          <label for="ket_wilayah">Keterangan wilayah</label>
-                          <textarea class="form-control p-input" id="ket_wilayah" aria-describedby="ket_wilayah" name="ket_wilayah"><?= $satu_wilayah['ket_wilayah'] ?></textarea>
+                          <label for="no_telp">Nomer Telepon</label>
+                          <input type="text" class="form-control p-input" id="no_telp" name="no_telp" placeholder="no_telp" value="<?= $satu_wilayah['no_telp'] ?>" required>
                         </div>
                         <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>

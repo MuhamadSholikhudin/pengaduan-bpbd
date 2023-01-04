@@ -40,7 +40,7 @@
                       </thead>
                       <tbody>
                         <?php
-                        $bantuans = Querybanyak("SELECT * FROM bantuan");
+                        $bantuans = Querybanyak("SELECT * FROM bantuan  ORDER BY id_bantuan DESC");
                         foreach ($bantuans as $bantuan) { ?>
                           <tr>
 

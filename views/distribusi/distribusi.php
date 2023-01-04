@@ -57,9 +57,9 @@
                             </td>
                             <td>
                               <?php
-                              $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . "")
+                              $bencana = Querysatudata("SELECT bencana.nama_bencana FROM pelaporan JOIN bencana ON pelaporan.id_bencana = bencana.id_bencana WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
                               ?>
-                              <?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?>
+                              <?= $bencana['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?> / <?= $peninjauan['level_bencana'] ?>
                             </td>
                             <td>
                               <?php
@@ -144,6 +144,8 @@
                                         data: gabbantuan
                                       });
 
+                                      console.log(payload);
+
                                       $.ajax({
                                         type: "POST",
                                         url: url_web + "/?distribusi=ajax_insert",
@@ -164,6 +166,7 @@
                                           console.error();
                                         },
                                       });
+                                      
 
 
                                     }

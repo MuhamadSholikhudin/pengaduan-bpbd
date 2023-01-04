@@ -3,8 +3,11 @@ var url_web = "http://localhost/pengaduan-bpbd";
 $(".tambahpeninjauan").on("click", function () {
   var id = $(this).data("id");
   var id_wilayah = $(this).data("idwilayah");
+  var id_bencana = $(this).data("idbencana");
+
   $("#id_pelaporan").val(id);
   $("#id_wilayah").val(id_wilayah);
+  $("#id_bencana").val(id_bencana);
 });
 
 

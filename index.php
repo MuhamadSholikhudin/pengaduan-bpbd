@@ -96,7 +96,7 @@ if ($_GET) {
             } elseif ($param_val == 'post') {
                 $wilayah->Post($_POST);
             } elseif ($param_val == 'update') {
-                $wilayah->Post($_POST);
+                $wilayah->Update($_POST);
             }
             break;
 

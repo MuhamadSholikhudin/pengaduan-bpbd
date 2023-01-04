@@ -15,34 +15,6 @@
                           <label for="nama_bencana">Nama Bencana</label>
                           <input type="text" class="form-control p-input" id="nama_bencana"  name="nama_bencana" placeholder="nama_bencana">
                       </div>
-                      <div class="form-group">
-                        <?php  $kategori_bencanas = ['Tanah Longsor', 'Banjir'];?>
-                        <label for="kategori_bencana">Kategori</label>
-                        <select class="form-control " name="kategori_bencana" id="kategori_bencana">
-                          <?php foreach($kategori_bencanas as $kategori_bencana){?>
-                            <option value="<?= $kategori_bencana ?>"><?= $kategori_bencana ?></option>
-                          <?php } ?> 
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <?php  $levels = [1, 2]; ?>
-                        <label for="level">Level</label>
-                        <select class="form-control " name="level" id="level">
-                          <?php foreach($levels as $level){?>
-                            <option value="<?= $level ?>"><?= $level ?></option>
-                          <?php } ?> 
-                        </select>
-                      </div>
-
-                      <div class="form-group">
-                        <?php $wilayahs = ["Kota", "Desa"]; ?>
-                        <label for="wilayah">wilayah</label>
-                        <select class="form-control " name="wilayah" id="wilayah">
-                          <?php foreach($wilayahs as $wilayah){?>
-                            <option value="<?= $wilayah ?>"><?= $wilayah ?></option>
-                          <?php } ?> 
-                        </select>
-                      </div>
                       <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </div>

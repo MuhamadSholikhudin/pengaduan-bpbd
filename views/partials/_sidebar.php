@@ -26,8 +26,9 @@
                     case 'petugas_bpbd':
                     ?>
                       <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
-                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
                       <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?wilayah=wilayah">Wilayah</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
 
                     <?php
                     break;

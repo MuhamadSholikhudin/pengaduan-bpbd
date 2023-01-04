@@ -8,13 +8,21 @@
         }
 
         public function Post($request, $file){
+
+            $sql_pelaporan = "UPDATE  `pelaporan` 
+                SET   id_bencana = ".$request['id_bencana'].",
+                      id_wilayah =  ".$request['id_wilayah']."
+                    WHERE id_pelaporan = ".$request['id_pelaporan']."
+            ";
+            $this->Model()->Execute($sql_pelaporan);
+
             $bukti_peninjauan = "";
             if($file['bukti_peninjauan']['name'] !== ""){
                 $bukti_peninjauan = (strtotime("now") . $file['bukti_peninjauan']['name']);
                 $lokasi = $file['bukti_peninjauan']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
             } 
-            $sql = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`,  `bukti_peninjauan`)
+            $sql_peninjauan = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`,  `bukti_peninjauan`)
                     VALUES 
                     ( 
                         ".$request['id_pelaporan'].", 
@@ -27,7 +35,7 @@
                         '".$request['keterangan_peninjauan']."',
                         '".$bukti_peninjauan."'
                     )";
-            $this->Model()->Execute($sql);
+            $this->Model()->Execute($sql_peninjauan);
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Tambah");
         }
 

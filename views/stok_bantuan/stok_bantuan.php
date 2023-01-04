@@ -1,6 +1,6 @@
         <?php
         $cari_bantuan_berdasarkan_id_bantuan =
-            'SELECT * FROM bantuan WHERE id_bantuan = ' . $_GET['id'] . '';
+            "SELECT * FROM bantuan WHERE id_bantuan = " . $_GET['id'] . " ORDER BY id_bantuan DESC";
         $satu_bantuan = Querysatudata($cari_bantuan_berdasarkan_id_bantuan);
         ?>
      <!-- partial -->

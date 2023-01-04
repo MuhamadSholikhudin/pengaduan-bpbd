@@ -21,7 +21,13 @@
                             Tanggal Pelaporan
                           </th>
                           <th>
+                            Bencana
+                          </th>
+                          <th>
                             Wilayah
+                          </th>
+                          <th>
+                            No Telp
                           </th>
                           <th>
                             Status Pelaporan
@@ -35,10 +41,10 @@
                         <?php
                         switch ($_SESSION['level']) {
                           case "petugas_bpbd":
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ORDER BY id_pelaporan DESC";
                             break;
                           case "petugas_kajian":
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan DESC";
                             break;
                         }
                         $pelaporans = Querybanyak($query_pelapolaran);
@@ -54,11 +60,18 @@
                               <?= $pelaporan['tanggal_pelaporan'] ?>
                             </td>
                             <td>
+                            <?php
+                              $bencana = Querysatudata("SELECT nama_bencana FROM bencana WHERE id_bencana = " . $pelaporan['id_bencana'] . "")
+                              ?>
+                              <?= $bencana['nama_bencana'] ?>  
+                            </td>
+                            <td>
                               <?php
                               $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $pelaporan['id_wilayah'] . "")
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
                             </td>
+                            <td><?= $wilayah['no_telp'] ?></td>
                             <td>
                               <?= $pelaporan['status_pelaporan'] ?>
                             </td>
@@ -84,12 +97,15 @@
                                   <?php }
                                   break;
                                 case "petugas_kajian":
+                                  $cek_peninjauan = Querysatudata("SELECT COUNT(*) as count FROM peninjauan WHERE id_pelaporan = " . $pelaporan['id_pelaporan'] . "");
+                                  if ($cek_peninjauan['count'] < 1) {
                                   ?>
-                                  <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" data-idwilayah="<?= $pelaporan['id_wilayah'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
-                                    <i class="ti-plus"></i>
-                                    Tambah Peninjauan
-                                  </a>
+                                    <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" data-idbencana="<?= $pelaporan['id_bencana'] ?>" data-idwilayah="<?= $pelaporan['id_wilayah'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
+                                      <i class="ti-plus"></i>
+                                      Tambah Peninjauan
+                                    </a>
                               <?php
+                                  }
                                   break;
                               }
                               ?>
@@ -108,7 +124,7 @@
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="modalSayaLabel">Form Peninjauan Data Bencana</h5>
+                          <h5 class="modal-title" id="modalSayaLabel">Form Data Peninjauan Bencana</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -141,17 +157,41 @@
                               <label for="id_bencana">* Bencana</label>
                               <select class=" form-control" id="id_bencana" name="id_bencana">
                                 <?php
-                                  $bencanas = Querybanyak("SELECT * FROM bencana");
-                                  foreach ($bencanas as $bencana) { ?>
-                                    <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
-                                  <?php
-                                  }
+                                $bencanas = Querybanyak("SELECT * FROM bencana");
+                                foreach ($bencanas as $bencana) { ?>
+                                  <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?></option>
+                                <?php
+                                }
                                 ?>
                               </select>
                             </div>
                             <div class="form-group">
                               <label for="jumlah_korban">* Korban</label>
                               <input type="number" class="form-control" id="jumlah_korban" name="jumlah_korban">
+                            </div>
+                            <div class="form-group">
+                              <label for="kategori_bencana">* Kategori Bencana</label>
+                              <select class=" form-control" id="kategori_bencana" name="kategori_bencana" required>
+                                <?php
+                                $kategori_bencanas = ["Bencana Alam", "Bencana Non Alam"];
+                                foreach ($kategori_bencanas as $kategori_bencana) { ?>
+                                  <option value="<?= $kategori_bencana ?>"><?= $kategori_bencana ?></option>
+                                <?php
+                                }
+                                ?>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="level_bencana">* Level Bencana</label>
+                              <select class=" form-control" id="level_bencana" name="level_bencana" required>
+                                <?php
+                                $level_bencanas = [1, 2, 3, 4, 0];
+                                foreach ($level_bencanas as $level_bencana) { ?>
+                                  <option value="<?= $level_bencana ?>"><?= $level_bencana ?></option>
+                                <?php
+                                }
+                                ?>
+                              </select>
                             </div>
                             <div class="form-group">
                               <label for="peninjauan">* Keterangan peninjauan</label>

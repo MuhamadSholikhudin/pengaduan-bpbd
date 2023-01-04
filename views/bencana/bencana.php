@@ -22,17 +22,11 @@
                       <thead>
                         <tr>
                           <th>
+                            No
+                          </th>
+                          <th>
                             Nama Bencana
                           </th>
-                          <th>
-                            Kategori bencana
-                          </th>
-                          <th>
-                            level
-                          </th>
-                          <!-- <th>
-                            Wilayah bencana
-                          </th> -->
                           <th>
                             Action
                           </th>
@@ -40,26 +34,22 @@
                       </thead>
                       <tbody>
                         <?php
+                        $no = 1;
                         $bencanas = Querybanyak("SELECT * FROM bencana");
                         foreach ($bencanas as $bencana) { ?>
                           <tr>
+                            <td>
+                              <?= $no++; ?>
+                            </td>
 
                             <td>
                               <?= $bencana['nama_bencana'] ?>
                             </td>
-                            <td>
-                              <?= $bencana['kategori_bencana'] ?>
-                            </td>
-                            <td>
-                              <?= $bencana['level'] ?>
-                            </td>
-                            <!-- <td>
-                              <?= $bencana['wilayah'] ?>
-                            </td> -->
+                         
                             <td>
                               <a href="<?= $url ?>/?bencana=edit&id=<?= $bencana['id_bencana'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                                <i class="ti-pencil btn-icon-append"></i>
                                 Edit
-                                <i class="ti-file btn-icon-append"></i>
                               </a>
                             </td>
                           </tr>

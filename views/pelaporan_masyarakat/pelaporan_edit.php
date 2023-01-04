@@ -22,7 +22,7 @@
                         <label for="nama_pelapor">* Nama pelapor</label>
                         <input type="hidden" class="form-control p-input" id="id_pelaporan" name="id_pelaporan" value="<?= $satu_pelaporan['id_pelaporan'] ?>">
                         <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
-                        <input type="hidden" class="form-control p-input" name="status_pelaporan" value="<?= $satu_pelaporan['id_wilayah'] ?>">
+                        <input type="hidden" class="form-control p-input" name="status_pelaporan" value="<?= $satu_pelaporan['status_pelaporan'] ?>">
                         <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
                       </div>
                       <div class="form-group">

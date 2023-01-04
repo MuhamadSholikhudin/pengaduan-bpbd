@@ -21,13 +21,13 @@
                       <thead>
                         <tr>
                           <th>
-                            Nama wilayah
+                            Kecamatan
                           </th>
                           <th>
-                            Status wilayah
+                            Desa
                           </th>
                           <th>
-                            Ket Bencana
+                            No Telp
                           </th>
                           <th>
                             Action
@@ -40,18 +40,18 @@
                         foreach ($wilayahs as $wilyah) { ?>
                           <tr>
                             <td>
-                              <?= $wilyah['nama_wilayah'] ?>
+                              <?= $wilyah['kecamatan'] ?>
                             </td>
                             <td>
-                              <?= $wilyah['status_wilayah'] ?>
+                              <?= $wilyah['desa'] ?>
                             </td>
                             <td>
-                              <?= $wilyah['ket_wilayah'] ?>
+                              <?= $wilyah['no_telp'] ?>
                             </td>
                             <td>
                               <a href="<?= $url ?>/?wilayah=edit&id=<?= $wilyah['id_wilayah'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                                <i class="ti-pencil btn-icon-append"></i>
                                 Edit
-                                <i class="ti-file btn-icon-append"></i>
                               </a>
                             </td>
                           </tr>
