@@ -64,6 +64,38 @@
                         <input type="number" class="form-control" id="jumlah_korban" value="<?= $satu_peninjauan['jumlah_korban'] ?>" name="jumlah_korban">
                       </div>
                       <div class="form-group">
+                        <label for="kategori_bencana">* Kategori Bencana</label>
+                        <select class="js-example-basic-single form-control" id="kategori_bencana" name="kategori_bencana">
+                          <?php
+                          $kategori_bencanas = ["Bencana Alam", "Bencana Non Alam"];
+                          foreach ($kategori_bencanas as $kategori_bencana) { ?>
+                            <?php if( $satu_peninjauan['kategori_bencana'] == $kategori_bencana){ ?>
+                              <option value="<?= $kategori_bencana ?>" selected><?= $kategori_bencana ?></option>
+                            <?php }else{ ?>
+                              <option value="<?= $kategori_bencana ?>"><?= $kategori_bencana ?></option>
+                            <?php } ?>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="level_bencana">* Level Bencana</label>
+                        <select class="js-example-basic-single form-control" id="level_bencana" name="level_bencana">
+                          <?php
+                          $level_bencanas = [1, 2, 3, 4, 0];
+                          foreach ($level_bencanas as $level_bencana) { ?>
+                            <?php if( $satu_peninjauan['level_bencana'] == $level_bencana){ ?>
+                              <option value="<?= $level_bencana ?>" selected><?= $level_bencana ?></option>
+                            <?php }else{ ?>
+                              <option value="<?= $level_bencana ?>"><?= $level_bencana ?></option>
+                            <?php } ?>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
                         <label for="peninjauan">* Keterangan peninjauan</label>
                         <textarea class="form-control" id="keterangan_peninjauan" name="keterangan_peninjauan" style="height: 150px;"><?= $satu_peninjauan['keterangan_peninjauan'] ?></textarea>
                       </div>

@@ -141,11 +141,11 @@
                               <label for="id_bencana">* Bencana</label>
                               <select class=" form-control" id="id_bencana" name="id_bencana">
                                 <?php
-                                $bencanas = Querybanyak("SELECT * FROM bencana");
-                                foreach ($bencanas as $bencana) { ?>
-                                  <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
-                                <?php
-                                }
+                                  $bencanas = Querybanyak("SELECT * FROM bencana");
+                                  foreach ($bencanas as $bencana) { ?>
+                                    <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
+                                  <?php
+                                  }
                                 ?>
                               </select>
                             </div>
@@ -168,7 +168,6 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                          <!-- <button type="button" class="btn btn-primary">Oke</button> -->
                         </div>
                       </div>
                     </div>

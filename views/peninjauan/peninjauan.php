@@ -50,19 +50,19 @@
                         <tr>
                           <td>
                           <?php
-                              $user = Querysatudata("SELECT nama_user FROM pelaporan JOIN user ON pelaporan.id_user = user.id_user
+                              $pelaporanuser = Querysatudata("SELECT user.nama_user as nama_user, pelaporan.id_bencana as id_bencana FROM pelaporan JOIN user ON pelaporan.id_user = user.id_user
                                WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
                               ?>
-                              <?= $user['nama_user'] ?> 
+                              <?= $pelaporanuser['nama_user'] ?> 
                           </td>
                           <td>
                             <?= $peninjauan['tanggal_peninjauan'] ?>
                           </td>
                           <td>
                           <?php
-                              $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . "")
+                              $bencana = Querysatudata("SELECT pelaporan.id_bencana as id_bencana FROM pelaporan LEFT JOIN bencana WHERE pelaporan.id_bencana = " . $pelaporanuser['id_bencana'] . " AND pelaporan.id_pelaporan = ".$peninjauan['id_pelaporan']."")
                               ?>
-                              <?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?>  
+                              <?= $bencana['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?>  
                           </td>
                           <td>
                           <?php

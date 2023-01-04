@@ -7,7 +7,7 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-12">
-                      <a href="<?= $url ?>?pelaporan=add" class="btn btn-sm btn-outline-secondary">
+                      <a href="<?= $url ?>?pelaporan_masyarakat=add" class="btn btn-sm btn-outline-secondary">
                         <i class="mdi mdi-library-plus"></i>
                         Tambah
                       </a>
@@ -25,6 +25,9 @@
                           </th>
                           <th>
                             Tanggal Pelaporan
+                          </th>
+                          <th>
+                            Bencana
                           </th>
                           <th>
                             Wilayah
@@ -50,6 +53,12 @@
                             </td>
                             <td>
                               <?= $pelaporan['tanggal_pelaporan'] ?>
+                            </td>
+                            <td>
+                              <?php
+                              $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $pelaporan['id_bencana'] . "")
+                              ?>
+                              <?= $bencana['nama_bencana'] ?>
                             </td>
                             <td>
                               <?php

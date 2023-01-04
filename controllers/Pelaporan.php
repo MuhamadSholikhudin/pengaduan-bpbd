@@ -9,11 +9,12 @@
 
         public function Post($request){
         
-            $sql = "INSERT INTO `pelaporan` ( `id_user`, `tanggal_pelaporan`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`)
+            $sql = "INSERT INTO `pelaporan` ( `id_user`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`)
                     VALUES 
                     ( 
                         ".$request['id_user'].", 
                         '".$request['tanggal_pelaporan']."', 
+                        ".$request['id_bencana'].",
                         ".$request['id_wilayah'].",
                         '".$request['pelaporan']."',
                         '".$request['link_maps']."',
@@ -27,6 +28,7 @@
             $sql = "UPDATE  `pelaporan` 
                 SET   id_user =  ".$request['id_user'].", 
                       tanggal_pelaporan =  '".$request['tanggal_pelaporan']."', 
+                      id_bencana = ".$request['id_bencana'].",
                       id_wilayah = ".$request['id_wilayah'].",
                       pelaporan =  '".$request['pelaporan']."',
                       link_maps =  '".$request['link_maps']."',

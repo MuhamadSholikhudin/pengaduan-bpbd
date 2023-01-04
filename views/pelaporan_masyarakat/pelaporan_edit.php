@@ -46,6 +46,22 @@
                         </select>
                       </div>
                       <div class="form-group">
+                        <label for="pelaporan">* Bencana</label>
+                        <select class="js-example-basic-single form-control" name="id_bencana">
+                          <?php
+                          $bencanas = Querybanyak("SELECT * FROM bencana");
+                          foreach ($bencanas as $bencana) { ?>
+                          <?php if($bencana['id_bencana'] == $satu_pelaporan['id_bencana']) { ?>
+                              <option value="<?= $bencana['id_bencana'] ?>" selected><?= $bencana['nama_bencana'] ?></option>
+                            <?php }else{ ?>
+                              <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?></option>
+                            <?php } ?>                         
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
                         <label for="pelaporan">* Keterangan pelaporan</label>
                         <textarea class="form-control" id="pelaporan" name="pelaporan" style="height: 300px;"><?= $satu_pelaporan['pelaporan'] ?></textarea>
                       </div>

@@ -15,7 +15,7 @@
                 <div class="form-group">
                   <label for="nama_pelapor">* Nama pelapor</label>
                   <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
-                  <input type="text" class="form-control p-input" name="status_pelaporan" value="belum dikirim">
+                  <input type="hidden" class="form-control p-input" name="status_pelaporan" value="belum dikirim">
                   <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
                 </div>
                 <div class="form-group">
@@ -40,7 +40,7 @@
                     <?php
                     $bencanas = Querybanyak("SELECT * FROM bencana");
                     foreach ($bencanas as $bencana) { ?>
-                      <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> / <?= $bencana['kategori_bencana'] ?></option>
+                      <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?></option>
                     <?php
                     }
                     ?>
