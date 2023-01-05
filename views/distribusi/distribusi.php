@@ -111,55 +111,55 @@
                     </table>
                   </div>
 
-                                            <!-- Modal Distribusi -->
-                                            <div class="modal fade" id="modaldistribusi" tabindex="-1" role="dialog" aria-labelledby="modaldistribusiLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="modaldistribusiLabel">Form Tambah Data Distribusi Bantuan </h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <!-- <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data"> -->
-                                  <input type="text" class="form-control p-input" id="id_peninjauan" style="display: none;">
-                                  <input type="text" class="form-control p-input" id="id_user" value="<?= $_SESSION['id_user'] ?>" style="display: none;">
-                                  <div class="row">
-                                    <div class="col-lg-6">
-                                      <div class="form-group">
-                                        <label for="tanggal_distribusi">* Tanggal distribusi</label>
-                                        <input type="date" class="form-control p-input" id="tanggal_distribusi" value="<?= date('Y-m-d') ?>">
-                                      </div>
-                                      <div class="table_result" id="table_result">
-                                        <ul id="table_result_ul">
-                                        </ul>
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="keterangan_distribusi">* Keterangan distribusi</label>
-                                        <textarea class="form-control" style="height: 100px;" id="keterangan_distribusi"></textarea>
-                                      </div>
-                                      <button class="btn btn-primary" onclick="ProcessInsertLogistik()">SIMPAN</button>
-                                    </div>
-                                    <div class="col-lg-6">
-                                      <div class="form-group">
-                                        <label for="search_distribusi">Cari Data Bantuan</label>
-                                        <input type="text" class="form-control p-input" id="search_distribusi">
-                                      </div>
-                                      <div class="result_search" id="result_search">
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-12">                                    
-                                  </div>
-                                  <!-- </form> -->
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                </div>
+                  <!-- Modal Distribusi -->
+                  <div class="modal fade" id="modaldistribusi" tabindex="-1" role="dialog" aria-labelledby="modaldistribusiLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modaldistribusiLabel">Form Tambah Data Distribusi Bantuan </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data"> -->
+                          <input type="text" class="form-control p-input" id="id_peninjauan" style="display: none;">
+                          <input type="text" class="form-control p-input" id="id_user" value="<?= $_SESSION['id_user'] ?>" style="display: none;">
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="tanggal_distribusi">* Tanggal distribusi</label>
+                                <input type="date" class="form-control p-input" id="tanggal_distribusi" value="<?= date('Y-m-d') ?>">
+                              </div>
+                              <div class="table_result" id="table_result">
+                                <ul id="table_result_ul">
+                                </ul>
+                              </div>
+                              <div class="form-group">
+                                <label for="keterangan_distribusi">* Keterangan distribusi</label>
+                                <textarea class="form-control" style="height: 100px;" id="keterangan_distribusi"></textarea>
+                              </div>
+                              <button class="btn btn-primary" onclick="ProcessInsertLogistik()">SIMPAN</button>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="form-group">
+                                <label for="search_distribusi">Cari Data Bantuan</label>
+                                <input type="text" class="form-control p-input" id="search_distribusi">
+                              </div>
+                              <div class="result_search" id="result_search">
                               </div>
                             </div>
                           </div>
+                          <div class="col-12">
+                          </div>
+                          <!-- </form> -->
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div class="card-footer">
 

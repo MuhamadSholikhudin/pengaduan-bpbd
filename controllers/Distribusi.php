@@ -95,33 +95,33 @@ class Distribusi
     }
 
     public function AjaxInsert($request)
-    {       
+    {
         $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`, `id_user`, `tanggal_distribusi`, `keterangan_distribusi`,`status_distribusi`)
         VALUES 
         ( 
-            ".$request['id_peninjauan'].",
-            ".$request['id_user'].",
-            '".$request['tanggal_distribusi']."',
-            '".$request['keterangan_distribusi']."',
+            " . $request['id_peninjauan'] . ",
+            " . $request['id_user'] . ",
+            '" . $request['tanggal_distribusi'] . "',
+            '" . $request['keterangan_distribusi'] . "',
             'Sedang di proses'
         )";
 
         $this->Model()->Execute($sql_distribusi);
-        $this->Model()->Execute("UPDATE peninjauan SET status_peninjauan = 'selesai' WHERE id_peninjauan = ".$request['id_peninjauan']."");
+        $this->Model()->Execute("UPDATE peninjauan SET status_peninjauan = 'selesai' WHERE id_peninjauan = " . $request['id_peninjauan'] . "");
 
         $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_user = " . $request['id_user'] . "");
         foreach ($request['data'] as $key => $val) {
             $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_bantuan`, `jumlah`, `satuan`,`batch`)
             VALUES
             (
-                ".$distribusi['id_distribusi'].", 
-                ".$key.",
-                ".$val.",
-                ".$val.",
-                ".$val."
+                " . $distribusi['id_distribusi'] . ", 
+                " . $key . ",
+                " . $val . ",
+                " . $val . ",
+                " . $val . "
             )";
             $this->Model()->Execute($sql_distribusi_bantuan);
-        }      
+        }
         echo json_encode("Data Distribusi berhasil di tambahkan");
     }
 
@@ -163,42 +163,61 @@ class Distribusi
         $bantuan = Querysatudata($num_sql);
         $table_ul = '<tr>
                         <td>1</td>
-                        <td>'.$bantuan['nama_bantuan'].'</td>
-                        <td>'.$bantuan['satuan'].'</td>
-                        <td>Action</td>
+                        <td>' . $bantuan['nama_bantuan'] . '</td>
+                        <td>
+                            <input class="form-control" type="hidden" name="bantuan_id[]" min="0" value="' . $bantuan['id_bantuan'] . '">                         
+                            <input class="form-control" type="number" name="jumlah_bantuan[]" min="0" value="1">                         
+                        </td>
+                        <td>
+                          ' . $bantuan['satuan'] . '
+                        </td>
+                        <td>
+                        <a href="#" class="text-decoration-none text-danger" id="trash_bantuan_edit">
+                                <i id="removebant" class="ti-trash" ></i>
+                                Delete
+                            </a> 
+                        </td>
                     </tr>';
         echo json_encode($table_ul);
     }
 
 
     public function AjaxUpdateDistribusi($request)
-    {       
-        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`, `id_user`, `tanggal_distribusi`, `keterangan_distribusi`,`status_distribusi`)
-        VALUES 
-        ( 
-            ".$request['id_peninjauan'].",
-            ".$request['id_user'].",
-            '".$request['tanggal_distribusi']."',
-            '".$request['keterangan_distribusi']."',
-            'Sedang di proses'
-        )";
+    {
+        $sql_update_distribusi = "UPDATE distribusi 
+        SET keterangan_distribusi = '" . $request['keterangan_distribusi'] . "',
+            tanggal_distribusi = '" . $request['tanggal_distribusi'] . "'
+         WHERE id_distribusi = " . $request['id_distribusi'] . "";
+        $this->Model()->Execute($sql_update_distribusi);
 
-        $this->Model()->Execute($sql_distribusi);
-        $this->Model()->Execute("UPDATE peninjauan SET status_peninjauan = 'selesai' WHERE id_peninjauan = ".$request['id_peninjauan']."");
+        //data bantuan array dari yang lama 
+        $data_bantuan_distribusi_lamas = Querybanyak("SELECT * FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " ");
+        foreach ($data_bantuan_distribusi_lamas as $data_bantuan_distribusi_lama) {
+            $data_update = $request['data'];
+            if (array_key_exists($data_bantuan_distribusi_lama['id_bantuan'], $data_update)) {
+                $sql_execute_old = "UPDATE bantuan_dstribusi SET jumlah = " . $data_update[$data_bantuan_distribusi_lama['id_bantuan']] . " WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . " ";
+            } else {
+                $sql_execute_old = "DELETE FROM bantuan_distribusi WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . "  ";
+            }
+            $this->Model()->Execute($sql_execute_old);
+        }
 
-        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_user = " . $request['id_user'] . "");
+        // data bantuan array dari html         
         foreach ($request['data'] as $key => $val) {
-            $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_bantuan`, `jumlah`, `satuan`,`batch`)
-            VALUES
-            (
-                ".$distribusi['id_distribusi'].", 
-                ".$key.",
-                ".$val.",
-                ".$val.",
-                ".$val."
-            )";
-            $this->Model()->Execute($sql_distribusi_bantuan);
-        }      
-        echo json_encode("Data Distribusi berhasil di tambahkan");
+            $check_dari_bantuan_distribusi = Querysatudata("SELECT COUNT(*) as count FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " AND id_bantuan = " . $key . " ");
+            if ($check_dari_bantuan_distribusi['count'] < 1) { // Jika sudah ada maka 
+                $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_bantuan`, `jumlah`, `satuan`,`batch`)
+                VALUES
+                (
+                    " . $request['id_distribusi'] . ", 
+                    " . $key . ",
+                    " . $val . ",
+                    " . $val . ",
+                    " . date("Y-m-d") . "
+                )";
+                $this->Model()->Execute($sql_distribusi_bantuan);
+            }
+        }
+        echo json_encode("Data bantuan distribusi berhasil di update");
     }
 }
