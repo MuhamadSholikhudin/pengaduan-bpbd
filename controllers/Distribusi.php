@@ -45,13 +45,12 @@ class Distribusi
 
     public function AjaxSearch($request)
     {
-
         $bantuan_loop = '';
         if ($request['search'] !== "" and $request['search'] !== " " and $request['search'] !== NULL) {
             $num_sql = "SELECT COUNT(*) as id FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' ";
             $num_bantuan = Querysatudata($num_sql);
             if ($num_bantuan['id'] > 0) {
-                $sql = "SELECT * FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' LIMIT 10";
+                $sql = "SELECT * FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' OR kategori LIKE '%" . $request['search'] . "%' LIMIT 10";
                 $bantuans = Querybanyak($sql);
                 $bantuan_loop .= '<table class="table table-stripped" id="tablesearch">';
                 $bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
@@ -59,8 +58,8 @@ class Distribusi
                 foreach ($bantuans as $bant) {
                     $bantuan_loop .= '                        
                                             <tr>                            
-                                                <td>' . $bant['nama_bantuan'] . '</td>
-                                                <td>' . $bant['batch'] . '</td>
+                                                <td>' . $bant['nama_bantuan'] . ' / ' . $bant['kategori'] . ' </td>
+                                                <td>' . $bant['stok'] . '</td>
                                                 <td>
                                                     <button id="addbantuan" data-id_bantuan="' . $bant['id_bantuan'] . '" class="addbantuan btn btn-sm btn-primary">
                                                         <i class="ti-plus"></i>    
@@ -96,14 +95,13 @@ class Distribusi
     }
 
     public function AjaxInsert($request)
-    {
-        
+    {       
         $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`, `id_user`, `tanggal_distribusi`, `keterangan_distribusi`,`status_distribusi`)
         VALUES 
         ( 
             ".$request['id_peninjauan'].",
             ".$request['id_user'].",
-            ".$request['tanggal_distribusi'].",
+            '".$request['tanggal_distribusi']."',
             '".$request['keterangan_distribusi']."',
             'Sedang di proses'
         )";
@@ -120,10 +118,87 @@ class Distribusi
                 ".$key.",
                 ".$val.",
                 ".$val.",
-                ".date('Ymd')."
+                ".$val."
             )";
             $this->Model()->Execute($sql_distribusi_bantuan);
-        }        
+        }      
+        echo json_encode("Data Distribusi berhasil di tambahkan");
+    }
+
+    // ====================== UPDATE =========================
+    public function AjaxSearchEdit($request)
+    {
+        $bantuan_loop = '';
+        if ($request['search'] !== "" and $request['search'] !== " " and $request['search'] !== NULL) {
+            $num_sql = "SELECT COUNT(*) as id FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' ";
+            $num_bantuan = Querysatudata($num_sql);
+            if ($num_bantuan['id'] > 0) {
+                $sql = "SELECT * FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' OR kategori LIKE '%" . $request['search'] . "%' LIMIT 10";
+                $bantuans = Querybanyak($sql);
+                $bantuan_loop .= '<table class="table table-stripped" id="tablesearch">';
+                $bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
+                $bantuans = Querybanyak($sql);
+                foreach ($bantuans as $bant) {
+                    $bantuan_loop .= '                        
+                                            <tr>                            
+                                                <td>' . $bant['nama_bantuan'] . ' / ' . $bant['kategori'] . ' </td>
+                                                <td>' . $bant['stok'] . '</td>
+                                                <td>
+                                                    <button id="addeditbantuan" data-id_bantuan="' . $bant['id_bantuan'] . '" class="addbantuan btn btn-sm btn-primary">
+                                                        <i class="ti-plus"></i>    
+                                                        Add
+                                                    </button>
+                                                </td>                                   
+                                            </tr>';
+                }
+                $bantuan_loop .= '</table>';
+            }
+        }
+        echo json_encode($bantuan_loop);
+    }
+
+    public function AjaxAddEditBant($request)
+    {
+        $num_sql = "SELECT * FROM bantuan WHERE id_bantuan = " . $request['id_bantuan'] . " ";
+        $bantuan = Querysatudata($num_sql);
+        $table_ul = '<tr>
+                        <td>1</td>
+                        <td>'.$bantuan['nama_bantuan'].'</td>
+                        <td>'.$bantuan['satuan'].'</td>
+                        <td>Action</td>
+                    </tr>';
+        echo json_encode($table_ul);
+    }
+
+
+    public function AjaxUpdateDistribusi($request)
+    {       
+        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`, `id_user`, `tanggal_distribusi`, `keterangan_distribusi`,`status_distribusi`)
+        VALUES 
+        ( 
+            ".$request['id_peninjauan'].",
+            ".$request['id_user'].",
+            '".$request['tanggal_distribusi']."',
+            '".$request['keterangan_distribusi']."',
+            'Sedang di proses'
+        )";
+
+        $this->Model()->Execute($sql_distribusi);
+        $this->Model()->Execute("UPDATE peninjauan SET status_peninjauan = 'selesai' WHERE id_peninjauan = ".$request['id_peninjauan']."");
+
+        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_user = " . $request['id_user'] . "");
+        foreach ($request['data'] as $key => $val) {
+            $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_bantuan`, `jumlah`, `satuan`,`batch`)
+            VALUES
+            (
+                ".$distribusi['id_distribusi'].", 
+                ".$key.",
+                ".$val.",
+                ".$val.",
+                ".$val."
+            )";
+            $this->Model()->Execute($sql_distribusi_bantuan);
+        }      
         echo json_encode("Data Distribusi berhasil di tambahkan");
     }
 }

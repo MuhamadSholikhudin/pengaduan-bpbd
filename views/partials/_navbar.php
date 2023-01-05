@@ -7,7 +7,7 @@
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="<?= $url ?>/assets/index.html">
-            <img src="<?= $url ?>/assets/images/logo.svg" alt="logo" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="<?= $url ?>/assets/index.html">
             <img src="<?= $url ?>/assets/images/logo-mini.svg" alt="logo" />

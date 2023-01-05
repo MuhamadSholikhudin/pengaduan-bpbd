@@ -42,7 +42,6 @@ if ($_GET) {
             break;
 
         case 'user':
-            // USER
             if ($param_val == 'user') {
                 $conf->TemplateAdmin('views/users/user.php');
             } elseif ($param_val == 'add') {
@@ -183,17 +182,22 @@ if ($_GET) {
                 var_dump($_POST);
                 // $user->Post($_POST);
             } elseif ($param_val == 'ajax_search') {
-                $bantuan_loop = 'OKE';
-                // echo $bantuan_loop;
-                // return json_encode($bantuan_loop);
-
                 $distribusi->AjaxSearch($_POST);
             }elseif ($param_val == 'ajax_add_bant') {
-                $distribusi->AjaxAddBant($_POST);
-            
+                $distribusi->AjaxAddBant($_POST);            
             }elseif ($param_val == 'ajax_insert') {
                 $distribusi->AjaxInsert($_POST);
             }
+
+            elseif ($param_val == 'ajax_search_edit') {
+                $distribusi->AjaxSearchEdit($_POST);
+            }elseif ($param_val == 'ajax_add_edit_bant') {
+                $distribusi->AjaxAddEditBant($_POST);            
+            }elseif ($param_val == 'ajax_update_distribusi') {
+                $distribusi->AjaxUpdateDistribusi($_POST);
+            }
+
+
             break;
 
         case 'pages':
