@@ -65,9 +65,7 @@ function ProcessInsertLogistik() {
   var id_user = document.getElementById("id_user").value;
   var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
   var id_peninjauan = document.getElementById("id_peninjauan").value;
-  var keterangan_distribusi = document.getElementById(
-    "keterangan_distribusi"
-  ).value;
+  var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
   var bantuan_id = document.getElementsByName("bantuan_id[]");
   var jumlah_bantuan = document.getElementsByName("jumlah_bantuan[]");
   var gabbantuan = {};
@@ -99,12 +97,19 @@ function ProcessInsertLogistik() {
 // EDIT DISTRIBUSI =>  SEARCH EDIT BANTUAN
 $("#search_edit_distribusi").keyup(function () {
   var search = document.getElementById("search_edit_distribusi").value;
+  var bantuan_id = document.getElementsByName("bantuan_id[]");
+  var array_bantuan = [];
+  for (var i = 0; i < bantuan_id.length; i++) {
+    array_bantuan.push(bantuan_id[i].value);
+  }
   $.ajax({
     type: "POST",
     url: url_web + "/?distribusi=ajax_search_edit",
     dataType: "json",
     data: {
       search: search,
+      length: bantuan_id.length,
+      array_bantuan:array_bantuan
     },
     success: function (data) {
       $("#result_search").html(data);
@@ -113,17 +118,20 @@ $("#search_edit_distribusi").keyup(function () {
       console.error();
     },
   });
+  
 });
 
 // EDIT DISTRIBUSI => KLIK TAMBAH DARI HASIL EDIT SEARCH BANTUAN
 $("#result_search").on("click", "#addeditbantuan", function () {
   var id_bantuan = $(this).data("id_bantuan");
+  var bantuan_id = document.getElementsByName("bantuan_id[]");
   $.ajax({
     type: "POST",
     url: url_web + "/?distribusi=ajax_add_edit_bant",
     dataType: "json",
     data: {
       id_bantuan: id_bantuan,
+      no: bantuan_id.length
     },
     success: function (data) {
       $("#editbodydistribusi").append(data);
@@ -132,6 +140,7 @@ $("#result_search").on("click", "#addeditbantuan", function () {
       console.log("Error");
     },
   });
+  
 });
 
 // DISTRIBUSI => HAPUS DATA PENAMBAHAN BANTUAN
@@ -139,15 +148,13 @@ $("#editbodydistribusi").on("click", "#trash_bantuan_edit", function () {
   $(this).closest("tr").remove();
 });
 
-// DISTRIBUSI =>  INSERT DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI
+// DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI
 function ProcessUpdateLogistik() {
   var id_distribusi = document.getElementById("id_distribusi").value;
   var id_user = document.getElementById("id_user").value;
   var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
   var id_peninjauan = document.getElementById("id_peninjauan").value;
-  var keterangan_distribusi = document.getElementById(
-    "keterangan_distribusi"
-  ).value;
+  var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
   var bantuan_id = document.getElementsByName("bantuan_id[]");
   var jumlah_bantuan = document.getElementsByName("jumlah_bantuan[]");
   var gabbantuan = {};
@@ -155,14 +162,13 @@ function ProcessUpdateLogistik() {
     gabbantuan[bantuan_id[i].value] = jumlah_bantuan[i].value;
   }
   var payload = JSON.stringify({
+    id_distribusi: id_distribusi,
+    id_peninjauan: id_peninjauan,
     id_user: id_user,
     tanggal_distribusi: tanggal_distribusi,
-    id_peninjauan: id_peninjauan,
     keterangan_distribusi: keterangan_distribusi,
-    id_distribusi: id_distribusi,
     data: gabbantuan,
   });
-
   $.ajax({
     type: "POST",
     url: url_web + "/?distribusi=ajax_update_distribusi",
@@ -177,8 +183,7 @@ function ProcessUpdateLogistik() {
     },
     success: function (success) {
       alert(success);
-      window.location.href =
-        "http://localhost/pengaduan-bpbd/?distribusi=distribusi";
+      window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
     },
     error() {
       console.error();

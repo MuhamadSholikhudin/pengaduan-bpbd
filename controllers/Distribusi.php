@@ -130,10 +130,16 @@ class Distribusi
     {
         $bantuan_loop = '';
         if ($request['search'] !== "" and $request['search'] !== " " and $request['search'] !== NULL) {
-            $num_sql = "SELECT COUNT(*) as id FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' ";
+            $except = "";
+            if($request['length'] > 0){
+                foreach($request['array_bantuan'] as $id_bant){
+                    $except .= " id_bantuan != ".$id_bant." AND ";
+                }
+            }
+            $num_sql = "SELECT COUNT(*) as id FROM bantuan WHERE ".$except." nama_bantuan LIKE '%" . $request['search'] . "%' OR kategori LIKE '%" . $request['search'] . "%' ";
             $num_bantuan = Querysatudata($num_sql);
             if ($num_bantuan['id'] > 0) {
-                $sql = "SELECT * FROM bantuan WHERE nama_bantuan LIKE '%" . $request['search'] . "%' OR kategori LIKE '%" . $request['search'] . "%' LIMIT 10";
+                $sql = "SELECT * FROM bantuan WHERE ".$except." nama_bantuan LIKE '%" . $request['search'] . "%' OR kategori LIKE '%" . $request['search'] . "%' LIMIT 10";
                 $bantuans = Querybanyak($sql);
                 $bantuan_loop .= '<table class="table table-stripped" id="tablesearch">';
                 $bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
@@ -162,7 +168,7 @@ class Distribusi
         $num_sql = "SELECT * FROM bantuan WHERE id_bantuan = " . $request['id_bantuan'] . " ";
         $bantuan = Querysatudata($num_sql);
         $table_ul = '<tr>
-                        <td>1</td>
+                        <td>'.(intval($request['no']) + 1).'</td>
                         <td>' . $bantuan['nama_bantuan'] . '</td>
                         <td>
                             <input class="form-control" type="hidden" name="bantuan_id[]" min="0" value="' . $bantuan['id_bantuan'] . '">                         
@@ -190,19 +196,21 @@ class Distribusi
          WHERE id_distribusi = " . $request['id_distribusi'] . "";
         $this->Model()->Execute($sql_update_distribusi);
 
-        //data bantuan array dari yang lama 
+
+        $data_update = $request['data'];
+        // //data bantuan array dari yang lama 
         $data_bantuan_distribusi_lamas = Querybanyak("SELECT * FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " ");
-        foreach ($data_bantuan_distribusi_lamas as $data_bantuan_distribusi_lama) {
-            $data_update = $request['data'];
+        foreach ($data_bantuan_distribusi_lamas as $data_bantuan_distribusi_lama) {            
             if (array_key_exists($data_bantuan_distribusi_lama['id_bantuan'], $data_update)) {
-                $sql_execute_old = "UPDATE bantuan_dstribusi SET jumlah = " . $data_update[$data_bantuan_distribusi_lama['id_bantuan']] . " WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . " ";
+                $sql_execute_old = "UPDATE bantuan_distribusi SET jumlah = " . $request['data'][$data_bantuan_distribusi_lama['id_bantuan']] . " WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . " ";
+               $this->Model()->Execute($sql_execute_old);
             } else {
                 $sql_execute_old = "DELETE FROM bantuan_distribusi WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . "  ";
+                $this->Model()->Execute($sql_execute_old);
             }
-            $this->Model()->Execute($sql_execute_old);
         }
 
-        // data bantuan array dari html         
+        // // data bantuan array dari html         
         foreach ($request['data'] as $key => $val) {
             $check_dari_bantuan_distribusi = Querysatudata("SELECT COUNT(*) as count FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " AND id_bantuan = " . $key . " ");
             if ($check_dari_bantuan_distribusi['count'] < 1) { // Jika sudah ada maka 
@@ -218,6 +226,6 @@ class Distribusi
                 $this->Model()->Execute($sql_distribusi_bantuan);
             }
         }
-        echo json_encode("Data bantuan distribusi berhasil di update");
+        echo json_encode("Data Bantuan distribusi berhasil di update");
     }
 }

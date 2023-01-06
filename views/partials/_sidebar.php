@@ -2,7 +2,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="<?= $url ?>/assets/index.html">
+            <a class="nav-link" href="<?= $url ?>/?dashboard=dashboard">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -43,7 +43,6 @@
                     ?>
                       <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
                       <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?peninjauan=peninjauan">Peninjauan</a></li>
-                    
                     <?php
                     break;
                     case 'masyarakat':
@@ -51,12 +50,9 @@
                         <li class="nav-item"><a class="nav-link" href="<?= $url ?>/?pelaporan_masyarakat=pelaporan">Pelapor</a></li>            
                     <?php
                         break;
-
                   }
 
                 }?>
-
-              
                 <!-- 
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
@@ -80,11 +76,10 @@
             </a>
             <div class="collapse" id="ui-laporan">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?laporan=pendistribusian">Laporan Pendistribusian</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?laporan=persediaan">Laporan Persediaan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?laporan=pendistribusian">Laporan Pendistribusian</a></li>
               </ul>
             </div>
-         
         </ul>
       </nav>
       <!-- partial -->
