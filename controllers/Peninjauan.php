@@ -22,12 +22,13 @@
                 $lokasi = $file['bukti_peninjauan']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
             } 
-            $sql_peninjauan = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`,  `bukti_peninjauan`)
+            $sql_peninjauan = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`,`id_bencana`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`,  `bukti_peninjauan`)
                     VALUES 
                     ( 
                         ".$request['id_pelaporan'].", 
                         '".$request['id_user']."', 
                         ".$request['id_wilayah'].",
+                        ".$request['id_bencana'].",
                         '".$request['tanggal_peninjauan']."',
                         ".$request['jumlah_korban'].",
                         '".$request['kategori_bencana']."',
@@ -51,6 +52,7 @@
                 SET   id_pelaporan =  ".$request['id_pelaporan'].", 
                       id_user =  '".$request['id_user']."', 
                       id_wilayah = ".$request['id_wilayah'].",
+                      id_bencana = ".$request['id_bencana'].",
                       tanggal_peninjauan =  '".$request['tanggal_peninjauan']."',
                       jumlah_korban =  ".$request['jumlah_korban'].",
                       kategori_bencana =  '".$request['kategori_bencana']."',

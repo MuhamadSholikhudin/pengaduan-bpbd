@@ -6,12 +6,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-lg-12">
+                    <!-- <div class="col-lg-12">
                       <a href="<?= $url ?>?peninjauan=add" class="btn btn-sm btn-outline-secondary">
                         <i class="mdi mdi-library-plus"></i>
                         Tambah
                       </a>
-                    </div>
+                    </div> -->
                     <div class="col-lg-12 text-center">
                       <h2><?= strtoupper("Data " . array_keys($_GET)[0]) ?></h2>
                     </div>

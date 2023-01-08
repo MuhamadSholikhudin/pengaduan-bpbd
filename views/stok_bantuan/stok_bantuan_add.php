@@ -39,10 +39,10 @@
                         <label for="batch">* Batch</label>
                         <input type="date" class="form-control" id="batch" name="batch" value="<?= date("Y-m-d") ?>" required>
                       </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                         <label for="satuan">* Satuan</label>
                         <input type="text" class="form-control" id="satuan" name="satuan">
-                      </div>
+                      </div> -->
 
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary">SIMPAN</button>

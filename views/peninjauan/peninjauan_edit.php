@@ -47,6 +47,22 @@
                         </select>
                       </div>
                       <div class="form-group">
+                        <label for="id_bencana">* Bencana</label>
+                        <select class="js-example-basic-single form-control" id="id_bencana" name="id_bencana">
+                          <?php
+                          $bencanas = Querybanyak("SELECT * FROM bencana");
+                          foreach ($bencanas as $bencana) { ?>
+                            <?php if( $satu_peninjauan['id_bencana'] == $bencana['id_bencana']){ ?>
+                              <option value="<?= $bencana['id_bencana'] ?>" selected><?= $bencana['nama_bencana'] ?> </option>
+                            <?php }else{ ?>
+                              <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?> </option>
+                            <?php } ?>
+                          <?php
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
                         <label for="jumlah_korban">* Korban</label>
                         <input type="number" class="form-control" id="jumlah_korban" value="<?= $satu_peninjauan['jumlah_korban'] ?>" name="jumlah_korban">
                       </div>
@@ -74,12 +90,12 @@
                         <label for="level_bencana">* Level Bencana</label>
                         <select class="js-example-basic-single form-control" id="level_bencana" name="level_bencana">
                           <?php
-                          $level_bencanas = [1, 2, 3, 4, 0];
-                          foreach ($level_bencanas as $level_bencana) { ?>
+                          $level_bencanas = [1 => "Ringan", 2 => "Waspada", 3 => "Siaga", 4 => "Awas", 0 => "Aman"];
+                          foreach ($level_bencanas as $level_bencana => $val) { ?>
                             <?php if( $satu_peninjauan['level_bencana'] == $level_bencana){ ?>
-                              <option value="<?= $level_bencana ?>" selected><?= $level_bencana ?></option>
+                              <option value="<?= $level_bencana ?>" selected><?= $level_bencana ?> = <?= $val ?></option>
                             <?php }else{ ?>
-                              <option value="<?= $level_bencana ?>"><?= $level_bencana ?></option>
+                              <option value="<?= $level_bencana ?>"><?= $level_bencana ?> = <?= $val ?></option>
                             <?php } ?>
                           <?php
                           }
