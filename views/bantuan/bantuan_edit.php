@@ -21,29 +21,14 @@
                           <input type="hidden" class="form-control p-input" id="id_bantuan"  name="id_bantuan" value="<?= $satu_bantuan['id_bantuan'] ?>">
                           <input type="text" class="form-control p-input" id="nama_bantuan" aria-describedby="nama_bantuan" name="nama_bantuan" value="<?= $satu_bantuan['nama_bantuan'] ?>">
                       </div>
-                      <div class="form-group">
-                        <?php 
-                          $kategoris = ['langsung', 'atm'];
-                        ?>
-                        <label for="kategori">Kategori</label>
-                        <select class="form-control " name="kategori" id="kategori">
-                          <?php foreach($kategoris as $kategori){?>
-                            <?php if($kategori == $satu_bantuan['nama_bantuan'] ) {?>
-                            <option value="<?= $kategori ?>"><?= $kategori ?></option>
-                            <?php }else{?>
-                              <option value="<?= $kategori ?>"><?= $kategori ?></option>
 
-                            <?php }?>
-                          <?php } ?> 
-                        </select>
-                      </div>
                       <div class="form-group">
                           <label for="satuan">Satuan</label>
                           <input type="text" class="form-control p-input" id="satuan" aria-describedby="satuan" name="satuan" value="<?= $satu_bantuan['satuan'] ?>" placeholder="Enter Nama Lengkap">
                         </div>
                       <div class="form-group">
-                          <label for="batch">Batch</label>
-                          <input type="text" class="form-control p-input" id="batch" aria-describedby="batch" name="batch" value="<?= $satu_bantuan['batch'] ?>" placeholder="Enter Nama Lengkap">
+                          <label for="stok">stok</label>
+                          <input type="text" class="form-control p-input" id="stok" aria-describedby="stok" name="stok" value="<?= $satu_bantuan['stok'] ?>" placeholder="Enter Nama Lengkap">
                       </div>
 
                       

@@ -19,6 +19,11 @@ if (!isset($_SESSION['id_user'])) {
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/simple-line-icons/css/simple-line-icons.css">
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/css/vendor.bundle.base.css">
 
+
+  <!-- <link rel="stylesheet" href="<?= $url ?>/assets/fonts/fontawesome/fontawesome.css" /> -->
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+
+
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   <link rel="stylesheet" href="<?= $url ?>/assets/css/vertical-layout-light/style.css">

@@ -6,48 +6,50 @@
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-header">
-                  <h2><?= strtoupper("Tambah data ". str_replace("_"," ", array_keys($_GET)[0])) ?></h2>
+                  <h2><?= strtoupper("Tambah data " . str_replace("_", " ", array_keys($_GET)[0])) ?></h2>
                 </div>
                 <div class="card-body">
                   <div class="row">
-                    <form class="forms-sample" action="<?= $url ?>/?stok_bantuan=stok_bantuan_post" method="POST" enctype="multipart/form-data">
+                    <form class="forms-sample" action="<?= $url ?>/?stok_bantuan=post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
-                        <?php 
-                          $id_bantuans = ['Sarimi', 'Indomie'];
-                        ?>
-                        <label for="id_bantuan">ID Bantuan</label>
-                        <select class="form-control " name="id_bantuan" id="id_bantuan">
-                          <?php foreach($id_bantuans as $id_bantuan){?>
-                            <option value="<?= $id_bantuan ?>"><?= $id_bantuan ?></option>
-                          <?php } ?> 
+                        <label for="pelaporan">* Nama Bantuan</label>
+                        <select class="form-control js-example-basic-single" name="id_bantuan" required>
+                          <?php
+                          $bantuans = Querybanyak("SELECT * FROM bantuan");
+                          foreach ($bantuans as $bantuan) { ?>
+                            <option value="<?= $bantuan['id_bantuan'] ?>"> <?= $bantuan['nama_bantuan'] ?></option>
+                          <?php
+                          }
+                          ?>
                         </select>
                       </div>
                       <div class="form-group">
-                          <label for="batch">Batch</label>
-                          <input type="text" class="form-control p-input" id="batch" name="batch" aria-describedby="batch"  placeholder="Enter Nama Lengkap">
+                        <label for="tanggal_masuk">* Tanggal Masuk</label>
+                        <input type="date" class="form-control p-input" id="tanggal_masuk" name="tanggal_masuk" value="<?= date('Y-m-d') ?>" required>
                       </div>
                       <div class="form-group">
-                          <label for="tanggal_masuk">Tanggal masuk</label>
-                          <input type="text" class="form-control p-input" id="tanggal_masuk" aria-describedby="tanggal_masuk" name="tanggal_masuk" placeholder="Enter Nama Lengkap">
-                      </div> 
+                        <label for="tanggal_kadaluarsa">* Tanggal Kadaluarsa</label>
+                        <input type="date" class="form-control p-input" id="tanggal_kadaluarsa" name="tanggal_kadaluarsa" value="<?= date('Y-m-d') ?>" required>
+                      </div>
                       <div class="form-group">
-                          <label for="tanggal_kadaluarsa">Keterangan stok_bantuan</label>
-                          <input type="date" class="form-control" id="tanggal_kadaluarsa" name="tanggal_kadaluarsa" >
-                      </div>     
+                        <label for="stok_masuk">* Stok Masuk</label>
+                        <input type="number" class="form-control" id="stok_masuk" name="stok_masuk" min="1" value="1" required>
+                      </div>
                       <div class="form-group">
-                          <label for="stok">Stok</label>
-                          <input type="number" class="form-control" id="stok" name="stok" >
-                      </div>                
+                        <label for="batch">* Batch</label>
+                        <input type="date" class="form-control" id="batch" name="batch" value="<?= date("Y-m-d") ?>" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="satuan">* Satuan</label>
+                        <input type="text" class="form-control" id="satuan" name="satuan">
+                      </div>
+
                       <div class="col-12">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
                       </div>
-                  </form>
+                    </form>
 
                   </div>
-
-            
-                  
-
                 </div>
                 <div class="card-footer">
 

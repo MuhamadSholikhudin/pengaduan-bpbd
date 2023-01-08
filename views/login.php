@@ -30,7 +30,8 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo text-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo">
+                <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo"> -->
+                <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="logo">
               </div>
               <h6 class="fw-light text-center">Sign in to continue.</h6>
               <form class="pt-3" action="<?= $url ?>/?auth=login" method="POST" enctype="multipart/form-data">

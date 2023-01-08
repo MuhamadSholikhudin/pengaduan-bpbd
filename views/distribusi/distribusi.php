@@ -7,10 +7,12 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-12">
-                      <a href="<?= $url ?>?distribusi=add" class="btn btn-sm btn-outline-secondary">
+                      <!-- 
+                        <a href="<?= $url ?>?distribusi=add" class="btn btn-sm btn-outline-secondary">
                         <i class="mdi mdi-library-plus"></i>
                         Tambah
-                      </a>
+                      </a> 
+                    -->
                     </div>
                     <div class="col-lg-12 text-center">
                       <h2><?= strtoupper("Data " . array_keys($_GET)[0]) ?></h2>
@@ -21,13 +23,13 @@
                       <thead>
                         <tr>
                           <th>
-                            ID Peninjauan
+                            Peninjauan
                           </th>
                           <th>
-                            ID Wilayah
+                            Bencana
                           </th>
                           <th>
-                            ID Stok Bantuan
+                            Wilayah
                           </th>
                           <th>
                             Tanggal Distribusi
@@ -47,28 +49,23 @@
                           <tr class="bg-danger">
                             <td>
                               <?php
-                              $user = Querysatudata("SELECT nama_user FROM pelaporan JOIN user ON pelaporan.id_user = user.id_user
-                               WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
+                              $benwil = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $peninjauan['id_peninjauan'] . " ");
+                              $bencana = Querysatudata("SELECT bencana.nama_bencana FROM pelaporan JOIN bencana ON pelaporan.id_bencana = bencana.id_bencana WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "");
+                              $user_tinjau = Querysatudata("SELECT * FROM user  WHERE id_user = " . $peninjauan['id_user'] . "");
                               ?>
-                              <?= $user['nama_user'] ?>
+                              <?= $user_tinjau['nama_user'] ?>, <?= $peninjauan['tanggal_peninjauan'] ?>
                             </td>
                             <td>
-                              <?= $peninjauan['tanggal_peninjauan'] ?>
+                              <?= $benwil['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?> / <?= $peninjauan['level_bencana'] ?>
                             </td>
                             <td>
-                              <?php
-                              $bencana = Querysatudata("SELECT bencana.nama_bencana FROM pelaporan JOIN bencana ON pelaporan.id_bencana = bencana.id_bencana WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
-                              ?>
-                              <?= $bencana['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?> / <?= $peninjauan['level_bencana'] ?>
+                              <?= $benwil['kecamatan'] ?> / <?= $benwil['desa'] ?>
                             </td>
                             <td>
-                              <?php
-                              $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . "")
-                              ?>
-                              <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
+
                             </td>
                             <td>
-                              <?= $peninjauan['id_user'] ?>
+                              Belum di Proses
                             </td>
                             <td>
                               <button class="btn btn-sm btn-sm btn-outline-primary btn-icon-text addpeninjauan" data-toggle="modal" data-id="<?= $peninjauan['id_pelaporan'] ?>" data-target="#modaldistribusi">
@@ -81,14 +78,21 @@
                         }
                         ?>
                         <?php
-                        $distribusis = Querybanyak("SELECT * FROM distribusi");
+                        $distribusis = Querybanyak("SELECT * FROM distribusi ");
                         foreach ($distribusis as $distribusi) { ?>
                           <tr>
                             <td>
-                              <?= $distribusi['id_peninjauan'] ?>
+                              <?php
+                              $peninjauan = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $distribusi['id_peninjauan'] . " ");
+                              $user_tinjau = Querysatudata("SELECT nama_user FROM user WHERE id_user = " . $peninjauan['id_user'] . " ");
+                              ?>
+                              <?= $user_tinjau['nama_user'] ?> , <?= $peninjauan['tanggal_peninjauan'] ?>
                             </td>
                             <td>
-                              <?= $distribusi['id_peninjauan'] ?>
+                              <?= $peninjauan['nama_bencana'] ?>
+                            </td>
+                            <td>
+                              <?= $peninjauan['kecamatan'] ?> / <?= $peninjauan['desa'] ?>
                             </td>
                             <td>
                               <?= $distribusi['tanggal_distribusi'] ?>
@@ -97,11 +101,8 @@
                               <?= $distribusi['status_distribusi'] ?>
                             </td>
                             <td>
-                              <?= $distribusi['id_user'] ?>
-                            </td>
-                            <td>
                               <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                                <i class="ti-pencil btn-icon-append"></i>
+                                <i class="ti-pencil-alt btn-icon-append"></i>
                                 Edit
                               </a>
                             </td>
@@ -128,25 +129,39 @@
                           <div class="row">
                             <div class="col-lg-6">
                               <div class="form-group">
+                                <label for="bencana">Bencana</label>
+                                <input type="text" class="form-control p-input" id="bencana" readonly">
+                              </div>
+                              <div class="form-group">
+                                <label for="keterangan_peninjauan">Keterangan Peninjauan</label>
+                                <textarea class="form-control" style="height: 100px;" id="keterangan_peninjauan" readonly></textarea>
+                              </div>
+                              <div class="form-group">
                                 <label for="tanggal_distribusi">* Tanggal distribusi</label>
                                 <input type="date" class="form-control p-input" id="tanggal_distribusi" value="<?= date('Y-m-d') ?>">
                               </div>
                               <div class="table_result" id="table_result">
-                                <ul id="table_result_ul">
-                                </ul>
+                                <div class="table-responsive">
+                                  <table class="table table-striped" id="tablleresult">
+                                  </table>
+                                </div>
                               </div>
                               <div class="form-group">
                                 <label for="keterangan_distribusi">* Keterangan distribusi</label>
                                 <textarea class="form-control" style="height: 100px;" id="keterangan_distribusi"></textarea>
                               </div>
-                              <button class="btn btn-primary" onclick="ProcessInsertLogistik()">SIMPAN</button>
+                              <button class="btn btn-primary" onclick="ProcessInsertLogistikStok()">SIMPAN</button>
+                              <!-- <button class="btn btn-primary" onclick="ProcessInsertLogistik()">SIMPAN</button> -->
                             </div>
                             <div class="col-lg-6">
                               <div class="form-group">
                                 <label for="search_distribusi">Cari Data Bantuan</label>
-                                <input type="text" class="form-control p-input" id="search_distribusi">
+                                <!-- <input type="text" class="form-control p-input" id="search_distribusi"> -->
+                                <input type="text" class="form-control p-input" id="search_distribusi_stok_bantuan">
                               </div>
-                              <div class="result_search" id="result_search">
+                              <div class="table-responsive">
+                                <table class="result_search table table-striped" id="result_search">
+                                </table>
                               </div>
                             </div>
                           </div>

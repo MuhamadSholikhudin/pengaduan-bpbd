@@ -31,10 +31,19 @@
                     </div>
                     <div class="form-group mt-3">
                       <label for="search_distribusi">Cari Data Bantuan</label>
-                      <input type="text" class="form-control p-input" id="search_edit_distribusi">
+                      <!-- <input type="text" class="form-control p-input" id="search_edit_distribusi"> -->
+                      <input type="text" class="form-control p-input" id="search_editdistribusi_stok_bantuan">
                     </div>
-                    <div class="result_search" id="result_search">
+
+                    <!-- <div class="result_search" id="result_search">
+                    </div> -->
+
+                    <div class="table-responsive">
+                      <table class="table table-striped" id="result_search">
+
+                      </table>
                     </div>
+
                     <!-- </form> -->
                   </div>
                 </div>
@@ -63,6 +72,71 @@
                         <tbody id="editbodydistribusi">
                           <?php
                           $no = 1;
+                          $bantuan_distribusis = Querybanyak("SELECT * FROM bantuan_distribusi LEFT JOIN stok_bantuan ON bantuan_distribusi.id_stok_bantuan = stok_bantuan.id_stok_bantuan WHERE bantuan_distribusi.id_distribusi = " . $_GET['id'] . "");
+                          foreach ($bantuan_distribusis as $bantuan_distribusi) {
+                            $bantuan = Querysatudata("SELECT * FROM bantuan WHERE id_bantuan = " . $bantuan_distribusi['id_bantuan'] . "")
+                          ?>
+                            <tr>
+                              <td><?= $no++; ?></td>
+                              <td><?= $bantuan['nama_bantuan']; ?></td>
+                              <td>
+                                <input class="form-control" type="hidden" name="stok_bantuan_id[]" min="0" value="<?= $bantuan_distribusi['id_stok_bantuan']; ?>">
+                                <input class="form-control" type="number" name="jumlah_bantuan[]" min="0" value="<?= $bantuan_distribusi['jumlah']; ?>">
+                              </td>
+                              <td>
+                                <?= $bantuan['satuan']; ?>
+                              </td>
+                              <td class="">
+                                <a href="#" class="text-decoration-none text-danger" id="trash_stok_bantuan_edit">
+                                  <i id="removebant" class="ti-trash"></i>
+                                  Delete
+                                </a>
+                              </td>
+                            </tr>
+                          <?php
+                          }
+                          ?>
+                        </tbody>
+                        <?php 
+                        /*
+                        <tbody id="editbodydistribusi">
+                          <?php
+                          $no = 1;
+                          $bantuan_distribusis = Querybanyak("SELECT * FROM bantuan_distribusi LEFT JOIN stok_bantuan ON bantuan_distribusi.id_stok_bantuan = stok_bantuan.id_stok_bantuan WHERE bantuan_distribusi.id_distribusi = " . $_GET['id'] . "");
+                          foreach ($bantuan_distribusis as $bantuan_distribusi) {
+                            $bantuan = Querysatudata("SELECT * FROM bantuan WHERE id_bantuan = " . $bantuan_distribusi['id_bantuan'] . "")
+                          ?>
+                            <tr>
+                              <td><?= $no++; ?></td>
+                              <td><?= $bantuan['nama_bantuan']; ?></td>
+                              <td>
+                                <input class="form-control" type="hidden" name="stok_bantuan_id[]" min="0" value="<?= $bantuan_distribusi['id_stok_bantuan']; ?>">
+                                <input class="form-control" type="number" name="jumlah_bantuan[]" min="0" value="<?= $bantuan_distribusi['jumlah']; ?>">
+                              </td>
+                              <td>
+                                <?= $bantuan['satuan']; ?>
+                              </td>
+                              <td class="">
+                                <a href="#" class="text-decoration-none text-danger" id="trash_bantuan_edit">
+                                  <i id="removebant" class="ti-trash"></i>
+                                  Delete
+                                </a>
+                              </td>
+                            </tr>
+                          <?php
+                          }
+                          ?>
+                        </tbody>
+                            */
+                        ?>
+                      </table>
+                      <?php 
+                      /*
+                       <!-- List Data bantuan distribusi lama -->
+                        <!--
+                        <tbody id="editbodydistribusi">
+                        <?php
+                          $no = 1;
                           $bantuan_distribusis = Querybanyak("SELECT * FROM bantuan_distribusi WHERE id_distribusi = " . $_GET['id'] . "");
                           foreach ($bantuan_distribusis as $bantuan_distribusi) {
                             $bantuan = Querysatudata("SELECT * FROM bantuan WHERE id_bantuan = " . $bantuan_distribusi['id_bantuan'] . "")
@@ -88,13 +162,17 @@
                           }
                           ?>
                         </tbody>
-                      </table>
+                        -->
+                        */
+                        ?>
                     </div>
                     <div class="col-12 mt-3 text-center">
-                      <button type="submit" class="btn btn-success" onclick="ProcessUpdateLogistik();">
-                        <i class="ti-pencil"></i>
+                      <!-- <button type="submit" class="btn btn-success" onclick="ProcessUpdateLogistik();"> -->
+                      <button type="submit" class="btn btn-success" onclick="ProcessUpdateLogistikStokbantuan();">
+                        <i class="ti-pencil-alt"></i>
                         Update
                       </button>
+
                     </div>
                   </div>
 

@@ -31,7 +31,7 @@
                             Satuan
                           </th>
                           <th>
-                            Batch
+                            Stok
                           </th>
                           <th>
                             Action
@@ -43,7 +43,6 @@
                         $bantuans = Querybanyak("SELECT * FROM bantuan  ORDER BY id_bantuan DESC");
                         foreach ($bantuans as $bantuan) { ?>
                           <tr>
-
                             <td>
                               <?= $bantuan['nama_bantuan'] ?>
                             </td>
@@ -54,11 +53,11 @@
                             <?= $bantuan['satuan'] ?>
                             </td>
                             <td>
-                            <?= $bantuan['batch'] ?>
+                            <?= $bantuan['stok'] ?>
                             </td>
                             <td>
                               <a href="<?= $url ?>/?bantuan=edit&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-success">
-                                <i class="ti-pencil"></i>
+                                <i class="ti-pencil-alt"></i>
                                 Edit
                               </a>
                               <a href="<?= $url ?>/?bantuan=stok&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-primary">

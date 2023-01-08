@@ -3,7 +3,7 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="<?= $url ?>/?dashboard=dashboard">
-              <i class="mdi mdi-grid-large menu-icon"></i>
+              <i class="mdi mdi-grid-large menu-icon md-5x"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
@@ -34,9 +34,10 @@
                     break;
                     case 'petugas_logistik':
                     ?>
-                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
-                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan">Stok Bantuan</a></li>
                       <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan">Stok Masuk Bantuan</a></li>
+                      <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan_keluar">Stok Keluar Bantuan</a></li>
                     <?php
                     break;
                     case 'petugas_kajian':
@@ -76,6 +77,7 @@
             </a>
             <div class="collapse" id="ui-laporan">
               <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?laporan=pelaporan">Pelaporan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?laporan=persediaan">Laporan Persediaan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?laporan=pendistribusian">Laporan Pendistribusian</a></li>
               </ul>

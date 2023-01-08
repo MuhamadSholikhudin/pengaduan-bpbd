@@ -30,6 +30,9 @@ $peninjauan = new Peninjauan();
 include 'controllers/Distribusi.php';
 $distribusi = new Distribusi();
 
+include 'controllers/Stok_bantuan.php';
+$stok_bantuan = new Stok_bantuan();
+
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
     $param_val = $_GET[array_keys($_GET)[0]];
@@ -163,11 +166,14 @@ if ($_GET) {
             } elseif ($param_val == 'add') {
                 $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_add.php');
             } elseif ($param_val == 'edit') {
-                $conf->TemplateAdmin(
-                    'views/stok_bantuan/stok_bantuan_edit.php'
-                );
+                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_edit.php');
             } elseif ($param_val == 'post') {
-                $user->Post($_POST);
+                $stok_bantuan->Post($_POST);
+            }
+
+            elseif ($param_val == 'stok_bantuan_keluar') {
+                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_keluar.php');
+
             }
             break;
 
@@ -181,7 +187,9 @@ if ($_GET) {
             } elseif ($param_val == 'post') {
                 var_dump($_POST);
                 // $user->Post($_POST);
-            } elseif ($param_val == 'ajax_search') {
+            } 
+                        
+            elseif ($param_val == 'ajax_search') {
                 $distribusi->AjaxSearch($_POST);
             }elseif ($param_val == 'ajax_add_bant') {
                 $distribusi->AjaxAddBant($_POST);            
@@ -197,7 +205,44 @@ if ($_GET) {
                 $distribusi->AjaxUpdateDistribusi($_POST);
             }
 
+            elseif ($param_val == 'ajax_click_peninjauan') {
+                $distribusi->Ajax_klik_peninjauan($_POST);
+            }
 
+            elseif ($param_val == 'ajax_search_distribusi_bantuan') {
+                $distribusi->AjaxSearchDistribusiBantuan($_POST);
+            }elseif ($param_val == 'ajax_add_stok_bant') {
+                $distribusi->AjaxAddStokBant($_POST);            
+            }elseif ($param_val == 'ajax_insert_distribusi_stok') {
+                $distribusi->AjaxInsertDistribusiStok($_POST);
+            
+
+            }elseif ($param_val == 'ajax_search_editdistribusi_bantuan') {
+                $distribusi->AjaxSearchEditDistribusiBantuan($_POST);               
+            }elseif ($param_val == 'ajax_edit_stok_bant') {
+                $distribusi->AjaxEditStokBant($_POST);             
+            }elseif ($param_val == 'ajax_update_distribusi_stok') {
+                $distribusi->AjaxUpdateDistribusiStok($_POST);
+            }
+
+            break;
+        case "laporan":
+            if ($param_val == 'pelaporan') {
+                if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
+                } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+
+                } elseif (isset($_POST['tahun'])) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                } else {
+                    $conf->TemplateAdmin('views/laporan/pelaporan.php');
+                }
+            }elseif($param_val == 'pelaporan_post'){
+                var_dump($_GET);
+
+                
+            }
             break;
 
         case 'pages':
