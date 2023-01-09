@@ -9,7 +9,6 @@ function Page($page){
     include "template/partials/_header.php";
     include "template/partials/_navbar.php";
     include "template/partials/_sidebar.php";
-
     include $page;
     include "template/partials/_footer.php";
 }
@@ -45,4 +44,8 @@ function NumRows($query){
 function Redirect($link, $notif) {
     echo $output = "<script>alert('".$notif."')</script><meta http-equiv='refresh' content='0; url=".$link. "'>";
     return $output;
+}
+
+function Dompdf(){
+    require_once 'assets/dompdf/autoload.inc.php';
 }

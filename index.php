@@ -238,13 +238,17 @@ if ($_GET) {
                 } elseif (isset($_POST['tahun'])) {
                     Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
                 } else {
-                    $conf->TemplateAdmin('views/laporan/pelaporan.php');
+                    $conf->TemplateAdmin('views/laporan/pelaporan/pelaporan.php');
                 }
-            }elseif($param_val == 'pelaporan_post'){
-                var_dump($_GET);
-
-                
+            }elseif($param_val == 'pelaporan_cetak'){
+                include "views/laporan/pelaporan/pelaporan_cetak.php";                
+            }elseif($param_val == 'pelaporan_excel'){
+                include "views/laporan/pelaporan/pelaporan_excel.php";                
+            
+            }elseif($param_val == 'pelaporan_pdf'){
+                include "views/laporan/pelaporan/pelaporan_pdf.php";                
             }
+
             break;
 
         case 'pages':
