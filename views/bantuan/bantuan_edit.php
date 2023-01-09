@@ -27,6 +27,10 @@
                           <input type="text" class="form-control p-input" id="satuan" aria-describedby="satuan" name="satuan" value="<?= $satu_bantuan['satuan'] ?>" placeholder="Enter Nama Lengkap">
                         </div>
                       <div class="form-group">
+                          <label for="kategori">kategori</label>
+                          <input type="text" class="form-control p-input" id="kategori" aria-describedby="kategori" name="kategori" value="<?= $satu_bantuan['kategori'] ?>" placeholder="Enter Nama Lengkap">
+                        </div>
+                      <div class="form-group">
                           <label for="stok">stok</label>
                           <input type="text" class="form-control p-input" id="stok" aria-describedby="stok" name="stok" value="<?= $satu_bantuan['stok'] ?>" placeholder="Enter Nama Lengkap">
                       </div>

@@ -229,6 +229,8 @@ if ($_GET) {
 
             break;
         case "laporan":
+
+            // ================== Pelaporan =======
             if ($param_val == 'pelaporan') {
                 if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
                     Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
@@ -249,7 +251,30 @@ if ($_GET) {
                 include "views/laporan/pelaporan/pelaporan_pdf.php";                
             }
 
+            // ================== distribusi =======
+            if ($param_val == 'distribusi') {
+                if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=distribusi&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
+                } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=distribusi&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+
+                } elseif (isset($_POST['tahun'])) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=distribusi&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                } else {
+                    $conf->TemplateAdmin('views/laporan/distribusi/distribusi.php');
+                }
+            }elseif($param_val == 'distribusi_cetak'){
+                include "views/laporan/distribusi/distribusi_cetak.php";                
+            }elseif($param_val == 'distribusi_excel'){
+                include "views/laporan/distribusi/distribusi_excel.php";                
+            
+            }elseif($param_val == 'distribusi_pdf'){
+                include "views/laporan/distribusi/distribusi_pdf.php";                
+            }
+
+
             break;
+
 
         case 'pages':
             if ($param_val == 'crud') {

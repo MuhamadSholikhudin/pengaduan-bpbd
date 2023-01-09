@@ -28,7 +28,7 @@
 	</style>
  	<?php
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment; filename=Data_Pelaporan.xls');
+        header('Content-Disposition: attachment; filename=Data_Distribusi.xls');
     ?>
  	<center>
 		<h1>Laporan Data Pelaporan <br/> Badan penanggulangan Bencana</h1>
@@ -56,28 +56,30 @@
         <tbody>
             <?php
                 if (isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])) {
-                    $sql_pelaporan = "SELECT * FROM pelaporan WHERE tanggal_pelaporan BETWEEN '".$_GET['tanggal_awal']."' AND '".$_GET['tanggal_akhir'] ."' ";
+                    $sql_distribusi = "SELECT * FROM distribusi WHERE tanggal_distribusi BETWEEN '".$_GET['tanggal_awal']."' AND '".$_GET['tanggal_akhir'] ."' ";
                 } elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) {
-                    $sql_pelaporan = 'SELECT * FROM pelaporan WHERE MONTH(tanggal_pelaporan) = '.$_GET['bulan']." AND YEAR(tanggal_pelaporan) = '" .$_GET['tahun']."' ";
+                    $sql_distribusi = 'SELECT * FROM distribusi WHERE MONTH(tanggal_distribusi) = '.$_GET['bulan']." AND YEAR(tanggal_distribusi) = '" .$_GET['tahun']."' ";
                 } elseif (isset($_GET['tahun'])) {
-                    $sql_pelaporan = "SELECT * FROM pelaporan WHERE  YEAR(tanggal_pelaporan) = '".$_GET['tahun']."' ";
+                    $sql_distribusi = "SELECT * FROM distribusi WHERE  YEAR(tanggal_distribusi) = '".$_GET['tahun']."' ";
                 } else {
-                    $sql_pelaporan = 'SELECT * FROM pelaporan';
+                    $sql_distribusi = 'SELECT * FROM distribusi';
                 }
 
-                $pelaporans = Querybanyak($sql_pelaporan);
-                foreach ($pelaporans as $pelaporan) {
+                $distribusis = Querybanyak($sql_distribusi);
+                foreach ($distribusis as $distribusi) {
 
-                $user = Querysatudata("SELECT * FROM user WHERE id_user = ".$pelaporan['id_user']."");
-                $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']. "");
-                $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']. "");
+                $user = Querysatudata("SELECT * FROM user WHERE id_user = ".$distribusi['id_user']."");
+                $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = ".$distribusi['id_peninjauan']."");                                        
+
+                $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$peninjauan['id_bencana']. "");
+                $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$peninjauan['id_wilayah']. "");
                 ?>
                 <tr>
                     <td class="py-1">
                         <?= $user['nama_user'] ?>
                     </td>
                     <td>
-                        <?= $pelaporan['tanggal_pelaporan'] ?>
+                        <?= $distribusi['tanggal_distribusi'] ?>
                     </td>
                     <td>
                         <?= $bencana['nama_bencana'] ?>
@@ -86,8 +88,8 @@
                         <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
                     </td>
                     <td>
-                        <?= $pelaporan[
-                            'status_pelaporan'
+                        <?= $distribusi[
+                            'status_distribusi'
                         ] ?>
                     </td>
                 </tr>

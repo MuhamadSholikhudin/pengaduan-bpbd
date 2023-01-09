@@ -16,25 +16,19 @@
                           <input type="text" class="form-control p-input" id="nama_bantuan"  name="nama_bantuan" placeholder="Nama Bantuan">
                       </div>
                       <div class="form-group">
-                        <?php 
-                          $kategoris = ['cash', 'atm'];
-                        ?>
-                        <label for="kategori">Kategori</label>
-                        <select class="form-control " name="kategori" id="kategori">
-                          <?php foreach($kategoris as $kategori){?>
-                            <option value="<?= $kategori ?>"><?= $kategori ?></option>
-                          <?php } ?> 
-                        </select>
+                          <label for="kategori">Kategori Bantuan</label>
+                          <input type="text" class="form-control p-input" id="kategori"  name="kategori" placeholder="Nama Bantuan">
                       </div>
+                    
                       <div class="form-group">
                           <label for="satuan">Satuan</label>
                           <input type="text" class="form-control p-input" id="satuan" aria-describedby="satuan" name="satuan" placeholder="Satuan">
 
                         </div>
-                      <div class="form-group">
+                      <!-- <div class="form-group">
                           <label for="batch">Batch</label>
                           <input type="text" class="form-control p-input" id="batch" aria-describedby="batch" name="batch" placeholder="Batch">
-                      </div>                        
+                      </div>                         -->
                       <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>
                       </div>
