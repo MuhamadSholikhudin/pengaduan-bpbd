@@ -48,7 +48,7 @@
                          
                             <td>
                               <a href="<?= $url ?>/?bencana=edit&id=<?= $bencana['id_bencana'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                                <i class="ti-pencil btn-icon-append"></i>
+                                <i class="ti-pencil-alt btn-icon-append"></i>
                                 Edit
                               </a>
                             </td>

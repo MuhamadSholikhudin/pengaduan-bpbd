@@ -130,7 +130,7 @@
                             <div class="col-lg-6">
                               <div class="form-group">
                                 <label for="bencana">Bencana</label>
-                                <input type="text" class="form-control p-input" id="bencana" readonly">
+                                <input type="text" class="form-control p-input" id="bencana" disabled">
                               </div>
                               <div class="form-group">
                                 <label for="keterangan_peninjauan">Keterangan Peninjauan</label>

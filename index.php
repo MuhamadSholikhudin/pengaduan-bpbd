@@ -169,6 +169,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_edit.php');
             } elseif ($param_val == 'post') {
                 $stok_bantuan->Post($_POST);
+            }elseif ($param_val == 'update') {
+                $stok_bantuan->Update($_POST);
             }
 
             elseif ($param_val == 'stok_bantuan_keluar') {

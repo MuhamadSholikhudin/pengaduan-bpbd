@@ -1,10 +1,8 @@
-<?php 
+      <?php 
           $id = $_GET['id'];
           $cari_pelaporan_berdasarkan_id_pelaporan = "SELECT * FROM pelaporan WHERE id_pelaporan = " . $_GET['id'] . "";
           $satu_pelaporan = Querysatudata($cari_pelaporan_berdasarkan_id_pelaporan);
         ?>
-
-      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">

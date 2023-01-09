@@ -78,7 +78,7 @@
                                   Kirim
                                 </a>
                                 <a href="<?= $url ?>/?pelaporan_masyarakat=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
-                                  <i class="ti-pencil"></i>
+                                  <i class="ti-pencil-alt"></i>
                                   Edit
                                 </a>
                               <?php

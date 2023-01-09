@@ -93,7 +93,6 @@
                                       <i class="ti-check-box"></i>
                                       valid
                                     </a>
-
                                   <?php }
                                   break;
                                 case "petugas_kajian":

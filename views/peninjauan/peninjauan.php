@@ -83,7 +83,7 @@
                               Beritahu
                             </a>
                             <a href="<?= $url ?>/?peninjauan=edit&id=<?= $peninjauan['id_peninjauan'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                              <i class="ti-pencil"></i>
+                              <i class="ti-pencil-alt"></i>
                               Edit
                             </a>
                           </td>

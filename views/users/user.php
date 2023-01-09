@@ -64,7 +64,7 @@
                           </td>
                           <td>
                             <a href="<?= $url ?>/?user=edit&id=<?= $user['id_user']; ?>" class="btn btn-lg btn-outline-warning btn-icon-text">
-                              <i class="ti-pencil"></i>                          
+                              <i class="ti-pencil-alt"></i>                          
                               Edit
                             </a>                          
                           </td>
