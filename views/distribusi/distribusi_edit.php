@@ -1,10 +1,9 @@
       <?php
       $id = $_GET['id'];
-      $cari_distribusi_berdasarkan_id_distribusi =
-        'SELECT * FROM distribusi WHERE id_distribusi = ' . $_GET['id'] . '';
-      $satu_distribusi = Querysatudata(
-        $cari_distribusi_berdasarkan_id_distribusi
-      );
+      $cari_distribusi_berdasarkan_id_distribusi = "SELECT * FROM distribusi WHERE id_distribusi = ". $_GET['id'] ."";
+      $satu_distribusi = Querysatudata($cari_distribusi_berdasarkan_id_distribusi);
+      $sql_peninjauan = "SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = ".$satu_distribusi['id_peninjauan']." ";
+      $peninjauan = Querysatudata($sql_peninjauan);
       ?>
       <!-- partial -->
       <div class="main-panel">
@@ -21,6 +20,12 @@
                     <input type="hidden" class="form-control p-input" id="id_distribusi" aria-describedby="id_distribusi" name="id_distribusi" value="<?= $_GET['id'] ?>">
                     <input type="hidden" class="form-control p-input" id="id_user" aria-describedby="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                     <input type="hidden" class="form-control p-input" id="id_peninjauan" aria-describedby="id_peninjauan" name="id_peninjauan" value="<?= $satu_distribusi['id_peninjauan'] ?>">
+                    <div class="form-group">
+                      <label for="info_peninjauan">Info Peninjauan</label>
+                      <textarea class="form-control" id="keterangan_distribusi"  style="height: 100px;" disabled>Terjadi <?= $peninjauan['kategori_bencana'] ?> <?= $peninjauan['nama_bencana'] ?> dengan level <?= $peninjauan['level_bencana'] ?>   pada wilayah <?= $peninjauan['kecamatan'] ?> <?= $peninjauan['desa'] ?> dengan jumlah korban <?= $peninjauan['jumlah_korban'] ?> keterangan : <?= $peninjauan['keterangan_peninjauan'] ?>
+                      </textarea>
+                    </div>                   
+
                     <div class="form-group">
                       <label for="tanggal_distribusi">Tanggal distribusi</label>
                       <input type="date" class="form-control p-input" id="tanggal_distribusi" aria-describedby="tanggal_distribusi" name="tanggal_distribusi" value="<?= $satu_distribusi['tanggal_distribusi'] ?>">

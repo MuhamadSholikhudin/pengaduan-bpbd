@@ -40,7 +40,7 @@
         }
      
         public function Kirim($request){
-            $sql = "UPDATE  `pelaporan` 
+            $sql = "UPDATE `pelaporan` 
                     SET status_pelaporan =  'terkirim'
                     WHERE id_pelaporan = ".$request['id']."
             ";

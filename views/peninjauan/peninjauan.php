@@ -72,7 +72,7 @@
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>  
                           </td>
                           <td>
-                            <?= $peninjauan['id_user'] ?>
+                            <?= $peninjauan['jumlah_korban'] ?>
                           </td>
                           <td>
                             <?= $peninjauan['status_peninjauan'] ?>

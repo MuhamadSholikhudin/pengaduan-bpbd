@@ -367,12 +367,12 @@ class Distribusi
             }
             $num_sql = "SELECT COUNT(*) as id 
             FROM stok_bantuan LEFT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan 
-            WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%' AND tanggal_kadaluarsa > " . date('Y-m-d') . "";
+            WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%' AND stok_bantuan.stok_tersedia > 0 AND stok_bantuan.tanggal_kadaluarsa > " . date('Y-m-d') . "";
             $num_bantuan = Querysatudata($num_sql);
             if ($num_bantuan['id'] > 0) {
                 $sql = "SELECT bantuan.nama_bantuan as nama_bantuan, bantuan.kategori as kategori, stok_bantuan.stok_tersedia as stok, stok_bantuan.id_stok_bantuan as id_stok_bantuan 
                 FROM stok_bantuan LEFT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan 
-                WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%'  AND tanggal_kadaluarsa > " . date('Y-m-d') . " LIMIT 10";
+                WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%'  AND stok_bantuan.stok_tersedia > 0 AND stok_bantuan.tanggal_kadaluarsa > " . date('Y-m-d') . " LIMIT 10";
                 $bantuans = Querybanyak($sql);
                 $stok_bantuan_loop .= '<tbody>';
                 $stok_bantuan_loop .= '<tr><th>Nama bantuan</th><th>Jumlah</th><th>Add</th></tr>';
@@ -407,7 +407,7 @@ class Distribusi
                         <td>' . $bantuan['nama_bantuan'] . '</td>
                         <td>
                             <input class="form-control" type="hidden" name="stok_bantuan_id[]" min="0" value="' . $bantuan['id_stok_bantuan'] . '">                         
-                            <input class="form-control" type="number" name="jumlah_bantuan[]" min="0"  max="' . $bantuan['stok_tersedia'] . '" style="width:100px;">                         
+                            <input class="form-control" type="number" name="jumlah_bantuan[]" min="1"  max="' . $bantuan['stok_tersedia'] . '" value="1" style="width:100px;">                         
                         </td>
                         <td>' . $bantuan['satuan'] . '</td>
                         <td>

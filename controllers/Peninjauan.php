@@ -50,7 +50,7 @@
             }
             $sql = "UPDATE  `peninjauan` 
                 SET   id_pelaporan =  ".$request['id_pelaporan'].", 
-                      id_user =  '".$request['id_user']."', 
+                      id_user =  ".$request['id_user'].", 
                       id_wilayah = ".$request['id_wilayah'].",
                       id_bencana = ".$request['id_bencana'].",
                       tanggal_peninjauan =  '".$request['tanggal_peninjauan']."',
@@ -58,9 +58,10 @@
                       kategori_bencana =  '".$request['kategori_bencana']."',
                       level_bencana =  ".$request['level_bencana'].",
                       keterangan_peninjauan =  '".$request['keterangan_peninjauan']."',
-                      bukti_peninjauan =  '".$bukti_peninjauan."',
+                      bukti_peninjauan =  '".$bukti_peninjauan."'
                     WHERE id_peninjauan = ".$request['id_peninjauan']."
             ";
+            var_dump($sql);
             $this->Model()->Execute($sql);
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Ubah");
         }

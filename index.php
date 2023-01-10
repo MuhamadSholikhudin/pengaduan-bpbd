@@ -272,7 +272,26 @@ if ($_GET) {
                 include "views/laporan/distribusi/distribusi_pdf.php";                
             }
 
+            //=================== stok_bantuan ===================
+            if ($param_val == 'stok_bantuan') {
+                if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
+                } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
 
+                } elseif (isset($_POST['tahun'])) {
+                    Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                } else {
+                    $conf->TemplateAdmin('views/laporan/stok_bantuan/stok_bantuan.php');
+                }
+            }elseif($param_val == 'stok_bantuan_cetak'){
+                include "views/laporan/stok_bantuan/stok_bantuan_cetak.php";                
+            }elseif($param_val == 'stok_bantuan_excel'){
+                include "views/laporan/stok_bantuan/stok_bantuan_excel.php";                
+            
+            }elseif($param_val == 'stok_bantuan_pdf'){
+                include "views/laporan/stok_bantuan/stok_bantuan_pdf.php";                
+            }
             break;
 
 
