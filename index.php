@@ -278,7 +278,6 @@ if ($_GET) {
                     Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
                 } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
                     Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
-
                 } elseif (isset($_POST['tahun'])) {
                     Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
                 } else {

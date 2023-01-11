@@ -22,7 +22,7 @@
                     <input type="hidden" class="form-control p-input" id="id_peninjauan" aria-describedby="id_peninjauan" name="id_peninjauan" value="<?= $satu_distribusi['id_peninjauan'] ?>">
                     <div class="form-group">
                       <label for="info_peninjauan">Info Peninjauan</label>
-                      <textarea class="form-control" id="keterangan_distribusi"  style="height: 100px;" disabled>Terjadi <?= $peninjauan['kategori_bencana'] ?> <?= $peninjauan['nama_bencana'] ?> dengan level <?= $peninjauan['level_bencana'] ?>   pada wilayah <?= $peninjauan['kecamatan'] ?> <?= $peninjauan['desa'] ?> dengan jumlah korban <?= $peninjauan['jumlah_korban'] ?> keterangan : <?= $peninjauan['keterangan_peninjauan'] ?>
+                      <textarea class="form-control"  style="height: 100px;" disabled>Terjadi <?= $peninjauan['kategori_bencana'] ?> <?= $peninjauan['nama_bencana'] ?> dengan level <?= $peninjauan['level_bencana'] ?>   pada wilayah <?= $peninjauan['kecamatan'] ?> <?= $peninjauan['desa'] ?> dengan jumlah korban <?= $peninjauan['jumlah_korban'] ?> keterangan : <?= $peninjauan['keterangan_peninjauan'] ?>
                       </textarea>
                     </div>                   
 

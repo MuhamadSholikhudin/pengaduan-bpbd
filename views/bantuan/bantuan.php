@@ -60,10 +60,10 @@
                                 <i class="ti-pencil-alt"></i>
                                 Edit
                               </a>
-                              <a href="<?= $url ?>/?bantuan=stok&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-primary">
+                              <!-- <a href="<?= $url ?>/?bantuan=stok&id=<?= $bantuan['id_bantuan'] ?>" class="btn btn-primary">
                                 <i class="ti-pencil"></i>
                                 Stok
-                              </a>
+                              </a> -->
                             </td>
                           </tr>
 

@@ -79,7 +79,7 @@
                    </div>
                  </div>
                  <div class="table-responsive">
-                   <table class="table table-striped" >
+                   <table id="myTable" class="table table-striped" >
                      <thead>
                        <tr>
                          <th>Nama Bantuan</th>
@@ -115,7 +115,7 @@
                              <?= $stok_bantuan['stok_tersedia'] ?>
                            </td>
                            <td>
-                             <a href="<?= $url ?>/?stok_bantuan=edit" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                             <a href="<?= $url ?>/?stok_bantuan=edit&id=<?= $stok_bantuan['id_stok_bantuan'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                               <i class="ti-pencil-alt btn-icon-append"></i>
                                Edit
                              </a>

@@ -11,7 +11,7 @@
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table  id="myTable" class="table table-striped">
                       <thead>
                         <tr>
                           <th>

@@ -9,9 +9,9 @@
                     <div class="col-lg-12">
                       <!-- 
                         <a href="<?= $url ?>?distribusi=add" class="btn btn-sm btn-outline-secondary">
-                        <i class="mdi mdi-library-plus"></i>
-                        Tambah
-                      </a> 
+                          <i class="mdi mdi-library-plus"></i>
+                          Tambah
+                        </a> 
                     -->
                     </div>
                     <div class="col-lg-12 text-center">
@@ -19,7 +19,7 @@
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table  id="myTable" class="table table-striped">
                       <thead>
                         <tr>
                           <th>
@@ -130,7 +130,7 @@
                             <div class="col-lg-6">
                               <div class="form-group">
                                 <label for="bencana">Bencana</label>
-                                <input type="text" class="form-control p-input" id="bencana" disabled">
+                                <input type="text" class="form-control p-input" id="bencana" disabled readonly>
                               </div>
                               <div class="form-group">
                                 <label for="keterangan_peninjauan">Keterangan Peninjauan</label>
