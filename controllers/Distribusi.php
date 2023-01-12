@@ -507,8 +507,12 @@ class Distribusi
                 $this->Model()->Execute($sql_distribusi_bantuan);
             }
         }
-        
-        
         echo json_encode("Data Bantuan distribusi berhasil di update");
+    }
+
+    public function Update_status($request){
+        $sql_update_status = "UPDATE distribusi SET status_distribusi = '". $request["status_distribusi"]."' WHERE id_distribusi = ".$request["id_distribusi"]." ";
+        $this->Model()->Execute($sql_update_status);
+        Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Status Distribusi Berhasil Di Ubah");
     }
 }

@@ -98,7 +98,9 @@
                               <?= $distribusi['tanggal_distribusi'] ?>
                             </td>
                             <td>
-                              <?= $distribusi['status_distribusi'] ?>
+                                <a href="#"  data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white"  data-toggle="modal"  data-target="#modaleditstatusdistribusi"> 
+                                  <?= $distribusi['status_distribusi'] ?>
+                                </a>
                             </td>
                             <td>
                               <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
@@ -175,6 +177,51 @@
                       </div>
                     </div>
                   </div>
+
+
+                <!-- Modal Distribusi -->
+                  <div class="modal fade" id="modaleditstatusdistribusi" tabindex="-1" role="dialog" aria-labelledby="modaleditstatusdistribusiLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modaleditstatusdistribusiLabel">Form Edit Status Distribusi </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="forms-sample" action="<?= $url ?>/?distribusi=update_status" method="POST" enctype="multipart/form-data">
+                          <input type="text" class="form-control p-input" id="id_user" value="<?= $_SESSION['id_user'] ?>" style="display: none;">
+                          <input name="id_distribusi" id="edit_id_distribusi"  style="display: none;" />
+                          <div class="row">
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label for="status_distribusi">* Status Distribusi</label>
+                                <select class="form-control" id="status_distribusi" name="status_distribusi">
+                                  <?php
+                                  $status_diss = ['Persiapan di kendaraan', 'Sedang di proses', 'Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
+                                  foreach ($status_diss as $status_dis) { ?>
+                                    <option value="<?= $status_dis ?>"><?= $status_dis ?></option>
+                                  <?php
+                                  }
+                                  ?>
+                                </select>
+                              </div>
+                              <div class="form-group text-center">
+                                <button class="btn btn-success "> <i class="ti-pencil-alt"></i>Update</button>
+                              </div>
+
+                          </div>
+                          </form>
+                        </div>
+                        <!-- <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+
+
                 </div>
                 <div class="card-footer">
 

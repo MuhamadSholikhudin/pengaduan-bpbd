@@ -44,6 +44,7 @@
             <?php
             $user_dashboard =
               [
+                "kepala_bpbd" => ["wilayah", "user", "pelaporan", "peninjauan", "distribusi", "bantuan", "stok_bantuan"],
                 "petugas_bpbd" => ["wilayah", "user", "pelaporan", "peninjauan", "distribusi", "bantuan", "stok_bantuan"],
                 "masyarakat" => ["pelaporan"],
                 "petugas_kajian" => ["pelaporan", "peninjauan",],
@@ -53,7 +54,6 @@
             <div class="col-lg-12">
 
               <div class="row">
-
                 <?php
                 if (in_array("user", $user_dashboard[$_SESSION['level']])) {
                 ?>

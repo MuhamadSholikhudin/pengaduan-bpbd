@@ -188,8 +188,10 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/distribusi/distribusi_edit.php');
             } elseif ($param_val == 'post') {
                 var_dump($_POST);
-                // $user->Post($_POST);
             } 
+            elseif ($param_val == 'update_status') {
+                $distribusi->Update_status($_POST);
+            }
                         
             elseif ($param_val == 'ajax_search') {
                 $distribusi->AjaxSearch($_POST);
