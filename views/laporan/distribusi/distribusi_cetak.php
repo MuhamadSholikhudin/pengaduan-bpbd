@@ -17,32 +17,36 @@
         width: 100%;
         border-collapse: collapse;
     }
-
-    table,
-    th,
-    td {
-        border: 1px solid;
+    #table_data thead tr th {
+        border: 1px solid black;
+    }
+    #table_data tbody tr td {
+        border: 1px solid black;
     }
 
     #imglogo {
-        height: 50px;
+        height: 90px;
     }
 </style>
 
 <body>
 
     <div style="text-align:center;">
-        <tr style="border: 1px solid;">
-            <td>
+    <table style="width:100%; border: none;">
+        <tr >
+            <td rowspan="4">
                 <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="" id="imglogo">
             </td>
             <td>
-                Data Pendistribusian Masyarakat <br>
-                Badan Penanggulangan Bencana Daerah KUDUS <br>
-                Pendistribusian Mulai dari tanggal <br>
+                PEMERINTAH KABUPATEN KUDUS 
             </td>
         </tr>
+        <tr><td>Jl. PG. Rendeng, Mlatinorowito Telp / Faxs. (0291) 4250022 Kudus 59313</td></tr>
+        <tr><td>BADAN PENANGGULANGAN BENCANA DAERAH</td></tr>
+        <tr><td>E-mail : bpbdkudus_jateng@yahoo.com </td></tr>
+        <table>
     </div>
+    <h4 class="text-center  ">LAPORAN DATA PENDISTRIBUSIAN</h4>
 
     <div style="align-content: center;">
         <table class="table table-striped" id="table_data">
@@ -66,12 +70,10 @@
                 } else {
                     $sql_distribusi = "SELECT * FROM distribusi";
                 }
-
                 $distribusis = Querybanyak($sql_distribusi);
                 foreach ($distribusis as $distribusi) {
                     $user = Querysatudata("SELECT * FROM user WHERE id_user = " . $distribusi['id_user'] . " ");
                     $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = " . $distribusi['id_peninjauan'] . "");
-
                     $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . " ");
                     $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . " ");
                 ?>
@@ -99,6 +101,8 @@
             </tbody>
         </table>
     </div>
+
+    
 
 
     <script>

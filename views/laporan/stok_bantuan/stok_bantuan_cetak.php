@@ -18,30 +18,36 @@
         border-collapse: collapse;
     }
 
-    table,
-    th,
-    td {
-        border: 1px solid;
+    #table_data thead tr th {
+        border: 1px solid black;
+    }
+    #table_data tbody tr td {
+        border: 1px solid black;
     }
 
     #imglogo {
-        height: 50px;
+        height: 90px;
     }
 </style>
 
 <body>
 
     <div style="text-align:center;">
-        <tr style="border: 1px solid;">
-            <td>
+    <table style="width:100%; border: none;">
+        <tr >
+            <td rowspan="4">
                 <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="" id="imglogo">
             </td>
             <td>
-                Data Persediaan bantuan Masyarakat <br>
-                Badan Penanggulangan Bencana Daerah KUDUS <br>
-                Persediaan bantuan Mulai dari tanggal <br>
+                PEMERINTAH KABUPATEN KUDUS 
             </td>
         </tr>
+        <tr><td>Jl. PG. Rendeng, Mlatinorowito Telp / Faxs. (0291) 4250022 Kudus 59313</td></tr>
+        <tr><td>BADAN PENANGGULANGAN BENCANA DAERAH</td></tr>
+        <tr><td>E-mail : bpbdkudus_jateng@yahoo.com </td></tr>
+        <table>
+         <h4 class="text-center  ">LAPORAN DATA PERSEDIAAN</h4>
+
     </div>
 
     <div style="align-content: center;">

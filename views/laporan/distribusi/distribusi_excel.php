@@ -30,9 +30,19 @@
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename=Data_Distribusi.xls');
     ?>
- 	<center>
-		<h1>Laporan Data Pelaporan <br/> Badan penanggulangan Bencana</h1>
-	</center>
+ 	<table style="width:100%; border: none;">
+        <tr >
+            <td rowspan="4">
+                <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="" id="imglogo">
+            </td>
+            <td>
+                PEMERINTAH KABUPATEN KUDUS 
+            </td>
+        </tr>
+        <tr><td>Jl. PG. Rendeng, Mlatinorowito Telp / Faxs. (0291) 4250022 Kudus 59313</td></tr>
+        <tr><td>BADAN PENANGGULANGAN BENCANA DAERAH</td></tr>
+        <tr><td>E-mail : bpbdkudus_jateng@yahoo.com </td></tr>
+        <table>
  	<table border="1">
         <thead>
             <tr>

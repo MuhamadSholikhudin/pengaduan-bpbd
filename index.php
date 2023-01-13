@@ -186,6 +186,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/distribusi/distribusi_add.php');
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/distribusi/distribusi_edit.php');
+            } elseif ($param_val == 'lihat') {
+                $conf->TemplateAdmin('views/distribusi/distribusi_lihat.php');
             } elseif ($param_val == 'post') {
                 var_dump($_POST);
             } 

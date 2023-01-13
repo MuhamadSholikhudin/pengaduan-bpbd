@@ -12,11 +12,11 @@
             margin: 20px auto;
             border-collapse: collapse;
         }
-        table th,
-        table td{
-            border: 1px solid #3c3c3c;
-            padding: 3px 8px;
-    
+        #table_data thead tr th {
+        border: 1px solid black;
+        }
+        #table_data tbody tr td {
+            border: 1px solid black;
         }
         a{
             background: blue;
@@ -30,9 +30,20 @@
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment; filename=Data_Persedian.xls');
     ?>
- 	<center>
-		<h1>Laporan Data Persediaan <br/> Badan penanggulangan Bencana</h1>
-	</center>
+ 	<table style="width:100%; border: none;">
+        <tr >
+            <td rowspan="4">
+                <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="" id="imglogo">
+            </td>
+            <td>
+                PEMERINTAH KABUPATEN KUDUS 
+            </td>
+        </tr>
+        <tr><td>Jl. PG. Rendeng, Mlatinorowito Telp / Faxs. (0291) 4250022 Kudus 59313</td></tr>
+        <tr><td>BADAN PENANGGULANGAN BENCANA DAERAH</td></tr>
+        <tr><td>E-mail : bpbdkudus_jateng@yahoo.com </td></tr>
+        <table>
+         <h4 class="text-center  ">LAPORAN DATA PERSEDIAAN</h4>
  	<table border="1">
         <thead>
             <tr>

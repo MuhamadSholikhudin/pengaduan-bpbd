@@ -2,7 +2,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
 
-        <h1 class="welcome-text text-center mb-3">Laporan distribusi </h1>
+        <h1 class="welcome-text text-center mb-3">Laporan Persediaan </h1>
 
         <div class="row">
             <div class="col-lg-12 mb-4">
@@ -161,7 +161,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h4 class="card-title text-center">Data Pendistribusian</h4>
+                                <h4 class="card-title text-center">Data Persediaan</h4>
                             </div>
                             <div class="col-lg-12">
                                 <a target="_blank" href="http://localhost/pengaduan-bpbd/?laporan=stok_bantuan_cetak<?= $link ?>" class="btn btn-warning btn-sm">

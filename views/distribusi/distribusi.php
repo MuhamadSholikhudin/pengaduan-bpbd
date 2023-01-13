@@ -98,15 +98,40 @@
                               <?= $distribusi['tanggal_distribusi'] ?>
                             </td>
                             <td>
-                                <a href="#"  data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white"  data-toggle="modal"  data-target="#modaleditstatusdistribusi"> 
+                                <?php
+                                if($_SESSION['level'] == "petugas_logistik"){ ?>
+<a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white"  data-toggle="modal"  data-target="#modaleditstatusdistribusi"> 
                                   <?= $distribusi['status_distribusi'] ?>
                                 </a>
+                                  <?php
+                                }elseif($_SESSION['level'] == "petugas_kajian" AND $distribusi['status_distribusi'] != "Persiapan di kendaraan" AND $distribusi['status_distribusi'] != "Sedang di proses"){
+?>
+<a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white"  data-toggle="modal"  data-target="#modaleditstatusdistribusi"> 
+                                  <?= $distribusi['status_distribusi'] ?>
+                                </a>
+<?php
+                                }else{
+                                  echo $distribusi['status_distribusi'];
+                                }
+
+                                ?>
+                                
                             </td>
                             <td>
+                              <a href="<?= $url ?>/?distribusi=lihat&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
+                                <i class="ti-eye btn-icon-append"></i>
+                                Lihat
+                              </a>
+                              <?php if($_SESSION['level'] == "petugas_logistik"){ ?>
                               <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                                 <i class="ti-pencil-alt btn-icon-append"></i>
                                 Edit
                               </a>
+                              <?php
+                              }
+                              ?>
+
+                            
                             </td>
                           </tr>
                         <?php } ?>
@@ -199,7 +224,11 @@
                                 <label for="status_distribusi">* Status Distribusi</label>
                                 <select class="form-control" id="status_distribusi" name="status_distribusi">
                                   <?php
+                                  
                                   $status_diss = ['Persiapan di kendaraan', 'Sedang di proses', 'Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
+                                  if($_SESSION['level'] == "petugas_kajian"){
+                                    $status_diss = ['Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
+                                  }
                                   foreach ($status_diss as $status_dis) { ?>
                                     <option value="<?= $status_dis ?>"><?= $status_dis ?></option>
                                   <?php
