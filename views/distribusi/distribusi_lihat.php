@@ -12,7 +12,7 @@
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-header">
-                  <h2><?= strtoupper('Edit data ' . array_keys($_GET)[0]) ?></h2>
+                  <h2><?= strtoupper('Lihat data ' . array_keys($_GET)[0]) ?></h2>
                 </div>
                 <div class="card-body">
                   <div class="row">
@@ -43,7 +43,7 @@
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-header">
-                  <h2>Edit Data Bantuan Distribusi</h2>
+                  <h2>Lihat Data Bantuan Distribusi</h2>
                 </div>
                 <div class="card-body">
                   <div class="row">

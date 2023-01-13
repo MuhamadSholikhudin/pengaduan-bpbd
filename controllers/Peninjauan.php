@@ -61,7 +61,6 @@
                       bukti_peninjauan =  '".$bukti_peninjauan."'
                     WHERE id_peninjauan = ".$request['id_peninjauan']."
             ";
-            var_dump($sql);
             $this->Model()->Execute($sql);
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Ubah");
         }
