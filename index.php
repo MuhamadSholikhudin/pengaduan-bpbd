@@ -110,11 +110,11 @@ if ($_GET) {
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/pelaporan/pelaporan_edit.php');
             } elseif ($param_val == 'post') {
-                $pelaoran->Post($_POST);
+                $pelaoran->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {
-                $pelaoran->Update($_POST);
+                $pelaoran->Update($_POST,$_FILES);
             } elseif ($param_val == 'kirim') {
-                $pelaoran->Update($_GET);
+                $pelaoran->Update($_GET, $_FILES);
             } elseif ($param_val == 'validasi') {
                 $pelaoran->Validasi($_GET);
             } elseif ($param_val == 'tidak_valid') {
@@ -136,9 +136,9 @@ if ($_GET) {
                     'views/pelaporan_masyarakat/pelaporan_edit.php'
                 );
             } elseif ($param_val == 'post') {
-                $pelaoran->Post($_POST);
+                $pelaoran->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {
-                $pelaoran->Update($_POST);
+                $pelaoran->Update($_POST, $_FILES);
             } elseif ($param_val == 'kirim') {
                 $pelaoran->Kirim($_GET);
             } elseif ($param_val == 'batal_kirim') {

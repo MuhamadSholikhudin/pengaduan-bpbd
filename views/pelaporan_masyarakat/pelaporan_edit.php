@@ -64,9 +64,57 @@
                         <textarea class="form-control" id="pelaporan" name="pelaporan" style="height: 300px;"><?= $satu_pelaporan['pelaporan'] ?></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="link_maps">Link Maps (Opsional)</label>
-                        <input type="url" class="form-control p-input" id="link_maps" name="link_maps" value="<?= $satu_pelaporan['link_maps'] ?>">
-                      </div>
+                  <label for="gambar_bencana">* Gambar Bencana</label>
+                  <input type="file" class="form-control mb-2" id="gambar_bencana" name="gambar_bencana" onchange="loadFilegambar_bencana(event)" >                  
+                  <div class="card " id="d_gambar_bencana">
+                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan['gambar_bencana'] ?>" id="i_gambar_bencana">
+                  </div>
+                  <script>
+                    var loadFilegambar_bencana = function(event) {
+                      var output = document.getElementById('i_gambar_bencana');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
+                </div>
+                <div class="form-group">
+                  <label for="gambar_lokasi_bencana">* Gambar lokasi Bencana</label>
+                  <input type="file" class="form-control  mb-2" id="gambar_lokasi_bencana" name="gambar_lokasi_bencana" onchange="loadFilegambar_lokasi_bencana(event)" >
+                  <div class="card " id="d_gambar_lokasi_bencana">
+                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan['gambar_lokasi_bencana'] ?>" id="i_gambar_lokasi_bencana">
+                  </div>
+                  <script>
+                    var loadFilegambar_lokasi_bencana = function(event) {
+                      var output = document.getElementById('i_gambar_lokasi_bencana');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
+                </div>
+                <div class="form-group">
+                  <label for="link_maps">Link Maps (Opsional)</label>
+                  <input type="url" class="form-control p-input" id="link_maps" name="link_maps" value="<?= $satu_pelaporan['link_maps'] ?>">
+                </div>
+                <div class="form-group">
+                  <label for="gambar_pelapor">* Gambar Pelapor</label>
+                  <input type="file" class="form-control  mb-2" id="gambar_pelapor" name="gambar_pelapor" onchange="loadFilegambar_pelapor(event)" >
+                  <div class="card " id="d_gambar_pelaporan">
+                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan['gambar_pelapor'] ?>" id="i_gambar_pelaporan" />
+                  </div>
+                  <script>
+                    var loadFilegambar_pelaporan = function(event) {
+                      var output = document.getElementById('i_gambar_pelapor');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
+                </div>
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary">Submit</button>
                       </div>

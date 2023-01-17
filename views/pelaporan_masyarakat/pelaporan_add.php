@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                   <label for="id_bencana">* Bencana</label>
-                  <select class=" form-control" id="id_bencana" name="id_bencana" required>
+                  <select class="js-example-basic-single form-control" id="id_bencana" name="id_bencana" required>
                     <?php
                     $bencanas = Querybanyak("SELECT * FROM bencana");
                     foreach ($bencanas as $bencana) { ?>
