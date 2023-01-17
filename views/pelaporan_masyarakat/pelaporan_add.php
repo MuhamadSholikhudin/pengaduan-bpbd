@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                   <label for="pelaporan">* Wilayah</label>
-                  <select class="js-example-basic-single form-control" name="id_wilayah">
+                  <select class="js-example-basic-single form-control" name="id_wilayah" required>
                     <?php
                     $wilayahs = Querybanyak("SELECT * FROM wilayah");
                     foreach ($wilayahs as $wilayah) { ?>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                   <label for="id_bencana">* Bencana</label>
-                  <select class=" form-control" id="id_bencana" name="id_bencana">
+                  <select class=" form-control" id="id_bencana" name="id_bencana" required>
                     <?php
                     $bencanas = Querybanyak("SELECT * FROM bencana");
                     foreach ($bencanas as $bencana) { ?>
@@ -48,12 +48,61 @@
                 </div>
                 <div class="form-group">
                   <label for="pelaporan">* Keterangan pelaporan</label>
-                  <textarea class="form-control" id="pelaporan" name="pelaporan" style="height: 300px;"></textarea>
+                  <textarea class="form-control" id="pelaporan" name="pelaporan" style="height: 300px;" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="gambar_bencana">* Gambar Bencana</label>
+                  <input type="file" class="form-control mb-2" id="gambar_bencana" name="gambar_bencana" onchange="loadFilegambar_bencana(event)" required>                  
+                  <div class="card " id="d_gambar_bencana">
+                      <img id="i_gambar_bencana">
+                  </div>
+                  <script>
+                    var loadFilegambar_bencana = function(event) {
+                      var output = document.getElementById('i_gambar_bencana');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
+                </div>
+                <div class="form-group">
+                  <label for="gambar_lokasi_bencana">* Gambar lokasi Bencana</label>
+                  <input type="file" class="form-control  mb-2" id="gambar_lokasi_bencana" name="gambar_lokasi_bencana" onchange="loadFilegambar_lokasi_bencana(event)" required>
+                  <div class="card " id="d_gambar_lokasi_bencana">
+                      <img id="i_gambar_lokasi_bencana">
+                  </div>
+                  <script>
+                    var loadFilegambar_lokasi_bencana = function(event) {
+                      var output = document.getElementById('i_gambar_lokasi_bencana');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
                 </div>
                 <div class="form-group">
                   <label for="link_maps">Link Maps (Opsional)</label>
                   <input type="url" class="form-control p-input" id="link_maps" name="link_maps">
                 </div>
+                <div class="form-group">
+                  <label for="gambar_pelapor">* Gambar Pelapor</label>
+                  <input type="file" class="form-control  mb-2" id="gambar_pelapor" name="gambar_pelapor" onchange="loadFilegambar_pelapor(event)" required>
+                  <div class="card " id="d_gambar_pelaporan">
+                      <img id="i_gambar_pelaporan" />
+                  </div>
+                  <script>
+                    var loadFilegambar_pelaporan = function(event) {
+                      var output = document.getElementById('i_gambar_pelapor');
+                      output.src = URL.createObjectURL(event.target.files[0]);
+                      output.onload = function() {
+                        URL.revokeObjectURL(output.src) // free memory
+                      }
+                    };
+                  </script>
+                </div>
+                
                 <div class="col-12">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
