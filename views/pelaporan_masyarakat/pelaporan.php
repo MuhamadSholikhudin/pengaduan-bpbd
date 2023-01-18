@@ -2,6 +2,34 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
+
+            <div class="col-lg-12 grid-margin stretch-card pelaporaninfo" id="pelaporaninfo">
+              <div class="card">
+                <div class="card-body" style="padding-top: 0%;">
+                <div class="text-left" style="text-align: right;">
+                    <button class="btn " onclick="Closepelaporaninfo();">
+                       <i class="mdi mdi-close"></i> 
+                    </button>
+                  </div>
+                <div class="row ">
+                  <p  style="padding-left: 5px; padding-right:5px;">
+                  <span class="text-primary">! INFO :</span>  
+                   Tampilan ini menampilkan data pelaporan masyarakat yang di tambahkan sesuai user yang di pakai oleh masyarakat
+                   data akan untuk menambahkan data pelaporan anda dapat memimilih tombol tambah setelah itu lakukan penginputan 
+                   pelaporan bencana sesuai dengan data yang berada di lokasi kejadian. 
+                  </p>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <script>
+              function Closepelaporaninfo(){
+                document.getElementById("pelaporaninfo").style.display = "none";
+              }
+            </script>
+
+
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -13,11 +41,11 @@
                       </a>
                     </div>
                     <div class="col-lg-12 text-center">
-                      <h2><?= strtoupper("Data " . str_replace("_"," ", array_keys($_GET)[0])) ?></h2>
+                      <h2><?= strtoupper("Data " . str_replace("_", " ", array_keys($_GET)[0])) ?></h2>
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table  id="myTable" class="table table-striped">
+                    <table id="myTable" class="table table-striped">
                       <thead>
                         <tr>
                           <th>
@@ -88,13 +116,17 @@
                                   <i class="ti-arrow-top-right"></i>
                                   Kirim
                                 </a>
+                                <a href="<?= $url ?>/?pelaporan_masyarakat=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
+                                  <i class="ti-pencil-alt"></i>
+                                  Edit
+                                </a>
                               <?php
                               } elseif ($pelaporan['status_pelaporan'] == "terkirim") {
                               ?>
-                              <a href="<?= $url ?>/?pelaporan_masyarakat=batal_kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-secondary btn-outline-white btn-sm text-dark">
-                                <i class="ti-back-left"></i>
-                                Batalkan
-                              </a>
+                                <a href="<?= $url ?>/?pelaporan_masyarakat=batal_kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-secondary btn-outline-white btn-sm text-dark">
+                                  <i class="ti-back-left"></i>
+                                  Batalkan
+                                </a>
                               <?php
                               } elseif ($pelaporan['status_pelaporan'] == "tidak valid") {
                               ?>
@@ -102,17 +134,21 @@
                                   <i class="ti-arrow-top-right"></i>
                                   Kirim
                                 </a>
+                                <a href="<?= $url ?>/?pelaporan_masyarakat=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
+                                  <i class="ti-pencil-alt"></i>
+                                  Edit
+                                </a>
                               <?php
                               } elseif ($pelaporan['status_pelaporan'] == "tervalidasi") {
                               ?>
-                              <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
-                                <i class="ti-check-box"></i>
-                                valid
-                              </a>
+                                <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
+                                  <i class="ti-check-box"></i>
+                                  valid
+                                </a>
                               <?php
                               }
                               ?>
-                              
+
 
                             </td>
                           </tr>
