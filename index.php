@@ -109,6 +109,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/pelaporan/pelaporan_add.php');
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/pelaporan/pelaporan_edit.php');
+            } elseif ($param_val == 'lihat') {
+                $conf->TemplateAdmin('views/pelaporan/pelaporan_edit.php');
             } elseif ($param_val == 'post') {
                 $pelaoran->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {

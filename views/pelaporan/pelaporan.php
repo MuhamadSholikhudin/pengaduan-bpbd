@@ -76,6 +76,10 @@
                               <?= $pelaporan['status_pelaporan'] ?>
                             </td>
                             <td>
+                              <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                <i class="ti-eye"></i>
+                                Lihat
+                              </a>
                               <?php
                               switch ($_SESSION['level']) {
                                 case "petugas_bpbd":
@@ -93,6 +97,7 @@
                                       <i class="ti-check-box"></i>
                                       valid
                                     </a>
+                                    
                                   <?php }
                                   break;
                                 case "petugas_kajian":
