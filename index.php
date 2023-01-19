@@ -177,9 +177,14 @@ if ($_GET) {
 
             elseif ($param_val == 'stok_bantuan_keluar') {
                 $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_keluar.php');
-
             }
             break;
+        case 'stok_bantuan_keluar':
+            if ($param_val == 'stok_bantuan_keluar') {
+                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_keluar.php');
+            }
+        break;
+
 
         case 'distribusi':
             if ($param_val == 'distribusi') {
