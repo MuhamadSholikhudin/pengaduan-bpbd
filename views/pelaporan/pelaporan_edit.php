@@ -56,15 +56,9 @@
                           ) { ?>
                               <option value="<?= $wilayah[
                                   'id_wilayah'
-                              ] ?>" selected><?= $wilayah[
-    'desa'
-] ?> / <?= $wilayah['kecamatan'] ?></option>
+                              ] ?>" selected><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
                             <?php } else { ?>
-                              <option value="<?= $wilayah[
-                                  'id_wilayah'
-                              ] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah[
-     'kecamatan'
- ] ?></option>
+                              <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
                             <?php } ?>                         
                           <?php }
                           ?>
@@ -72,11 +66,7 @@
                       </div>
                       <div class="form-group">
                         <label for="pelaporan">* Bencana</label>
-                        <select class="js-example-basic-single form-control" name="id_bencana" <?php echo $_GET[
-                            'pelaporan'
-                        ] == 'edit'
-                            ? ''
-                            : 'disabled'; ?>>
+                        <select class="js-example-basic-single form-control" name="id_bencana" <?php echo $_GET['pelaporan'] == 'edit' ? '': 'disabled'; ?>>
                           <?php
                           $bencanas = Querybanyak('SELECT * FROM bencana');
                           foreach ($bencanas as $bencana) { ?>
@@ -86,9 +76,7 @@
                           ) { ?>
                               <option value="<?= $bencana[
                                   'id_bencana'
-                              ] ?>" selected><?= $bencana[
-    'nama_bencana'
-] ?></option>
+                              ] ?>" selected><?= $bencana['nama_bencana'] ?></option>
                             <?php } else { ?>
                               <option value="<?= $bencana[
                                   'id_bencana'
@@ -134,9 +122,7 @@
                     <input type="file" class="form-control  mb-2" id="gambar_lokasi_bencana" name="gambar_lokasi_bencana" onchange="loadFilegambar_lokasi_bencana(event)" >
                   <?php } ?> 
                   <div class="card " id="d_gambar_lokasi_bencana">
-                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan[
-    'gambar_lokasi_bencana'
-] ?>" id="i_gambar_lokasi_bencana">
+                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan['gambar_lokasi_bencana'] ?>" id="i_gambar_lokasi_bencana">
                   </div>
                   <script>
                     var loadFilegambar_lokasi_bencana = function(event) {
@@ -160,9 +146,7 @@
                   <input type="file" class="form-control  mb-2" id="gambar_pelapor" name="gambar_pelapor" onchange="loadFilegambar_pelapor(event)" >
                   <?php } ?>    
                   <div class="card " id="d_gambar_pelaporan">
-                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan[
-    'gambar_pelapor'
-] ?>" id="i_gambar_pelaporan" />
+                      <img src="<?= $url ?>/gambar/pelaporan/<?= $satu_pelaporan['gambar_pelapor'] ?>" id="i_gambar_pelaporan" />
                   </div>
                   <script>
                     var loadFilegambar_pelaporan = function(event) {
@@ -176,10 +160,31 @@
                 </div>
                 <div class="col-12">
                 <?php if ($_GET['pelaporan'] == 'edit') { ?>                
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="<?= $url ?>?pelaporan=pelaporan" class="btn btn-success">Kembali</button>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <?php } ?>
-                  </div>
+                        <?php
+                        switch ($_SESSION['level']) {
+                          case "petugas_bpbd":
+                            if ($satu_pelaporan['status_pelaporan'] == 'terkirim') { ?>
+                              <a href="<?= $url ?>/?pelaporan=validasi&id=<?= $satu_pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
+                                <i class="ti-check"></i>
+                                Validasi
+                              </a>
+                              <a href="<?= $url ?>/?pelaporan=tidak_valid&id=<?= $satu_pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                <i class="ti-reload"></i>
+                                Tidak Valid
+                              </a>
+                            <?php } elseif ($satu_pelaporan['status_pelaporan'] == 'tervalidasi') { ?>
+                              <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
+                                <i class="ti-check-box"></i>
+                                valid
+                              </a>                              
+                          <?php }                             
+                          break;
+                          }
+                          ?>
+                      </div>
                     </form>
 
                   </div>

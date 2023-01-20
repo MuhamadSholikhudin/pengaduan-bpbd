@@ -24,7 +24,6 @@ class Pelaporan
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_lokasi_bencana);
         }
         $gambar_pelapor = null;
-        $gambar_lokasi_bencana = null;
         if ($file['gambar_pelapor']['name'] !== "") {
             $gambar_pelapor = (strtotime("now") . $file['gambar_pelapor']['name']);
             $lokasi = $file['gambar_pelapor']['tmp_name'];

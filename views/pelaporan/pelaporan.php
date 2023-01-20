@@ -41,7 +41,7 @@
                         <?php
                         switch ($_SESSION['level']) {
                           case "petugas_bpbd":
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ORDER BY id_pelaporan DESC";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' AND status_pelaporan != 'batal kirim' ORDER BY id_pelaporan DESC";
                             break;
                           case "petugas_kajian":
                             $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan DESC";
@@ -71,19 +71,22 @@
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
                             </td>
-                            <td><?= $wilayah['no_telp'] ?></td>
+                            <td>
+                              <a href="tel:+<?= $wilayah['no_telp'] ?>"><?= $wilayah['no_telp'] ?></a>
+                              </td>
                             <td>
                               <?= $pelaporan['status_pelaporan'] ?>
                             </td>
                             <td>
-                              <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
-                                <i class="ti-eye"></i>
-                                Lihat
-                              </a>
+                              
                               <?php
                               switch ($_SESSION['level']) {
                                 case "petugas_bpbd":
                                   if ($pelaporan['status_pelaporan'] == 'terkirim') { ?>
+                                    <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                      <i class="ti-eye"></i>
+                                      Lihat
+                                    </a>
                                     <a href="<?= $url ?>/?pelaporan=validasi&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
                                       <i class="ti-check"></i>
                                       Validasi
@@ -93,6 +96,10 @@
                                       Tidak Valid
                                     </a>
                                   <?php } elseif ($pelaporan['status_pelaporan'] == 'tervalidasi') { ?>
+                                    <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                      <i class="ti-eye"></i>
+                                      Lihat
+                                    </a>
                                     <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
                                       <i class="ti-check-box"></i>
                                       valid
