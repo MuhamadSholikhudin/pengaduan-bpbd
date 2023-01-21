@@ -16,7 +16,7 @@
               <p style="padding-left: 5px; padding-right:5px;">
                 <span class="text-primary">! INFO :</span>
                 Halaman ini digunakan untuk menambahkan data pelaporan bencana data yang di tambahkan akan di prosess 1 X 24 jam 
-                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> 89080</a>
+                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> 890806856575</a>
               </p>
             </div>
           </div>

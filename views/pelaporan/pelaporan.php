@@ -27,10 +27,13 @@
                             Wilayah
                           </th>
                           <th>
-                            No Telp
+                            No Telp Daerah
                           </th>
                           <th>
                             Status Pelaporan
+                          </th>
+                          <th>
+                            Review Pelaporan
                           </th>
                           <th>
                             Action
@@ -72,9 +75,35 @@
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
                             </td>
                             <td><?= $wilayah['no_telp'] ?></td>
+
+                            <td class="text-center">
+                              <!-- Swith tampilan status pelaporan pada admin -->
+                              <?php 
+                                  switch($pelaporan['status_pelaporan']){
+
+                                    case "terkirim": // status_pelaporan datanya terkirim
+                                      // Tampilkan  
+                                      echo '<button class="btn badge-danger text">data pelaporan belum di proses</button>';
+                                      break;
+
+                                    case "tervalidasi": // status_pelaporan datanya tervalidasi
+                                      echo $pelaporan['status_pelaporan'];
+                                      break;
+
+                                    default: // default status_pelaporan atau jika tidak ada yang memenuhi
+                                      echo $pelaporan['status_pelaporan'];
+                                      break;
+
+
+                                  }
+                              ?>
+                              
+                            </td>   
+
                             <td>
-                              <?= $pelaporan['status_pelaporan'] ?>
+                              <?= $pelaporan['review_pelaporan'] ?>
                             </td>
+
                             <td>
                               <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
                                 <i class="ti-eye"></i>

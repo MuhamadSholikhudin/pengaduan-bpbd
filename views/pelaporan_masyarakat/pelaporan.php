@@ -22,14 +22,11 @@
                 </div>
               </div>
             </div>
-
             <script>
               function Closepelaporaninfo(){
                 document.getElementById("pelaporaninfo").style.display = "none";
               }
             </script>
-
-
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -64,13 +61,19 @@
                             Status Pelaporan
                           </th>
                           <th>
+                            Review Pelaporan
+                          </th>
+                          <th>
+                            Peninjauan
+                          </th>
+                          <th>
                             Action
                           </th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE id_user = " . $_SESSION['id_user'] . "");
+                        $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE id_user = " . $_SESSION['id_user'] . " ORDER BY id_pelaporan DESC");
                         foreach ($pelaporans as $pelaporan) { ?>
                           <tr>
                             <td>
@@ -94,12 +97,31 @@
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
                             </td>
-                            <td>
+                            <td>                             
                               <?= $pelaporan['status_pelaporan'] ?>
+                              
                             </td>
                             <td>
+                                <!-- Review Pelaporan -->
+                                <?= $pelaporan["review_pelaporan"] ?>                               
+
+                            </td>
+                            <td>
+                              <?php 
+                              // Check data peninjaun berdasarkan id_pelaporan
+                              $checkp = NumRows("SELECT * FROM peninjauan WHERE id_pelaporan = ".$pelaporan['id_pelaporan']."");
+                              if($checkp >   0){ // jika peninjauan pelaporan sudah ada 
+                                
+                                // Query menampilkan satu data peninjauan 
+                                $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_pelaporan = ".$pelaporan['id_pelaporan']." ");
+                                echo $peninjauan['status_peninjauan'];
+                              }            
+                              ?>
+                            </td>
+                            <td>
+                              <!-- Action -->
                               <?php
-                              if ($pelaporan['status_pelaporan'] == "belum dikirim") {
+                              if ($pelaporan['status_pelaporan'] == "belum dikirim") { // Jika status pelaporan belum di kirim
                               ?>
                                 <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
                                   <i class="ti-arrow-top-right"></i>
@@ -110,7 +132,7 @@
                                   Edit
                                 </a>
                               <?php
-                              } elseif ($pelaporan['status_pelaporan'] == "batal kirim") {
+                              } elseif ($pelaporan['status_pelaporan'] == "batal kirim") { // Jika status_pelaporan batal dikirim
                               ?>
                                 <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
                                   <i class="ti-arrow-top-right"></i>
@@ -121,14 +143,14 @@
                                   Edit
                                 </a>
                               <?php
-                              } elseif ($pelaporan['status_pelaporan'] == "terkirim") {
+                              } elseif ($pelaporan['status_pelaporan'] == "terkirim") { // Jika status_pelaporan terkirim
                               ?>
                                 <a href="<?= $url ?>/?pelaporan_masyarakat=batal_kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-secondary btn-outline-white btn-sm text-dark">
                                   <i class="ti-back-left"></i>
                                   Batalkan
                                 </a>
                               <?php
-                              } elseif ($pelaporan['status_pelaporan'] == "tidak valid") {
+                              } elseif ($pelaporan['status_pelaporan'] == "tidak valid") { // Jika status_pelaporan tidak valid
                               ?>
                                 <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
                                   <i class="ti-arrow-top-right"></i>
@@ -139,7 +161,7 @@
                                   Edit
                                 </a>
                               <?php
-                              } elseif ($pelaporan['status_pelaporan'] == "tervalidasi") {
+                              } elseif ($pelaporan['status_pelaporan'] == "tervalidasi") { // Jika status_pelaporan tervalidasi
                               ?>
                                 <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
                                   <i class="ti-check-box"></i>
