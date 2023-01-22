@@ -75,9 +75,18 @@
                             <?= $peninjauan['jumlah_korban'] ?>
                           </td>
                           <td>
+<?php if($_SESSION['level'] == "petugas_kajian"){ 
+echo $peninjauan['id_peninjauan'];
+} ?>
                             <?= $peninjauan['status_peninjauan'] ?>
                           </td>
                           <td>
+<?php if($_SESSION['level'] == "petugas_logistik"){ ?>
+   <a class="btn btn-sm btn-sm btn-primary btn- btn-icon-text">
+                              <i class="ti-plus"></i>
+                              Tambah distribusi 
+                            </a>
+<?php }elseif($_SESSION['level'] == "petugas_kajian"){ ?>
                             <a class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
                               <i class="ti-alert"></i>
                               Beritahu
@@ -86,6 +95,8 @@
                               <i class="ti-pencil-alt"></i>
                               Edit
                             </a>
+<?php } ?>
+
                           </td>
                         </tr>
                         <?php
