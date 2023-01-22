@@ -22,7 +22,7 @@
                 $lokasi = $file['bukti_peninjauan']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
             } 
-            $sql_peninjauan = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`,`id_bencana`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`,  `bukti_peninjauan`, dusun, rt, rw, jumlah_kk, jumlah_rumah, sebab, akibat, upaya_penanganan, lain_lain)
+            $sql_peninjauan = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_user`, `id_wilayah`,`id_bencana`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`, `status_peninjauan`, `bukti_peninjauan`, dusun, rt, rw, jumlah_kk, jumlah_rumah, sebab, akibat, upaya_penanganan, lain_lain)
                     VALUES 
                     ( 
                         ".$request['id_pelaporan'].", 
@@ -34,6 +34,7 @@
                         '".$request['kategori_bencana']."',
                         ".$request['level_bencana'].",
                         '".$request['keterangan_peninjauan']."',
+                        'dalam proses',
                         '".$bukti_peninjauan."',
                         '".$request['dusun']."',
                         ".$request['rt'].",
@@ -43,7 +44,7 @@
                         '".$request['sebab']."',
                         '".$request['akibat']."',
                         '".$request['upaya_penanganan']."',
-                        '".$request['lain_lain']."',
+                        '".$request['lain_lain']."'
                     )";
             $this->Model()->Execute($sql_peninjauan);
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Tambah");
@@ -77,11 +78,10 @@
                     sebab =  '".$request['sebab']."',
                     akibat =  '".$request['akibat']."',
                     upaya_penanganan =  '".$request['upaya_penanganan']."',
-                    lain_lain =  '".$request['lain_lain']."',
+                    lain_lain =  '".$request['lain_lain']."'
                     WHERE id_peninjauan = ".$request['id_peninjauan']."
             ";
-            var_dump($sql);
-            die();
+
             $this->Model()->Execute($sql);
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Ubah");
         }     
@@ -90,8 +90,7 @@
             // Updata data status peninjauan berdasarkan id_peninjauan
             $sql = "UPDATE peninjauan 
                 SET status_peninjauan = '".$request['status_peninjauan']."' 
-                WHERE id_peninjauan =  id_peninjauan = ".$request['id_peninjauan']."";
-
+                WHERE id_peninjauan  = ".$request['id_peninjauan']."";
             $this->Model()->Execute($sql);
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Prosess");
 

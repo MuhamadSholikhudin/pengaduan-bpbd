@@ -19,9 +19,12 @@
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table  id="myTable" class="table table-striped">
+                    <table id="myTable" class="table table-striped">
                       <thead>
                         <tr>
+                          <th>
+                            No
+                          </th>
                           <th>
                             Peninjauan
                           </th>
@@ -43,6 +46,7 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <!--
                         <?php
                         $peninjauans = Querybanyak("SELECT * FROM peninjauan WHERE status_peninjauan != 'selesai' ");
                         foreach ($peninjauans as $peninjauan) { ?>
@@ -68,7 +72,7 @@
                               Belum di Proses
                             </td>
                             <td>
-                              <button class="btn btn-sm btn-sm btn-outline-primary btn-icon-text addpeninjauan" data-toggle="modal" data-id="<?= $peninjauan['id_pelaporan'] ?>" data-target="#modaldistribusi">
+                              <button class="btn btn-sm btn-sm btn-outline-primary btn-icon-text addpeninjauan" data-toggle="modal" data-id="<?= $peninjauan['id_peninjauan'] ?>" data-target="#modaldistribusi">
                                 <i class="ti-plus"></i>
                                 Tambah
                               </button>
@@ -77,10 +81,15 @@
                         <?php
                         }
                         ?>
+                        -->
                         <?php
-                        $distribusis = Querybanyak("SELECT * FROM distribusi ");
+                        $no = 1;
+                        $distribusis = Querybanyak("SELECT * FROM distribusi ORDER BY id_distribusi DESC");
                         foreach ($distribusis as $distribusi) { ?>
                           <tr>
+                            <td>
+                              <?= $no++; ?>
+                            </td>
                             <td>
                               <?php
                               $peninjauan = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $distribusi['id_peninjauan'] . " ");
@@ -98,40 +107,40 @@
                               <?= $distribusi['tanggal_distribusi'] ?>
                             </td>
                             <td>
-                                <?php
-                                if($_SESSION['level'] == "petugas_logistik"){ ?>
-<a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white"  data-toggle="modal"  data-target="#modaleditstatusdistribusi"> 
+                              <?php
+                              if ($_SESSION['level'] == "petugas_logistik") { ?>
+                                <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
                                   <?= $distribusi['status_distribusi'] ?>
                                 </a>
-                                  <?php
-                                }elseif($_SESSION['level'] == "petugas_kajian" AND $distribusi['status_distribusi'] != "Persiapan di kendaraan" AND $distribusi['status_distribusi'] != "Sedang di proses"){
-?>
-<a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white"  data-toggle="modal"  data-target="#modaleditstatusdistribusi"> 
+                              <?php
+                              } elseif ($_SESSION['level'] == "petugas_kajian" and $distribusi['status_distribusi'] != "Persiapan di kendaraan" and $distribusi['status_distribusi'] != "Sedang di proses") {
+                              ?>
+                                <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
                                   <?= $distribusi['status_distribusi'] ?>
                                 </a>
-<?php
-                                }else{
-                                  echo $distribusi['status_distribusi'];
-                                }
-
-                                ?>
-                                
+                              <?php
+                              } else {
+                                echo $distribusi['status_distribusi'];
+                              }
+                              ?>
                             </td>
+
                             <td>
                               <a href="<?= $url ?>/?distribusi=lihat&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
                                 <i class="ti-eye btn-icon-append"></i>
                                 Lihat
                               </a>
-                              <?php if($_SESSION['level'] == "petugas_logistik"){ ?>
-                              <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                                <i class="ti-pencil-alt btn-icon-append"></i>
-                                Edit
-                              </a>
+
+                              <?php if ($_SESSION['level'] == "petugas_logistik") { ?>
+                                <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                                  <i class="ti-pencil-alt btn-icon-append"></i>
+                                  Edit
+                                </a>
                               <?php
                               }
                               ?>
 
-                            
+
                             </td>
                           </tr>
                         <?php } ?>
@@ -178,7 +187,6 @@
                                 <textarea class="form-control" style="height: 100px;" id="keterangan_distribusi"></textarea>
                               </div>
                               <button class="btn btn-primary" onclick="ProcessInsertLogistikStok()">SIMPAN</button>
-                              <!-- <button class="btn btn-primary" onclick="ProcessInsertLogistik()">SIMPAN</button> -->
                             </div>
                             <div class="col-lg-6">
                               <div class="form-group">
@@ -202,9 +210,7 @@
                       </div>
                     </div>
                   </div>
-
-
-                <!-- Modal Distribusi -->
+                  <!-- Modal Distribusi -->
                   <div class="modal fade" id="modaleditstatusdistribusi" tabindex="-1" role="dialog" aria-labelledby="modaleditstatusdistribusiLabel" aria-hidden="true">
                     <div class="modal-dialog modal-md" role="document">
                       <div class="modal-content">
@@ -216,36 +222,32 @@
                         </div>
                         <div class="modal-body">
                           <form class="forms-sample" action="<?= $url ?>/?distribusi=update_status" method="POST" enctype="multipart/form-data">
-                          <input type="text" class="form-control p-input" id="id_user" value="<?= $_SESSION['id_user'] ?>" style="display: none;">
-                          <input name="id_distribusi" id="edit_id_distribusi"  style="display: none;" />
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="form-group">
-                                <label for="status_distribusi">* Status Distribusi</label>
-                                <select class="form-control" id="status_distribusi" name="status_distribusi">
-                                  <?php
-                                  
-                                  $status_diss = ['Persiapan di kendaraan', 'Sedang di proses', 'Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
-                                  if($_SESSION['level'] == "petugas_kajian"){
-                                    $status_diss = ['Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
-                                  }
-                                  foreach ($status_diss as $status_dis) { ?>
-                                    <option value="<?= $status_dis ?>"><?= $status_dis ?></option>
-                                  <?php
-                                  }
-                                  ?>
-                                </select>
-                              </div>
-                              <div class="form-group text-center">
-                                <button class="btn btn-success "> <i class="ti-pencil-alt"></i>Update</button>
-                              </div>
+                            <input type="text" class="form-control p-input" id="id_user" value="<?= $_SESSION['id_user'] ?>" style="display: none;">
+                            <input name="id_distribusi" id="edit_id_distribusi" style="display: none;" />
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="status_distribusi">* Status Distribusi</label>
+                                  <select class="form-control" id="status_distribusi" name="status_distribusi">
+                                    <?php
+                                    $status_diss = ['Persiapan di kendaraan', 'Sedang di proses', 'Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
+                                    if ($_SESSION['level'] == "petugas_kajian") {
+                                      $status_diss = ['Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
+                                    }
+                                    foreach ($status_diss as $status_dis) { ?>
+                                      <option value="<?= $status_dis ?>"><?= $status_dis ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                <div class="form-group text-center">
+                                  <button class="btn btn-success "> <i class="ti-pencil-alt"></i>Update</button>
+                                </div>
 
-                          </div>
+                              </div>
                           </form>
                         </div>
-                        <!-- <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        </div> -->
                       </div>
                     </div>
                   </div>

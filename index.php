@@ -165,6 +165,9 @@ if ($_GET) {
                 $peninjauan->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {
                 $peninjauan->Update($_POST, $_FILES);
+            
+            } elseif ($param_val == 'update_status') {
+                $peninjauan->UpdateStatus($_POST);
             }
             break;
 
@@ -214,21 +217,15 @@ if ($_GET) {
                 $distribusi->AjaxAddBant($_POST);            
             }elseif ($param_val == 'ajax_insert') {
                 $distribusi->AjaxInsert($_POST);
-            }
-
-            elseif ($param_val == 'ajax_search_edit') {
+            }elseif ($param_val == 'ajax_search_edit') {
                 $distribusi->AjaxSearchEdit($_POST);
             }elseif ($param_val == 'ajax_add_edit_bant') {
                 $distribusi->AjaxAddEditBant($_POST);            
             }elseif ($param_val == 'ajax_update_distribusi') {
                 $distribusi->AjaxUpdateDistribusi($_POST);
-            }
-
-            elseif ($param_val == 'ajax_click_peninjauan') {
+            }elseif ($param_val == 'ajax_click_peninjauan') {
                 $distribusi->Ajax_klik_peninjauan($_POST);
-            }
-
-            elseif ($param_val == 'ajax_search_distribusi_bantuan') {
+            }elseif ($param_val == 'ajax_search_distribusi_bantuan') {
                 $distribusi->AjaxSearchDistribusiBantuan($_POST);
             }elseif ($param_val == 'ajax_add_stok_bant') {
                 $distribusi->AjaxAddStokBant($_POST);            

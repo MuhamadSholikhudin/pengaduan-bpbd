@@ -80,7 +80,7 @@
                               <div class="col-sm-6">
                                 <div class="form-group">
                                   <label for="rw">* Rw</label>
-                                  <input type="text" class="form-control" id="rw" name="rw" value="<?= $satu_peninjauan['rw'] ?>">
+                                  <input type="text" class="form-control" id="rw" name="rw"  value="<?= $satu_peninjauan['rw'] ?>">
                                 </div>
                               </div>
                             </div>
@@ -91,13 +91,11 @@
                               <div class="text-center">
                                 <label for="Jumlah_terdampak">* Jumlah Korban Terdampak</label>
                               </div>
-
                               <div class="col-sm-4">
                                 <div class="form-group">
                                   <label for="jumlah_kk">KK</label>
                                   <input type="number" class="form-control" id="jumlah_kk" name="jumlah_kk" value="<?= $satu_peninjauan['jumlah_kk'] ?>" min="0">
                                 </div>
-
                               </div>
                               <div class="col-sm-4">
                                 <div class="form-group">

@@ -17,9 +17,11 @@
         width: 100%;
         border-collapse: collapse;
     }
+
     #table_data thead tr th {
         border: 1px solid black;
     }
+
     #table_data tbody tr td {
         border: 1px solid black;
     }
@@ -32,19 +34,25 @@
 <body>
 
     <div style="text-align:center;">
-    <table style="width:100%; border: none;">
-        <tr >
-            <td rowspan="4">
-                <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="" id="imglogo">
-            </td>
-            <td>
-                PEMERINTAH KABUPATEN KUDUS 
-            </td>
-        </tr>
-        <tr><td>Jl. PG. Rendeng, Mlatinorowito Telp / Faxs. (0291) 4250022 Kudus 59313</td></tr>
-        <tr><td>BADAN PENANGGULANGAN BENCANA DAERAH</td></tr>
-        <tr><td>E-mail : bpbdkudus_jateng@yahoo.com </td></tr>
-        <table>
+        <table style="width:100%; border: none;">
+            <tr>
+                <td rowspan="4">
+                    <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="" id="imglogo">
+                </td>
+                <td>
+                    PEMERINTAH KABUPATEN KUDUS
+                </td>
+            </tr>
+            <tr>
+                <td>Jl. PG. Rendeng, Mlatinorowito Telp / Faxs. (0291) 4250022 Kudus 59313</td>
+            </tr>
+            <tr>
+                <td>BADAN PENANGGULANGAN BENCANA DAERAH</td>
+            </tr>
+            <tr>
+                <td>E-mail : bpbdkudus_jateng@yahoo.com </td>
+            </tr>
+            <table>
     </div>
     <h4 class="text-center  ">LAPORAN DATA PENDISTRIBUSIAN</h4>
 
@@ -100,9 +108,59 @@
 
             </tbody>
         </table>
+
+      
+
     </div>
 
-    
+    <div style="display: flex; justify-content: space-around">
+      
+        <div></div>
+        <div>
+        <table style="text-align:center;">
+                <tr>
+                    <td style="width: 400px;"></td>
+                    <td>Kepala Pelaksana</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Badan Penanggulangan daerah</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Kabupaten Kudus</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Drs. RINARDI BUDIYANTO</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Pembina Tk. I</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>NIP. 19690325 198803 1 001</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+
+
 
 
     <script>

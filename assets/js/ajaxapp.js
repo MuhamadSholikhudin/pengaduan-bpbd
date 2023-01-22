@@ -15,7 +15,6 @@ $(".tambahpeninjauan").on("click", function () {
 $(".addpeninjauan").on("click", function () {
   var id_peninjauan = $(this).data("id");
   document.getElementById("id_peninjauan").value = id_peninjauan;
-
   $.ajax({
     type: "POST",
     url: url_web + "/?distribusi=ajax_click_peninjauan",
@@ -28,12 +27,13 @@ $(".addpeninjauan").on("click", function () {
       document.getElementById("keterangan_peninjauan").value = data[1];
     },
     error() {
-      console.error();
+      alert("error");
     },
   });
 
 });
 
+/*
 // DISTRIBUSI => SEARCH INSERT BANTUAN
 $("#search_distribusi").keyup(function () {
   var search = document.getElementById("search_distribusi").value;
@@ -207,7 +207,7 @@ function ProcessUpdateLogistik() {
     },
   });
 }
-
+*/
 // ========================= Distribusi data bantuan =====================
 // DISTRIBUSI => SEARCH INSERT DISTRIBUSI STOK BANTUAN
 $("#search_distribusi_stok_bantuan").keyup(function () {
@@ -265,6 +265,7 @@ $("#result_search").on("click", "#addstokbantuan", function () {
 $("#tablleresult").on("click", "#trash_stok_bantuan_edit", function () {
   $(this).closest("tr").remove();
 });
+
 
 
 // DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI
@@ -418,4 +419,14 @@ $(".status_distribusi").on("click", function () {
   var status = $(this).data("status");
   $("#edit_id_distribusi").val(id);
   $("#status_distribusi").val(status);
+});
+
+
+/// ================= Status peninjauan ===============
+// PENINJAUAN MODAL FORM PEMINJAUAN
+$(".status_peninjauan").on("click", function () {
+  var id = $(this).data("id");
+  var status = $(this).data("status");
+  $("#edit_id_peninjauan").val(id);
+  $("#status_peninjauan").val(status);
 });

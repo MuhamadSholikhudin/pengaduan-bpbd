@@ -233,11 +233,14 @@ class Distribusi
 
     public function Ajax_klik_peninjauan($request)
     {
-        $peninjauan = Querysatudata(" SELECT * FROM peninjauan WHERE id_peninjauan = " . $request['id_peninjauan'] . " ");
+        $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = " . intval($request['id_peninjauan']) . " ");
+        
         $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . " ");
         $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . " ");
         $bencan_level_kategoti = $bencana['nama_bencana'] . " Wilayah " . $wilayah['kecamatan'] . " " . $wilayah['desa'] . " level " . $peninjauan['level_bencana'] . " " . $peninjauan['kategori_bencana'];
         echo json_encode([$bencan_level_kategoti, $peninjauan['keterangan_peninjauan']]);
+        
+        // echo json_encode([1, intval($request['id_peninjauan'])]);
     }
 
     public function AjaxSearchDistribusiBantuan($request)
@@ -356,7 +359,6 @@ class Distribusi
 
     public function AjaxSearchEditDistribusiBantuan($request)
     {
-
         $stok_bantuan_loop = '';
         if ($request['search'] !== "" and $request['search'] !== " " and $request['search'] !== NULL) {
             $except = "";
