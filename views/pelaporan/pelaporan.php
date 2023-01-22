@@ -242,20 +242,20 @@
                                   <div class="col-sm-4">
                                     <div class="form-group">
                                       <label for="jumlah_kk">KK</label>
-                                      <input type="number" class="form-control" id="jumlah_kk" name="jumlah_kk" min="0">
+                                      <input type="number" class="form-control" id="jumlah_kk" name="jumlah_kk" min="0" value="0">
                                     </div>
 
                                   </div>
                                   <div class="col-sm-4">
                                     <div class="form-group">
                                       <label for="jumlah_korban">Jiwa</label>
-                                      <input type="number" class="form-control" id="jumlah_korban" name="jumlah_korban" min="0">
+                                      <input type="number" class="form-control" id="jumlah_korban" name="jumlah_korban" min="0" value="0">
                                     </div>
                                   </div>
                                   <div class="col-sm-4">
                                     <div class="form-group">
                                       <label for="jumlah_rumah">Rumah</label>
-                                      <input type="number" class="form-control" id="jumlah_rumah" name="jumlah_rumah" min="0">
+                                      <input type="number" class="form-control" id="jumlah_rumah" name="jumlah_rumah" min="0" value="0">
                                     </div>
                                   </div>
                                 </div>
