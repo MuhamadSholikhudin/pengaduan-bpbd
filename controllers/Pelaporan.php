@@ -24,7 +24,6 @@ class Pelaporan
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_lokasi_bencana);
         }
         $gambar_pelapor = null;
-        $gambar_lokasi_bencana = null;
         if ($file['gambar_pelapor']['name'] !== "") {
             $gambar_pelapor = (strtotime("now") . $file['gambar_pelapor']['name']);
             $lokasi = $file['gambar_pelapor']['tmp_name'];
@@ -127,5 +126,16 @@ class Pelaporan
             ";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Tidak divalidasi");
+    }
+
+    public function CheckValidasi($request)
+    {
+        $sql = "UPDATE  `pelaporan` 
+                SET status_pelaporan =  '".$request["status_pelaporan"]."',
+                review_pelaporan =  '".$request["review_pelaporan"]."'
+                WHERE id_pelaporan = " . $request['id_pelaporan'] . "
+            ";
+        $this->Model()->Execute($sql);
+        Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil ".$request["status_pelaporan"]."");
     }
 }

@@ -11,7 +11,7 @@
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table  id="myTable" class="table table-striped">
+                    <table id="myTable" class="table table-striped">
                       <thead>
                         <tr>
                           <th>
@@ -27,7 +27,7 @@
                             Wilayah
                           </th>
                           <th>
-                            No Telp Daerah
+                            No Telp Penangung jawab
                           </th>
                           <th>
                             Status Pelaporan
@@ -44,10 +44,10 @@
                         <?php
                         switch ($_SESSION['level']) {
                           case "petugas_bpbd":
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' ORDER BY id_pelaporan DESC";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' AND status_pelaporan != 'batal kirim' ORDER BY id_pelaporan, tanggal_pelaporan DESC";
                             break;
                           case "petugas_kajian":
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan DESC";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan, tanggal_pelaporan DESC";
                             break;
                         }
                         $pelaporans = Querybanyak($query_pelapolaran);
@@ -63,10 +63,10 @@
                               <?= $pelaporan['tanggal_pelaporan'] ?>
                             </td>
                             <td>
-                            <?php
+                              <?php
                               $bencana = Querysatudata("SELECT nama_bencana FROM bencana WHERE id_bencana = " . $pelaporan['id_bencana'] . "")
                               ?>
-                              <?= $bencana['nama_bencana'] ?>  
+                              <?= $bencana['nama_bencana'] ?>
                             </td>
                             <td>
                               <?php
@@ -74,45 +74,51 @@
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
                             </td>
-                            <td><?= $wilayah['no_telp'] ?></td>
+                            <td><a href="tel:+<?= $wilayah['no_telp'] ?>"><?= $wilayah['no_telp'] ?></a></td>
 
                             <td class="text-center">
                               <!-- Swith tampilan status pelaporan pada admin -->
-                              <?php 
-                                  switch($pelaporan['status_pelaporan']){
+                              <?php
+                              // Check data peninjauan berdasarkan pelaporan
+                              $cek_peninjauan = NumRows("SELECT * FROM peninjauan WHERE id_pelaporan = " . $pelaporan['id_pelaporan'] . "");
 
-                                    case "terkirim": // status_pelaporan datanya terkirim
-                                      // Tampilkan  
-                                      echo '<button class="btn badge-danger text">data pelaporan belum di proses</button>';
-                                      break;
+                              switch ($pelaporan['status_pelaporan']) {
 
-                                    case "tervalidasi": // status_pelaporan datanya tervalidasi
-                                      echo $pelaporan['status_pelaporan'];
-                                      break;
+                                case "terkirim": // status_pelaporan datanya terkirim
+                                  // Tampilkan  
+                                  echo '<button class="btn badge-danger text">data pelaporan belum di proses</button>';
+                                  break;
 
-                                    default: // default status_pelaporan atau jika tidak ada yang memenuhi
-                                      echo $pelaporan['status_pelaporan'];
-                                      break;
-
-
+                                case "tervalidasi": // status_pelaporan datanya tervalidasi
+                                  if ($_SESSION['level'] == "petugas_kajian") {
+                                    echo $pelaporan['status_pelaporan'] . ", belum di tinjau";
+                                  } else {
+                                    echo $pelaporan['status_pelaporan'];
                                   }
+                                  break;
+
+                                default: // default status_pelaporan atau jika tidak ada yang memenuhi
+                                  echo $pelaporan['status_pelaporan'];
+                                  break;
+                              }
                               ?>
-                              
-                            </td>   
+
+                            </td>
 
                             <td>
                               <?= $pelaporan['review_pelaporan'] ?>
                             </td>
 
                             <td>
-                              <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
-                                <i class="ti-eye"></i>
-                                Lihat
-                              </a>
+
                               <?php
-                              switch ($_SESSION['level']) {
-                                case "petugas_bpbd":
+                              switch ($_SESSION['level']) { /// Check yang level user
+                                case "petugas_bpbd": // Jika levelnya petugas_bpbd
                                   if ($pelaporan['status_pelaporan'] == 'terkirim') { ?>
+                                    <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                      <i class="ti-eye"></i>
+                                      Lihat
+                                    </a>
                                     <a href="<?= $url ?>/?pelaporan=validasi&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
                                       <i class="ti-check"></i>
                                       Validasi
@@ -122,21 +128,27 @@
                                       Tidak Valid
                                     </a>
                                   <?php } elseif ($pelaporan['status_pelaporan'] == 'tervalidasi') { ?>
+                                    <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                      <i class="ti-eye"></i>
+                                      Lihat
+                                    </a>
                                     <a href="#" class="btn btn-success btn-outline-white btn-sm text-white">
                                       <i class="ti-check-box"></i>
                                       valid
                                     </a>
-                                    
                                   <?php }
                                   break;
-                                case "petugas_kajian":
-                                  $cek_peninjauan = Querysatudata("SELECT COUNT(*) as count FROM peninjauan WHERE id_pelaporan = " . $pelaporan['id_pelaporan'] . "");
-                                  if ($cek_peninjauan['count'] < 1) {
+
+                                case "petugas_kajian": // Jika levelnya petugas_kajian
+
+                                  if ($cek_peninjauan < 1) {
                                   ?>
                                     <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" data-idbencana="<?= $pelaporan['id_bencana'] ?>" data-idwilayah="<?= $pelaporan['id_wilayah'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
                                       <i class="ti-plus"></i>
                                       Tambah Peninjauan
                                     </a>
+
+
                               <?php
                                   }
                                   break;
@@ -164,76 +176,165 @@
                         </div>
                         <div class="modal-body">
                           <form class="forms-sample" action="<?= $url ?>/?peninjauan=post" method="POST" enctype="multipart/form-data">
-                            <div class="form-group">
-                              <label for="nama_pelapor">* Nama Peninjau</label>
-                              <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
-                              <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
-                              <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
+                            <div class="row">
+                              <div class="col-sm-4">
+                                <div class="form-group">
+                                  <label for="nama_pelapor">* Nama Peninjau</label>
+                                  <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
+                                  <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
+                                  <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="tanggal_peninjauan">* Tanggal Peninjauan</label>
+                                  <input type="date" class="form-control p-input" id="tanggal_peninjauan" name="tanggal_peninjauan" value="<?= date("Y-m-d") ?>">
+                                </div>
+                                <div class="form-group">
+                                  <label for="id_bencana">* Bencana</label>
+                                  <select class=" form-control" id="id_bencana" name="id_bencana">
+                                    <?php
+                                    $bencanas = Querybanyak("SELECT * FROM bencana");
+                                    foreach ($bencanas as $bencana) { ?>
+                                      <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="id_wilayah">* Wilayah</label>
+                                  <select class=" form-control" id="id_wilayah" name="id_wilayah">
+                                    <?php
+                                    $wilayahs = Querybanyak("SELECT * FROM wilayah");
+                                    foreach ($wilayahs as $wilayah) { ?>
+                                      <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="dusun">* Dusun</label>
+                                  <input type="text" class="form-control" id="dusun" name="dusun">
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label for="rt">* Rt</label>
+                                      <input type="text" class="form-control" id="rt" name="rt">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    <div class="form-group">
+                                      <label for="rw">* Rw</label>
+                                      <input type="text" class="form-control" id="rw" name="rw">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div><!--col-sm-4 -->
+                              <div class="col-sm-4">
+
+                                <div class="row">
+                                  <div class="text-center">
+                                    <label for="Jumlah_terdampak">* Jumlah Korban Terdampak</label>
+                                  </div>
+
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <label for="jumlah_kk">KK</label>
+                                      <input type="number" class="form-control" id="jumlah_kk" name="jumlah_kk" min="0">
+                                    </div>
+
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <label for="jumlah_korban">Jiwa</label>
+                                      <input type="number" class="form-control" id="jumlah_korban" name="jumlah_korban" min="0">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4">
+                                    <div class="form-group">
+                                      <label for="jumlah_rumah">Rumah</label>
+                                      <input type="number" class="form-control" id="jumlah_rumah" name="jumlah_rumah" min="0">
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <label for="kategori_bencana">* Kategori Bencana</label>
+                                  <select class=" form-control" id="kategori_bencana" name="kategori_bencana" required>
+                                    <?php
+                                    $kategori_bencanas = ["Bencana Alam", "Bencana Non Alam"];
+                                    foreach ($kategori_bencanas as $kategori_bencana) { ?>
+                                      <option value="<?= $kategori_bencana ?>"><?= $kategori_bencana ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="level_bencana">* Level Bencana</label>
+                                  <select class=" form-control" id="level_bencana" name="level_bencana" required>
+                                    <?php
+
+                                    $level_bencanas = [1 => "Ringan", 2 => "Waspada", 3 => "Siaga", 4 => "Awas", 0 => "Aman"];
+                                    foreach ($level_bencanas as $level_bencana => $val) { ?>
+                                      <option value="<?= $level_bencana ?>"><?= $level_bencana ?> = <?= $val ?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <label for="peninjauan">* Keterangan peninjauan</label>
+                                  <textarea class="form-control" id="keterangan_peninjauan" name="keterangan_peninjauan" style="height: 150px;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="bukti_peninjauan">* Bukti Peninjauan</label>
+                                  <input type="file" class="form-control" id="bukti_peninjauan" name="bukti_peninjauan" onchange="loadFilebukti_peninjauan(event)" accept="image/png, image/gif, image/jpeg">
+                                  <br>
+                                  <div class="card " id="d_bukti_peninjauan">
+                                    <img id="i_bukti_peninjauan">
+                                  </div>
+                                </div>
+                                <script>
+                                  var loadFilebukti_peninjauan = function(event) {
+                                    var output = document.getElementById('i_bukti_peninjauan');
+                                    output.src = URL.createObjectURL(event.target.files[0]);
+                                    output.onload = function() {
+                                      URL.revokeObjectURL(output.src) // free memory
+                                    }
+                                  };
+                                </script>
+                              </div><!--col-sm-4 -->
+
+                              <div class="col-sm-4">
+                                <div class="form-group">
+                                  <label for="sebab">* Sebab</label>
+                                  <textarea class="form-control" id="sebab" name="sebab" style="height: 150px;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="akibat">* Akibat</label>
+                                  <textarea class="form-control" id="akibat" name="akibat" style="height: 150px;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="upaya_penanganan">* Upaya penanganan</label>
+                                  <textarea class="form-control" id="upaya_penanganan" name="upaya_penanganan" style="height: 150px;"></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="lain_lain">* Lain-lain</label>
+                                  <textarea class="form-control" id="lain_lain" name="lain_lain" style="height: 150px;"></textarea>
+                                </div>
+
+                              </div><!--col-sm-4 -->
                             </div>
-                            <div class="form-group">
-                              <label for="tanggal_peninjauan">* Tanggal Peninjauan</label>
-                              <input type="date" class="form-control p-input" id="tanggal_peninjauan" name="tanggal_peninjauan" value="<?= date("Y-m-d") ?>">
-                            </div>
-                            <div class="form-group">
-                              <label for="id_wilayah">* Wilayah</label>
-                              <select class=" form-control" id="id_wilayah" name="id_wilayah">
-                                <?php
-                                $wilayahs = Querybanyak("SELECT * FROM wilayah");
-                                foreach ($wilayahs as $wilayah) { ?>
-                                  <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
-                                <?php
-                                }
-                                ?>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label for="id_bencana">* Bencana</label>
-                              <select class=" form-control" id="id_bencana" name="id_bencana">
-                                <?php
-                                $bencanas = Querybanyak("SELECT * FROM bencana");
-                                foreach ($bencanas as $bencana) { ?>
-                                  <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?></option>
-                                <?php
-                                }
-                                ?>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label for="jumlah_korban">* Korban</label>
-                              <input type="number" class="form-control" id="jumlah_korban" name="jumlah_korban">
-                            </div>
-                            <div class="form-group">
-                              <label for="kategori_bencana">* Kategori Bencana</label>
-                              <select class=" form-control" id="kategori_bencana" name="kategori_bencana" required>
-                                <?php
-                                $kategori_bencanas = ["Bencana Alam", "Bencana Non Alam"];
-                                foreach ($kategori_bencanas as $kategori_bencana) { ?>
-                                  <option value="<?= $kategori_bencana ?>"><?= $kategori_bencana ?></option>
-                                <?php
-                                }
-                                ?>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label for="level_bencana">* Level Bencana</label>
-                              <select class=" form-control" id="level_bencana" name="level_bencana" required>
-                                <?php
-                                $level_bencanas = [1, 2, 3, 4, 0];
-                                foreach ($level_bencanas as $level_bencana) { ?>
-                                  <option value="<?= $level_bencana ?>"><?= $level_bencana ?></option>
-                                <?php
-                                }
-                                ?>
-                              </select>
-                            </div>
-                            <div class="form-group">
-                              <label for="peninjauan">* Keterangan peninjauan</label>
-                              <textarea class="form-control" id="keterangan_peninjauan" name="keterangan_peninjauan" style="height: 150px;"></textarea>
-                            </div>
-                            <div class="form-group">
-                              <label for="bukti_peninjauan">* Bukti Peninjauan</label>
-                              <input type="file" class="form-control" id="bukti_peninjauan" name="bukti_peninjauan" accept="image/png, image/gif, image/jpeg">
-                            </div>
+
+
+
+
+
+
+
                             <div class="col-12">
                               <button type="submit" class="btn btn-primary">SIMPAN</button>
                             </div>

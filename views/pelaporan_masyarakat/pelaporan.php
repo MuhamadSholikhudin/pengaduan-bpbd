@@ -101,7 +101,7 @@
                               <?= $pelaporan['status_pelaporan'] ?>
                               
                             </td>
-                            <td>
+                            <td style="width: 40px; ">
                                 <!-- Review Pelaporan -->
                                 <?= $pelaporan["review_pelaporan"] ?>                               
 
@@ -110,11 +110,17 @@
                               <?php 
                               // Check data peninjaun berdasarkan id_pelaporan
                               $checkp = NumRows("SELECT * FROM peninjauan WHERE id_pelaporan = ".$pelaporan['id_pelaporan']."");
-                              if($checkp >   0){ // jika peninjauan pelaporan sudah ada 
+                              if($checkp > 0){ // jika peninjauan pelaporan sudah ada 
                                 
                                 // Query menampilkan satu data peninjauan 
                                 $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_pelaporan = ".$pelaporan['id_pelaporan']." ");
-                                echo $peninjauan['status_peninjauan'];
+                                
+                                // Query menampilkan satu data user 
+                                $user = Querysatudata("SELECT * FROM user WHERE id_user = ".$pelaporan['id_user']." ");
+                                echo "(".$user['nama_user']."), ".$peninjauan['status_peninjauan'];
+                              }else{ // Jika peninjauan tidak ada maka tampilkan
+                                echo "Belum di tinjau";
+
                               }            
                               ?>
                             </td>

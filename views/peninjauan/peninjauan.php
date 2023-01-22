@@ -54,7 +54,7 @@
                                WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
                               ?>
                               <?= $pelaporanuser['nama_user'] ?> 
-                              <?= $pelaporanuser['id_bencana'] ?> 
+                              
                           </td>
                           <td>
                             <?= $peninjauan['tanggal_peninjauan'] ?>
