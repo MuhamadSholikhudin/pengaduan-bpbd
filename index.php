@@ -256,6 +256,7 @@ if ($_GET) {
                 } else {
                     $conf->TemplateAdmin('views/laporan/pelaporan/pelaporan.php');
                 }
+
             }elseif($param_val == 'pelaporan_cetak'){
                 include "views/laporan/pelaporan/pelaporan_cetak.php";                
             }elseif($param_val == 'pelaporan_excel'){
@@ -279,6 +280,8 @@ if ($_GET) {
                 }
             }elseif($param_val == 'distribusi_cetak'){
                 include "views/laporan/distribusi/distribusi_cetak.php";                
+            }elseif($param_val == 'distribusi_cetak_id'){
+                include "views/laporan/distribusi/distribusi_cetak_id.php";                
             }elseif($param_val == 'distribusi_excel'){
                 include "views/laporan/distribusi/distribusi_excel.php";                
             
@@ -315,6 +318,8 @@ if ($_GET) {
                 require __DIR__ . '/views/login.php';
             } elseif ($param_val == 'pendaftaran') {
                 require __DIR__ . '/views/pendaftaran.php';
+            }elseif ($param_val == 'home') {
+                require __DIR__ . '/views/pages/index.php';
             }
 
             break;

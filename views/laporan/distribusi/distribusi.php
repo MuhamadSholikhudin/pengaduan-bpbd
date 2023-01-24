@@ -1,8 +1,22 @@
 <!-- partial -->
 <div class="main-panel">
     <div class="content-wrapper">
-
         <h1 class="welcome-text text-center mb-3">Laporan distribusi </h1>
+        <?php 
+            if (  isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])  ) {
+                $sql_distribusi = "SELECT * FROM distribusi  WHERE tanggal_distribusi BETWEEN '" . $_GET['tanggal_awal'] . "' AND '" . $_GET['tanggal_akhir'] . "' ";
+                $link = "&tanggal_awal=".$_GET['tanggal_awal']."&tanggal_akhir=".$_GET['tanggal_akhir']."";
+            } elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) {
+                $sql_distribusi = "SELECT * FROM distribusi WHERE MONTH(tanggal_distribusi) = " . $_GET['bulan'] . " AND YEAR(tanggal_distribusi) = '" . $_GET['tahun'] . "' ";
+                $link = "&bulan=".$_GET['bulan']."&tahun=".$_GET['tahun']."";
+            } elseif (isset($_GET['tahun'])) {
+                $sql_distribusi = "SELECT * FROM distribusi WHERE  YEAR(tanggal_distribusi) = '" . $_GET['tahun'] . "' ";
+                $link = "&tahun=".$_GET['tahun']."";
+            } else {
+                $sql_distribusi = "SELECT * FROM distribusi";
+                $link = "";
+            }
+        ?>
 
         <div class="row">
             <div class="col-lg-12 mb-4">
@@ -139,22 +153,6 @@
                     </div>
                 </div>
             </div>
-            <?php 
-                if (  isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])  ) {
-                    $sql_distribusi = "SELECT * FROM distribusi  WHERE tanggal_distribusi BETWEEN '" . $_GET['tanggal_awal'] . "' AND '" . $_GET['tanggal_akhir'] . "' ";
-                    $link = "&tanggal_awal=".$_GET['tanggal_awal']."&tanggal_akhir=".$_GET['tanggal_akhir']."";
-                } elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) {
-                    $sql_distribusi = "SELECT * FROM distribusi WHERE MONTH(tanggal_distribusi) = " . $_GET['bulan'] . " AND YEAR(tanggal_distribusi) = '" . $_GET['tahun'] . "' ";
-                    $link = "&bulan=".$_GET['bulan']."&tahun=".$_GET['tahun']."";
-                } elseif (isset($_GET['tahun'])) {
-                    $sql_distribusi = "SELECT * FROM distribusi WHERE  YEAR(tanggal_distribusi) = '" . $_GET['tahun'] . "' ";
-                    $link = "&tahun=".$_GET['tahun']."";
-                } else {
-                    $sql_distribusi = "SELECT * FROM distribusi";
-                    $link = "";
-                }
-            ?>
-
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -201,6 +199,9 @@
                                         <th>
                                             Status
                                         </th>
+                                        <th>
+                                            Lihat
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -227,6 +228,14 @@
                                             </td>
                                             <td>
                                                 <?= $distribusi['status_distribusi'] ?>
+                                            </td>
+                                            <td>
+                                                <a target="_blank" href="http://localhost/pengaduan-bpbd/?laporan=distribusi_cetak_id&id_distribusi=<?= $distribusi['id_distribusi'] ?>" class="btn btn-danger btn-sm">
+                                                    <i class="ti-eye"></i>
+                                                    &nbsp; 
+                                                    Lihat
+                                                </a>
+                                                
                                             </td>
                                         </tr>
                                     <?php
