@@ -41,6 +41,9 @@
                             Status Distribusi
                           </th>
                           <th>
+                            Bukti Distribusi
+                          </th>
+                          <th>
                             Action
                           </th>
                         </tr>
@@ -124,13 +127,14 @@
                               }
                               ?>
                             </td>
-
+                            <td>
+                              <img src="<?= $url ?>/gambar/bukti_distribusi/<?= $distribusi['bukti_distribusi'] ?>" alt="">
+                            </td>
                             <td>
                               <a href="<?= $url ?>/?distribusi=lihat&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
                                 <i class="ti-eye btn-icon-append"></i>
                                 Lihat
                               </a>
-
                               <?php if ($_SESSION['level'] == "petugas_logistik") { ?>
                                 <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                                   <i class="ti-pencil-alt btn-icon-append"></i>
@@ -226,6 +230,10 @@
                             <input name="id_distribusi" id="edit_id_distribusi" style="display: none;" />
                             <div class="row">
                               <div class="col-12">
+                                <div class="form-group" id="form-distribusi">
+                                  <label for="bukti_distribusi">* Bukti distribusi</label>
+                                  <input type="file" class="form-control" name="bukti_distribusi">
+                                </div>
                                 <div class="form-group">
                                   <label for="status_distribusi">* Status Distribusi</label>
                                   <select class="form-control" id="status_distribusi" name="status_distribusi">

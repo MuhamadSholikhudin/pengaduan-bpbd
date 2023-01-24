@@ -196,9 +196,7 @@ $Bantuan_logistik = NumRows($sql_distribusi);
                             <p>&nbsp;</p>
                         </td>
                         <td></td>
-                    </tr>
-                   
-                    
+                    </tr>                 
                     <tr>
                         <td></td>
                         <td>Drs. RINARDI BUDIYANTO</td>

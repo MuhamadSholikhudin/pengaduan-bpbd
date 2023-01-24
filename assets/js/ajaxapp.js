@@ -417,6 +417,12 @@ function ProcessUpdateLogistikStokbantuan() {
 $(".status_distribusi").on("click", function () {
   var id = $(this).data("id");
   var status = $(this).data("status");
+  if(status == "Sudah sampai" || status == "Selesai"){
+    $("#form-distribusi").show();    
+  }else{
+    $("#form-distribusi").hide();
+  }
+  
   $("#edit_id_distribusi").val(id);
   $("#status_distribusi").val(status);
 });

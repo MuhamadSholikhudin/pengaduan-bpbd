@@ -39,6 +39,7 @@
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("bencana"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("distribusi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("wilayah"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?wilayah=wilayah">Wilayah</a></li>
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("publikasi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?publikasi=publikasi">Publikasi</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("user"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
 
                     <?php

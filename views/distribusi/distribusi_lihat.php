@@ -1,8 +1,8 @@
       <?php
       $id = $_GET['id'];
-      $cari_distribusi_berdasarkan_id_distribusi = "SELECT * FROM distribusi WHERE id_distribusi = ". $_GET['id'] ."";
+      $cari_distribusi_berdasarkan_id_distribusi = "SELECT * FROM distribusi WHERE id_distribusi = " . $_GET['id'] . "";
       $satu_distribusi = Querysatudata($cari_distribusi_berdasarkan_id_distribusi);
-      $sql_peninjauan = "SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = ".$satu_distribusi['id_peninjauan']." ";
+      $sql_peninjauan = "SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $satu_distribusi['id_peninjauan'] . " ";
       $peninjauan = Querysatudata($sql_peninjauan);
       ?>
       <!-- partial -->
@@ -22,10 +22,9 @@
                     <input type="hidden" class="form-control p-input" id="id_peninjauan" aria-describedby="id_peninjauan" name="id_peninjauan" value="<?= $satu_distribusi['id_peninjauan'] ?>">
                     <div class="form-group">
                       <label for="info_peninjauan">Info Peninjauan</label>
-                      <textarea class="form-control"  style="height: 100px;" disabled>Terjadi <?= $peninjauan['kategori_bencana'] ?> <?= $peninjauan['nama_bencana'] ?> dengan level <?= $peninjauan['level_bencana'] ?>   pada wilayah <?= $peninjauan['kecamatan'] ?> <?= $peninjauan['desa'] ?> dengan jumlah korban <?= $peninjauan['jumlah_korban'] ?> keterangan : <?= $peninjauan['keterangan_peninjauan'] ?>
+                      <textarea class="form-control" style="height: 100px;" disabled>Terjadi <?= $peninjauan['kategori_bencana'] ?> <?= $peninjauan['nama_bencana'] ?> dengan level <?= $peninjauan['level_bencana'] ?>   pada wilayah <?= $peninjauan['kecamatan'] ?> <?= $peninjauan['desa'] ?> dengan jumlah korban <?= $peninjauan['jumlah_korban'] ?> keterangan : <?= $peninjauan['keterangan_peninjauan'] ?>
                       </textarea>
-                    </div>                   
-
+                    </div>
                     <div class="form-group">
                       <label for="tanggal_distribusi">Tanggal distribusi</label>
                       <input type="date" class="form-control p-input" id="tanggal_distribusi" aria-describedby="tanggal_distribusi" name="tanggal_distribusi" value="<?= $satu_distribusi['tanggal_distribusi'] ?>" disabled>
@@ -34,6 +33,11 @@
                       <label for="keterangan_distribusi">Keterangan distribusi</label>
                       <textarea class="form-control" id="keterangan_distribusi" name="keterangan_distribusi" style="height: 100px;" disabled><?= $satu_distribusi['keterangan_distribusi'] ?></textarea>
                     </div>
+                    <div class="form-group">
+                      <label for="bukti_distribusi">Bukti distribusi</label>
+                      <img class="card-img" src="<?= $url ?>/gambar/bukti_distribusi/<?= $satu_distribusi['bukti_distribusi'] ?>" alt="">
+                    </div>
+
                   </div>
                 </div>
                 <div class="card-footer">
@@ -74,19 +78,19 @@
                               <td>
                                 <?= $bantuan['satuan']; ?>
                               </td>
-                            
+
                             </tr>
                           <?php
                           }
                           ?>
                         </tbody>
-                      
+
                       </table>
-                      
-                      
+
+
                     </div>
                     <div class="col-12 mt-3 text-center">
-                      <a href="<?= $url ?>/?distribusi=distribusi"  class="btn btn-primary">
+                      <a href="<?= $url ?>/?distribusi=distribusi" class="btn btn-primary">
                         <i class="ti-arrow-left"></i>
                         Kembali
                       </a>

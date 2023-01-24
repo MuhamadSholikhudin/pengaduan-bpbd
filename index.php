@@ -33,6 +33,9 @@ $distribusi = new Distribusi();
 include 'controllers/Stok_bantuan.php';
 $stok_bantuan = new Stok_bantuan();
 
+include 'controllers/Publikasi.php';
+$publikasi = new Publikasi();
+
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
     $param_val = $_GET[array_keys($_GET)[0]];
@@ -208,7 +211,7 @@ if ($_GET) {
                 var_dump($_POST);
             } 
             elseif ($param_val == 'update_status') {
-                $distribusi->Update_status($_POST);
+                $distribusi->Update_status($_POST, $_FILES);
             }
                         
             elseif ($param_val == 'ajax_search') {
@@ -242,6 +245,21 @@ if ($_GET) {
             }
 
             break;
+        case "publikasi":
+            if ($param_val == 'publikasi') {
+                $conf->TemplateAdmin('views/publikasi/publikasi.php');
+            } elseif ($param_val == 'add') {
+                $conf->TemplateAdmin('views/publikasi/publikasi_add.php');
+            } elseif ($param_val == 'edit') {
+                $conf->TemplateAdmin('views/publikasi/publikasi_edit.php');
+            } elseif ($param_val == 'lihat') {
+                $conf->TemplateAdmin('views/publikasi/publikasi_lihat.php');
+            } elseif ($param_val == 'post') {
+                $publikasi->Post($_POST, $_FILES);
+            } 
+            break;
+
+
         case "laporan":
 
             // ================== Pelaporan =======
