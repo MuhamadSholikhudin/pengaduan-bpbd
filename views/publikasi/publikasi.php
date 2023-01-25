@@ -61,7 +61,7 @@
                               <?= $publikasi['tanggal_publikasi']; ?>
                             </td>
                             <td>
-                              <img src="<?= $url ?>/gambar/publikasi/<?= $publikasi['gambar'] ?>" alt="">
+                              <img class="img" height="50" src="<?= $url ?>/gambar/publikasi/<?= $publikasi['gambar'] ?>" alt="">
                             </td>
                             <td>
                               <a href="<?= $url ?>/?publikasi=edit&id=<?= $publikasi['id_publikasi']; ?>" class="btn btn-lg btn-outline-warning btn-icon-text">

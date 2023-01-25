@@ -358,10 +358,16 @@ if ($_GET) {
         default:
             // http_response_code(404);
             // require __DIR__ . '/views/404.php';
-            require __DIR__ . '/views/login.php';
+            // require __DIR__ . '/views/login.php';
+
+            require __DIR__ . '/views/pages/index.php';
+
+            
 
             break;
     }
 } else {
-    require __DIR__ . '/views/login.php';
+    // require __DIR__ . '/views/login.php';
+    require __DIR__ . '/views/pages/index.php';
+
 }
