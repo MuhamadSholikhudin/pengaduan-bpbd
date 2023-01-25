@@ -40,14 +40,14 @@
                         </div>
                         <div class="form-group">
                           <label for="tanggal_publikasi">* Tanggal Publikasi</label>
-                          <input type="date" class="form-control p-input" id="tanggal_publikasi" name="tanggal_publikasi" required>
+                          <input type="date" class="form-control p-input" id="tanggal_publikasi" name="tanggal_publikasi" value="<?= $satu_publikasi['tanggal_publikasi'] ?>" required>
                         </div>
                         <div class="form-group">
                           <label for="gambar">Gambar</label>
-                          <input type="file" class="form-control p-input" id="gambar" name="gambar" onchange="loadFilegambar(event)" accept="image/png, image/gif, image/jpeg" required>
+                          <input type="file" class="form-control p-input" id="gambar" name="gambar" onchange="loadFilegambar(event)" accept="image/png, image/gif, image/jpeg" >
                           <br>
                           <div class="card" id="d_gambar">
-                            <img id="i_gambar">
+                            <img src="<?=  $url ?>/gambar/publikasi/<?= $satu_publikasi['gambar'] ?>" id="i_gambar">
                           </div>
                         </div>
                         <script>
@@ -61,7 +61,7 @@
                         </script>
                         <div class="form-group">
                           <label for="isi">* Isi publikasi</label>
-                          <textarea class="form-control" id="isi" name="isi" style="height: 500px;" required></textarea>
+                          <textarea class="form-control" id="isi" name="isi" style="height: 500px;" required><?= $satu_publikasi['isi'] ?></textarea>
                         </div>
                         <div class="col-12">
                           <button type="submit" class="btn btn-primary">Submit</button>

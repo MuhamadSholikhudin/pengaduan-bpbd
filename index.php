@@ -256,6 +256,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/publikasi/publikasi_lihat.php');
             } elseif ($param_val == 'post') {
                 $publikasi->Post($_POST, $_FILES);
+            } elseif ($param_val == 'update') {
+                $publikasi->Update($_POST, $_FILES);
             } 
             break;
 
