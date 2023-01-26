@@ -13,6 +13,8 @@ function Page($page){
     include "template/partials/_footer.php";
 }
 
+
+
 $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
  
 // Check connection

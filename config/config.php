@@ -14,5 +14,12 @@ class Config {
         include "views/partials/_footer.php";
     }
 
-   
+    public function TemplatePages($page){
+        $url = $this->UrlWeb();
+        include "views/pages/templates/header.php";
+        include "views/pages/templates/navbar.php";
+        include "views/pages/templates/breadcrumb.php";
+        include $page;
+        include "views/pages/templates/footer.php";
+    }
 }

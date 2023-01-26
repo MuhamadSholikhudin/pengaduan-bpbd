@@ -115,20 +115,17 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/pelaporan/pelaporan_edit.php');
             } elseif ($param_val == 'lihat') {
                 $conf->TemplateAdmin('views/pelaporan/pelaporan_edit.php');
-
             } elseif ($param_val == 'post') {
                 $pelaporan->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {
-                $pelaporan->Update($_POST,$_FILES);
+                $pelaporan->Update($_POST, $_FILES);
             } elseif ($param_val == 'kirim') {
                 $pelaporan->Update($_GET, $_FILES);
             } elseif ($param_val == 'validasi') {
                 $pelaporan->Validasi($_GET);
             } elseif ($param_val == 'tidak_valid') {
                 $pelaporan->Tidak_Valid($_GET);
-            }
-
-            elseif ($param_val == 'checkvalidasi') {
+            } elseif ($param_val == 'checkvalidasi') {
                 $pelaporan->CheckValidasi($_POST);
             }
             break;
@@ -168,7 +165,6 @@ if ($_GET) {
                 $peninjauan->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {
                 $peninjauan->Update($_POST, $_FILES);
-            
             } elseif ($param_val == 'update_status') {
                 $peninjauan->UpdateStatus($_POST);
             }
@@ -180,23 +176,26 @@ if ($_GET) {
             } elseif ($param_val == 'add') {
                 $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_add.php');
             } elseif ($param_val == 'edit') {
-                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_edit.php');
+                $conf->TemplateAdmin(
+                    'views/stok_bantuan/stok_bantuan_edit.php'
+                );
             } elseif ($param_val == 'post') {
                 $stok_bantuan->Post($_POST);
-            }elseif ($param_val == 'update') {
+            } elseif ($param_val == 'update') {
                 $stok_bantuan->Update($_POST);
-            }
-
-            elseif ($param_val == 'stok_bantuan_keluar') {
-                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_keluar.php');
+            } elseif ($param_val == 'stok_bantuan_keluar') {
+                $conf->TemplateAdmin(
+                    'views/stok_bantuan/stok_bantuan_keluar.php'
+                );
             }
             break;
         case 'stok_bantuan_keluar':
             if ($param_val == 'stok_bantuan_keluar') {
-                $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan_keluar.php');
+                $conf->TemplateAdmin(
+                    'views/stok_bantuan/stok_bantuan_keluar.php'
+                );
             }
-        break;
-
+            break;
 
         case 'distribusi':
             if ($param_val == 'distribusi') {
@@ -209,43 +208,38 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/distribusi/distribusi_lihat.php');
             } elseif ($param_val == 'post') {
                 var_dump($_POST);
-            } 
-            elseif ($param_val == 'update_status') {
+            } elseif ($param_val == 'update_status') {
                 $distribusi->Update_status($_POST, $_FILES);
-            }
-                        
-            elseif ($param_val == 'ajax_search') {
+            } elseif ($param_val == 'ajax_search') {
                 $distribusi->AjaxSearch($_POST);
-            }elseif ($param_val == 'ajax_add_bant') {
-                $distribusi->AjaxAddBant($_POST);            
-            }elseif ($param_val == 'ajax_insert') {
+            } elseif ($param_val == 'ajax_add_bant') {
+                $distribusi->AjaxAddBant($_POST);
+            } elseif ($param_val == 'ajax_insert') {
                 $distribusi->AjaxInsert($_POST);
-            }elseif ($param_val == 'ajax_search_edit') {
+            } elseif ($param_val == 'ajax_search_edit') {
                 $distribusi->AjaxSearchEdit($_POST);
-            }elseif ($param_val == 'ajax_add_edit_bant') {
-                $distribusi->AjaxAddEditBant($_POST);            
-            }elseif ($param_val == 'ajax_update_distribusi') {
+            } elseif ($param_val == 'ajax_add_edit_bant') {
+                $distribusi->AjaxAddEditBant($_POST);
+            } elseif ($param_val == 'ajax_update_distribusi') {
                 $distribusi->AjaxUpdateDistribusi($_POST);
-            }elseif ($param_val == 'ajax_click_peninjauan') {
+            } elseif ($param_val == 'ajax_click_peninjauan') {
                 $distribusi->Ajax_klik_peninjauan($_POST);
-            }elseif ($param_val == 'ajax_search_distribusi_bantuan') {
+            } elseif ($param_val == 'ajax_search_distribusi_bantuan') {
                 $distribusi->AjaxSearchDistribusiBantuan($_POST);
-            }elseif ($param_val == 'ajax_add_stok_bant') {
-                $distribusi->AjaxAddStokBant($_POST);            
-            }elseif ($param_val == 'ajax_insert_distribusi_stok') {
+            } elseif ($param_val == 'ajax_add_stok_bant') {
+                $distribusi->AjaxAddStokBant($_POST);
+            } elseif ($param_val == 'ajax_insert_distribusi_stok') {
                 $distribusi->AjaxInsertDistribusiStok($_POST);
-            
-
-            }elseif ($param_val == 'ajax_search_editdistribusi_bantuan') {
-                $distribusi->AjaxSearchEditDistribusiBantuan($_POST);               
-            }elseif ($param_val == 'ajax_edit_stok_bant') {
-                $distribusi->AjaxEditStokBant($_POST);             
-            }elseif ($param_val == 'ajax_update_distribusi_stok') {
+            } elseif ($param_val == 'ajax_search_editdistribusi_bantuan') {
+                $distribusi->AjaxSearchEditDistribusiBantuan($_POST);
+            } elseif ($param_val == 'ajax_edit_stok_bant') {
+                $distribusi->AjaxEditStokBant($_POST);
+            } elseif ($param_val == 'ajax_update_distribusi_stok') {
                 $distribusi->AjaxUpdateDistribusiStok($_POST);
             }
 
             break;
-        case "publikasi":
+        case 'publikasi':
             if ($param_val == 'publikasi') {
                 $conf->TemplateAdmin('views/publikasi/publikasi.php');
             } elseif ($param_val == 'add') {
@@ -258,78 +252,141 @@ if ($_GET) {
                 $publikasi->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {
                 $publikasi->Update($_POST, $_FILES);
-            } 
+            }
             break;
 
-
-        case "laporan":
-
+        case 'laporan':
             // ================== Pelaporan =======
             if ($param_val == 'pelaporan') {
-                if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
+                if (
+                    isset($_POST['tanggal_awal']) &&
+                    isset($_POST['tanggal_akhir'])
+                ) {
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=pelaporan&tanggal_awal=' .
+                            $_POST['tanggal_awal'] .
+                            '&tanggal_akhir=' .
+                            $_POST['tanggal_akhir'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
-
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=pelaporan&bulan=' .
+                            $_POST['bulan'] .
+                            '&tahun=' .
+                            $_POST['tahun'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } elseif (isset($_POST['tahun'])) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=pelaporan&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=pelaporan&tahun=' .
+                            $_POST['tahun'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } else {
-                    $conf->TemplateAdmin('views/laporan/pelaporan/pelaporan.php');
+                    $conf->TemplateAdmin(
+                        'views/laporan/pelaporan/pelaporan.php'
+                    );
                 }
-
-            }elseif($param_val == 'pelaporan_cetak'){
-                include "views/laporan/pelaporan/pelaporan_cetak.php";                
-            }elseif($param_val == 'pelaporan_excel'){
-                include "views/laporan/pelaporan/pelaporan_excel.php";                
-            
-            }elseif($param_val == 'pelaporan_pdf'){
-                include "views/laporan/pelaporan/pelaporan_pdf.php";                
+            } elseif ($param_val == 'pelaporan_cetak') {
+                include 'views/laporan/pelaporan/pelaporan_cetak.php';
+            } elseif ($param_val == 'pelaporan_excel') {
+                include 'views/laporan/pelaporan/pelaporan_excel.php';
+            } elseif ($param_val == 'pelaporan_pdf') {
+                include 'views/laporan/pelaporan/pelaporan_pdf.php';
             }
 
             // ================== distribusi =======
             if ($param_val == 'distribusi') {
-                if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=distribusi&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
+                if (
+                    isset($_POST['tanggal_awal']) &&
+                    isset($_POST['tanggal_akhir'])
+                ) {
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=distribusi&tanggal_awal=' .
+                            $_POST['tanggal_awal'] .
+                            '&tanggal_akhir=' .
+                            $_POST['tanggal_akhir'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=distribusi&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
-
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=distribusi&bulan=' .
+                            $_POST['bulan'] .
+                            '&tahun=' .
+                            $_POST['tahun'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } elseif (isset($_POST['tahun'])) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=distribusi&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=distribusi&tahun=' .
+                            $_POST['tahun'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } else {
-                    $conf->TemplateAdmin('views/laporan/distribusi/distribusi.php');
+                    $conf->TemplateAdmin(
+                        'views/laporan/distribusi/distribusi.php'
+                    );
                 }
-            }elseif($param_val == 'distribusi_cetak'){
-                include "views/laporan/distribusi/distribusi_cetak.php";                
-            }elseif($param_val == 'distribusi_cetak_id'){
-                include "views/laporan/distribusi/distribusi_cetak_id.php";                
-            }elseif($param_val == 'distribusi_excel'){
-                include "views/laporan/distribusi/distribusi_excel.php";                
-            
-            }elseif($param_val == 'distribusi_pdf'){
-                include "views/laporan/distribusi/distribusi_pdf.php";                
+            } elseif ($param_val == 'distribusi_cetak') {
+                include 'views/laporan/distribusi/distribusi_cetak.php';
+            } elseif ($param_val == 'distribusi_cetak_id') {
+                include 'views/laporan/distribusi/distribusi_cetak_id.php';
+            } elseif ($param_val == 'distribusi_excel') {
+                include 'views/laporan/distribusi/distribusi_excel.php';
+            } elseif ($param_val == 'distribusi_pdf') {
+                include 'views/laporan/distribusi/distribusi_pdf.php';
             }
 
             //=================== stok_bantuan ===================
             if ($param_val == 'stok_bantuan') {
-                if (  isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])  ) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tanggal_awal=".$_POST['tanggal_awal']."&tanggal_akhir=".$_POST['tanggal_akhir']."", "Data Berhasil di proses");
+                if (
+                    isset($_POST['tanggal_awal']) &&
+                    isset($_POST['tanggal_akhir'])
+                ) {
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tanggal_awal=' .
+                            $_POST['tanggal_awal'] .
+                            '&tanggal_akhir=' .
+                            $_POST['tanggal_akhir'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&bulan=".$_POST['bulan']."&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&bulan=' .
+                            $_POST['bulan'] .
+                            '&tahun=' .
+                            $_POST['tahun'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } elseif (isset($_POST['tahun'])) {
-                    Redirect("http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tahun=".$_POST['tahun']."", "Data Berhasil di proses");
+                    Redirect(
+                        'http://localhost/pengaduan-bpbd/?laporan=stok_bantuan&tahun=' .
+                            $_POST['tahun'] .
+                            '',
+                        'Data Berhasil di proses'
+                    );
                 } else {
-                    $conf->TemplateAdmin('views/laporan/stok_bantuan/stok_bantuan.php');
+                    $conf->TemplateAdmin(
+                        'views/laporan/stok_bantuan/stok_bantuan.php'
+                    );
                 }
-            }elseif($param_val == 'stok_bantuan_cetak'){
-                include "views/laporan/stok_bantuan/stok_bantuan_cetak.php";                
-            }elseif($param_val == 'stok_bantuan_excel'){
-                include "views/laporan/stok_bantuan/stok_bantuan_excel.php";                
-            
-            }elseif($param_val == 'stok_bantuan_pdf'){
-                include "views/laporan/stok_bantuan/stok_bantuan_pdf.php";                
+            } elseif ($param_val == 'stok_bantuan_cetak') {
+                include 'views/laporan/stok_bantuan/stok_bantuan_cetak.php';
+            } elseif ($param_val == 'stok_bantuan_excel') {
+                include 'views/laporan/stok_bantuan/stok_bantuan_excel.php';
+            } elseif ($param_val == 'stok_bantuan_pdf') {
+                include 'views/laporan/stok_bantuan/stok_bantuan_pdf.php';
             }
             break;
-
 
         case 'pages':
             if ($param_val == 'crud') {
@@ -338,7 +395,19 @@ if ($_GET) {
                 require __DIR__ . '/views/login.php';
             } elseif ($param_val == 'pendaftaran') {
                 require __DIR__ . '/views/pendaftaran.php';
-            }elseif ($param_val == 'home') {
+
+
+            } elseif ($param_val == 'home') {
+                $conf->TemplatePages('views/pages/index.php');
+            } elseif ($param_val == 'blog') {
+                $conf->TemplatePages('views/pages/blog.php');
+            } elseif ($param_val == 'blog_post') {
+                $conf->TemplatePages('views/pages/blog_single.php');
+            } elseif ($param_val == 'contact') {
+                $conf->TemplatePages('views/pages/contact.php');
+            } elseif ($param_val == 'home') {
+                require __DIR__ . '/views/pages/index.php';
+            } elseif ($param_val == 'home') {
                 require __DIR__ . '/views/pages/index.php';
             }
 
@@ -359,15 +428,13 @@ if ($_GET) {
             // http_response_code(404);
             // require __DIR__ . '/views/404.php';
             // require __DIR__ . '/views/login.php';
-
-            require __DIR__ . '/views/pages/index.php';
-
-            
+            // require __DIR__ . '/views/pages/index.php';
+            $conf->TemplatePages('views/pages/index.php');
 
             break;
     }
 } else {
     // require __DIR__ . '/views/login.php';
-    require __DIR__ . '/views/pages/index.php';
-
+    // require __DIR__ . '/views/pages/index.php';
+    $conf->TemplatePages('views/pages/index.php');
 }

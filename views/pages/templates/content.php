@@ -30,7 +30,7 @@
               <div class="carousel-content animate__animated animate__fadeInUp">
                 <h2><?= $publikasi['judul'] ?></h2>
                 <p><?= $publikasi['kutipan'] ?></p>
-                <div class="text-center"><a href="<?= $url ?>/?pages=blog_post&id=<?= $publikasi['id_publikasi'] ?>" class="btn-get-started">Read More</a></div>
+                <div class="text-center"><a href="<?= $url ?>/?pages=blog&blog=<?= $publikasi['id_publikasi'] ?>" class="btn-get-started">Read More</a></div>
               </div>
             </div>
           </div>
@@ -95,24 +95,23 @@
 
         <div class="row content">
           <div class="col-lg-6" data-aos="fade-right">
-            <h2>BPBD KABUPATEN KUDUS</h2>
-            <h3>Badan Penanggulangan Bencana Daerah (BPBD) adalah lembaga pemerintah non-departemen yang melaksanakan tugas penanggulangan bencana di daerah baik Provinsi maupun Kabupaten/ Kota dengan berpedoman pada kebijakan yang ditetapkan oleh Badan Nasional Penanggulangan Bencana.</h3>
+            <h2>Eum ipsam laborum deleniti velitena</h2>
+            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assum perenda sruen jonee trave</h3>
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left">
-            <h4>Visi</h4>
             <p>
-              “Terwujudnya Penanggulangan Bencana yang Tangguh Secara Terencana, Terpadu dan Menyeluruh”.
-             </p>
-
-            <h4>Misi</h4>
+              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum
+            </p>
             <ul>
-              <li><i class="ri-check-double-line"></i>Membangun jaringan kerjasama antara pemangku kepentingan untuk menyelenggarakan penanggulangan bencana yang terintegrasi, sistematis, terorganisir, tepat dan rukun.</li>
-              <li><i class="ri-check-double-line"></i>Melaksanakan penyelenggaraan penanggulangan bencana yang siap, siaga dan sadar bencana di Kabupaten Kudus.</li>
-              <li><i class="ri-check-double-line"></i>Menghimpun dan meobilisasi segala sumber yang siap melayani masyarakat dalam penyelenggaraan penanggulangan bencana</li>
+              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequa</li>
+              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>
+              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in</li>
             </ul>
-            <h4>Motto Pelayanan</h4>
             <p class="fst-italic">
-              Tanggap, Tangkas dan Tangguh dalam Penanggulangan Bencana.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
             </p>
           </div>
         </div>
@@ -136,7 +135,7 @@
               <div class="icon">
                 <i class="bx bxl-dribbble"></i>
               </div>
-              <h4><a href="<?= $url ?>/?pages=blog_post&id=<?= $publikasi['id_publikasi'] ?>"><?= $publikasi['judul'] ?></a></h4>
+              <h4><a href="<?= $url ?>/?pages=blog&blog=<?= $publikasi['id_publikasi'] ?>"><?= $publikasi['judul'] ?></a></h4>
               <p><?= $publikasi['kutipan'] ?></p>
             </div>
           </div>
