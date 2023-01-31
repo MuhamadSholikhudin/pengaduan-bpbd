@@ -15,27 +15,39 @@
             }
 
             $count_result = NumRows($sql_publikasi);
-            $page = 1;            
+            $perpage = 3;
+            
+            $page = 1;
             $offset = 0;
+            $prev_page = 1;
             $last_page = 1;
-            $next_page = 1;            
-            $countpage = ceil($count_result / 3);
+            $next_page = 1;
+            
+            $countpage = ceil($count_result / $perpage);
+            
             if(isset($_GET['page'])){
-                $offset = ($page * 3);
                 $page = $_GET['page'];
+                 if($page >= $countpage AND $page != 1){
+                    $prev_page = $countpage - 1;
+                    $next_page = $countpage;
+                }elseif($page > 1 AND $page < $countpage){
+                    $prev_page = $page - 1;
+                    $next_page = $page + 1;
+                }elseif($page == 1 AND $countpage > 1){
+                    $prev_page = 1;
+                    $next_page = $page + 1;
+                }
+                $offset = (($page - 1)  * $perpage) ;
+            }else{
+                if($countpage > 1){
+                    $prev_page = $countpage;
+                    $next_page = 2;
+                }
+                $offset = 0;
             }
-            if($page == 1){
-                $offset = 0; 
-            }
+            $sql_result = $sql_publikasi." ORDER BY id_publikasi DESC LIMIT ".$perpage." OFFSET ".$offset."";
 
-            if($page !== 1){
-                $last_page = $page - 1;
-            }
-
-            if($page >=  $countpage){
-                $last_page = $countpage;
-            }
-            $sql_result = $sql_publikasi." ORDER BY id_publikasi DESC LIMIT 3 OFFSET ".$offset."";
+            
             $publikasis = Querybanyak($sql_result);
             foreach ($publikasis as $publikasi) {
         ?>
@@ -166,7 +178,7 @@
             <?php if($count_result > 0){ ?>
                 <div class="blog-pagination">
                     <ul class="justify-content-center">
-                        <li ><a href="<?= $url ?>/?pages=blog<?= isset($_GET['search']) ? "&search=".$_GET['search']."" : "" ?><?= "&page=".$last_page."" ?>"><<</a></li>
+                        <li ><a href="<?= $url ?>/?pages=blog<?= isset($_GET['search']) ? "&search=".$_GET['search']."" : "" ?><?= "&page=".$prev_page."" ?>"><<</a></li>
                         <li class="active"><a href="#"><?= $page ?></a></li>
                         <li><a href="<?= $url ?>/?pages=blog<?= isset($_GET['search']) ? "&search=".$_GET['search']."" : "" ?><?= "&page=".$next_page."" ?>">>></a></li>
                     </ul>

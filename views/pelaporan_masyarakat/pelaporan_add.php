@@ -2,8 +2,6 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="row">
-
-
       <div class="col-lg-12 grid-margin stretch-card pelaporaninfo" id="pelaporaninfo">
         <div class="card">
           <div class="card-body" style="padding-top: 0%;">
@@ -14,21 +12,22 @@
             </div>
             <div class="row ">
               <p style="padding-left: 5px; padding-right:5px;">
+              <?php 
+                $user_admin = Querysatudata("SELECT * FROM user WHERE level = 'petugas_bpbd' LIMIT 1 ");
+              ?>
                 <span class="text-primary">! INFO :</span>
                 Halaman ini digunakan untuk menambahkan data pelaporan bencana data yang di tambahkan akan di prosess 1 X 24 jam 
-                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> 890806856575</a>
+                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> <?= $user_admin['no_telp_user'] ?></a>
               </p>
             </div>
           </div>
         </div>
       </div>
-
       <script>
         function Closepelaporaninfo() {
           document.getElementById("pelaporaninfo").style.display = "none";
         }
       </script>
-
       <div class="col-lg-6 grid-margin stretch-card">
         <div class="card">
           <div class="card-header">
@@ -122,7 +121,6 @@
                   };
                 </script>
               </div>
-
               <div class="form-group">
                 <label for="gambar_pelapor">* Gambar Pelapor</label>
                 <input type="file" class="form-control  mb-2" id="gambar_pelapor" name="gambar_pelapor" onchange="loadFilegambar_pelapor(event)" required>

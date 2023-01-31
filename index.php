@@ -429,12 +429,15 @@ if ($_GET) {
             // require __DIR__ . '/views/404.php';
             // require __DIR__ . '/views/login.php';
             // require __DIR__ . '/views/pages/index.php';
-            $conf->TemplatePages('views/pages/index.php');
+            // $conf->TemplatePages('views/pages/index.php');
+            echo "<meta http-equiv='refresh' content='0; url=http://localhost/pengaduan-bpbd/?pages=home'>";
 
             break;
     }
 } else {
     // require __DIR__ . '/views/login.php';
     // require __DIR__ . '/views/pages/index.php';
-    $conf->TemplatePages('views/pages/index.php');
+    // $conf->TemplatePages('views/pages/index.php');
+    echo "<meta http-equiv='refresh' content='0; url=http://localhost/pengaduan-bpbd/?pages=home'>";
+
 }

@@ -31,7 +31,9 @@
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo text-center">
                 <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo"> -->
-                <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="logo">
+                <a href="<?= $url ?>/?pages=home" >
+                  <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="logo">
+                </a>
               </div>
               <h6 class="fw-light text-center">Sign in to continue.</h6>
               <form class="pt-3" action="<?= $url ?>/?auth=login" method="POST" enctype="multipart/form-data">
@@ -44,7 +46,7 @@
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="<?= $url ?>/assets/index.html">SIGN IN</button>
                 </div>
-                <div class="my-2 d-flex justify-content-between align-items-center">
+                <!-- <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input">
@@ -52,7 +54,7 @@
                     </label>
                   </div>
                   <a href="#" class="auth-link text-black">Forgot password?</a>
-                </div>
+                </div> -->
                 <div class="text-center mt-4 fw-light">
                   Don't have an account? <a href="<?= $url ?>/?pages=pendaftaran" class="text-primary">Create</a>
                 </div>
