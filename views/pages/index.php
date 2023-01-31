@@ -14,7 +14,7 @@
             <div class="carousel-content animate__animated animate__fadeInUp">
               <h2><?= $slider_publikasi1["judul"] ?></h2>
               <p><?= $slider_publikasi1['kutipan'] ?></p>
-              <div class="text-center"><a href="<?= $url ?>/?pages=blog&blog=<?= $slider_publikasi1['id_publikasi'] ?>" class="btn-get-started">Read More</a></div>
+              <div class="text-center"><a href="<?= $url ?>/?pages=blog_post&id=<?= $slider_publikasi1['id_publikasi'] ?>" class="btn-get-started">Read More</a></div>
             </div>
           </div>
         </div>

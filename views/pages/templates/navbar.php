@@ -8,7 +8,7 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a href="<?= $url ?>/?pages=home" class="active">Home</a></li>
+          <li><a href="<?= $url ?>/?pages=home" class="<?= $_GET[array_keys($_GET)[0]] == "home" ? "active" : "" ?>">Home</a></li>
 
           <!-- <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -30,8 +30,8 @@
           <li><a href="services.html">Services</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
           <li><a href="pricing.html">Pricing</a></li> -->
-          <li><a href="<?= $url ?>/?pages=blog">Blog</a></li>
-          <li><a href="<?= $url ?>/?pages=contact">Contact</a></li>
+          <li><a href="<?= $url ?>/?pages=blog" class="<?= $_GET[array_keys($_GET)[0]] == "blog" || $_GET[array_keys($_GET)[0]] == "blog_post"  ? "active" : "" ?>">Blog</a></li>
+          <li><a href="<?= $url ?>/?pages=contact" class="<?= $_GET[array_keys($_GET)[0]] == "contact" ? "active" : "" ?>">Contact</a></li>
 
           <?php
           if (isset($_SESSION['id_user'])) { ?>

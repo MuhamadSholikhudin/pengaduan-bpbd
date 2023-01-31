@@ -73,7 +73,7 @@
 
               <div class="entry-content">
                 <p>
-                <?= $publikasi["kutipan"] ?>
+                  <?= $publikasi["kutipan"] ?>
                 </p>
                 <div class="read-more">
                   <a href="<?= $url ?>/?pages=blog_post&id=<?= $publikasi['id_publikasi'] ?>">Read More</a>
