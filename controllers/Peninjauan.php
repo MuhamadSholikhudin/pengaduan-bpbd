@@ -9,11 +9,13 @@
 
         public function Post($request, $file){
 
+            print_r($request);
+            print_r($file);
             $sql_pelaporan = "UPDATE  `pelaporan` 
                 SET   id_bencana = ".$request['id_bencana'].",
                       id_wilayah =  ".$request['id_wilayah']."
-                    WHERE id_pelaporan = ".$request['id_pelaporan']."
-            ";
+                WHERE id_pelaporan = ".$request['id_pelaporan']."
+            ";          
             $this->Model()->Execute($sql_pelaporan);
 
             $bukti_peninjauan = "";
@@ -37,8 +39,8 @@
                         'dalam proses',
                         '".$bukti_peninjauan."',
                         '".$request['dusun']."',
-                        ".$request['rt'].",
-                        ".$request['rw'].",
+                        '".$request['rt']."',
+                        '".$request['rw']."',
                         ".$request['jumlah_kk'].",
                         ".$request['jumlah_rumah'].",
                         '".$request['sebab']."',
@@ -47,6 +49,8 @@
                         '".$request['lain_lain']."'
                     )";
             $this->Model()->Execute($sql_peninjauan);
+            print_r($sql_peninjauan);
+            die();
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Tambah");
         }
 

@@ -276,7 +276,6 @@
                                   <label for="level_bencana">* Level Bencana</label>
                                   <select class=" form-control" id="level_bencana" name="level_bencana" required>
                                     <?php
-
                                     $level_bencanas = [1 => "Ringan", 2 => "Waspada", 3 => "Siaga", 4 => "Awas", 0 => "Aman"];
                                     foreach ($level_bencanas as $level_bencana => $val) { ?>
                                       <option value="<?= $level_bencana ?>"><?= $level_bencana ?> = <?= $val ?></option>

@@ -32,19 +32,19 @@ class Pelaporan
 
         $sql = "INSERT INTO `pelaporan` 
             ( `id_user`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`)
-                    VALUES 
-                    ( 
-                        " . $request['id_user'] . ", 
-                        '" . $request['tanggal_pelaporan'] . "', 
-                        " . $request['id_bencana'] . ",
-                        " . $request['id_wilayah'] . ",
-                        '" . $request['pelaporan'] . "',
-                        '" . $request['link_maps'] . "',
-                        '" . $request['status_pelaporan'] . "',
-                        '" . $gambar_bencana . "',
-                        '" . $gambar_lokasi_bencana . "',
-                        '" . $gambar_pelapor . "'
-                    )";
+            VALUES 
+            ( 
+                ".$request['id_user'].", 
+                '".$request['tanggal_pelaporan']."', 
+                ".$request['id_bencana'].",
+                ".$request['id_wilayah'].",
+                '".$request['pelaporan']."',
+                '".$request['link_maps']."',
+                '".$request['status_pelaporan']."',
+                '".$gambar_bencana."',
+                '".$gambar_lokasi_bencana."',
+                '".$gambar_pelapor."'
+            )";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Pelaporan Berhasil Di Tambah");
     }
@@ -94,8 +94,8 @@ class Pelaporan
     public function Kirim($request)
     {
         $sql = "UPDATE `pelaporan` 
-                    SET status_pelaporan =  'terkirim'
-                    WHERE id_pelaporan = " . $request['id'] . "
+                SET status_pelaporan =  'terkirim'
+                WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Kirim");
@@ -103,8 +103,8 @@ class Pelaporan
     public function Batal_kirim($request)
     {
         $sql = "UPDATE  `pelaporan` 
-                    SET status_pelaporan =  'batal kirim'
-                    WHERE id_pelaporan = " . $request['id'] . "
+                SET status_pelaporan =  'batal kirim'
+                WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Kirim");
@@ -112,8 +112,8 @@ class Pelaporan
     public function Validasi($request)
     {
         $sql = "UPDATE  `pelaporan` 
-                    SET status_pelaporan =  'tervalidasi'
-                    WHERE id_pelaporan = " . $request['id'] . "
+                SET status_pelaporan =  'tervalidasi'
+                WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Validasi");
@@ -121,8 +121,8 @@ class Pelaporan
     public function Tidak_Valid($request)
     {
         $sql = "UPDATE  `pelaporan` 
-                    SET status_pelaporan =  'tidak valid'
-                    WHERE id_pelaporan = " . $request['id'] . "
+                SET status_pelaporan =  'tidak valid'
+                WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Tidak divalidasi");
