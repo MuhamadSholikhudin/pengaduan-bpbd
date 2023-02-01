@@ -49,8 +49,6 @@
                         '".$request['lain_lain']."'
                     )";
             $this->Model()->Execute($sql_peninjauan);
-            print_r($sql_peninjauan);
-            die();
             Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Tambah");
         }
 
