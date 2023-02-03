@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PENGAJUAN BPBD PATI</title>
+  <title>PENGADUAN BPBD PATI</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/feather/feather.css">
   <link rel="stylesheet" href="<?= $url ?>/assets/vendors/mdi/css/materialdesignicons.min.css">
@@ -30,7 +30,9 @@
           <div class="col-lg-6 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo text-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo">
+                <a href="<?= $url ?>/?pages=home" >
+                  <img src="<?= $url ?>/assets/images/bpbdkudus.png" alt="logo">
+                </a>              
               </div>
               <h6 class="fw-light text-center">Daftar Untuk Mengakses.</h6>
               <form class="pt-3" action="<?= $url ?>/?auth=pendaftaran" method="POST" enctype="multipart/form-data">

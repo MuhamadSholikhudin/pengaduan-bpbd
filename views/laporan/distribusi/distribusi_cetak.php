@@ -83,7 +83,7 @@ $Bantuan_logistik = NumRows($sql_distribusi);
                     <hr style="position: relative;  top: 20px; height: 3px; background: black; border: 1px solid black;  ">
                 </td>
             </tr>
-            <table>
+        <table>
     </div>
     <br>
     <span class="text-center" style="font-size: 16xpx; font-weight:700;">NOTA DINAS</span>
