@@ -47,6 +47,7 @@
                 "kepala_bpbd" => ["wilayah", "user", "pelaporan", "peninjauan", "distribusi", "bantuan", "stok_bantuan"],
                 "petugas_bpbd" => ["wilayah", "user", "pelaporan", "peninjauan", "distribusi", "bantuan", "stok_bantuan"],
                 "masyarakat" => ["pelaporan"],
+                "pelapor" => ["pelaporan"],
                 "petugas_kajian" => ["pelaporan", "peninjauan",],
                 "petugas_logistik" => ["peninjauan", "distribusi", "bantuan", "stok_bantuan"]
               ];
@@ -93,9 +94,10 @@
                             <p class="text-small mb-2">Total Pelaporan</p>
                             <?php
                               $pelaporan = NumRows("SELECT * FROM pelaporan");
-                              if($_SESSION['level'] == "masyarakat"){
-                                $pelaporan = NumRows("SELECT * FROM pelaporan WHERE id_user = ".$_SESSION['id_user']." ");
-                               }
+                              if($_SESSION['level'] == "pelapor"){
+                                $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_user = ".$_SESSION['id_user']." ");
+                                $pelaporan = NumRows("SELECT * FROM pelaporan WHERE id_pelapor = ".$pelapor['id_pelapor']." ");
+                              }
                             ?>
                             <h3 class="mb-0 fw-bold"><?= $pelaporan ?></h3>
                           </div>

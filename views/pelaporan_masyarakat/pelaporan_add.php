@@ -13,11 +13,28 @@
             <div class="row ">
               <p style="padding-left: 5px; padding-right:5px;">
               <?php 
-                $user_admin = Querysatudata("SELECT * FROM user WHERE level = 'petugas_bpbd' LIMIT 1 ");
+
+              //Menampilkan data pelaporan yang dudah login
+              $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_user = ".$_SESSION['id_user']." ");
+
+              // Menampilkan data satu bpbp
+              $sql_user = "SELECT * FROM user WHERE level = 'petugas_bpbd' LIMIT 1 " ;
+              $numAdmn = NumRows($sql_user);
+
+              $user_admin = Querysatudata($sql_user);
+              $sql_petugas = "SELECT * FROM petugas_bpbd WHERE id_user = ".$user_admin['id_user']." LIMIT 1 ";
+              $numpetugas = NumRows($sql_petugas);
+              $no_hp = "";
+
+            
+              if($numpetugas  > 0){
+                $petugas_bpbd = Querysatudata($sql_petugas);
+                $no_hp = $petugas_bpbd['no_telp'];
+              }
               ?>
                 <span class="text-primary">! INFO :</span>
                 Halaman ini digunakan untuk menambahkan data pelaporan bencana data yang di tambahkan akan di prosess 1 X 24 jam 
-                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> <?= $user_admin['no_telp_user'] ?></a>
+                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> <?= $no_hp ?></a>
               </p>
             </div>
           </div>
@@ -38,9 +55,9 @@
               <form class="forms-sample" action="<?= $url ?>/?pelaporan=post" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="nama_pelapor">* Nama pelapor</label>
-                  <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
+                  <input type="hidden" class="form-control p-input" id="id_pelapor" name="id_pelapor" value="<?= $pelapor['id_pelapor'] ?>">
                   <input type="hidden" class="form-control p-input" name="status_pelaporan" value="belum dikirim">
-                  <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
+                  <input type="text" class="form-control p-input" value="<?= $pelapor['nama_pelapor'] ?>" disabled>
                 </div>
                 <div class="form-group">
                   <label for="tanggal_pelaporan">* Tanggal pelaporan</label>
@@ -66,7 +83,7 @@
                     foreach ($bencanas as $bencana) { ?>
                       <option value="<?= $bencana['id_bencana'] ?>"><?= $bencana['nama_bencana'] ?></option>
                     <?php
-                    }
+                    }      
                     ?>
                   </select>
                 </div>

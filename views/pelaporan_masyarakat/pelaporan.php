@@ -73,14 +73,18 @@
                       </thead>
                       <tbody>
                         <?php
-                        $pelaporans = Querybanyak("SELECT * FROM pelaporan WHERE id_user = " . $_SESSION['id_user'] . " ORDER BY id_pelaporan DESC");
+
+                        // Menampilkan data pelapor
+
+                        //Menampilkan looping data pelaporan 
+                        $pelaporans = Querybanyak("SELECT * FROM pelaporan LEFT JOIN pelapor ON pelaporan.id_pelapor = pelapor.id_pelapor WHERE pelapor.id_user = ".$_SESSION['id_user']." ORDER BY pelaporan.id_pelaporan DESC");
                         foreach ($pelaporans as $pelaporan) { ?>
                           <tr>
                             <td>
                               <?php
-                              $user = Querysatudata("SELECT nama_user FROM user WHERE id_user = " . $pelaporan['id_user'] . "")
+                              // $user = Querysatudata("SELECT nama_user FROM user WHERE id_user = " . $pelaporan['id_user'] . "")
                               ?>
-                              <?= $user['nama_user'] ?>
+                              <?= $pelaporan['nama_pelapor'] ?>
                             </td>
                             <td>
                               <?= $pelaporan['tanggal_pelaporan'] ?>
@@ -103,8 +107,7 @@
                             </td>
                             <td style="width: 40px; ">
                                 <!-- Review Pelaporan -->
-                                <?= $pelaporan["review_pelaporan"] ?>                               
-
+                                <?= $pelaporan["review_pelaporan"] ?>                             
                             </td>
                             <td>
                               <?php 

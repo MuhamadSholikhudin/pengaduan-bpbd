@@ -30,11 +30,13 @@ class Pelaporan
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_pelapor);
         }
 
+         
+
         $sql = "INSERT INTO `pelaporan` 
-            ( `id_user`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`)
+            ( `id_pelapor`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`)
             VALUES 
             ( 
-                ".$request['id_user'].", 
+                ".$request['id_pelapor'].", 
                 '".$request['tanggal_pelaporan']."', 
                 ".$request['id_bencana'].",
                 ".$request['id_wilayah'].",
@@ -75,7 +77,7 @@ class Pelaporan
         }
 
         $sql = "UPDATE  `pelaporan` 
-                SET   id_user =  " . $request['id_user'] . ", 
+                SET   id_pelapor =  " . $request['id_pelapor'] . ", 
                       tanggal_pelaporan =  '" . $request['tanggal_pelaporan'] . "', 
                       id_bencana = " . $request['id_bencana'] . ",
                       id_wilayah = " . $request['id_wilayah'] . ",

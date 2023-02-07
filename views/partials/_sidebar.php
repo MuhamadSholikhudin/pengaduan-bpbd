@@ -60,7 +60,7 @@
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("distribusi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
                     <?php
                     break;
-                    case 'masyarakat':
+                    case 'pelapor':
                       ?>
                         <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("pelaporan_masyarakat"): "" ?>"><a class="nav-link" href="<?= $url ?>/?pelaporan_masyarakat=pelaporan">Pelapor</a></li>            
                     <?php
