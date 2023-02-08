@@ -530,7 +530,7 @@ class Distribusi
         $distribusi_lama = Querysatudata("SELECT * FROM distribusi WHERE id_distribusi = ".$request['id_distribusi']."");
         $bukti_distribusi = $distribusi_lama["bukti_distribusi"];
         if($file['bukti_distribusi']['name'] !== ""){
-            $bukti_distribusi = (strtotime("now") . $file['bukti_distribusi']['name']);
+            $bukti_distribusi = str_replace(" ", "", (strtotime("now") . $file['bukti_distribusi']['name']));
             $lokasi = $file['bukti_distribusi']['tmp_name'];    
             move_uploaded_file($lokasi, "./gambar/bukti_distribusi/".$bukti_distribusi);
         }

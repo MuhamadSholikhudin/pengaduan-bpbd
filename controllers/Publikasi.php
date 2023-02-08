@@ -10,7 +10,7 @@
         public function Post($request, $file){
             $gambar = "";
             if($file['gambar']['name'] !== ""){
-                $gambar = (strtotime("now") . $file['gambar']['name']);
+                $gambar = str_replace(" ", "", (strtotime("now") . $file['gambar']['name']));
                 $lokasi = $file['gambar']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/publikasi/".$gambar);
             } 
@@ -36,7 +36,7 @@
             $publikasi_lama = Querysatudata("SELECT * FROM publikasi WHERE id_publikasi = ".$request['id_publikasi']."");
             $gambar = $publikasi_lama["gambar"];
             if($file['gambar']['name'] !== ""){
-                $gambar = (strtotime("now") . $file['gambar']['name']);
+                $gambar = str_replace(" ", "", (strtotime("now") . $file['gambar']['name']));
                 $lokasi = $file['gambar']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/publikasi/".$gambar);
             }

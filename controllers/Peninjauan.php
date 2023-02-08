@@ -17,7 +17,7 @@
 
             $bukti_peninjauan = "";
             if($file['bukti_peninjauan']['name'] !== ""){
-                $bukti_peninjauan = (strtotime("now") . $file['bukti_peninjauan']['name']);
+                $bukti_peninjauan = str_replace(" ", "", (strtotime("now") . $file['bukti_peninjauan']['name']));
                 $lokasi = $file['bukti_peninjauan']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
             } 
@@ -54,7 +54,7 @@
             $peninjauan_lama = Querysatudata("SELECT * FROM peninjauan WHERE id_Peninjauan = ".$request['id_peninjauan']."");
             $bukti_peninjauan = $peninjauan_lama["bukti_peninjauan"];
             if($file['bukti_peninjauan']['name'] !== ""){
-                $bukti_peninjauan = (strtotime("now") . $file['bukti_peninjauan']['name']);
+                $bukti_peninjauan = str_replace(" ", "", (strtotime("now") . $file['bukti_peninjauan']['name']));
                 $lokasi = $file['bukti_peninjauan']['tmp_name'];    
                 move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/".$bukti_peninjauan);
             }

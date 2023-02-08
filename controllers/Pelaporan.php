@@ -13,19 +13,19 @@ class Pelaporan
     {
         $gambar_bencana = null;
         if ($file['gambar_bencana']['name'] !== "") {
-            $gambar_bencana = (strtotime("now") . $file['gambar_bencana']['name']);
+            $gambar_bencana = str_replace(" ", "", (strtotime("now") . $file['gambar_bencana']['name']));
             $lokasi = $file['gambar_bencana']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_bencana);
         }
         $gambar_lokasi_bencana = null;
         if ($file['gambar_lokasi_bencana']['name'] !== "") {
-            $gambar_lokasi_bencana = (strtotime("now") . $file['gambar_lokasi_bencana']['name']);
+            $gambar_lokasi_bencana = str_replace(" ", "", (strtotime("now") . $file['gambar_lokasi_bencana']['name']));
             $lokasi = $file['gambar_lokasi_bencana']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_lokasi_bencana);
         }
         $gambar_pelapor = null;
         if ($file['gambar_pelapor']['name'] !== "") {
-            $gambar_pelapor = (strtotime("now") . $file['gambar_pelapor']['name']);
+            $gambar_pelapor = str_replace(" ", "", (strtotime("now") . $file['gambar_pelapor']['name']));
             $lokasi = $file['gambar_pelapor']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_pelapor);
         }
@@ -56,21 +56,21 @@ class Pelaporan
         $gambar_bencana = $pelaporan['gambar_bencana'];
         if ($file['gambar_bencana']['name'] !== "") {
             unlink("./gambar/pelaporan/" . $gambar_bencana);
-            $gambar_bencana = (strtotime("now") . $file['gambar_bencana']['name']);
+            $gambar_bencana = str_replace(" ", "", (strtotime("now") . $file['gambar_bencana']['name']));
             $lokasi = $file['gambar_bencana']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_bencana);            
         }
         $gambar_lokasi_bencana = $pelaporan['gambar_lokasi_bencana'];
         if ($file['gambar_lokasi_bencana']['name'] !== "") {
             unlink("./gambar/pelaporan/" . $gambar_lokasi_bencana);
-            $gambar_lokasi_bencana = (strtotime("now") . $file['gambar_lokasi_bencana']['name']);
+            $gambar_lokasi_bencana = str_replace(" ", "", (strtotime("now") . $file['gambar_lokasi_bencana']['name']));
             $lokasi = $file['gambar_lokasi_bencana']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_lokasi_bencana);
         }
         $gambar_pelapor = $pelaporan['gambar_pelapor'];
         if ($file['gambar_pelapor']['name'] !== "") {
             unlink("./gambar/pelaporan/" . $gambar_pelapor);
-            $gambar_pelapor = (strtotime("now") . $file['gambar_pelapor']['name']);
+            $gambar_pelapor = str_replace(" ", "", (strtotime("now") . $file['gambar_pelapor']['name']));
             $lokasi = $file['gambar_pelapor']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_pelapor);
         }

@@ -1,8 +1,16 @@
     <?php
       $id = $_GET['id'];
+
+      // Query menampilkan data distribusi berdasarkan id_distribusi dari GET['id']
       $cari_distribusi_berdasarkan_id_distribusi = "SELECT * FROM distribusi WHERE id_distribusi = " . $_GET['id'] . "";
+      
+      // Execute Query data distribusi
       $satu_distribusi = Querysatudata($cari_distribusi_berdasarkan_id_distribusi);
+
+      // Query menampilkan data peninjauan berdasarkan id_peninjauan dari distribusis
       $sql_peninjauan = "SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $satu_distribusi['id_peninjauan'] . " ";
+      
+      // Execute Query data peninjauan
       $peninjauan = Querysatudata($sql_peninjauan);
       ?>
       

@@ -203,8 +203,8 @@
                                   <?php
                                   //Peninjauan
                                   ?>
-                                  <input type="text" class="form-control p-input" id="id_petugas_kajian" name="id_petugas_kajian" value="<?= $id_petugas_kajian ?>">
-                                  <input type="text" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
+                                  <input type="hidden" class="form-control p-input" id="id_petugas_kajian" name="id_petugas_kajian" value="<?= $id_petugas_kajian ?>">
+                                  <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
                                   <input type="text" class="form-control p-input" value="<?= $nama_petugas_kajian ?>" disabled>
                                 </div>
 

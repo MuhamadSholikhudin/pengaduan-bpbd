@@ -48,7 +48,7 @@
                       <input type="text" class="form-control form-control" id="nama_lengkap" name="nama_lengkap" placeholder="nama_lengkap" required>
                     </div>
                     <div class="form-group">
-                      <select class="js-example-basic-single form-control" name="jenis_kelamin">                       
+                      <select class="form-control" aria-hidden="true" name="jenis_kelamin">                       
                           <option value="LAKI-LAKI">LAKI-LAKI</option>
                           <option value="PEREMPUAN">PEREMPUAN</option>                        
                       </select>
@@ -131,6 +131,15 @@
   <script src="<?= $url ?>/assets/js/template.js"></script>
   <script src="<?= $url ?>/assets/js/settings.js"></script>
   <script src="<?= $url ?>/assets/js/todolist.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- <script src="<?= $url ?>/assets/js/select2.min.js"></script> -->
+
+        <script>
+          $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+          });
+        </script>
   <!-- endinject -->
 </body>
 

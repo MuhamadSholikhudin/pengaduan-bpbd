@@ -116,8 +116,8 @@
                                 $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_pelaporan = ".$pelaporan['id_pelaporan']." ");
                                 
                                 // Query menampilkan satu data user 
-                                $user = Querysatudata("SELECT * FROM user WHERE id_user = ".$pelaporan['id_user']." ");
-                                echo "(".$user['nama_user']."), ".$peninjauan['status_peninjauan'];
+                                $user = Querysatudata("SELECT * FROM petugas_kajian WHERE id_petugas_kajian = ".$peninjauan['id_petugas_kajian']." ");
+                                echo "(".$user['nama']."), ".$peninjauan['status_peninjauan'];
                               }else{ // Jika peninjauan tidak ada maka tampilkan
                                 echo "Belum di tinjau";
 
@@ -176,8 +176,6 @@
                               <?php
                               }
                               ?>
-
-
                             </td>
                           </tr>
                         <?php
