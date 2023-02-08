@@ -42,12 +42,30 @@
                       </thead>
                       <tbody>
                         <?php
+
+                        // Mendefinisikan untuk di pakai petugas kajian
+                        $id_petugas_kajian = 0;
+                        $nama_petugas_kajian = "NULL";
+
+                        // Memilih menampilkan data looping pelaporan berdasarkan session login
                         switch ($_SESSION['level']) {
-                          case "petugas_bpbd":
+                          case "petugas_bpbd": // jika session levelnya petugas bpbd
+
+                            //Query Menampilkan data pelaporan berdasarkan kriteria  status_pelaporan yang tidak belum dikirim dan batal kirim
                             $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' AND status_pelaporan != 'batal kirim' ORDER BY id_pelaporan, tanggal_pelaporan DESC";
                             break;
-                          case "petugas_kajian":
+
+                          case "petugas_kajian": // jika session levelnya petugas kajian
+
+                            // Query Menampilkan data pelaporan berdasarkan kriteria yang status_pelaporan tervalidasi
                             $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan, tanggal_pelaporan DESC";
+                            
+                            // Menampilkan data petugas_kajian yang session levelnya petugas kajian
+                            $petugas_peninjaun = Querysatudata("SELECT * FROM petugas_kajian WHERE id_user = ".$_SESSION['id_user']." "); 
+                            
+                            // Merubah data id_petugas_kajian dan nama_petugas_kajian
+                            $id_petugas_kajian = $petugas_peninjaun['id_petugas_kajian'];
+                            $nama_petugas_kajian = $petugas_peninjaun['nama'];
                             break;
                         }
                         $pelaporans = Querybanyak($query_pelapolaran);
@@ -55,21 +73,26 @@
                           <tr>
                             <td>
                               <?php
-                              $user = Querysatudata("SELECT nama_user FROM user WHERE id_user = " . $pelaporan['id_user'] . "")
+
+                              // Menampilkan nama pelapor dari tabel pelapor berdasarkan id_pelapor dari pelaporan
+                              $pelapor = Querysatudata("SELECT nama_pelapor FROM pelapor WHERE id_pelapor = " . $pelaporan['id_pelapor'] . "")
                               ?>
-                              <?= $user['nama_user'] ?>
+                              <?= $pelapor['nama_pelapor'] ?>
                             </td>
                             <td>
                               <?= $pelaporan['tanggal_pelaporan'] ?>
                             </td>
                             <td>
                               <?php
+
+                              // Menampilkan data tabel bencana berdasarkan id_bencana dari pelaporan
                               $bencana = Querysatudata("SELECT nama_bencana FROM bencana WHERE id_bencana = " . $pelaporan['id_bencana'] . "")
                               ?>
                               <?= $bencana['nama_bencana'] ?>
                             </td>
                             <td>
                               <?php
+                              // Menampilkan data tabel wilayah berdasarkan id_wilayah dari pelaporan
                               $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $pelaporan['id_wilayah'] . "")
                               ?>
                               <?= $wilayah['kecamatan'] ?> / <?= $wilayah['desa'] ?>
@@ -140,15 +163,12 @@
                                   break;
 
                                 case "petugas_kajian": // Jika levelnya petugas_kajian
-
                                   if ($cek_peninjauan < 1) {
                                   ?>
                                     <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" data-idbencana="<?= $pelaporan['id_bencana'] ?>" data-idwilayah="<?= $pelaporan['id_wilayah'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">
                                       <i class="ti-plus"></i>
                                       Tambah Peninjauan
                                     </a>
-
-
                               <?php
                                   }
                                   break;
@@ -164,7 +184,7 @@
                   </div>
                 </div>
                 <div class="card-footer">
-                  <!-- Contoh Modal -->
+                  <!-- Modal Add Peninjauan -->
                   <div class="modal  fade" id="modalSaya" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
@@ -180,9 +200,12 @@
                               <div class="col-sm-4">
                                 <div class="form-group">
                                   <label for="nama_pelapor">* Nama Peninjau</label>
-                                  <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
-                                  <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
-                                  <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
+                                  <?php
+                                  //Peninjauan
+                                  ?>
+                                  <input type="text" class="form-control p-input" id="id_petugas_kajian" name="id_petugas_kajian" value="<?= $id_petugas_kajian ?>">
+                                  <input type="text" class="form-control p-input" name="id_pelaporan" id="id_pelaporan">
+                                  <input type="text" class="form-control p-input" value="<?= $nama_petugas_kajian ?>" disabled>
                                 </div>
 
                                 <div class="form-group">

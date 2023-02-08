@@ -6,10 +6,10 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="<?= $url ?>/?dashboard=dashboard">
+          <a class="navbar-brand brand-logo" href="<?= $url ?>/">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KTduKbv9DqsQhb9CJD21ZLBrfnpy4h0577BLdZHiAg&s" alt="logo" />
           </a>
-          <a class="navbar-brand brand-logo-mini" href="<?= $url ?>/?dashboard=dashboard">
+          <a class="navbar-brand brand-logo-mini" href="<?= $url ?>/">
             <img src="<?= $url ?>/assets/images/logo-mini.svg" alt="logo" />
           </a>
         </div>
@@ -18,14 +18,15 @@
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
             <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">
-              <?php if(isset($_SESSION['nama_user'])){
-                echo $_SESSION['nama_user'];
+              <?php if(isset($_SESSION['username'])){
+                echo $_SESSION['username'];
               } ?>            
             </span></h1>
             <h3 class="welcome-sub-text">Selamat Menjalankan Aktivitas dengan bahagia </h3>
           </li>
         </ul>
-        <ul class="navbar-nav ms-auto">        
+        <ul class="navbar-nav ms-auto">   
+          <!--     
           <li class="nav-item dropdown">
             <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
               <i class="icon-mail icon-lg"></i>
@@ -104,13 +105,14 @@
               </a>
             </div>
           </li>
+            -->
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <img class="img-xs rounded-circle" src="<?= $url ?>/assets/images/faces/default-image.jpg" alt="Profile image"> </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
                 <img class="img-xs rounded-circle" src="<?= $url ?>/assets/images/faces/default-image.jpg"  alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold"><?= $_SESSION['nama_user'] ?></p>
+                <p class="mb-1 mt-3 font-weight-semibold"><?= $_SESSION['username'] ?></p>
                 <p class="fw-light text-muted mb-0"><?= $_SESSION['username'] ?></p>
               </div>
               <!-- <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>

@@ -14,7 +14,6 @@ function Page($page){
 }
 
 
-
 $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
  
 // Check connection

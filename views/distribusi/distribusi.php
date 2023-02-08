@@ -49,42 +49,6 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!--
-                        <?php
-                        $peninjauans = Querybanyak("SELECT * FROM peninjauan WHERE status_peninjauan != 'selesai' ");
-                        foreach ($peninjauans as $peninjauan) { ?>
-                          <tr class="bg-danger">
-                            <td>
-                              <?php
-                              $benwil = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $peninjauan['id_peninjauan'] . " ");
-                              $bencana = Querysatudata("SELECT bencana.nama_bencana FROM pelaporan JOIN bencana ON pelaporan.id_bencana = bencana.id_bencana WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "");
-                              $user_tinjau = Querysatudata("SELECT * FROM user  WHERE id_user = " . $peninjauan['id_user'] . "");
-                              ?>
-                              <?= $user_tinjau['nama_user'] ?>, <?= $peninjauan['tanggal_peninjauan'] ?>
-                            </td>
-                            <td>
-                              <?= $benwil['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?> / <?= $peninjauan['level_bencana'] ?>
-                            </td>
-                            <td>
-                              <?= $benwil['kecamatan'] ?> / <?= $benwil['desa'] ?>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                              Belum di Proses
-                            </td>
-                            <td>
-                              <button class="btn btn-sm btn-sm btn-outline-primary btn-icon-text addpeninjauan" data-toggle="modal" data-id="<?= $peninjauan['id_peninjauan'] ?>" data-target="#modaldistribusi">
-                                <i class="ti-plus"></i>
-                                Tambah
-                              </button>
-                            </td>
-                          </tr>
-                        <?php
-                        }
-                        ?>
-                        -->
                         <?php
                         $no = 1;
                         $distribusis = Querybanyak("SELECT * FROM distribusi ORDER BY id_distribusi DESC");
@@ -95,10 +59,10 @@
                             </td>
                             <td>
                               <?php
-                              $peninjauan = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $distribusi['id_peninjauan'] . " ");
-                              $user_tinjau = Querysatudata("SELECT nama_user FROM user WHERE id_user = " . $peninjauan['id_user'] . " ");
+                                $peninjauan = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $distribusi['id_peninjauan'] . " ");
+                                $petugas_kajian = Querysatudata("SELECT nama FROM petugas_kajian WHERE id_petugas_kajian = " . $peninjauan['id_petugas_kajian'] . " ");
                               ?>
-                              <?= $user_tinjau['nama_user'] ?> , <?= $peninjauan['tanggal_peninjauan'] ?>
+                              <?= $petugas_kajian['nama'] ?> , <?= $peninjauan['tanggal_peninjauan'] ?>
                             </td>
                             <td>
                               <?= $peninjauan['nama_bencana'] ?>
@@ -111,20 +75,22 @@
                             </td>
                             <td>
                               <?php
-                              if ($_SESSION['level'] == "petugas_logistik") { ?>
-                                <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
-                                  <?= $distribusi['status_distribusi'] ?>
-                                </a>
-                              <?php
-                              } elseif ($_SESSION['level'] == "petugas_kajian" and $distribusi['status_distribusi'] != "Persiapan di kendaraan" and $distribusi['status_distribusi'] != "Sedang di proses") {
-                              ?>
-                                <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
-                                  <?= $distribusi['status_distribusi'] ?>
-                                </a>
-                              <?php
-                              } else {
-                                echo $distribusi['status_distribusi'];
-                              }
+                              // Colomn status_distribusi
+                                if ($_SESSION['level'] == "petugas_logistik") { ?>
+                                  <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
+                                    <?= $distribusi['status_distribusi'] ?>
+                                  </a>                               
+                                <?php
+                                } elseif ($_SESSION['level'] == "petugas_kajian" and $distribusi['status_distribusi'] != "Persiapan di kendaraan" and $distribusi['status_distribusi'] != "Sedang di proses") {
+                                ?>
+                                  <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
+                                    <?= $distribusi['status_distribusi'] ?>
+                                  </a>
+                                <?php
+                                } else {
+                                  echo $distribusi['status_distribusi'];
+                                }
+                              // Colomn status_distribusi
                               ?>
                             </td>
                             <td>
@@ -135,16 +101,26 @@
                                 <i class="ti-eye btn-icon-append"></i>
                                 Lihat
                               </a>
-                              <?php if ($_SESSION['level'] == "petugas_logistik") { ?>
+                              <?php if ($_SESSION['level'] == "petugas_logistik") { // jika level nya petugas logistik ?>
                                 <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                                   <i class="ti-pencil-alt btn-icon-append"></i>
                                   Edit
                                 </a>
+
+                                <?php 
+                                  // Check jumlah data publikasi berdasarkan distribusi sudah ada
+                                  $cekcountpublikasi = NumRows("SELECT * FROM publikasi WHERE id_distribusi = ".$distribusi['id_distribusi']."");
+                                  if($cekcountpublikasi == 0){ // Jika belum di publikasikan
+                                    ?>
+                                    <a href="<?= $url ?>/?distribusi=add_publikasi&id=<?= $distribusi['id_distribusi'] ?>"  class="btn btn-sm btn-sm btn-outline-success btn-icon-text">
+                                      + Publikasi
+                                    </a>
+                                <?php 
+                                  }
+                                ?>
                               <?php
                               }
                               ?>
-
-
                             </td>
                           </tr>
                         <?php } ?>

@@ -29,8 +29,7 @@ class Pelaporan
             $lokasi = $file['gambar_pelapor']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_pelapor);
         }
-
-         
+       
 
         $sql = "INSERT INTO `pelaporan` 
             ( `id_pelapor`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`)
@@ -113,10 +112,14 @@ class Pelaporan
     }
     public function Validasi($request)
     {
+        $petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd WHERE id_user = ".$_SESSION['id_user']." ");
+
         $sql = "UPDATE  `pelaporan` 
-                SET status_pelaporan =  'tervalidasi'
+                SET status_pelaporan =  'tervalidasi',
+                id_petugas_bpbd =  ".$petugas_bpbd["id_petugas_bpbd"]."
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
+
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Validasi");
     }
@@ -132,11 +135,13 @@ class Pelaporan
 
     public function CheckValidasi($request)
     {
+
         $sql = "UPDATE  `pelaporan` 
                 SET status_pelaporan =  '".$request["status_pelaporan"]."',
+                id_petugas_bpbd =  ".$request["id_petugas_bpbd"].",
                 review_pelaporan =  '".$request["review_pelaporan"]."'
                 WHERE id_pelaporan = " . $request['id_pelaporan'] . "
-            ";
+            ";      
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil ".$request["status_pelaporan"]."");
     }

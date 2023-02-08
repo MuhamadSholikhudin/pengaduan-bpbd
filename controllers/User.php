@@ -8,18 +8,46 @@
         }
 
         public function Post($request){
-            $sql = "INSERT INTO `user` ( `nama_user`, `alamat_user`, `no_telp_user`, `username`, `password`, `level`) 
+
+            //Check User 
+            $countuser = NumRows("SELECT * FROM user WHERE username = '".$request['username']."' ");
+
+            if($countuser > 0){
+                Redirect("http://localhost/pengaduan-bpbd/?user=user", "Data tidak dapat di tambah karena username sudah ada");
+            }else{
+
+                // Query INSERT data user
+                $sql_user = "INSERT INTO `user` (`username`, `password`, `level`) 
+                        VALUES 
+                        ( 
+                            '".$request['username']."', 
+                            '".$request['password']."', 
+                            '".$request['level']."'
+                        )";
+                // Execute query INSERT
+                $this->Model()->Execute($sql_user);
+
+                // Menampilkan data user 
+                $user = Querysatudata("SELECT * FROM user WHERE 
+                        username = '".$request['username']."' AND
+                        password = '".$request['password']."' AND
+                        level =    '".$request['level']."' ");
+
+                // Query INSERT data bpbd
+                $sql_bpbd = "INSERT INTO `".$request['level']."` ( `id_user`,`nama`, `alamat`, `no_telp`) 
                     VALUES 
                     ( 
-                        '".$request['nama_user']."', 
-                        '".$request['alamat_user']."', 
-                        '".$request['no_telp_user']."', 
-                        '".$request['username']."', 
-                        '".$request['password']."', 
-                        '".$request['level']."'
+                        ".$user['id_user'].",
+                        '".$request['nama']."', 
+                        '".$request['alamat']."', 
+                        '".$request['no_telp']."'
                     )";
-            $this->Model()->Execute($sql);
-            Redirect("http://localhost/pengaduan-bpbd/?user=user", "Data Berhasil Di Tambah");
+
+                // Execute query INSERT tabel bpbd
+                $this->Model()->Execute($sql_bpbd);
+                Redirect("http://localhost/pengaduan-bpbd/?user=user", "Data Berhasil Di Tambah");
+            }
+
         }
 
 
@@ -44,17 +72,32 @@
         }
 
         public function Update($request){
-            $sql = "UPDATE  `user` 
-                SET `nama_user` = '".$request['nama_user']."', 
-                    `alamat_user` = '".$request['alamat_user']."', 
-                    `no_telp_user` = '".$request['no_telp_user']."', 
-                    `username` = '".$request['username']."', 
-                    `password` = '".$request['password']."', 
-                    `level` = '".$request['level']."'
+
+            $sql_user = "UPDATE  `user` 
+                SET `username` = '".$request['username']."', 
+                    `password` = '".$request['password']."'
                     WHERE id_user = ".$request['id_user']."
             ";
+            $this->Model()->Execute($sql_user);
 
-            $this->Model()->Execute($sql);
+            if($request['level'] == "pelapor"){
+
+                // Query Update tabel pelapor
+                $sql_bpbd = "UPDATE ".$request['level']." SET 
+                    nama_pelapor='".$request['nama']."',
+                    alamat_pelapor='".$request['alamat']."',
+                    no_telp_pelapor='".$request['no_telp']."' 
+                    WHERE id_user=".$request['id_user']."";
+            }else{
+                // Query Update BPBD
+                $sql_bpbd = "UPDATE ".$request['level']." SET 
+                    nama='".$request['nama']."',
+                    alamat='".$request['alamat']."',
+                    no_telp='".$request['no_telp']."' 
+                    WHERE id_user=".$request['id_user']."";
+            }
+            
+            $this->Model()->Execute($sql_bpbd);
             Redirect("http://localhost/pengaduan-bpbd/?user=user", "Data Berhasil Di Ubah");
         }
     }

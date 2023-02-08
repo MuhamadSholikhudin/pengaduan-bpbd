@@ -8,10 +8,10 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-lg-12">
-                      <a href="<?= $url ?>?publikasi=add" class="btn btn-sm btn-outline-secondary">
+                      <!-- <a href="<?= $url ?>?publikasi=add" class="btn btn-sm btn-outline-secondary">
                         <i class="mdi mdi-library-plus"></i>
                         Tambah
-                      </a>
+                      </a> -->
                     </div>
                     <div class="col-lg-12 text-center">
                       <h2>DATA PUBLIKASI</h2>

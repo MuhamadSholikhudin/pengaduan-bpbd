@@ -31,10 +31,14 @@
     }
 </style>
 <?php
+
+// Query data distribusi berdasarkan id_distribusi
 $sql_distribusi = "SELECT * FROM distribusi WHERE id_distribusi = ".$_GET['id_distribusi']." ";
 
+// Query data bantuan_distribusi berdasarkan id_distribusi
 $sql_bantuan_distribusi = "SELECT * FROM bantuan_distribusi WHERE id_distribusi = ".$_GET['id_distribusi']." ";
 
+// Menampilkan data distribusi berdasarkan id_distribusi
 $datu_data_distribusi = Querysatudata($sql_distribusi);
 ?>
 
@@ -109,12 +113,23 @@ $datu_data_distribusi = Querysatudata($sql_distribusi);
                 <tbody>
                     <?php
                     $no = 1;
+                    // Execute Query bantuan distribusi
                     $bantuan_distribusis = Querybanyak($sql_bantuan_distribusi);
                     foreach ($bantuan_distribusis as $bantuan_distribusi) {
+
+                        // Menampilkan data stok_bantuan berdasarkan id_stok_bantuan
                         $stok_bantuan = Querysatudata("SELECT * FROM stok_bantuan WHERE id_stok_bantuan = " . $bantuan_distribusi['id_stok_bantuan'] . " ");
+                        
+                        // Menampilkan data bantuan berdasarkan id_bantuan
                         $bantuan = Querysatudata("SELECT * FROM bantuan WHERE id_bantuan = " . $stok_bantuan['id_bantuan'] . "");
+                        
+                        // Menampilkan data peninjauan berdasarkan id_peninjauan
                         $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = " . $datu_data_distribusi['id_peninjauan'] . "");
+                        
+                        // Menampilkan data bencana berdasarkan id_bencana
                         $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . "");
+                        
+                        // Menampilkan data wilayah berdasarkan id_wilayah
                         $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . "");
                     ?>
                         <tr>
@@ -131,10 +146,8 @@ $datu_data_distribusi = Querysatudata($sql_distribusi);
                                 <?= $datu_data_distribusi['tanggal_distribusi'] ?>
                             </td>
                             <td>
-                                <?= $bencana['nama_bencana']. ", ". $wilayah['kecamatan']. " ".$wilayah['desa'] ?>
-                                                                
-                            </td>
-                            
+                                <?= $bencana['nama_bencana']. ", ". $wilayah['kecamatan']. " ".$wilayah['desa'] ?>                                                                
+                            </td>                            
                         </tr>
                     <?php
                     }

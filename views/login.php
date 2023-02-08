@@ -56,7 +56,7 @@
                   <a href="#" class="auth-link text-black">Forgot password?</a>
                 </div> -->
                 <div class="text-center mt-4 fw-light">
-                  Don't have an account? <a href="<?= $url ?>/?pages=pendaftaran" class="text-primary">Create</a>
+                  Belum Punya akun ? <a href="<?= $url ?>/?pages=pendaftaran" class="text-primary">Create</a>
                 </div>
               </form>
             </div>

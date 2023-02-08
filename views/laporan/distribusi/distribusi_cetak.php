@@ -31,21 +31,41 @@
     }
 </style>
 <?php
-if (isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])) {
+if (isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])) { // jika terdapat GET tanggal_awak dan tanggal_akhir
+
+    // Query data peninjauan berdasarkan tanggal peninjauan BETWEEN
     $sql_peninjauan = "SELECT * FROM peninjauan WHERE tanggal_peninjauan BETWEEN '" . $_GET['tanggal_awal'] . "' AND '" . $_GET['tanggal_akhir'] . "' ";
+    
+    // Query data distribusi berdasarkan tanggal distribusi BETWEEN
     $sql_distribusi = "SELECT * FROM distribusi WHERE tanggal_distribusi BETWEEN '" . $_GET['tanggal_awal'] . "' AND '" . $_GET['tanggal_akhir'] . "' ";
+    
+    // Membuat perihal dengan memasukkan tanggal awal dan tanggal_akhir
     $hal = "dari tanggal ". $_GET['tanggal_awal']. " Sampai ".$_GET['tanggal_akhir'];
-} elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) {
+
+} elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) { //Jika terdapat GET bulan dan tahun
+
+    // Query data peninjauan berdasarkan bulan dan tahun pada tanggal peninjauan
     $sql_peninjauan = "SELECT * FROM peninjauan WHERE MONTH(tanggal_peninjauan) = " . $_GET['bulan'] . " AND YEAR(tanggal_peninjauan) = '" . $_GET['tahun'] . "' ";
+    
+    // Query data distribusi berdasarkan bulan dan tahun tanggal distribusi 
     $sql_distribusi = "SELECT * FROM distribusi WHERE MONTH(tanggal_distribusi) = " . $_GET['bulan'] . " AND YEAR(tanggal_distribusi) = '" . $_GET['tahun'] . "' ";
+    
+    // Membuat perihal dengan memasukkan bulan dan tahun tanggal distribusi 
     $hal = " bulan ". BulanIndonesia($_GET['bulan'])." Tahun ". $_GET['tahun'];
-} elseif (isset($_GET['tahun'])) {
+
+} elseif (isset($_GET['tahun'])) { // Jika hanya GET tahun
+
+    // Query data peninjauan berdasarkan tahun pada tanggal peninjauan
     $sql_peninjauan = "SELECT * FROM peninjauan WHERE  YEAR(tanggal_peninjauan) = '" . $_GET['tahun'] . "' ";
+
+    // Query data distribusi berdasarkan tahun tanggal distribusi 
     $sql_distribusi = "SELECT * FROM distribusi WHERE  YEAR(tanggal_distribusi) = '" . $_GET['tahun'] . "' ";
+
+    // Membuat perihal dengan memasukkan  tahun tanggal distribusi 
     $hal = " Tahun ". $_GET['tahun'];
-} else {
-    $sql_peninjauan = "SELECT * FROM peninjauan";
-    $sql_distribusi = "SELECT * FROM distribusi";
+} else { // Jika tidak memenuhi GET diatas maka 
+    $sql_peninjauan = "SELECT * FROM peninjauan ORDER BY id_peninjauan LIMIT 100";
+    $sql_distribusi = "SELECT * FROM distribusi ORDER BY id_distribusi LIMIT 100";
     $hal = "";
 }
 
@@ -140,7 +160,7 @@ $Bantuan_logistik = NumRows($sql_distribusi);
                     $no = 1;
                     $distribusis = Querybanyak($sql_distribusi);
                     foreach ($distribusis as $distribusi) {
-                        $user = Querysatudata("SELECT * FROM user WHERE id_user = " . $distribusi['id_user'] . " ");
+                        $petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik WHERE id_petugas_logistik = " . $distribusi['id_petugas_logistik'] . " ");
                         $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = " . $distribusi['id_peninjauan'] . "");
                         $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . " ");
                         $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . " ");
@@ -150,7 +170,7 @@ $Bantuan_logistik = NumRows($sql_distribusi);
                                 <?= $no++ ?>
                             </td>
                             <td class="py-1">
-                                <?= $user['nama_user'] ?>
+                                <?= $petugas_logistik['nama'] ?>
                             </td>
                             <td>
                                 <?= $distribusi['tanggal_distribusi'] ?>

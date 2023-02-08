@@ -74,8 +74,6 @@
                       <tbody>
                         <?php
 
-                        // Menampilkan data pelapor
-
                         //Menampilkan looping data pelaporan 
                         $pelaporans = Querybanyak("SELECT * FROM pelaporan LEFT JOIN pelapor ON pelaporan.id_pelapor = pelapor.id_pelapor WHERE pelapor.id_user = ".$_SESSION['id_user']." ORDER BY pelaporan.id_pelaporan DESC");
                         foreach ($pelaporans as $pelaporan) { ?>
@@ -106,7 +104,6 @@
                               
                             </td>
                             <td style="width: 40px; ">
-                                <!-- Review Pelaporan -->
                                 <?= $pelaporan["review_pelaporan"] ?>                             
                             </td>
                             <td>

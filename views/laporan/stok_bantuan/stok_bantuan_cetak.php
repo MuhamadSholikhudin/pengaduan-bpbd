@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Pelaporan</title>
 </head>
-
 <style>
     #table_data {
         margin-left: auto;
@@ -79,7 +78,6 @@
             <table>
     </div>
     <br>
-
 
     <table style="text-align: left;">
         <tr>

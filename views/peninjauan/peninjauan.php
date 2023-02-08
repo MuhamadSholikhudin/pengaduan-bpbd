@@ -1,3 +1,20 @@
+<?php 
+
+// Mendefinisikan id_petugas_logistik
+$id_petugas_logistik = 0;
+
+//Jika session loginnya petugas_kajian 
+if($_SESSION['level'] == "petugas_logistik"){
+
+  //Menampilkan data petugas_logistik 
+  $petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik WHERE id_user = ".$_SESSION['id_user']." ");
+  
+  // Mensetting ulang id_petugas_logistik
+   $id_petugas_logistik = $petugas_logistik['id_petugas_logistik'];
+}
+                        
+?>
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -45,22 +62,23 @@
                       </thead>
                       <tbody>
                         <?php
+                        // Menampilkan looping data peninjauan 
                         $peninjauans = Querybanyak("SELECT * FROM peninjauan ORDER BY id_peninjauan DESC");
-                        foreach ($peninjauans as $peninjauan) { ?>
+                        foreach ($peninjauans as $peninjauan) { // peninjauans di nama ulang as peninjauan ?>
                           <tr>
                             <td>
                               <?php
-                              $pelaporanuser = Querysatudata("SELECT user.nama_user as nama_user, pelaporan.id_bencana as id_bencana FROM pelaporan JOIN user ON pelaporan.id_user = user.id_user
+                              $pelapor = Querysatudata("SELECT pelapor.nama_pelapor as nama, pelaporan.id_bencana as id_bencana FROM pelaporan JOIN pelapor ON pelaporan.id_pelapor = pelapor.id_pelapor
                                WHERE pelaporan.id_pelaporan = " . $peninjauan['id_pelaporan'] . "")
                               ?>
-                              <?= $pelaporanuser['nama_user'] ?>
+                              <?= $pelapor['nama'] ?>
                             </td>
                             <td>
                               <?= $peninjauan['tanggal_peninjauan'] ?>
                             </td>
                             <td>
                               <?php
-                              $bencana = Querysatudata("SELECT nama_bencana FROM  bencana WHERE id_bencana = " . $pelaporanuser['id_bencana'] . " ");
+                              $bencana = Querysatudata("SELECT nama_bencana FROM  bencana WHERE id_bencana = " . $pelapor['id_bencana'] . " ");
                               ?>
                               <?= $bencana['nama_bencana'] ?> / <?= $peninjauan['kategori_bencana'] ?>
                             </td>
@@ -112,7 +130,7 @@
                     </table>
                   </div>
 
-                  <!-- Modal Distribusi -->
+                  <!-- Modal Tambah Distribusi -->
                   <dsiv class="modal fade" id="modaldistribusi" tabindex="-1" role="dialog" aria-labelledby="modaldistribusiLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
@@ -125,7 +143,7 @@
                         <div class="modal-body">
                           <!-- <form class="forms-sample" action="<?= $url ?>/?distribusi=post" method="POST" enctype="multipart/form-data"> -->
                           <input type="text" class="form-control p-input" id="id_peninjauan" style="display: none;">
-                          <input type="text" class="form-control p-input" id="id_user" value="<?= $_SESSION['id_user'] ?>" style="display: none;">
+                          <input type="text" class="form-control p-input" id="id_petugas_logistik" value="<?= $id_petugas_logistik ?>" style="display: none;">
                           <div class="row">
                             <div class="col-lg-6">
                               <div class="form-group">
@@ -150,7 +168,9 @@
                                 <label for="keterangan_distribusi">* Keterangan distribusi</label>
                                 <textarea class="form-control" style="height: 100px;" id="keterangan_distribusi"></textarea>
                               </div>
-                              <button class="btn btn-primary" onclick="ProcessInsertLogistikStok()"> <i class="ti-marker"></i> SIMPAN</button>
+                              <button class="btn btn-primary" onclick="ProcessInsertLogistikStok()"> 
+                                <i class="ti-marker"></i> SIMPAN
+                              </button>
                             </div>
                             <div class="col-lg-6">
                               <div class="form-group">

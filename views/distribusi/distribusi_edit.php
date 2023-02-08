@@ -1,8 +1,29 @@
       <?php
       $id = $_GET['id'];
+
+        // Mendefinisikan id_petugas_logistik
+      $id_petugas_logistik = 0;
+
+      //Jika session loginnya petugas_kajian 
+      if($_SESSION['level'] == "petugas_logistik"){
+
+        //Menampilkan data petugas_logistik 
+        $petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik WHERE id_user = ".$_SESSION['id_user']." ");
+        
+        // Mensetting ulang id_petugas_logistik
+        $id_petugas_logistik = $petugas_logistik['id_petugas_logistik'];
+      }
+
+      //Query distribusi berdasarkan id_distribusi 
       $cari_distribusi_berdasarkan_id_distribusi = "SELECT * FROM distribusi WHERE id_distribusi = ". $_GET['id'] ."";
+      
+      //Menampilkan Query distribusi
       $satu_distribusi = Querysatudata($cari_distribusi_berdasarkan_id_distribusi);
+
+      //Query peninjauan berdasarkan peninjauan peninjauan berdasarkan id_peninjauan
       $sql_peninjauan = "SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = ".$satu_distribusi['id_peninjauan']." ";
+      
+      //Menampilkan Query peninjauan
       $peninjauan = Querysatudata($sql_peninjauan);
       ?>
       <!-- partial -->
@@ -18,7 +39,7 @@
                   <div class="row">
                     <!-- <form class="forms-sample" action="<?= $url ?>/?stok_bantuan=stok_bantuan_post" method="POST" enctype="multipart/form-data"> -->
                     <input type="hidden" class="form-control p-input" id="id_distribusi" aria-describedby="id_distribusi" name="id_distribusi" value="<?= $_GET['id'] ?>">
-                    <input type="hidden" class="form-control p-input" id="id_user" aria-describedby="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
+                    <input type="hidden" class="form-control p-input" id="id_petugas_logistik" aria-describedby="id_petugas_logistik" name="id_petugas_logistik" value="<?= $id_petugas_logistik ?>">
                     <input type="hidden" class="form-control p-input" id="id_peninjauan" aria-describedby="id_peninjauan" name="id_peninjauan" value="<?= $satu_distribusi['id_peninjauan'] ?>">
                     <div class="form-group">
                       <label for="info_peninjauan">Info Peninjauan</label>

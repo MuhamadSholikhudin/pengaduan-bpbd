@@ -246,18 +246,25 @@ class Distribusi
     public function AjaxSearchDistribusiBantuan($request)
     {
         $stok_bantuan_loop = '';
+
+        // Check serach tidak kosong 
         if ($request['search'] !== "" and $request['search'] !== " " and $request['search'] !== NULL) {
             $except = "";
-            if ($request['length'] > 0) {
+            if ($request['length'] > 0) { // check data banyaknya stok yang sudah di pilih
                 foreach ($request['array_bantuan'] as $id_bant) {
                     $except .= " stok_bantuan.id_stok_bantuan != " . $id_bant . " AND ";
                 }
             }
+            // Query check stok_bantuan berdasarkan bantuan.nama_bantuan, bantuan.kategori
             $num_sql = "SELECT COUNT(*) as id 
             FROM stok_bantuan LEFT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan 
             WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%' AND tanggal_kadaluarsa > " . date('Y-m-d') . "";
+            
+            // Menampilkan hasil query check stok bantuan
             $num_bantuan = Querysatudata($num_sql);
-            if ($num_bantuan['id'] > 0) {
+            
+            if ($num_bantuan['id'] > 0) { // Check jika distok bantuan tersedia apa tidak jika lebih dari 0 maka tersedia
+                
                 $sql = "SELECT bantuan.nama_bantuan as nama_bantuan, bantuan.kategori as kategori, stok_bantuan.stok_tersedia as stok, stok_bantuan.id_stok_bantuan as id_stok_bantuan 
                 FROM stok_bantuan LEFT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan 
                 WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%'  AND tanggal_kadaluarsa > " . date('Y-m-d') . " LIMIT 10";
@@ -286,7 +293,10 @@ class Distribusi
 
     public function AjaxAddStokBant($request)
     {
+        // Query data stok_bantuan
         $num_sql = "SELECT bantuan.nama_bantuan as nama_bantuan, bantuan.satuan as satuan, stok_bantuan.id_stok_bantuan as id_stok_bantuan, stok_bantuan.stok_tersedia as stok_tersedia FROM stok_bantuan RIGHT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan WHERE stok_bantuan.id_stok_bantuan = " . $request['id_stok_bantuan'] . " ";
+        
+        //Menampilkan data stok_bantuan
         $bantuan = Querysatudata($num_sql);
 
         $table_ul = '<tr>
@@ -309,15 +319,15 @@ class Distribusi
 
     public function AjaxInsertDistribusiStok($request)
     {
-        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`, `id_user`, `tanggal_distribusi`, `keterangan_distribusi`,`status_distribusi`)
-        VALUES 
-        ( 
-            " . $request['id_peninjauan'] . ",
-            " . $request['id_user'] . ",
-            '" . $request['tanggal_distribusi'] . "',
-            '" . $request['keterangan_distribusi'] . "',
-            'Sedang di proses'
-        )";
+        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`, `id_petugas_logistik`, `tanggal_distribusi`, `keterangan_distribusi`,`status_distribusi`)
+            VALUES 
+            ( 
+                " . $request['id_peninjauan'] . ",
+                " . $request['id_petugas_logistik'] . ",
+                '" . $request['tanggal_distribusi'] . "',
+                '" . $request['keterangan_distribusi'] . "',
+                'Sedang di proses'
+            )";
         // Insert data distribusi
         $this->Model()->Execute($sql_distribusi);
 
@@ -325,7 +335,7 @@ class Distribusi
         $this->Model()->Execute("UPDATE peninjauan SET status_peninjauan = 'selesai' WHERE id_peninjauan = " . $request['id_peninjauan'] . "");
 
         // Tampilkan data dstribusi yang terkahir
-        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_user = " . $request['id_user'] . "");
+        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_petugas_logistik = ".$request['id_petugas_logistik']." ");
 
         foreach ($request['data'] as $key => $val) {
 
@@ -430,15 +440,19 @@ class Distribusi
             SET keterangan_distribusi = '" . $request['keterangan_distribusi'] . "',
                 tanggal_distribusi = '" . $request['tanggal_distribusi'] . "'
                 WHERE id_distribusi = " . $request['id_distribusi'] . "";
-        $this->Model()->Execute($sql_update_distribusi);
+        $this->Model()->Execute($sql_update_distribusi); //Execute query
 
         // Tampung data array bantuan distribusi dari html
         $data_update = $request['data'];
 
-        //data bantuan array dari yang lama 
+        //Menampilkan looping data bantuan distribusi berdasarkan id_distribusi
         $data_bantuan_distribusi_lamas = Querybanyak("SELECT * FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " ");
         foreach ($data_bantuan_distribusi_lamas as $data_bantuan_distribusi_lama) {
+
+            //Menampilkan data stok_bantuan berdasarkan id_stok_bantuan
             $stok_bantuan = Querysatudata("SELECT id_bantuan, stok_tersedia FROM stok_bantuan WHERE id_stok_bantuan = " . $data_bantuan_distribusi_lama['id_stok_bantuan'] . " ");
+            
+            //Menampilkan data bantuan berdasarkan id_bantuan
             $bantuan = Querysatudata("SELECT stok FROM bantuan WHERE id_bantuan = " . $stok_bantuan['id_bantuan'] . " ");
 
             // Check Jika sudah ada namtuan distribusi tinggal di update
@@ -477,9 +491,10 @@ class Distribusi
             $this->Model()->Execute($sql_execute_old);
         }
 
-        
-        // // data bantuan array dari html         
+        // Menampilkan looping data id_bantuan array dari html         
         foreach ($request['data'] as $key => $val) {
+
+            //Menampilkan data jumlah bantuan_distribusi berdasarkan id_distribusi dan id_stok_bantuan
             $check_dari_bantuan_distribusi = Querysatudata("SELECT COUNT(*) as count FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " AND id_stok_bantuan = " . $key . " ");
             if ($check_dari_bantuan_distribusi['count'] < 1) { // Jika tida ada maka 
 

@@ -48,10 +48,50 @@
                         ?>
                         <tr>
                           <td class="py-1">
-                            <?= $user['nama_user']; ?>
+                            <?php
+                              $nama = "";
+                              $no_telp = "";
+                              $alamat = "";
+                              switch ($user['level']){
+                                case "petugas_bpbd":
+                                    $petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd WHERE id_user = ".$user['id_user']." ");
+                                    $nama = $petugas_bpbd['nama'];
+                                    $no_telp = $petugas_bpbd['no_telp'];
+                                    $alamat = $petugas_bpbd['alamat'];
+
+                                  break;
+                                case "petugas_kajian":
+                                    $petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian WHERE id_user = ".$user['id_user']." ");
+                                    $nama = $petugas_kajian['nama'];
+                                    $no_telp = $petugas_kajian['no_telp'];
+                                    $alamat = $petugas_kajian['alamat'];
+
+                                  break;
+                                case "petugas_logistik":
+                                    $petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik WHERE id_user = ".$user['id_user']." ");
+                                    $nama = $petugas_logistik['nama'];
+                                    $no_telp = $petugas_logistik['no_telp'];
+                                    $alamat = $petugas_logistik['alamat'];
+
+                                  break;
+                                case "kepala_bpbd":
+                                    $kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd WHERE id_user = ".$user['id_user']." ");
+                                    $nama = $kepala_bpbd['nama'];
+                                    $no_telp = $kepala_bpbd['no_telp'];
+                                    $alamat = $kepala_bpbd['alamat'];
+
+                                  break;
+                                case "pelapor":
+                                    $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_user = ".$user['id_user']." ");
+                                    $nama = $pelapor['nama_pelapor'];
+                                    $no_telp = $pelapor['no_telp_pelapor'];
+                                    $alamat = $pelapor['alamat_pelapor'];
+                                  break;
+                              }
+                            ?>
+                            <?= $nama ?>
                           </td>
-                          <td>
-                            <?= $user['alamat_user']; ?>
+                          <td> <?= $alamat ?>
                           </td>
                           <td>
                             <?= $user['username']; ?>
@@ -60,7 +100,7 @@
                             <?= $user['level']; ?>
                           </td>
                           <td>
-                            <?= $user['no_telp_user']; ?>
+                            <?= $no_telp ?>
                           </td>
                           <td>
                             <a href="<?= $url ?>/?user=edit&id=<?= $user['id_user']; ?>" class="btn btn-lg btn-outline-warning btn-icon-text">

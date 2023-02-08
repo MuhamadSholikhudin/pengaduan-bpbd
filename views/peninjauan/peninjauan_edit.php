@@ -1,10 +1,18 @@
         <?php
         $id = $_GET['id'];
+
+        // Menampilkan data peninjauan berdasarkan id_peninjauan dari $_GET['id']
         $cari_peninjauan_berdasarkan_id_peninjauan = "SELECT * FROM peninjauan WHERE id_peninjauan = " . $_GET['id'] . "";
         $satu_peninjauan = Querysatudata($cari_peninjauan_berdasarkan_id_peninjauan);
 
+        // Menampilkan data pelaporan berdasarkan id_pelaporan 
         $sql_pelaporan = "SELECT bencana.nama_bencana FROM pelaporan JOIN bencana ON pelaporan.id_bencana WHERE pelaporan.id_pelaporan = " . $satu_peninjauan['id_pelaporan'] . "";
         $pelaporan = Querysatudata($sql_pelaporan);
+
+        //Menampilkan data petugas kajian berdasarkan session login id_user
+        $sql_petugas_kajian = "SELECT * FROM petugas_kajian WHERE id_user = ".$_SESSION['id_user']."";
+        $petugas_kajian = Querysatudata($sql_petugas_kajian);
+
         ?>
         <!-- partial -->
         <div class="main-panel">
@@ -25,9 +33,13 @@
                             <div class="form-group">
                               <label for="nama_pelapor">* Nama Peninjau</label>
                               <input type="hidden" class="form-control p-input" id="id_peninjauan" name="id_peninjauan" value="<?= $satu_peninjauan['id_peninjauan'] ?>">
-                              <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
+                              <input type="hidden" class="form-control p-input" id="id_petugas_kajian" name="id_petugas_kajian" value="<?= $petugas_kajian['id_petugas_kajian'] ?>">
                               <input type="hidden" class="form-control p-input" name="id_pelaporan" id="id_pelaporan" value="<?= $satu_peninjauan['id_pelaporan'] ?>">
-                              <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
+                              <?php 
+                                $sql_kajian_old = "SELECT * FROM petugas_kajian  WHERE id_petugas_kajian = ".$satu_peninjauan['id_petugas_kajian']." ";
+                                $kajian_old = Querysatudata($sql_kajian_old);
+                              ?>
+                              <input type="text" class="form-control p-input" value="<?= $kajian_old['nama'] ?>" disabled>
                             </div>
 
                             <div class="form-group">

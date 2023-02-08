@@ -270,7 +270,7 @@ $("#tablleresult").on("click", "#trash_stok_bantuan_edit", function () {
 
 // DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI
 function ProcessInsertLogistikStok() {
-  var id_user = document.getElementById("id_user").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
   var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
   var id_peninjauan = document.getElementById("id_peninjauan").value;
   var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
@@ -282,7 +282,7 @@ function ProcessInsertLogistikStok() {
   }
   var payload = JSON.stringify({
     id_peninjauan: id_peninjauan,
-    id_user: id_user,
+    id_petugas_logistik: id_petugas_logistik,
     tanggal_distribusi: tanggal_distribusi,
     keterangan_distribusi: keterangan_distribusi,
     data: gabbantuan,
@@ -294,7 +294,7 @@ function ProcessInsertLogistikStok() {
     dataType: "json",
     data: {
       id_peninjauan: id_peninjauan,
-      id_user: id_user,
+      id_petugas_logistik: id_petugas_logistik,
       tanggal_distribusi: tanggal_distribusi,
       keterangan_distribusi: keterangan_distribusi,
       data: gabbantuan,
@@ -370,7 +370,7 @@ $("#editbodydistribusi").on("click", "#trash_stok_bantuan_edit", function () {
 // DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI STOK
 function ProcessUpdateLogistikStokbantuan() {
   var id_distribusi = document.getElementById("id_distribusi").value;
-  var id_user = document.getElementById("id_user").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
   var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
   var id_peninjauan = document.getElementById("id_peninjauan").value;
   var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
@@ -383,7 +383,7 @@ function ProcessUpdateLogistikStokbantuan() {
   var payload = JSON.stringify({
     id_distribusi: id_distribusi,
     id_peninjauan: id_peninjauan,
-    id_user: id_user,
+    id_petugas_logistik: id_petugas_logistik,
     tanggal_distribusi: tanggal_distribusi,
     keterangan_distribusi: keterangan_distribusi,
     data: gabbantuan,
@@ -396,14 +396,13 @@ function ProcessUpdateLogistikStokbantuan() {
     data: {
       id_distribusi: id_distribusi,
       id_peninjauan: id_peninjauan,
-      id_user: id_user,
+      id_petugas_logistik: id_petugas_logistik,
       tanggal_distribusi: tanggal_distribusi,
       keterangan_distribusi: keterangan_distribusi,
       data: gabbantuan,
     },
     success: function (success) {
       alert(success);
-      // window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
       location.replace("http://localhost/pengaduan-bpbd/?distribusi=distribusi");
     },
     error() {

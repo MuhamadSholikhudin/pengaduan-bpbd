@@ -1,8 +1,14 @@
     <?php
+
+    // Menampilkan data pelaporan berdasarkan id_pelaporan
     $id = $_GET['id'];
     $cari_pelaporan_berdasarkan_id_pelaporan =
       'SELECT * FROM pelaporan WHERE id_pelaporan = ' . $_GET['id'] . '';
     $satu_pelaporan = Querysatudata($cari_pelaporan_berdasarkan_id_pelaporan);
+    
+    // Menampilkan data petugas bpbd berdasarkan id_user dengan session login id_user
+    $petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd WHERE id_user = ".$_SESSION['id_user']." ");
+
     ?>
     <!-- partial -->
     <div class="main-panel">
@@ -21,9 +27,8 @@
                     <div class="form-group">
                       <label for="nama_pelapor">* Nama pelapor</label>
                       <input type="hidden" class="form-control p-input" id="id_pelaporan" name="id_pelaporan" value="<?= $satu_pelaporan['id_pelaporan'] ?>">
-                      <input type="hidden" class="form-control p-input" id="id_user" name="id_user" value="<?= $_SESSION['id_user'] ?>">
                       <input type="hidden" class="form-control p-input" name="status_pelaporan" value="<?= $satu_pelaporan['status_pelaporan'] ?>">
-                      <input type="text" class="form-control p-input" value="<?= $_SESSION['nama_user'] ?>" disabled>
+                      <input type="text" class="form-control p-input" value="<?= $petugas_bpbd['nama'] ?>" disabled>
                     </div>
                     <div class="form-group">
                       <label for="tanggal_pelaporan">* Tanggal pelaporan</label>
@@ -84,6 +89,7 @@
                       <div style="padding: 20px;  border:blueviolet; border: radius 10px; ">
                         <form action="<?= $url ?>/?pelaporan=checkvalidasi" method="post">
                           <input type="hidden" class="form-control p-input" id="id_pelaporan" name="id_pelaporan" value="<?= $satu_pelaporan['id_pelaporan'] ?>">
+                          <input type="hidden" class="form-control p-input" id="id_petugas_bpbd" name="id_petugas_bpbd" value="<?= $petugas_bpbd['id_petugas_bpbd'] ?>">
                           <div class="form-group">
                             <div class="row">
                               <div class="col-sm-4">
@@ -105,18 +111,15 @@
                                 ?>
                               </select>
                               </div>
-
                             </div>
-
                           </div>
-
                           <div class="form-group">
                             <label for="review_pelaporan">
                               <h4>* Review pelaporan</h4>
                             </label>
                             <textarea class="form-control" id="review_pelaporan" name="review_pelaporan" style="height: 300px;" required><?= $satu_pelaporan['review_pelaporan'] ?></textarea>
+                          
                           </div>
-
                           <button type="submit" class="btn btn-primary">Process</button>
                         </form>
                       </div>
@@ -125,7 +128,6 @@
                     <div class="col-12">
                       <a href="<?= $url ?>?pelaporan=pelaporan" class="badge badge-success"> <i class="ti-arrow"></i> Kembali</a>
                     </div>
-
                 </div>
               </div>
               <div class="card-footer">

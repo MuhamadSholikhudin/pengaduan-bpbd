@@ -209,13 +209,13 @@
                                     $distribusis = Querybanyak($sql_distribusi);
                                     foreach ($distribusis as $distribusi) {
                                         $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = ".$distribusi['id_peninjauan']."");                                        
-                                        $user = Querysatudata("SELECT * FROM user WHERE id_user = " . $distribusi['id_user'] . " ");
+                                        $petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik WHERE id_petugas_logistik = " . $distribusi['id_petugas_logistik'] . " ");
                                         $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . " ");
                                         $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . " ");
                                     ?>
                                         <tr>
                                             <td class="py-1">
-                                                <?= $user['nama_user'] ?>
+                                                <?= $petugas_logistik['nama'] ?>
                                             </td>
                                             <td>
                                                 <?= $distribusi['tanggal_distribusi'] ?>

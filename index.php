@@ -236,6 +236,8 @@ if ($_GET) {
                 $distribusi->AjaxEditStokBant($_POST);
             } elseif ($param_val == 'ajax_update_distribusi_stok') {
                 $distribusi->AjaxUpdateDistribusiStok($_POST);
+            } elseif ($param_val == 'add_publikasi') {
+                $conf->TemplateAdmin('views/distribusi/publikasi_add.php');
             }
 
             break;

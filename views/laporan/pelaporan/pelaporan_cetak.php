@@ -133,13 +133,13 @@
                 <?php
                 $pelaporans = Querybanyak($sql_pelaporan);
                 foreach ($pelaporans as $pelaporan) {
-                    $user = Querysatudata("SELECT * FROM user WHERE id_user = " . $pelaporan['id_user'] . " ");
+                    $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = " . $pelaporan['id_pelapor'] . " ");
                     $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $pelaporan['id_bencana'] . " ");
                     $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $pelaporan['id_wilayah'] . " ");
                 ?>
                     <tr>
                         <td class="py-1">
-                            <?= $user['nama_user'] ?>
+                            <?= $pelapor['nama_pelapor'] ?>
                         </td>
                         <td>
                             <?= $pelaporan['tanggal_pelaporan'] ?>

@@ -29,19 +29,16 @@ class Auth
         $sql_user = "INSERT INTO `user` ( `username`, `password`, `level`)  VALUES 
                     ( '".$request['username']."', '".$request['password']."', 'pelapor' )";
         $this->ModelAuth()->Execute($sql_user);
-        var_dump($sql_user);
 
         $sql_daftar = "INSERT INTO `daftar`(`tanggal_daftar`, `nama_lengkap`, `alamat`, `no_telp`, `jenis_kelamin`, `id_wilayah`) VALUES 
                         ('".$request['tanggal_daftar']."','".$request['nama_lengkap']."','".$request['alamat']."','".$request['no_telp']."','".$request['jenis_kelamin']."',".$request['id_wilayah'].")  ";
         $this->ModelAuth()->Execute($sql_daftar);
-        var_dump($sql_daftar);
 
         $tampil_user = Querysatudata("SELECT * FROM user WHERE username = '".$request['username']."' AND  password = '".$request['password']."' ");
         $tampil_daftar = Querysatudata("SELECT * FROM daftar WHERE tanggal_daftar = '".$request['tanggal_daftar']."' AND  nama_lengkap = '".$request['nama_lengkap']."' ");
         
         $sql_pelapor = "INSERT INTO `pelapor`(`id_user`, `id_daftar`, `nama_pelapor`, `alamat_pelapor`, `no_telp_pelapor`) VALUES 
                         (".$tampil_user['id_user'].", ".$tampil_daftar['id_daftar'].",'".$request['nama_lengkap']."', '".$request['alamat']."', '".$request['no_telp']."')";
-        var_dump($sql_pelapor);
         
         $this->ModelAuth()->Execute($sql_pelapor);
 
@@ -61,7 +58,7 @@ class Auth
             $_SESSION['username'] = $username;
             $_SESSION['status'] = 'login';
             $_SESSION['id_user'] = $data_cek['id_user'];
-            $_SESSION['nama_user'] = $data_cek['nama_user'];
+            // $_SESSION['nama_user'] = $data_cek['nama_user'];
             $_SESSION['level'] = $data_cek['level'];
             Redirect("http://localhost/pengaduan-bpbd?dashboard=dashboard", "Berhasil Login");
         } else {

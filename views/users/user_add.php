@@ -9,16 +9,16 @@
                   <div class="row">
                     <form class="forms-sample" action="<?= $url ?>/?user=post" method="POST" enctype="multipart/form-data">
                       <div class="form-group">
-                          <label for="nama_user">Nama Lengkap</label>
-                          <input type="text" class="form-control p-input" id="nama_user" aria-describedby="nama_user" name="nama_user" placeholder="Enter Nama Lengkap">
+                          <label for="nama">Nama Lengkap</label>
+                          <input type="text" class="form-control p-input" id="nama" aria-describedby="nama" name="nama" placeholder="Enter Nama Lengkap">
                       </div>
                       <div class="form-group">
-                          <label for="alamat_user">Alamat Lengkap</label>
-                          <textarea class="form-control p-input" id="alamat_user" name="alamat_user" ></textarea>
+                          <label for="alamat">Alamat Lengkap</label>
+                          <textarea class="form-control p-input" id="alamat" name="alamat" ></textarea>
                         </div>
                       <div class="form-group">
-                          <label for="no_telp_user">No telp User</label>
-                          <input type="text" class="form-control p-input" id="no_telp_user" aria-describedby="no_telp_user" name="no_telp_user" placeholder="Enter Nama Lengkap">
+                          <label for="no_telp">No telp User</label>
+                          <input type="text" class="form-control p-input" id="no_telp" aria-describedby="no_telp" name="no_telp" placeholder="8987667878">
                       </div>
                       <div class="form-group">
                           <label for="username">Usermame</label>
@@ -30,7 +30,7 @@
                       </div>
                       <div class="form-group">
                         <?php 
-                          $levels = ['kepala_bpbd', 'masyarakat', 'petugas_bpbd', 'petugas_kajian', 'petugas_logistik'];
+                          $levels = ['kepala_bpbd', 'petugas_bpbd', 'petugas_kajian', 'petugas_logistik'];
                         ?>
                         <label for="level">Level</label>
                         <select class="form-control " name="level" id="level">

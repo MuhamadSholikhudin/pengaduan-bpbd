@@ -15,18 +15,18 @@
                 move_uploaded_file($lokasi, "./gambar/publikasi/".$gambar);
             } 
 
-            $sql_publikasi = "INSERT INTO `publikasi` (  `judul`, `kutipan`,`kategori`, `isi`,`tanggal_publikasi`,  `gambar`, `created_at`, `updated_at`)
-            VALUES 
-            ( 
-                '".$request['judul']."',
-                 '".$request['kutipan']."',
-                 '".$request['kategori']."', 
-                 '".$request['isi']."',
-                 '".$request['tanggal_publikasi']."',
-                 '".$gambar."', 
-                 '".date("Y-m-d H:i:s")."', 
-                 '".date("Y-m-d H:i:s")."'
-
+            $sql_publikasi = "INSERT INTO `publikasi` ( `id_distribusi`, `judul`, `kutipan`,`kategori`, `isi`,`tanggal_publikasi`,  `gambar`, `created_at`, `updated_at`)
+                VALUES 
+                ( 
+                    ".$request['id_distribusi'].",
+                    '".$request['judul']."',
+                    '".$request['kutipan']."',
+                    '".$request['kategori']."', 
+                    '".$request['isi']."',
+                    '".$request['tanggal_publikasi']."',
+                    '".$gambar."', 
+                    '".date("Y-m-d H:i:s")."', 
+                    '".date("Y-m-d H:i:s")."'
                 )";
             $this->Model()->Execute($sql_publikasi);
             Redirect("http://localhost/pengaduan-bpbd/?publikasi=publikasi", "Data Berhasil Di Tambah");
