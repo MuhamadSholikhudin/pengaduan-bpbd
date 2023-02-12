@@ -11,7 +11,7 @@ $(".tambahpeninjauan").on("click", function () {
   $("#id_bencana").val(id_bencana);
 });
 
-//
+// Modal tambah distribusi pada tampilan peninjauan
 $(".addpeninjauan").on("click", function () {
   var id_peninjauan = $(this).data("id");
   document.getElementById("id_peninjauan").value = id_peninjauan;
@@ -30,7 +30,28 @@ $(".addpeninjauan").on("click", function () {
       alert("error");
     },
   });
+});
 
+
+// Modal tambah distribusi pada tampilan distribusi_add
+$("#add_id_peninjauan").on("change", function () {
+  var id_peninjauan = $("#add_id_peninjauan").val();
+  document.getElementById("id_peninjauan").value = id_peninjauan;
+  $.ajax({
+    type: "POST",
+    url: url_web + "/?distribusi=ajax_click_peninjauan",
+    dataType: "json",
+    data: {
+      id_peninjauan: id_peninjauan
+    },
+    success: function (data) {
+      document.getElementById("bencana").value = data[0];
+      document.getElementById("keterangan_peninjauan").value = data[1];
+    },
+    error() {
+      alert("Data peninjauan tidak boleh kosong!!!");
+    },
+  });
 });
 
 /*
@@ -287,26 +308,36 @@ function ProcessInsertLogistikStok() {
     keterangan_distribusi: keterangan_distribusi,
     data: gabbantuan,
   });
+
+  if(id_peninjauan == "" || id_peninjauan == NULL){
+    alert("Pilihan peninjauan Tidak boleh kosong");
+  }else{
+    console.log(payload);
+    /*
+    $.ajax({
+      type: "POST",
+      url: url_web + "/?distribusi=ajax_insert_distribusi_stok",
+      dataType: "json",
+      data: {
+        id_peninjauan: id_peninjauan,
+        id_petugas_logistik: id_petugas_logistik,
+        tanggal_distribusi: tanggal_distribusi,
+        keterangan_distribusi: keterangan_distribusi,
+        data: gabbantuan,
+      },
+      success: function (success) {
+        alert(success);
+        window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
+      },
+      error() {
+        console.error();
+      },
+    });
+    */
+
+  }
   
-  $.ajax({
-    type: "POST",
-    url: url_web + "/?distribusi=ajax_insert_distribusi_stok",
-    dataType: "json",
-    data: {
-      id_peninjauan: id_peninjauan,
-      id_petugas_logistik: id_petugas_logistik,
-      tanggal_distribusi: tanggal_distribusi,
-      keterangan_distribusi: keterangan_distribusi,
-      data: gabbantuan,
-    },
-    success: function (success) {
-      alert(success);
-      window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
-    },
-    error() {
-      console.error();
-    },
-  });
+
   
 }
 
@@ -392,6 +423,51 @@ function ProcessUpdateLogistikStokbantuan() {
   $.ajax({
     type: "POST",
     url: url_web + "/?distribusi=ajax_update_distribusi_stok",
+    dataType: "json",
+    data: {
+      id_distribusi: id_distribusi,
+      id_peninjauan: id_peninjauan,
+      id_petugas_logistik: id_petugas_logistik,
+      tanggal_distribusi: tanggal_distribusi,
+      keterangan_distribusi: keterangan_distribusi,
+      data: gabbantuan,
+    },
+    success: function (success) {
+      alert(success);
+      location.replace("http://localhost/pengaduan-bpbd/?distribusi=distribusi");
+    },
+    error() {
+      console.error();
+    },
+  });
+}
+
+
+// DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI STOK PADA KAJIAN
+function ProcessUpdateLogistikStokbantuankajian() {
+  var id_distribusi = document.getElementById("id_distribusi").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
+  var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
+  var id_peninjauan = document.getElementById("id_peninjauan").value;
+  var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
+  var stok_bantuan_id = document.getElementsByName("stok_bantuan_id[]");
+  var jumlah_bantuan = document.getElementsByName("jumlah_bantuan[]");
+  var gabbantuan = {};
+  for (var i = 0; i < stok_bantuan_id.length; i++) {
+    gabbantuan[stok_bantuan_id[i].value] = jumlah_bantuan[i].value;
+  }
+  var payload = JSON.stringify({
+    id_distribusi: id_distribusi,
+    id_peninjauan: id_peninjauan,
+    id_petugas_logistik: id_petugas_logistik,
+    tanggal_distribusi: tanggal_distribusi,
+    keterangan_distribusi: keterangan_distribusi,
+    data: gabbantuan,
+  });
+  
+  $.ajax({
+    type: "POST",
+    url: url_web + "/?distribusi=ajax_update_distribusi_stok_kajian",
     dataType: "json",
     data: {
       id_distribusi: id_distribusi,

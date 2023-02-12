@@ -51,6 +51,10 @@ function Dompdf(){
     require_once 'assets/dompdf/autoload.inc.php';
 }
 
+function dd($data){
+    print("<pre>".print_r($data,true)."</pre>");
+}
+
 function BulanIndonesia($date_month_hire = string){
      //Bulan Indonesia
      if($date_month_hire == '01'){

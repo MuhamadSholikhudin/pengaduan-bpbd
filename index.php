@@ -36,6 +36,9 @@ $stok_bantuan = new Stok_bantuan();
 include 'controllers/Publikasi.php';
 $publikasi = new Publikasi();
 
+include 'controllers/Posko.php';
+$posko = new Posko();
+
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
     $param_val = $_GET[array_keys($_GET)[0]];
@@ -59,7 +62,7 @@ if ($_GET) {
             } elseif ($param_val == 'update') {
                 $user->Update($_POST);
             }
-            break;
+        break;
 
         case 'bantuan':
             if ($param_val == 'bantuan') {
@@ -75,7 +78,7 @@ if ($_GET) {
             } elseif ($param_val == 'stok') {
                 $conf->TemplateAdmin('views/stok_bantuan/stok_bantuan.php');
             }
-            break;
+        break;
 
         case 'bencana':
             if ($param_val == 'bencana') {
@@ -89,7 +92,7 @@ if ($_GET) {
             } elseif ($param_val == 'update') {
                 $bencana->Update($_POST);
             }
-            break;
+        break;
 
         case 'wilayah':
             if ($param_val == 'wilayah') {
@@ -103,7 +106,7 @@ if ($_GET) {
             } elseif ($param_val == 'update') {
                 $wilayah->Update($_POST);
             }
-            break;
+        break;
 
         case 'pelaporan':
             //Template HTML
@@ -128,7 +131,7 @@ if ($_GET) {
             } elseif ($param_val == 'checkvalidasi') {
                 $pelaporan->CheckValidasi($_POST);
             }
-            break;
+        break;
 
         case 'pelaporan_masyarakat':
             if ($param_val == 'pelaporan') {
@@ -152,7 +155,7 @@ if ($_GET) {
             } elseif ($param_val == 'batal_kirim') {
                 $pelaporan->Batal_kirim($_GET);
             }
-            break;
+        break;  
 
         case 'peninjauan':
             if ($param_val == 'peninjauan') {
@@ -168,7 +171,23 @@ if ($_GET) {
             } elseif ($param_val == 'update_status') {
                 $peninjauan->UpdateStatus($_POST);
             }
-            break;
+        break;
+
+        case 'posko':
+            if ($param_val == 'posko') {
+                $conf->TemplateAdmin('views/posko/posko.php');
+            } elseif ($param_val == 'add') {
+                $conf->TemplateAdmin('views/posko/posko_add.php');
+            } elseif ($param_val == 'edit') {
+                $conf->TemplateAdmin('views/posko/posko_edit.php');
+            } elseif ($param_val == 'post') {
+                $posko->Post($_POST, $_FILES);
+            } elseif ($param_val == 'update') {
+                $posko->Update($_POST, $_FILES);
+            } elseif ($param_val == 'update_status') {
+                // $posko->UpdateStatus($_POST);
+            }
+        break;
 
         case 'stok_bantuan':
             if ($param_val == 'stok_bantuan') {
@@ -207,7 +226,10 @@ if ($_GET) {
             } elseif ($param_val == 'lihat') {
                 $conf->TemplateAdmin('views/distribusi/distribusi_lihat.php');
             } elseif ($param_val == 'post') {
-                var_dump($_POST);
+                $distribusi->Post($_POST);
+            } elseif ($param_val == 'update') {
+
+                $distribusi->Update($_POST);
             } elseif ($param_val == 'update_status') {
                 $distribusi->Update_status($_POST, $_FILES);
             } elseif ($param_val == 'ajax_search') {
@@ -236,10 +258,11 @@ if ($_GET) {
                 $distribusi->AjaxEditStokBant($_POST);
             } elseif ($param_val == 'ajax_update_distribusi_stok') {
                 $distribusi->AjaxUpdateDistribusiStok($_POST);
+            } elseif ($param_val == 'ajax_update_distribusi_stok_kajian') {
+                $distribusi->AjaxUpdateDistribusiStokKajian($_POST);
             } elseif ($param_val == 'add_publikasi') {
                 $conf->TemplateAdmin('views/distribusi/publikasi_add.php');
-            }
-
+            } 
             break;
         case 'publikasi':
             if ($param_val == 'publikasi') {

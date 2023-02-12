@@ -57,6 +57,7 @@
                     ?>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("pelaporan"): "" ?>"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("peninjauan"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?peninjauan=peninjauan">Peninjauan</a></li>
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("posko"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?posko=posko">Posko</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("distribusi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
                     <?php
                     break;

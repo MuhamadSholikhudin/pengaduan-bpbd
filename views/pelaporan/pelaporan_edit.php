@@ -8,6 +8,9 @@
     
     // Menampilkan data petugas bpbd berdasarkan id_user dengan session login id_user
     $petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd WHERE id_user = ".$_SESSION['id_user']." ");
+    
+    // Menampilkan data petugas bpbd berdasarkan id_user dengan session login id_user
+    $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$satu_pelaporan['id_pelapor']." ");
 
     ?>
     <!-- partial -->
@@ -28,7 +31,7 @@
                       <label for="nama_pelapor">* Nama pelapor</label>
                       <input type="hidden" class="form-control p-input" id="id_pelaporan" name="id_pelaporan" value="<?= $satu_pelaporan['id_pelaporan'] ?>">
                       <input type="hidden" class="form-control p-input" name="status_pelaporan" value="<?= $satu_pelaporan['status_pelaporan'] ?>">
-                      <input type="text" class="form-control p-input" value="<?= $petugas_bpbd['nama'] ?>" disabled>
+                      <input type="text" class="form-control p-input" value="<?= $pelapor['nama_pelapor'] ?>" disabled>
                     </div>
                     <div class="form-group">
                       <label for="tanggal_pelaporan">* Tanggal pelaporan</label>

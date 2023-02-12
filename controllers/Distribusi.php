@@ -11,36 +11,98 @@ class Distribusi
 
     public function Post($request)
     {
+        // print("<pre>".print_r($_POST,true)."</pre>"); 
 
-        $sql = "INSERT INTO `pelaporan` ( `id_user`, `tanggal_pelaporan`, `id_wilayah`, `id_bencana`, `pelaporan`, `link_maps`, `status_pelaporan`)
-                    VALUES 
-                    ( 
-                        " . $request['id_user'] . ", 
-                        '" . $request['tanggal_pelaporan'] . "', 
-                        " . $request['id_wilayah'] . ",
-                        " . $request['id_bencana'] . ",
-                        '" . $request['pelaporan'] . "',
-                        '" . $request['link_maps'] . "',
-                        '" . $request['status_pelaporan'] . "'
-                    )";
-        $this->Model()->Execute($sql);
-        Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Tambah");
+        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`,  `tanggal_distribusi`, `keterangan_distribusi`)
+        VALUES 
+        ( 
+            " . $request['id_peninjauan'] . ",
+            '" . $request['tanggal_distribusi'] . "',
+            '" . $request['keterangan_distribusi'] . "'            
+        )";
+        // // Insert data distribusi
+        // print("<pre>".print_r($sql_distribusi,true)."</pre>");
+        $this->Model()->Execute($sql_distribusi);
+
+        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE  id_peninjauan =" . $request['id_peninjauan'] . " AND  tanggal_distribusi  =  '" . $request['tanggal_distribusi'] . "' AND keterangan_distribusi = '" . $request['keterangan_distribusi'] . "' ");
+
+        for ($i = 0; $i < count($request['stok_bantuan_id']); $i++) {
+            // Insert bantuan_distribusi
+            $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_stok_bantuan`, `jumlah`, `satuan`,`batch`)
+            VALUES
+            (
+                " . $distribusi['id_distribusi'] . ", 
+                " . $request['stok_bantuan_id'][$i] . ",
+                " . $request['jumlah_bantuan'][$i] . ",
+                " . $i . ",
+                " . $i . "
+            )";
+            // print("<pre>".print_r($sql_distribusi_bantuan,true)."</pre>"); 
+            $this->Model()->Execute($sql_distribusi_bantuan);
+        }
+        // die();
+
+        Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Berhasil Di Tambah");
     }
 
     public function Update($request)
     {
-        $sql = "UPDATE  `pelaporan` 
-                SET   id_user =  " . $request['id_user'] . ", 
-                      tanggal_pelaporan =  '" . $request['tanggal_pelaporan'] . "', 
-                      id_wilayah = " . $request['id_wilayah'] . ",
-                      id_bencana = " . $request['id_bencana'] . ",
-                      pelaporan =  '" . $request['pelaporan'] . "',
-                      link_maps =  '" . $request['link_maps'] . "',
-                      status_pelaporan =  '" . $request['status_pelaporan'] . "'
-                    WHERE id_pelaporan = " . $request['id_pelaporan'] . "
+
+        $sql_distribusi = "UPDATE  `distribusi` 
+                SET id_peninjauan = " . $request['id_peninjauan'] . ",
+                    tanggal_distribusi = '" . $request['tanggal_distribusi'] . "',
+                    keterangan_distribusi = '" . $request['keterangan_distribusi'] . "' 
+                    WHERE id_distribusi = " . $request['id_distribusi'] . "
             ";
-        $this->Model()->Execute($sql);
-        Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Ubah");
+        $this->Model()->Execute($sql_distribusi);
+        dd($request);
+
+
+        //Menampilkan looping data bantuan distribusi berdasarkan id_distribusi
+        $data_bantuan_distribusi_lamas = Querybanyak("SELECT * FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " ");
+        foreach ($data_bantuan_distribusi_lamas as $data_bantuan_distribusi_lama) {
+
+            // Check Jika sudah ada namtuan distribusi tinggal di update
+            if (in_array($data_bantuan_distribusi_lama['id_stok_bantuan'], $request['stok_bantuan_id'])) {
+
+
+                $index = array_keys($request['stok_bantuan_id'], $data_bantuan_distribusi_lama['id_stok_bantuan']);
+
+                //update data bantuan distribusi            
+                $sql_execute_old = "UPDATE bantuan_distribusi SET jumlah = " . $request['jumlah_bantuan'][$index[0]] . " WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . " ";
+            } else {
+                // DELETE stok_bantuan dari bantuan distribusi
+                $sql_execute_old = "DELETE FROM bantuan_distribusi WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . "  ";
+            }
+            dd($sql_execute_old);
+            $this->Model()->Execute($sql_execute_old);
+        }
+
+        // Looping data stok_bantuan dan bantuan_distribusi
+        for ($i = 0; $i < count($request['stok_bantuan_id']); $i++) {
+
+            // Check data distribusi
+            $check_dari_bantuan_distribusi = Querysatudata("SELECT COUNT(*) as count FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " AND id_stok_bantuan = " . $request['stok_bantuan_id'][$i] . " ");
+            dd($check_dari_bantuan_distribusi['count']);
+
+            if ($check_dari_bantuan_distribusi['count'] < 1) {
+
+                // Query insert data bantuan distribusis
+                $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_stok_bantuan`, `jumlah`, `satuan`,`batch`)
+                    VALUES
+                    (
+                        " . $request['id_distribusi'] . ", 
+                        " . $request['stok_bantuan_id'][$i] . ",
+                        " . $request['jumlah_bantuan'][$i] . ",
+                        " . $i . ",
+                        " . $i . "
+                    )";
+                dd($sql_distribusi_bantuan);
+                $this->Model()->Execute($sql_distribusi_bantuan);
+            }
+        }
+        die();
+        Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Berhasil Di Ubah");
     }
 
     public function AjaxSearch($request)
@@ -211,7 +273,7 @@ class Distribusi
             }
         }
 
-        // // data bantuan array dari html         
+        // data bantuan array dari html         
         foreach ($request['data'] as $key => $val) {
             $check_dari_bantuan_distribusi = Querysatudata("SELECT COUNT(*) as count FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " AND id_bantuan = " . $key . " ");
             if ($check_dari_bantuan_distribusi['count'] < 1) { // Jika sudah ada maka 
@@ -234,12 +296,12 @@ class Distribusi
     public function Ajax_klik_peninjauan($request)
     {
         $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = " . intval($request['id_peninjauan']) . " ");
-        
+
         $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = " . $peninjauan['id_bencana'] . " ");
         $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $peninjauan['id_wilayah'] . " ");
         $bencan_level_kategoti = $bencana['nama_bencana'] . " Wilayah " . $wilayah['kecamatan'] . " " . $wilayah['desa'] . " level " . $peninjauan['level_bencana'] . " " . $peninjauan['kategori_bencana'];
         echo json_encode([$bencan_level_kategoti, $peninjauan['keterangan_peninjauan']]);
-        
+
         // echo json_encode([1, intval($request['id_peninjauan'])]);
     }
 
@@ -259,12 +321,12 @@ class Distribusi
             $num_sql = "SELECT COUNT(*) as id 
             FROM stok_bantuan LEFT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan 
             WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%' AND tanggal_kadaluarsa > " . date('Y-m-d') . "";
-            
+
             // Menampilkan hasil query check stok bantuan
             $num_bantuan = Querysatudata($num_sql);
-            
+
             if ($num_bantuan['id'] > 0) { // Check jika distok bantuan tersedia apa tidak jika lebih dari 0 maka tersedia
-                
+
                 $sql = "SELECT bantuan.nama_bantuan as nama_bantuan, bantuan.kategori as kategori, stok_bantuan.stok_tersedia as stok, stok_bantuan.id_stok_bantuan as id_stok_bantuan 
                 FROM stok_bantuan LEFT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan 
                 WHERE " . $except . " bantuan.nama_bantuan LIKE '%" . $request['search'] . "%' OR bantuan.kategori LIKE '%" . $request['search'] . "%'  AND tanggal_kadaluarsa > " . date('Y-m-d') . " LIMIT 10";
@@ -278,10 +340,10 @@ class Distribusi
                                                 <td>' . $bant['nama_bantuan'] . ' / ' . $bant['kategori'] . ' </td>
                                                 <td>' . $bant['stok'] . '</td>
                                                 <td>
-                                                    <button id="addstokbantuan" data-id_stok_bantuan="' . $bant['id_stok_bantuan'] . '" class="addbantuan btn btn-sm btn-primary">
+                                                    <span id="addstokbantuan" data-id_stok_bantuan="' . $bant['id_stok_bantuan'] . '" class="addbantuan btn btn-sm btn-primary">
                                                         <i class="ti-plus"></i>    
                                                         Add
-                                                    </button>
+                                                    </span>
                                                 </td>                                   
                                             </tr>';
                 }
@@ -295,7 +357,7 @@ class Distribusi
     {
         // Query data stok_bantuan
         $num_sql = "SELECT bantuan.nama_bantuan as nama_bantuan, bantuan.satuan as satuan, stok_bantuan.id_stok_bantuan as id_stok_bantuan, stok_bantuan.stok_tersedia as stok_tersedia FROM stok_bantuan RIGHT JOIN bantuan ON stok_bantuan.id_bantuan = bantuan.id_bantuan WHERE stok_bantuan.id_stok_bantuan = " . $request['id_stok_bantuan'] . " ";
-        
+
         //Menampilkan data stok_bantuan
         $bantuan = Querysatudata($num_sql);
 
@@ -335,7 +397,7 @@ class Distribusi
         $this->Model()->Execute("UPDATE peninjauan SET status_peninjauan = 'selesai' WHERE id_peninjauan = " . $request['id_peninjauan'] . "");
 
         // Tampilkan data dstribusi yang terkahir
-        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_petugas_logistik = ".$request['id_petugas_logistik']." ");
+        $distribusi = Querysatudata("SELECT * FROM distribusi WHERE id_peninjauan = " . $request['id_peninjauan'] . " AND id_petugas_logistik = " . $request['id_petugas_logistik'] . " ");
 
         foreach ($request['data'] as $key => $val) {
 
@@ -395,10 +457,10 @@ class Distribusi
                                                 <td>' . $bant['nama_bantuan'] . ' / ' . $bant['kategori'] . '</td>
                                                 <td>' . $bant['stok'] . '</td>
                                                 <td>
-                                                    <button id="editstokbantuan" data-id_stok_bantuan="' . $bant['id_stok_bantuan'] . '" class="addbantuan btn btn-sm btn-primary">
+                                                    <span id="editstokbantuan" data-id_stok_bantuan="' . $bant['id_stok_bantuan'] . '" class="addbantuan btn btn-sm btn-primary">
                                                         <i class="ti-plus"></i>    
                                                         Add
-                                                    </button>
+                                                    </span>
                                                 </td>                                   
                                             </tr>';
                 }
@@ -419,7 +481,7 @@ class Distribusi
                         <td>' . $bantuan['nama_bantuan'] . '</td>
                         <td>
                             <input class="form-control" type="hidden" name="stok_bantuan_id[]" min="0" value="' . $bantuan['id_stok_bantuan'] . '">                         
-                            <input class="form-control" type="number" name="jumlah_bantuan[]" min="1"  max="' . $bantuan['stok_tersedia'] . '" value="1" style="width:100px;">                         
+                            <input class="form-control" type="number" name="jumlah_bantuan[]" min="1" value="1" max="'.$bantuan['stok_tersedia'].'" style="width:100px;">                         
                         </td>
                         <td>' . $bantuan['satuan'] . '</td>
                         <td>
@@ -434,7 +496,7 @@ class Distribusi
 
     // Update data distribusi dan bantuan distribusi
     public function AjaxUpdateDistribusiStok($request)
-    {        
+    {
         // Update distribusi
         $sql_update_distribusi = "UPDATE distribusi 
             SET keterangan_distribusi = '" . $request['keterangan_distribusi'] . "',
@@ -451,7 +513,7 @@ class Distribusi
 
             //Menampilkan data stok_bantuan berdasarkan id_stok_bantuan
             $stok_bantuan = Querysatudata("SELECT id_bantuan, stok_tersedia FROM stok_bantuan WHERE id_stok_bantuan = " . $data_bantuan_distribusi_lama['id_stok_bantuan'] . " ");
-            
+
             //Menampilkan data bantuan berdasarkan id_bantuan
             $bantuan = Querysatudata("SELECT stok FROM bantuan WHERE id_bantuan = " . $stok_bantuan['id_bantuan'] . " ");
 
@@ -526,22 +588,78 @@ class Distribusi
         echo json_encode("Data Bantuan distribusi berhasil di update");
     }
 
-    public function Update_status($request, $file){        
-        $distribusi_lama = Querysatudata("SELECT * FROM distribusi WHERE id_distribusi = ".$request['id_distribusi']."");
+        // Update data distribusi dan bantuan distribusi pada kajian
+        public function AjaxUpdateDistribusiStokKajian($request)
+        {
+            // Update distribusi
+            $sql_update_distribusi = "UPDATE distribusi 
+                SET keterangan_distribusi = '" . $request['keterangan_distribusi'] . "',
+                    tanggal_distribusi = '" . $request['tanggal_distribusi'] . "'
+                    WHERE id_distribusi = " . $request['id_distribusi'] . "";
+            $this->Model()->Execute($sql_update_distribusi); //Execute query
+    
+            // Tampung data array bantuan distribusi dari html
+            $data_update = $request['data'];
+    
+            //Menampilkan looping data bantuan distribusi berdasarkan id_distribusi
+            $data_bantuan_distribusi_lamas = Querybanyak("SELECT * FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " ");
+            foreach ($data_bantuan_distribusi_lamas as $data_bantuan_distribusi_lama) {
+    
+                // Check Jika sudah ada namtuan distribusi tinggal di update
+                if (array_key_exists($data_bantuan_distribusi_lama['id_stok_bantuan'], $data_update)) {
+    
+                    //update data bantuan distribusi
+                    $sql_execute_old = "UPDATE bantuan_distribusi SET jumlah = " . $request['data'][$data_bantuan_distribusi_lama['id_stok_bantuan']] . " WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . " ";
+                } else {
+    
+                    // DELETE stok_bantuan dari bantuan distribusi
+                    $sql_execute_old = "DELETE FROM bantuan_distribusi WHERE id_bantuan_distribusi = " . $data_bantuan_distribusi_lama['id_bantuan_distribusi'] . "  ";
+                }
+                // Execute  data bantuan_dsitribusi
+                $this->Model()->Execute($sql_execute_old);
+            }
+    
+            // Menampilkan looping data id_bantuan array dari html         
+            foreach ($request['data'] as $key => $val) {
+    
+                //Menampilkan data jumlah bantuan_distribusi berdasarkan id_distribusi dan id_stok_bantuan
+                $check_dari_bantuan_distribusi = Querysatudata("SELECT COUNT(*) as count FROM bantuan_distribusi WHERE id_distribusi = " . intval($request['id_distribusi']) . " AND id_stok_bantuan = " . $key . " ");
+                if ($check_dari_bantuan_distribusi['count'] < 1) { // Jika tida ada maka 
+    
+                    // Insert bantuan_distribusi
+                    $sql_distribusi_bantuan = "INSERT INTO `bantuan_distribusi` (  `id_distribusi`, `id_stok_bantuan`, `jumlah`, `satuan`,`batch`)
+                            VALUES
+                            (
+                                " . $request['id_distribusi'] . ", 
+                                " . $key . ",
+                                " . $val . ",
+                                " . $val . ",
+                                " . $val . "
+                            )";
+                    $this->Model()->Execute($sql_distribusi_bantuan);
+                }
+            }
+            echo json_encode("Data Bantuan distribusi berhasil di update");
+        }
+
+
+    public function Update_status($request, $file)
+    {
+        $distribusi_lama = Querysatudata("SELECT * FROM distribusi WHERE id_distribusi = " . $request['id_distribusi'] . "");
         $bukti_distribusi = $distribusi_lama["bukti_distribusi"];
-        if($file['bukti_distribusi']['name'] !== ""){
+        if ($file['bukti_distribusi']['name'] !== "") {
             $bukti_distribusi = str_replace(" ", "", (strtotime("now") . $file['bukti_distribusi']['name']));
-            $lokasi = $file['bukti_distribusi']['tmp_name'];    
-            move_uploaded_file($lokasi, "./gambar/bukti_distribusi/".$bukti_distribusi);
+            $lokasi = $file['bukti_distribusi']['tmp_name'];
+            move_uploaded_file($lokasi, "./gambar/bukti_distribusi/" . $bukti_distribusi);
         }
 
         $sql_update_status = "UPDATE distribusi 
-            SET status_distribusi = '". $request["status_distribusi"]."' ,
-                bukti_distribusi = '". $bukti_distribusi."' 
-            WHERE id_distribusi = ".$request["id_distribusi"]." ";
+            SET status_distribusi = '" . $request["status_distribusi"] . "' ,
+                bukti_distribusi = '" . $bukti_distribusi . "' 
+            WHERE id_distribusi = " . $request["id_distribusi"] . " ";
 
-            $this->Model()->Execute($sql_update_status);
-            
+        $this->Model()->Execute($sql_update_status);
+
         Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Status Distribusi Berhasil Di Ubah");
     }
 }

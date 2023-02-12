@@ -350,13 +350,6 @@
 
                               </div><!--col-sm-4 -->
                             </div>
-
-
-
-
-
-
-
                             <div class="col-12">
                               <button type="submit" class="btn btn-primary">SIMPAN</button>
                             </div>

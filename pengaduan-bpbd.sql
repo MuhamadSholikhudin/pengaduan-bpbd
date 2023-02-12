@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2023 at 06:09 PM
+-- Generation Time: Feb 12, 2023 at 10:55 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -168,7 +168,11 @@ CREATE TABLE `bantuan_distribusi` (
 
 INSERT INTO `bantuan_distribusi` (`id_bantuan_distribusi`, `id_distribusi`, `id_stok_bantuan`, `jumlah`, `satuan`, `batch`) VALUES
 (1, 1, 84, 20, 20, 20),
-(2, 1, 88, 10, 10, 10);
+(2, 1, 88, 10, 10, 10),
+(13, 3, 90, 90, 2, 2),
+(14, 3, 103, 100, 3, 3),
+(15, 3, 83, 80, 4, 4),
+(18, 3, 88, 4, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -255,7 +259,8 @@ CREATE TABLE `distribusi` (
 --
 
 INSERT INTO `distribusi` (`id_distribusi`, `id_peninjauan`, `tanggal_distribusi`, `keterangan_distribusi`, `status_distribusi`, `bukti_distribusi`, `id_petugas_logistik`) VALUES
-(1, 1, '2023-02-08', 'Bantuan berupa makanan akan di kirim sekarang ', 'Selesai', '1675872986distribusibantuan1.jpg', 1);
+(1, 1, '2023-02-08', 'Bantuan berupa makanan akan di kirim sekarang ', 'Selesai', '1675872986distribusibantuan1.jpg', 1),
+(3, 1, '2023-02-12', 'Korban butuh bantuan', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -298,7 +303,7 @@ CREATE TABLE `pelapor` (
 --
 
 INSERT INTO `pelapor` (`id_pelapor`, `id_user`, `id_daftar`, `nama_pelapor`, `alamat_pelapor`, `no_telp_pelapor`) VALUES
-(1, 5, NULL, 'Ayuk Diyah Setyowati', 'rt 1 rw 2 margerejo dawe kudus', '89988876754');
+(1, 5, 1, 'Ayuk Diyah Setyowati', 'rt 1 rw 2 margerejo dawe kudus', '89988876754');
 
 -- --------------------------------------------------------
 
@@ -364,7 +369,7 @@ CREATE TABLE `peninjauan` (
 --
 
 INSERT INTO `peninjauan` (`id_peninjauan`, `id_pelaporan`, `id_wilayah`, `id_bencana`, `id_petugas_kajian`, `kategori_bencana`, `level_bencana`, `tanggal_peninjauan`, `jumlah_korban`, `keterangan_peninjauan`, `status_peninjauan`, `bukti_peninjauan`, `dusun`, `rt`, `rw`, `jumlah_kk`, `jumlah_rumah`, `sebab`, `akibat`, `upaya_penanganan`, `lain_lain`) VALUES
-(1, 1, 22, 7, 1, 'Bencana Non Alam', 2, '2023-02-08', 10, 'Peninjauan sedang berlangsung terhadap bencana yang terjadi pada lokasi', 'selesai', '1675872654fotokebakaran.jpg', 'margorejo', '1', '1', 2, 2, 'penyebab kebakaran adalah terjadinya konsleting lisrik ', 'terjadinya kebakaran yang membakar 2 rumah warga', '- Telah di padamkan oleh pemadam kebakaran\r\n- Para warga membantu jalannya evakuasi', '- Petugas BPBD\r\n- Pemadam kebakaran');
+(1, 1, 22, 7, 1, 'Bencana Non Alam', 2, '2023-02-08', 10, 'Peninjauan sedang berlangsung terhadap bencana yang terjadi pada lokasi', 'sudah meninjau', '1675872654fotokebakaran.jpg', 'margorejo', '1', '1', 2, 2, 'penyebab kebakaran adalah terjadinya konsleting lisrik ', 'terjadinya kebakaran yang membakar 2 rumah warga', '- Telah di padamkan oleh pemadam kebakaran\r\n- Para warga membantu jalannya evakuasi', '- Petugas BPBD\r\n- Pemadam kebakaran');
 
 -- --------------------------------------------------------
 
@@ -428,6 +433,37 @@ CREATE TABLE `petugas_logistik` (
 
 INSERT INTO `petugas_logistik` (`id_petugas_logistik`, `id_user`, `nama`, `alamat`, `no_telp`) VALUES
 (1, 4, 'Yudha Prasetyo', 'Mejobo Kudus', '89878865465');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posko`
+--
+
+CREATE TABLE `posko` (
+  `id_posko` int(11) NOT NULL,
+  `id_peninjauan` int(11) DEFAULT NULL,
+  `nama_posko` varchar(100) DEFAULT NULL,
+  `jumlah_jiwa` int(11) DEFAULT NULL,
+  `balita` int(11) DEFAULT NULL,
+  `remaja` int(11) DEFAULT NULL,
+  `dewasa` int(11) DEFAULT NULL,
+  `lanjut_usia` int(11) DEFAULT NULL,
+  `status_posko` varchar(50) DEFAULT NULL,
+  `tanggal_posko` date DEFAULT NULL,
+  `tanggal_selesai` date DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `gambar_posko` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posko`
+--
+
+INSERT INTO `posko` (`id_posko`, `id_peninjauan`, `nama_posko`, `jumlah_jiwa`, `balita`, `remaja`, `dewasa`, `lanjut_usia`, `status_posko`, `tanggal_posko`, `tanggal_selesai`, `keterangan`, `gambar_posko`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Posko Bupati1', 50, 0, 0, 0, 0, 'Keadaan Darurat Bencana', '2023-02-11', '0000-00-00', 'Posko Bupati', '1676168917distribusibantuan1.jpg', '2023-02-12 01:39:28', '2023-02-12 02:29:28');
 
 -- --------------------------------------------------------
 
@@ -853,6 +889,12 @@ ALTER TABLE `petugas_logistik`
   ADD KEY `id_user` (`id_user`);
 
 --
+-- Indexes for table `posko`
+--
+ALTER TABLE `posko`
+  ADD PRIMARY KEY (`id_posko`);
+
+--
 -- Indexes for table `publikasi`
 --
 ALTER TABLE `publikasi`
@@ -892,7 +934,7 @@ ALTER TABLE `bantuan`
 -- AUTO_INCREMENT for table `bantuan_distribusi`
 --
 ALTER TABLE `bantuan_distribusi`
-  MODIFY `id_bantuan_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_bantuan_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `bencana`
@@ -910,7 +952,7 @@ ALTER TABLE `daftar`
 -- AUTO_INCREMENT for table `distribusi`
 --
 ALTER TABLE `distribusi`
-  MODIFY `id_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kepala_bpbd`
@@ -953,6 +995,12 @@ ALTER TABLE `petugas_kajian`
 --
 ALTER TABLE `petugas_logistik`
   MODIFY `id_petugas_logistik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `posko`
+--
+ALTER TABLE `posko`
+  MODIFY `id_posko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `publikasi`
