@@ -225,10 +225,20 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/distribusi/distribusi_edit.php');
             } elseif ($param_val == 'lihat') {
                 $conf->TemplateAdmin('views/distribusi/distribusi_lihat.php');
-            } elseif ($param_val == 'post') {
-                $distribusi->Post($_POST);
-            } elseif ($param_val == 'update') {
 
+            } elseif ($param_val == 'post') { // Kajian
+                $distribusi->Post($_POST);
+
+            } elseif ($param_val == 'kirim') { // Kajian
+                $distribusi->Status($_GET);
+
+            } elseif ($param_val == 'persetujuan') { // kepala bpbd
+                $conf->TemplateAdmin('views/distribusi/distribusi_persetujuan.php');
+
+            } elseif ($param_val == 'ajax_persetujuan') { //Kepala BPBD
+                $distribusi->AjaxPersetujuan($_POST);
+            
+            } elseif ($param_val == 'update') {
                 $distribusi->Update($_POST);
             } elseif ($param_val == 'update_status') {
                 $distribusi->Update_status($_POST, $_FILES);
@@ -263,6 +273,10 @@ if ($_GET) {
             } elseif ($param_val == 'add_publikasi') {
                 $conf->TemplateAdmin('views/distribusi/publikasi_add.php');
             } 
+
+
+
+
             break;
         case 'publikasi':
             if ($param_val == 'publikasi') {

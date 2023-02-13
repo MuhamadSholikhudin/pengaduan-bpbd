@@ -336,9 +336,6 @@ function ProcessInsertLogistikStok() {
     */
 
   }
-  
-
-  
 }
 
 
@@ -429,6 +426,52 @@ function ProcessUpdateLogistikStokbantuan() {
       id_peninjauan: id_peninjauan,
       id_petugas_logistik: id_petugas_logistik,
       tanggal_distribusi: tanggal_distribusi,
+      keterangan_distribusi: keterangan_distribusi,
+      data: gabbantuan,
+    },
+    success: function (success) {
+      alert(success);
+      location.replace("http://localhost/pengaduan-bpbd/?distribusi=distribusi");
+    },
+    error() {
+      console.error();
+    },
+  });
+}
+
+// DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI STOK
+function ProcessPersetujuan() {
+  var id_distribusi = document.getElementById("id_distribusi").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
+  var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
+  var id_peninjauan = document.getElementById("id_peninjauan").value;
+  var status_distribusi = document.getElementById("status_distribusi").value;
+  var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
+  var stok_bantuan_id = document.getElementsByName("stok_bantuan_id[]");
+  var jumlah_bantuan = document.getElementsByName("jumlah_bantuan[]");
+  var gabbantuan = {};
+  for (var i = 0; i < stok_bantuan_id.length; i++) {
+    gabbantuan[stok_bantuan_id[i].value] = jumlah_bantuan[i].value;
+  }
+  var payload = JSON.stringify({
+    id_distribusi: id_distribusi,
+    id_peninjauan: id_peninjauan,
+    id_petugas_logistik: id_petugas_logistik,
+    tanggal_distribusi: tanggal_distribusi,
+    keterangan_distribusi: keterangan_distribusi,
+    status_distribusi: status_distribusi,
+    data: gabbantuan,
+  });
+  $.ajax({
+    type: "POST",
+    url: url_web + "/?distribusi=ajax_persetujuan",
+    dataType: "json",
+    data: {
+      id_distribusi: id_distribusi,
+      id_peninjauan: id_peninjauan,
+      id_petugas_logistik: id_petugas_logistik,
+      tanggal_distribusi: tanggal_distribusi,
+      status_distribusi: status_distribusi,
       keterangan_distribusi: keterangan_distribusi,
       data: gabbantuan,
     },

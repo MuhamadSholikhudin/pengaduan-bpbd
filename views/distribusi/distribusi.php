@@ -72,40 +72,58 @@
                               <?= $distribusi['tanggal_distribusi'] ?>
                             </td>
                             <td>
+                              <!-- STATUS DISTRIBUSI -->
                               <?php
                               // Colomn status_distribusi
-                              if ($_SESSION['level'] == "petugas_logistik") { ?>
-                                <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
-                                  <?= $distribusi['status_distribusi'] ?>
-                                </a>
-                              <?php
-                              } elseif ($_SESSION['level'] == "petugas_kajian" and $distribusi['status_distribusi'] == ("Sedang dalam perjalanan" || "Sudah sampai" || "Selesai")) {
+                              if ($_SESSION['level'] == "petugas_logistik" ) { // petugas logistik 
+                                if($distribusi['status_distribusi'] == "Setujui" || $distribusi['status_distribusi'] == "Sedang dalam perjalanan" || $distribusi['status_distribusi'] == "Sudah sampai" || $distribusi['status_distribusi'] == "Selesai" ){
+                                  ?>
+                                  <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
+                                    <?= $distribusi['status_distribusi'] ?>
+                                  </a>
+                                <?php
+                                }else{
+                                  echo $distribusi['status_distribusi'];
+                                }
+
+
+                              } elseif ($_SESSION['level'] == "petugas_kajian") { // Petugas kajian
+                                if($distribusi['status_distribusi'] == "Sedang dalam perjalanan" || $distribusi['status_distribusi'] == "Sudah sampai" || $distribusi['status_distribusi'] == "Selesai"){
                               ?>
                                 <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
                                   <?= $distribusi['status_distribusi'] ?>
                                 </a>
                               <?php
+                                }else{
+                                  echo $distribusi['status_distribusi'];
+                                }
+
+
                               } else {
                                 echo $distribusi['status_distribusi'];
-                              }
-                              // Colomn status_distribusi
+                              }                              
                               ?>
+                              <!-- STATUS DISTRIBUSI -->
                             </td>
                             <td>
                               <img src="<?= $url ?>/gambar/bukti_distribusi/<?= $distribusi['bukti_distribusi'] ?>" alt="">
                             </td>
                             <td>
+                              <!-- ACTION DISTRIBUSI -->
                               <a href="<?= $url ?>/?distribusi=lihat&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
                                 <i class="ti-eye btn-icon-append"></i>
                                 Lihat
                               </a>
+
                               <?php if ($_SESSION['level'] == "petugas_logistik") { // jika level nya petugas logistik 
-                              ?>
-                                <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
-                                  <i class="ti-pencil-alt btn-icon-append"></i>
-                                  Edit
-                                </a>
-                                <?php
+                                if( $distribusi['status_distribusi'] == "Setujui" ||  $distribusi['status_distribusi'] == "Persiapan di kendaraan" || $distribusi['status_distribusi'] == "Sedang di proses"){
+                                  ?>
+                                  <a href="<?= $url ?>/?distribusi=edit&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
+                                    <i class="ti-pencil-alt btn-icon-append"></i>
+                                    Edit
+                                  </a>
+                                  <?php
+                                }
                                 // Check jumlah data publikasi berdasarkan distribusi sudah ada
                                 $cekcountpublikasi = NumRows("SELECT * FROM publikasi WHERE id_distribusi = " . $distribusi['id_distribusi'] . "");
                                 if ($cekcountpublikasi == 0) { // Jika belum di publikasikan
@@ -117,7 +135,9 @@
                                 }
                                 ?>
                                 <?php
-                              } elseif ($_SESSION['level'] == "petugas_kajian") {
+                                
+
+                              } elseif ($_SESSION['level'] == "petugas_kajian") { //Level petugas kajian
                                 if ($distribusi['status_distribusi'] == "" || $distribusi['status_distribusi'] == NULL || $distribusi['status_distribusi'] == "tidak setujui") {
                                 ?>
                                 <a href="<?= $url ?>/?distribusi=kirim&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-primary btn-icon-text">
@@ -138,8 +158,18 @@
                                 <?php
                                 }
                               }
+
+                              elseif($_SESSION['level'] == "kepala_bpbd"){ // Level kepala BPBD ?>
+                                <a href="<?= $url ?>/?distribusi=persetujuan&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-success btn-icon-text">
+                                  <i class="ti-check btn-icon-append"></i>
+                                    Persetujuan
+                                </a>
+                              <?php 
+                              }
                               ?>
                             </td>
+                            <!-- ACTION DISTRIBUSI -->
+
                           </tr>
                         <?php } ?>
                       </tbody>
@@ -232,7 +262,7 @@
                                   <label for="status_distribusi">* Status Distribusi</label>
                                   <select class="form-control" id="status_distribusi" name="status_distribusi">
                                     <?php
-                                    $status_diss = ['Persiapan di kendaraan', 'Sedang di proses', 'Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
+                                    $status_diss = ['Persiapan di kendaraan', 'Sedang di proses', 'Setujui', 'Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
                                     if ($_SESSION['level'] == "petugas_kajian") {
                                       $status_diss = ['Sedang dalam perjalanan', 'Sudah sampai', 'Selesai'];
                                     }

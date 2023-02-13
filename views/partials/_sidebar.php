@@ -30,7 +30,9 @@
                 <?php if(isset($_SESSION['level'])){
                   switch ($_SESSION['level']){
                     case 'kepala_bpbd':
-                    ?>                    
+                    ?>              
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("distribusi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
+
                     <?php
                     break;
                     case 'petugas_bpbd':
