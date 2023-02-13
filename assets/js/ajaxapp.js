@@ -309,11 +309,9 @@ function ProcessInsertLogistikStok() {
     data: gabbantuan,
   });
 
-  if(id_peninjauan == "" || id_peninjauan == NULL){
+  if(id_peninjauan == "" ){
     alert("Pilihan peninjauan Tidak boleh kosong");
-  }else{
-    console.log(payload);
-    /*
+  }else{  
     $.ajax({
       type: "POST",
       url: url_web + "/?distribusi=ajax_insert_distribusi_stok",
@@ -333,7 +331,7 @@ function ProcessInsertLogistikStok() {
         console.error();
       },
     });
-    */
+    
 
   }
 }
