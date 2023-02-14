@@ -32,7 +32,7 @@ class Pelaporan
        
 
         $sql = "INSERT INTO `pelaporan` 
-            ( `id_pelapor`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`)
+            ( `id_pelapor`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`, `created_at`,`updated_at`)
             VALUES 
             ( 
                 ".$request['id_pelapor'].", 
@@ -44,7 +44,9 @@ class Pelaporan
                 '".$request['status_pelaporan']."',
                 '".$gambar_bencana."',
                 '".$gambar_lokasi_bencana."',
-                '".$gambar_pelapor."'
+                '".$gambar_pelapor."',
+                '".date("Y-m-d H:i:s")."',
+                '".date("Y-m-d H:i:s")."'
             )";
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Pelaporan Berhasil Di Tambah");
@@ -85,7 +87,8 @@ class Pelaporan
                       status_pelaporan = '" . $request['status_pelaporan'] . "',
                       gambar_bencana = '" . $gambar_bencana . "',
                       gambar_lokasi_bencana ='" . $gambar_lokasi_bencana . "',
-                      gambar_pelapor = '" . $gambar_pelapor . "'
+                      gambar_pelapor = '" . $gambar_pelapor . "',
+                      updated_at = '".date("Y-m-d H:i:s")."'
                     WHERE id_pelaporan = " . $request['id_pelaporan'] . "
             ";
         $this->Model()->Execute($sql);
@@ -95,7 +98,8 @@ class Pelaporan
     public function Kirim($request)
     {
         $sql = "UPDATE `pelaporan` 
-                SET status_pelaporan =  'terkirim'
+                SET status_pelaporan =  'terkirim',
+                updated_at = '".date("Y-m-d H:i:s")."'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
@@ -104,7 +108,8 @@ class Pelaporan
     public function Batal_kirim($request)
     {
         $sql = "UPDATE  `pelaporan` 
-                SET status_pelaporan =  'batal kirim'
+                SET status_pelaporan =  'batal kirim',
+                updated_at = '".date("Y-m-d H:i:s")."'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
@@ -116,7 +121,8 @@ class Pelaporan
 
         $sql = "UPDATE  `pelaporan` 
                 SET status_pelaporan =  'tervalidasi',
-                id_petugas_bpbd =  ".$petugas_bpbd["id_petugas_bpbd"]."
+                id_petugas_bpbd =  ".$petugas_bpbd["id_petugas_bpbd"].",
+                updated_at = '".date("Y-m-d H:i:s")."'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
 
@@ -126,7 +132,8 @@ class Pelaporan
     public function Tidak_Valid($request)
     {
         $sql = "UPDATE  `pelaporan` 
-                SET status_pelaporan =  'tidak valid'
+                SET status_pelaporan =  'tidak valid',
+                updated_at = '".date("Y-m-d H:i:s")."'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
@@ -139,7 +146,8 @@ class Pelaporan
         $sql = "UPDATE  `pelaporan` 
                 SET status_pelaporan =  '".$request["status_pelaporan"]."',
                 id_petugas_bpbd =  ".$request["id_petugas_bpbd"].",
-                review_pelaporan =  '".$request["review_pelaporan"]."'
+                review_pelaporan =  '".$request["review_pelaporan"]."',
+                updated_at = '".date("Y-m-d H:i:s")."'
                 WHERE id_pelaporan = " . $request['id_pelaporan'] . "
             ";      
         $this->Model()->Execute($sql);
