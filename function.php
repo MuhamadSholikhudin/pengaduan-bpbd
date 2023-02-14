@@ -14,7 +14,7 @@ function Page($page){
 }
 
 
-$koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
+$koneksi = mysqli_connect("localhost","root","","pengaduan-bpbdv2");
  
 // Check connection
 if (mysqli_connect_errno()){
@@ -23,20 +23,20 @@ if (mysqli_connect_errno()){
 
 //function query banyak
 function Querybanyak($query){
-    $mysqli = new mysqli("localhost","root","","pengaduan-bpbd");
+    $mysqli = new mysqli("localhost","root","","pengaduan-bpbdv2");
     // menggunakan foreach
     return $mysqli->query($query);
 }
 
 //function query satu data
 function Querysatudata($query){
-    $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
+    $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbdv2");
     $query_cek = mysqli_query($koneksi, $query);
     return mysqli_fetch_array($query_cek, MYSQLI_BOTH);
 }
 
 function NumRows($query){
-    $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
+    $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbdv2");
     $cari = mysqli_query($koneksi, $query);
     $cek = mysqli_num_rows($cari);
     return $cek;

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2023 at 05:07 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Feb 15, 2023 at 12:23 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pengaduan-bpbd`
+-- Database: `pengaduan-bpbdv2`
 --
 
 -- --------------------------------------------------------
@@ -40,112 +40,112 @@ CREATE TABLE `bantuan` (
 --
 
 INSERT INTO `bantuan` (`id_bantuan`, `nama_bantuan`, `kategori`, `satuan`, `stok`) VALUES
-(1, 'Karung Plastik', 'MATERIAL', 'Lembar\n', 50),
-(2, 'Triplek', 'MATERIAL', 'Lembar\n', 100),
-(3, 'Seng', 'MATERIAL', 'Lembar', 100),
-(4, 'Paku Payung', 'MATERIAL', 'Ons', 96),
-(5, 'Paku Usuk', 'MATERIAL', 'Ons', 95),
-(6, 'Paku Reng', 'MATERIAL', 'Ons', 100),
-(7, 'Tanah Urug', 'MATERIAL', 'm³', 100),
-(8, 'Kawat Bronjong', 'MATERIAL', 'Biji', 100),
-(9, 'Batu Belah', 'MATERIAL', 'm³', 100),
-(10, 'Seng Bergelombang', 'MATERIAL', 'Lembar', 100),
-(11, 'Plastik Mika Penutup Longsor', 'MATERIAL', 'Roll', 100),
-(12, 'Genteng', 'MATERIAL', 'Buah', 100),
-(13, 'Kerpus', 'MATERIAL', 'Buah', 100),
-(14, 'Semen', 'MATERIAL', 'Sak', 100),
-(15, 'Batu Bata', 'MATERIAL', 'Buah', 100),
-(16, 'Pasir', 'MATERIAL', 'm³', 100),
-(17, 'Selimut', 'SANDANG', 'Lembar', 100),
-(18, 'Selimut Lurik', 'SANDANG', 'Lembar', 100),
-(19, 'Jarik', 'SANDANG', 'Lembar', 100),
-(20, 'Sarung', 'SANDANG', 'Lembar', 100),
-(21, 'Kelambu', 'SANDANG', 'Lembar', 100),
-(22, 'Baju anak', 'SANDANG', 'Pcs', 100),
-(23, 'Kaos dalam laki - laki ', 'SANDANG', 'Pcs', 100),
-(24, 'Celana dalam wanita', 'SANDANG', 'Pcs', 100),
-(25, 'Daster', 'SANDANG', 'Pcs', 100),
-(26, 'Kaos untuk relawan', 'SANDANG', 'Buah', 100),
-(27, 'Seragam Relawan', 'SANDANG', 'Buah', 100),
-(28, 'Paket Sandang', 'SANDANG', 'Paket', 100),
-(29, 'Kid Ware', 'SANDANG', 'Paket', 100),
-(30, 'Kids Ware', 'SANDANG', 'Paket', 100),
-(31, 'Family Kit', 'SANDANG', 'Paket', 100),
-(32, 'Peralatan Dapur / Food ware', 'SANDANG', 'Paket', 100),
-(33, 'Peralatan Kesehatan Rumah Tangga', 'SANDANG', 'Paket', 100),
-(34, 'Peralatan Kesehatan/Kebersihan', 'SANDANG', 'Paket', 100),
-(35, 'Perlengkapan Sekolah', 'SANDANG', 'Paket', 100),
-(36, 'Perlengkapan Makan', 'SANDANG', 'Paket', 100),
-(37, 'Kantong Mayat', 'SANDANG', 'Buah', 100),
-(38, 'Kantong Jenazah', 'SANDANG', 'Buah', 100),
-(39, 'Paket Rekreasional', 'SANDANG', 'Paket', 100),
-(40, 'Medical kit', 'SANDANG', 'Paket', 100),
-(41, 'Matras ', 'SANDANG', 'Lembar', 100),
-(42, 'Tikar ', 'SANDANG', 'Lembar', 100),
-(43, 'Tenda Gulung', 'SANDANG', 'Lembar', 100),
-(44, 'Paket Seragam PA', 'SANDANG', 'Buah', 100),
-(45, 'Paket Seragam PI', 'SANDANG', 'Buah', 100),
-(46, 'Tas Sekolah', 'SANDANG', 'Pcs', 100),
-(47, 'Pakaian Seragam SD PA', 'SANDANG', 'Buah', 100),
-(48, 'Pakaian Seragam SD PI', 'SANDANG', 'Buah', 100),
-(49, 'Handuk', 'SANDANG', 'Buah', 100),
-(50, 'Wajan ', 'SANDANG', 'Buah', 100),
-(51, 'Panci ', 'SANDANG', 'Buah', 100),
-(52, 'Brosur Kebencanaan', 'SANDANG', 'Lembar', 100),
-(53, 'Sepatu Boot', 'SANDANG', 'Buah', 100),
-(54, 'Jas Hujan', 'SANDANG', 'Buah', 100),
-(55, 'Webbing', 'SANDANG', 'Roll', 100),
-(56, 'Buku Cerita', 'SANDANG', 'Buah', 100),
-(57, 'Buku Saku Kebencanaan', 'SANDANG', 'Buah', 100),
-(58, 'Tas Tahan Air', 'SANDANG', 'Buah', 100),
-(59, 'Tas Penyimpan Dokumen Penting', 'SANDANG', 'Buah', 100),
-(60, 'Pembalut Charm', 'SANDANG', 'Pack', 100),
-(61, 'Pembalut Laurier', 'SANDANG', 'Pack', 100),
-(62, 'Pembalut', 'SANDANG', 'Pack', 100),
-(63, 'Pempers', 'SANDANG', 'Buah', 100),
-(64, 'Pampers M', 'SANDANG', 'Buah', 100),
-(65, 'Pempers L', 'SANDANG', 'Buah', 100),
-(66, 'Pampers S', 'SANDANG', 'Buah', 100),
-(67, 'Pampers', 'SANDANG', 'Buah', 100),
-(68, 'Linggis', 'SANDANG', 'Buah', 100),
-(69, 'Cangkul', 'SANDANG', 'Buah', 100),
-(70, 'Skop', 'SANDANG', 'Buah', 100),
-(71, 'Garpu', 'SANDANG', 'Buah', 100),
-(72, 'Parang', 'SANDANG', 'Buah', 100),
-(73, 'Helmet Font Brim Ventedorange', 'SANDANG', 'Buah', 100),
-(74, 'Helmet Front Brim Orange', 'SANDANG', 'Buah', 100),
-(75, 'Sarung Tangan Latex Yellow', 'SANDANG', 'Buah', 100),
-(76, 'Sarung Tangan Glove Blue Leather', 'SANDANG', 'Buah', 100),
-(77, 'Sarung Tangan Kain', 'SANDANG', 'dos', 100),
-(78, 'Masker', 'SANDANG', 'dos', 100),
-(79, 'Troly', 'SANDANG', 'Buah', 100),
-(80, 'Hygiene Kit', 'SANDANG', 'Paket', 100),
-(81, 'Sarung ', 'SANDANG', 'Buah', 100),
-(82, 'Tikar', 'SANDANG', 'Pcs', 100),
-(83, 'Air Mineral', 'MAKANAN DAN MINUMAN', 'Dus', 100),
-(84, 'Air Mineral Botol', 'MAKANAN DAN MINUMAN', 'Dus', 100),
-(85, 'Air Mineral Gelas', 'MAKANAN DAN MINUMAN', 'Dus', 100),
-(86, 'Beras', 'MAKANAN DAN MINUMAN', 'Kg', 100),
-(87, 'Gula Pasir', 'MAKANAN DAN MINUMAN', 'Kg', 100),
-(88, 'Lauk Pauk', 'MAKANAN DAN MINUMAN', 'Paket', 96),
-(89, 'Minyak Goreng', 'MAKANAN DAN MINUMAN', 'Liter', 100),
-(90, 'Mie Instan', 'MAKANAN DAN MINUMAN', 'Dus', 97),
-(91, 'Bubur Sun @24', 'MAKANAN DAN MINUMAN', 'Buah', 100),
-(92, 'Bubur Sun @24 (Makanan Balita)', 'MAKANAN DAN MINUMAN', 'Buah', 100),
-(93, 'Makanan Balita', 'MAKANAN DAN MINUMAN', 'Buah', 100),
-(94, 'Susu Anak/Balita', 'MAKANAN DAN MINUMAN', 'Buah', 96),
-(95, 'Susu Kaleng', 'MAKANAN DAN MINUMAN', 'Kaleng', 95),
-(96, 'Kecap', 'MAKANAN DAN MINUMAN', 'Botol', 100),
-(97, 'Tambahan Gizi', 'MAKANAN DAN MINUMAN', 'Paket', 100),
-(98, 'Saos', 'MAKANAN DAN MINUMAN', 'Botol', 100),
-(99, 'Teh Serbuk', 'MAKANAN DAN MINUMAN', 'Buah', 100),
-(100, 'Teh Celup', 'MAKANAN DAN MINUMAN', 'Dus', 100),
-(101, 'Kopi Susu', 'MAKANAN DAN MINUMAN', 'Sachet', 100),
-(102, 'Kopi Instan', 'MAKANAN DAN MINUMAN', 'Sachet', 100),
-(103, 'Sarden', 'MAKANAN DAN MINUMAN', 'Kaleng', 100),
-(104, 'Siap Saji', 'MAKANAN DAN MINUMAN', 'Paket', 100),
-(105, 'Yogurt', 'MAKANAN DAN MINUMAN', 'Buah', 100),
-(106, 'Daging Kaleng', 'MAKANAN DAN MINUMAN', 'Buah', 100);
+(1, 'Karung Plastik', 'MATERIAL', 'Lembar\n', 200),
+(2, 'Triplek', 'MATERIAL', 'Lembar\n', 200),
+(3, 'Seng', 'MATERIAL', 'Lembar', 200),
+(4, 'Paku Payung', 'MATERIAL', 'Ons', 200),
+(5, 'Paku Usuk', 'MATERIAL', 'Ons', 200),
+(6, 'Paku Reng', 'MATERIAL', 'Ons', 200),
+(7, 'Tanah Urug', 'MATERIAL', 'm³', 200),
+(8, 'Kawat Bronjong', 'MATERIAL', 'Biji', 200),
+(9, 'Batu Belah', 'MATERIAL', 'm³', 200),
+(10, 'Seng Bergelombang', 'MATERIAL', 'Lembar', 200),
+(11, 'Plastik Mika Penutup Longsor', 'MATERIAL', 'Roll', 200),
+(12, 'Genteng', 'MATERIAL', 'Buah', 200),
+(13, 'Kerpus', 'MATERIAL', 'Buah', 200),
+(14, 'Semen', 'MATERIAL', 'Sak', 200),
+(15, 'Batu Bata', 'MATERIAL', 'Buah', 200),
+(16, 'Pasir', 'MATERIAL', 'm³', 200),
+(17, 'Selimut', 'SANDANG', 'Lembar', 200),
+(18, 'Selimut Lurik', 'SANDANG', 'Lembar', 200),
+(19, 'Jarik', 'SANDANG', 'Lembar', 200),
+(20, 'Sarung', 'SANDANG', 'Lembar', 199),
+(21, 'Kelambu', 'SANDANG', 'Lembar', 200),
+(22, 'Baju anak', 'SANDANG', 'Pcs', 200),
+(23, 'Kaos dalam laki - laki ', 'SANDANG', 'Pcs', 200),
+(24, 'Celana dalam wanita', 'SANDANG', 'Pcs', 200),
+(25, 'Daster', 'SANDANG', 'Pcs', 200),
+(26, 'Kaos untuk relawan', 'SANDANG', 'Buah', 200),
+(27, 'Seragam Relawan', 'SANDANG', 'Buah', 200),
+(28, 'Paket Sandang', 'SANDANG', 'Paket', 200),
+(29, 'Kid Ware', 'SANDANG', 'Paket', 200),
+(30, 'Kids Ware', 'SANDANG', 'Paket', 200),
+(31, 'Family Kit', 'SANDANG', 'Paket', 200),
+(32, 'Peralatan Dapur / Food ware', 'SANDANG', 'Paket', 200),
+(33, 'Peralatan Kesehatan Rumah Tangga', 'SANDANG', 'Paket', 200),
+(34, 'Peralatan Kesehatan/Kebersihan', 'SANDANG', 'Paket', 200),
+(35, 'Perlengkapan Sekolah', 'SANDANG', 'Paket', 200),
+(36, 'Perlengkapan Makan', 'SANDANG', 'Paket', 199),
+(37, 'Kantong Mayat', 'SANDANG', 'Buah', 200),
+(38, 'Kantong Jenazah', 'SANDANG', 'Buah', 200),
+(39, 'Paket Rekreasional', 'SANDANG', 'Paket', 200),
+(40, 'Medical kit', 'SANDANG', 'Paket', 200),
+(41, 'Matras ', 'SANDANG', 'Lembar', 200),
+(42, 'Tikar ', 'SANDANG', 'Lembar', 200),
+(43, 'Tenda Gulung', 'SANDANG', 'Lembar', 200),
+(44, 'Paket Seragam PA', 'SANDANG', 'Buah', 200),
+(45, 'Paket Seragam PI', 'SANDANG', 'Buah', 200),
+(46, 'Tas Sekolah', 'SANDANG', 'Pcs', 200),
+(47, 'Pakaian Seragam SD PA', 'SANDANG', 'Buah', 200),
+(48, 'Pakaian Seragam SD PI', 'SANDANG', 'Buah', 200),
+(49, 'Handuk', 'SANDANG', 'Buah', 200),
+(50, 'Wajan ', 'SANDANG', 'Buah', 200),
+(51, 'Panci ', 'SANDANG', 'Buah', 200),
+(52, 'Brosur Kebencanaan', 'SANDANG', 'Lembar', 200),
+(53, 'Sepatu Boot', 'SANDANG', 'Buah', 200),
+(54, 'Jas Hujan', 'SANDANG', 'Buah', 200),
+(55, 'Webbing', 'SANDANG', 'Roll', 200),
+(56, 'Buku Cerita', 'SANDANG', 'Buah', 200),
+(57, 'Buku Saku Kebencanaan', 'SANDANG', 'Buah', 200),
+(58, 'Tas Tahan Air', 'SANDANG', 'Buah', 200),
+(59, 'Tas Penyimpan Dokumen Penting', 'SANDANG', 'Buah', 200),
+(60, 'Pembalut Charm', 'SANDANG', 'Pack', 200),
+(61, 'Pembalut Laurier', 'SANDANG', 'Pack', 200),
+(62, 'Pembalut', 'SANDANG', 'Pack', 200),
+(63, 'Pempers', 'SANDANG', 'Buah', 200),
+(64, 'Pampers M', 'SANDANG', 'Buah', 200),
+(65, 'Pempers L', 'SANDANG', 'Buah', 200),
+(66, 'Pampers S', 'SANDANG', 'Buah', 200),
+(67, 'Pampers', 'SANDANG', 'Buah', 200),
+(68, 'Linggis', 'SANDANG', 'Buah', 200),
+(69, 'Cangkul', 'SANDANG', 'Buah', 200),
+(70, 'Skop', 'SANDANG', 'Buah', 200),
+(71, 'Garpu', 'SANDANG', 'Buah', 200),
+(72, 'Parang', 'SANDANG', 'Buah', 200),
+(73, 'Helmet Font Brim Ventedorange', 'SANDANG', 'Buah', 200),
+(74, 'Helmet Front Brim Orange', 'SANDANG', 'Buah', 200),
+(75, 'Sarung Tangan Latex Yellow', 'SANDANG', 'Buah', 200),
+(76, 'Sarung Tangan Glove Blue Leather', 'SANDANG', 'Buah', 200),
+(77, 'Sarung Tangan Kain', 'SANDANG', 'dos', 200),
+(78, 'Masker', 'SANDANG', 'dos', 200),
+(79, 'Troly', 'SANDANG', 'Buah', 200),
+(80, 'Hygiene Kit', 'SANDANG', 'Paket', 200),
+(81, 'Sarung ', 'SANDANG', 'Buah', 200),
+(82, 'Tikar', 'SANDANG', 'Pcs', 200),
+(83, 'Air Mineral', 'MAKANAN DAN MINUMAN', 'Dus', 200),
+(84, 'Air Mineral Botol', 'MAKANAN DAN MINUMAN', 'Dus', 200),
+(85, 'Air Mineral Gelas', 'MAKANAN DAN MINUMAN', 'Dus', 200),
+(86, 'Beras', 'MAKANAN DAN MINUMAN', 'Kg', 200),
+(87, 'Gula Pasir', 'MAKANAN DAN MINUMAN', 'Kg', 200),
+(88, 'Lauk Pauk', 'MAKANAN DAN MINUMAN', 'Paket', 200),
+(89, 'Minyak Goreng', 'MAKANAN DAN MINUMAN', 'Liter', 200),
+(90, 'Mie Instan', 'MAKANAN DAN MINUMAN', 'Dus', 200),
+(91, 'Bubur Sun @24', 'MAKANAN DAN MINUMAN', 'Buah', 200),
+(92, 'Bubur Sun @24 (Makanan Balita)', 'MAKANAN DAN MINUMAN', 'Buah', 200),
+(93, 'Makanan Balita', 'MAKANAN DAN MINUMAN', 'Buah', 200),
+(94, 'Susu Anak/Balita', 'MAKANAN DAN MINUMAN', 'Buah', 200),
+(95, 'Susu Kaleng', 'MAKANAN DAN MINUMAN', 'Kaleng', 200),
+(96, 'Kecap', 'MAKANAN DAN MINUMAN', 'Botol', 200),
+(97, 'Tambahan Gizi', 'MAKANAN DAN MINUMAN', 'Paket', 200),
+(98, 'Saos', 'MAKANAN DAN MINUMAN', 'Botol', 200),
+(99, 'Teh Serbuk', 'MAKANAN DAN MINUMAN', 'Buah', 200),
+(100, 'Teh Celup', 'MAKANAN DAN MINUMAN', 'Dus', 200),
+(101, 'Kopi Susu', 'MAKANAN DAN MINUMAN', 'Sachet', 200),
+(102, 'Kopi Instan', 'MAKANAN DAN MINUMAN', 'Sachet', 200),
+(103, 'Sarden', 'MAKANAN DAN MINUMAN', 'Kaleng', 200),
+(104, 'Siap Saji', 'MAKANAN DAN MINUMAN', 'Paket', 200),
+(105, 'Yogurt', 'MAKANAN DAN MINUMAN', 'Buah', 200),
+(106, 'Daging Kaleng', 'MAKANAN DAN MINUMAN', 'Buah', 200);
 
 -- --------------------------------------------------------
 
@@ -167,14 +167,14 @@ CREATE TABLE `bantuan_distribusi` (
 --
 
 INSERT INTO `bantuan_distribusi` (`id_bantuan_distribusi`, `id_distribusi`, `id_stok_bantuan`, `jumlah`, `satuan`, `batch`) VALUES
-(6, 2, 1, 50, 50, 50),
-(8, 2, 83, 100, 100, 100),
-(9, 3, 94, 4, 4, 4),
-(11, 3, 95, 5, 5, 5),
-(12, 3, 4, 4, 4, 4),
-(13, 3, 5, 5, 5, 5),
-(14, 5, 90, 3, 0, 0),
-(15, 5, 88, 4, 1, 1);
+(1, 1, 84, 20, 20, 20),
+(2, 1, 88, 10, 10, 10),
+(13, 3, 90, 90, 2, 2),
+(14, 3, 103, 100, 3, 3),
+(15, 3, 83, 80, 4, 4),
+(18, 3, 88, 4, 4, 4),
+(19, 1, 20, 1, 1, 1),
+(20, 1, 36, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -238,8 +238,7 @@ CREATE TABLE `daftar` (
 --
 
 INSERT INTO `daftar` (`id_daftar`, `tanggal_daftar`, `nama_lengkap`, `alamat`, `no_telp`, `jenis_kelamin`, `id_wilayah`) VALUES
-(1, NULL, 'dyah ayuk', 'Margerejo Kudus', '897898439834', 'PEREMPUAN', 22),
-(2, NULL, 'Ayuk Diyah ST', 'Margorejo Kudus', '8976766987', 'PEREMPUAN', 22);
+(1, '2023-02-08', 'Ayuk Diyah Setyowati', 'rt 1 rw 2 margerejo dawe kudus', '89988876754', 'PEREMPUAN', 22);
 
 -- --------------------------------------------------------
 
@@ -262,10 +261,9 @@ CREATE TABLE `distribusi` (
 --
 
 INSERT INTO `distribusi` (`id_distribusi`, `id_peninjauan`, `tanggal_distribusi`, `keterangan_distribusi`, `status_distribusi`, `bukti_distribusi`, `id_petugas_logistik`) VALUES
-(2, 1, '2023-01-05', 'makanan bencana', 'Sudah sampai', '16745687971673994945kebakaran.jpg', 1),
-(3, 2, '2023-01-22', 'Distribusi ke pengungsian hari pertama', 'Sedang di proses', '', 1),
-(4, 2, '2023-01-22', 'Bantuan hari ke 2', 'Sedang di proses', '', 1),
-(5, 2, '2023-02-13', 'Pengajuan distribusi bencana daerah', 'Setujui', NULL, NULL);
+(1, 1, '2023-02-08', 'Bantuan berupa makanan akan di kirim sekarang ', 'Selesai', '1675872986distribusibantuan1.jpg', 1),
+(3, 1, '2023-02-12', 'Korban butuh bantuan', NULL, NULL, NULL),
+(4, 1, '2023-02-14', 'makanan dan sandang ', 'Sedang di proses', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -286,7 +284,7 @@ CREATE TABLE `kepala_bpbd` (
 --
 
 INSERT INTO `kepala_bpbd` (`id_kepala_bpbd`, `id_user`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 2, 'Bambang', 'Kota Kudus', '7869961');
+(1, 2, 'Bambang SH', 'Bae Kudus', '89098767543');
 
 -- --------------------------------------------------------
 
@@ -297,7 +295,7 @@ INSERT INTO `kepala_bpbd` (`id_kepala_bpbd`, `id_user`, `nama`, `alamat`, `no_te
 CREATE TABLE `pelapor` (
   `id_pelapor` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `id_daftar` int(11) NOT NULL,
+  `id_daftar` int(11) DEFAULT NULL,
   `nama_pelapor` varchar(100) DEFAULT NULL,
   `alamat_pelapor` text DEFAULT NULL,
   `no_telp_pelapor` varchar(14) DEFAULT NULL
@@ -308,8 +306,7 @@ CREATE TABLE `pelapor` (
 --
 
 INSERT INTO `pelapor` (`id_pelapor`, `id_user`, `id_daftar`, `nama_pelapor`, `alamat_pelapor`, `no_telp_pelapor`) VALUES
-(1, 3, 1, 'dyah ayu', 'margorejo kudus', '897898439834'),
-(2, 6, 2, 'Diyah Ayuk ST', 'MArgerejo Kudus', '8973623762');
+(1, 5, 1, 'Ayuk Diyah Setyowati', 'rt 1 rw 2 margerejo dawe kudus', '89988876754');
 
 -- --------------------------------------------------------
 
@@ -330,18 +327,17 @@ CREATE TABLE `pelaporan` (
   `gambar_lokasi_bencana` text DEFAULT NULL,
   `gambar_pelapor` text DEFAULT NULL,
   `status_pelaporan` varchar(30) NOT NULL,
-  `review_pelaporan` text DEFAULT NULL
+  `review_pelaporan` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pelaporan`
 --
 
-INSERT INTO `pelaporan` (`id_pelaporan`, `id_pelapor`, `id_petugas_bpbd`, `id_bencana`, `id_wilayah`, `tanggal_pelaporan`, `pelaporan`, `link_maps`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`, `status_pelaporan`, `review_pelaporan`) VALUES
-(1, 1, 1, 1, 4, '2023-01-02', 'Kebanjiran karena tanggul jebol', '', NULL, NULL, NULL, 'tervalidasi', 'data lokasi pengaduan salah'),
-(2, 1, NULL, 1, 1, '2023-01-08', 'banjir selutut orang dewasa, satu kelurahan', '', NULL, NULL, NULL, 'tervalidasi', NULL),
-(3, 1, NULL, 7, 16, '2023-01-18', 'terjadi kebakaran pada sebuah rumah di jalan', '', '1674079698kebakaran.jpg', '1674079698lokasi kebakaran.jpg', '1674079698selfi kebakaran.jpg', 'tervalidasi', 'qwe'),
-(4, 1, NULL, 1, 4, '2023-02-02', 'Terjadi banjir di BAE kab KUDUS', '', '1675287465banjir1.jpg', '1675287465lokasi banjir.jpg', '1675287465selfi_banjir.jpg', 'belum dikirim', NULL);
+INSERT INTO `pelaporan` (`id_pelaporan`, `id_pelapor`, `id_petugas_bpbd`, `id_bencana`, `id_wilayah`, `tanggal_pelaporan`, `pelaporan`, `link_maps`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`, `status_pelaporan`, `review_pelaporan`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 7, 22, '2023-02-08', 'Terjadi kebakaran pada saat ini di margorejo dawe rt 1 rw 2 kecamatan dawe sekarang kebakaran membakar 2 rumah warga', '', '1675872205kebakaran.jpg', '1675872205lokasi kebakaran.jpg', '1675872205selfi kebakaran.jpg', 'tervalidasi', 'Pelaporan tervalidasi sekarang akan saya kirimkan tim pemadam kebakaran dan beserta petugas yang berkompeten terhadap bencana', '2023-02-14 21:13:35', '2023-02-14 21:13:45');
 
 -- --------------------------------------------------------
 
@@ -351,8 +347,8 @@ INSERT INTO `pelaporan` (`id_pelaporan`, `id_pelapor`, `id_petugas_bpbd`, `id_be
 
 CREATE TABLE `peninjauan` (
   `id_peninjauan` int(11) NOT NULL,
-  `id_pelaporan` int(11) NOT NULL,
-  `id_wilayah` int(11) NOT NULL,
+  `id_pelaporan` int(11) DEFAULT NULL,
+  `id_wilayah` int(11) DEFAULT NULL,
   `id_bencana` int(11) DEFAULT NULL,
   `id_petugas_kajian` int(11) DEFAULT NULL,
   `kategori_bencana` varchar(20) DEFAULT NULL,
@@ -378,9 +374,7 @@ CREATE TABLE `peninjauan` (
 --
 
 INSERT INTO `peninjauan` (`id_peninjauan`, `id_pelaporan`, `id_wilayah`, `id_bencana`, `id_petugas_kajian`, `kategori_bencana`, `level_bencana`, `tanggal_peninjauan`, `jumlah_korban`, `keterangan_peninjauan`, `status_peninjauan`, `bukti_peninjauan`, `dusun`, `rt`, `rw`, `jumlah_kk`, `jumlah_rumah`, `sebab`, `akibat`, `upaya_penanganan`, `lain_lain`) VALUES
-(1, 1, 1, 2, 1, 'Bencana Alam', 2, '2023-01-02', 28, 'Banjir karena tanggul jebol 30', 'selesai', '167264083682a3444a-aadc-4800-8df6-757b0c0d7c17.jpeg', '', '1', '1', 1, 1, '', '', '', ''),
-(2, 3, 16, 7, 1, 'Bencana Alam', 3, '2023-01-22', 1, 'Terjadi bencana di glagah Kulon deket pabrik', 'sudah meninjau', '1674378005kebakaran.jpg', 'Glagah Kulon sitik', '1', '2', 1, 1, 'membuang putung rokok ke bensin dan membuat api cepat mengenai lahan', 'lahan seluas 1 hektar terbakar', 'di padamkan dengan menggukana mobil pemadam kebakaran', '- Pemadam kebakaran'),
-(3, 2, 1, 1, 1, 'Bencana Alam', 1, '2023-02-02', 2, 'Banjir di umk', 'dalam proses', '1675287119download.jpg', 'Bae', '1', '1', 2, 2, 'terjadi hujan 2 hari berturut turut', 'Banjir dengan menggenang selama 2', 'pemberian bantuan', '- BPBD KAB KUDUS');
+(1, 1, 22, 7, 1, 'Bencana Non Alam', 2, '2023-02-08', 10, 'Peninjauan sedang berlangsung terhadap bencana yang terjadi pada lokasi', 'selesai', '1675872654fotokebakaran.jpg', 'margorejo', '1', '1', 2, 2, 'penyebab kebakaran adalah terjadinya konsleting lisrik ', 'terjadinya kebakaran yang membakar 2 rumah warga', '- Telah di padamkan oleh pemadam kebakaran\r\n- Para warga membantu jalannya evakuasi', '- Petugas BPBD\r\n- Pemadam kebakaran');
 
 -- --------------------------------------------------------
 
@@ -401,7 +395,7 @@ CREATE TABLE `petugas_bpbd` (
 --
 
 INSERT INTO `petugas_bpbd` (`id_petugas_bpbd`, `id_user`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 1, 'Rahajeng Wulansari', 'Kudus Kota', '892729432943');
+(1, 1, 'Rahajeng Wulansari', 'Kota Kudus', '89765456765');
 
 -- --------------------------------------------------------
 
@@ -422,7 +416,7 @@ CREATE TABLE `petugas_kajian` (
 --
 
 INSERT INTO `petugas_kajian` (`id_petugas_kajian`, `id_user`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 5, 'Yudha Prasetuo', 'Jekulo Kudus', '8987070074');
+(1, 3, 'Yusuf Nur Hidayat', 'Jekulo Kudus', '89767543342');
 
 -- --------------------------------------------------------
 
@@ -443,7 +437,7 @@ CREATE TABLE `petugas_logistik` (
 --
 
 INSERT INTO `petugas_logistik` (`id_petugas_logistik`, `id_user`, `nama`, `alamat`, `no_telp`) VALUES
-(1, 4, 'Yusuf Hidayat', 'Bae Kudus', '89796859');
+(1, 4, 'Yudha Prasetyo', 'Mejobo Kudus', '89878865465');
 
 -- --------------------------------------------------------
 
@@ -454,7 +448,7 @@ INSERT INTO `petugas_logistik` (`id_petugas_logistik`, `id_user`, `nama`, `alama
 CREATE TABLE `posko` (
   `id_posko` int(11) NOT NULL,
   `id_peninjauan` int(11) DEFAULT NULL,
-  `nama_posko` varchar(50) DEFAULT NULL,
+  `nama_posko` varchar(100) DEFAULT NULL,
   `jumlah_jiwa` int(11) DEFAULT NULL,
   `balita` int(11) DEFAULT NULL,
   `remaja` int(11) DEFAULT NULL,
@@ -468,6 +462,13 @@ CREATE TABLE `posko` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `posko`
+--
+
+INSERT INTO `posko` (`id_posko`, `id_peninjauan`, `nama_posko`, `jumlah_jiwa`, `balita`, `remaja`, `dewasa`, `lanjut_usia`, `status_posko`, `tanggal_posko`, `tanggal_selesai`, `keterangan`, `gambar_posko`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Posko Bupati1', 50, 0, 0, 0, 0, 'Keadaan Darurat Bencana', '2023-02-11', '0000-00-00', 'Posko Bupati', '1676168917distribusibantuan1.jpg', '2023-02-12 01:39:28', '2023-02-12 02:29:28');
 
 -- --------------------------------------------------------
 
@@ -493,9 +494,7 @@ CREATE TABLE `publikasi` (
 --
 
 INSERT INTO `publikasi` (`id_publikasi`, `id_distribusi`, `judul`, `kutipan`, `kategori`, `isi`, `gambar`, `created_at`, `updated_at`, `tanggal_publikasi`) VALUES
-(1, NULL, 'Distribusi pada bantuan ', 'Distribusi pada bantuan ', 'Distribusi', 'Distribusi pada bantuan ', '16746850911673994945kebakaran.jpg', '2023-01-25 22:18:11', '2023-01-25 22:18:11', '2023-01-26'),
-(2, NULL, 'SELFI BENCANA', 'SELFI BENCANA', 'Peninjauan', 'SELFI BENCANA', '16746851291673994945selfikebakaran.jpg', '2023-01-25 22:18:49', '2023-01-25 22:18:49', '2023-01-25'),
-(3, NULL, 'Lokasi Bencana', 'Lokasi Bencana', 'Distribusi', 'Lokasi Bencana', '16746852181673994945lokasikebakaran.jpg', '2023-01-25 22:20:18', '2023-01-25 22:20:18', '2023-01-20');
+(1, 1, 'Distribusi bantuan kepada wargayang terkena kebakaran di desa margorejo dawe kudus ', 'Distribusi bantuan kepada wargayang terkena kebakaran di desa margorejo dawe kudus', 'Distribusi', 'Desa Margorejo Dawe Kudus mengalami kebakaran pada tanggal 8 Februari 2023. Kebakaran yang terjadi pada sebuah rumah warga membuat panik warga setempat. Kebakaran cepat dikendalikan oleh tim pemadam kebakaran setempat dan tidak ada korban jiwa. Penyebab kebakaran masih sedang dalam penyelidikan. Warga meminta pemerintah untuk lebih memperhatikan masalah keamanan dan pencegahan kebakaran di desanya.', '1675873377distribusi_bantuan_1_1.jpg', '2023-02-08 16:22:57', '2023-02-08 17:06:04', '2023-02-08');
 
 -- --------------------------------------------------------
 
@@ -519,112 +518,112 @@ CREATE TABLE `stok_bantuan` (
 --
 
 INSERT INTO `stok_bantuan` (`id_stok_bantuan`, `id_bantuan`, `tanggal_masuk`, `tanggal_kadaluarsa`, `stok_masuk`, `stok_tersedia`, `batch`, `satuan`) VALUES
-(1, 1, '2023-01-09', '2025-01-09', 100, 150, '2023-01-09', NULL),
-(2, 2, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(3, 3, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(4, 4, '2023-01-09', '2025-01-09', 100, 96, '2023-01-09', NULL),
-(5, 5, '2023-01-09', '2025-01-09', 100, 95, '2023-01-09', NULL),
-(6, 6, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(7, 7, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(8, 8, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(9, 9, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(10, 10, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(11, 11, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(12, 12, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(13, 13, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(14, 14, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(15, 15, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(16, 16, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(17, 17, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(18, 18, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(19, 19, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(20, 20, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(21, 21, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(22, 22, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(23, 23, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(24, 24, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(25, 25, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(26, 26, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(27, 27, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(28, 28, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(29, 29, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(30, 30, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(31, 31, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(32, 32, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(33, 33, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(34, 34, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(35, 35, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(36, 36, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(37, 37, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(38, 38, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(39, 39, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(40, 40, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(41, 41, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(42, 42, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(43, 43, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(44, 44, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(45, 45, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(46, 46, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(47, 47, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(48, 48, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(49, 49, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(50, 50, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(51, 51, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(52, 52, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(53, 53, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(54, 54, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(55, 55, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(56, 56, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(57, 57, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(58, 58, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(59, 59, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(60, 60, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(61, 61, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(62, 62, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(63, 63, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(64, 64, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(65, 65, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(66, 66, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(67, 67, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(68, 68, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(69, 69, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(70, 70, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(71, 71, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(72, 72, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(73, 73, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(74, 74, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(75, 75, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(76, 76, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(77, 77, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(78, 78, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(79, 79, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(80, 80, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(81, 81, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(82, 82, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(83, 83, '2023-01-09', '2025-01-09', 100, 0, '2023-01-09', NULL),
-(84, 84, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(85, 85, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(86, 86, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(87, 87, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(88, 88, '2023-01-09', '2025-01-09', 100, 96, '2023-01-09', NULL),
-(89, 89, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(90, 90, '2023-01-09', '2025-01-09', 100, 97, '2023-01-09', NULL),
-(91, 91, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(92, 92, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(93, 93, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(94, 94, '2023-01-09', '2025-01-09', 100, 96, '2023-01-09', NULL),
-(95, 95, '2023-01-09', '2025-01-09', 100, 95, '2023-01-09', NULL),
-(96, 96, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(97, 97, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(98, 98, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(99, 99, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(100, 100, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(101, 101, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(102, 102, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(103, 103, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(104, 104, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(105, 105, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL),
-(106, 106, '2023-01-09', '2025-01-09', 100, 100, '2023-01-09', NULL);
+(1, 1, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(2, 2, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(3, 3, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(4, 4, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(5, 5, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(6, 6, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(7, 7, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(8, 8, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(9, 9, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(10, 10, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(11, 11, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(12, 12, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(13, 13, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(14, 14, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(15, 15, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(16, 16, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(17, 17, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(18, 18, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(19, 19, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(20, 20, '2023-01-09', '2025-01-09', 200, 199, '2023-01-09', NULL),
+(21, 21, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(22, 22, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(23, 23, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(24, 24, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(25, 25, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(26, 26, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(27, 27, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(28, 28, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(29, 29, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(30, 30, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(31, 31, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(32, 32, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(33, 33, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(34, 34, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(35, 35, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(36, 36, '2023-01-09', '2025-01-09', 200, 199, '2023-01-09', NULL),
+(37, 37, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(38, 38, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(39, 39, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(40, 40, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(41, 41, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(42, 42, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(43, 43, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(44, 44, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(45, 45, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(46, 46, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(47, 47, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(48, 48, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(49, 49, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(50, 50, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(51, 51, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(52, 52, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(53, 53, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(54, 54, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(55, 55, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(56, 56, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(57, 57, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(58, 58, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(59, 59, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(60, 60, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(61, 61, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(62, 62, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(63, 63, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(64, 64, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(65, 65, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(66, 66, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(67, 67, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(68, 68, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(69, 69, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(70, 70, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(71, 71, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(72, 72, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(73, 73, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(74, 74, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(75, 75, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(76, 76, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(77, 77, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(78, 78, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(79, 79, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(80, 80, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(81, 81, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(82, 82, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(83, 83, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(84, 84, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(85, 85, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(86, 86, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(87, 87, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(88, 88, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(89, 89, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(90, 90, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(91, 91, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(92, 92, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(93, 93, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(94, 94, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(95, 95, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(96, 96, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(97, 97, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(98, 98, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(99, 99, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(100, 100, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(101, 101, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(102, 102, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(103, 103, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(104, 104, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(105, 105, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL),
+(106, 106, '2023-01-09', '2025-01-09', 200, 200, '2023-01-09', NULL);
 
 -- --------------------------------------------------------
 
@@ -646,10 +645,9 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id_user`, `username`, `password`, `level`) VALUES
 (1, 'admin', 'admin', 'petugas_bpbd'),
 (2, 'kepala', 'kepala', 'kepala_bpbd'),
-(3, 'ayuk', 'ayuk', 'pelapor'),
+(3, 'kajian', 'kajian', 'petugas_kajian'),
 (4, 'logistik', 'logistik', 'petugas_logistik'),
-(5, 'kajian', 'kajian', 'petugas_kajian'),
-(6, 'dyah', '12345', 'pelapor');
+(5, 'ayuk', 'ayuk', 'pelapor');
 
 -- --------------------------------------------------------
 
@@ -941,7 +939,7 @@ ALTER TABLE `bantuan`
 -- AUTO_INCREMENT for table `bantuan_distribusi`
 --
 ALTER TABLE `bantuan_distribusi`
-  MODIFY `id_bantuan_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_bantuan_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `bencana`
@@ -953,13 +951,13 @@ ALTER TABLE `bencana`
 -- AUTO_INCREMENT for table `daftar`
 --
 ALTER TABLE `daftar`
-  MODIFY `id_daftar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_daftar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `distribusi`
 --
 ALTER TABLE `distribusi`
-  MODIFY `id_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_distribusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `kepala_bpbd`
@@ -971,25 +969,25 @@ ALTER TABLE `kepala_bpbd`
 -- AUTO_INCREMENT for table `pelapor`
 --
 ALTER TABLE `pelapor`
-  MODIFY `id_pelapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pelapor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pelaporan`
 --
 ALTER TABLE `pelaporan`
-  MODIFY `id_pelaporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pelaporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `peninjauan`
 --
 ALTER TABLE `peninjauan`
-  MODIFY `id_peninjauan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_peninjauan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `petugas_bpbd`
 --
 ALTER TABLE `petugas_bpbd`
-  MODIFY `id_petugas_bpbd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_petugas_bpbd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `petugas_kajian`
@@ -1007,13 +1005,13 @@ ALTER TABLE `petugas_logistik`
 -- AUTO_INCREMENT for table `posko`
 --
 ALTER TABLE `posko`
-  MODIFY `id_posko` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_posko` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `publikasi`
 --
 ALTER TABLE `publikasi`
-  MODIFY `id_publikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_publikasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `stok_bantuan`
@@ -1025,7 +1023,7 @@ ALTER TABLE `stok_bantuan`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `wilayah`

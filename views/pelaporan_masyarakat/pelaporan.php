@@ -17,6 +17,8 @@
                    Tampilan ini menampilkan data pelaporan masyarakat yang di tambahkan sesuai user yang di pakai oleh masyarakat
                    data akan untuk menambahkan data pelaporan anda dapat memimilih tombol tambah setelah itu lakukan penginputan 
                    pelaporan bencana sesuai dengan data yang berada di lokasi kejadian. 
+                   Setelah anda menambahkan data pelaporan silahkan kirim data pengajuan yang anda tambahkan pengirim anda akan di proses setelah anda kirim 
+                   data pelporan ke petugas BPBD. proses pengecekan pelaporan akan di proses 1x24 jam jika selama proses telah melewati 1x24 jam pelapolan anda dianggap tidak valid. 
                   </p>
                 </div>
                 </div>
@@ -52,6 +54,9 @@
                             Tanggal Pelaporan
                           </th>
                           <th>
+                            Max Proses
+                          </th>
+                          <th>
                             Bencana
                           </th>
                           <th>
@@ -85,7 +90,16 @@
                               <?= $pelaporan['nama_pelapor'] ?>
                             </td>
                             <td>
-                              <?= $pelaporan['tanggal_pelaporan'] ?>
+                              <!-- <?= $pelaporan['tanggal_pelaporan'] ?> -->
+
+                              <?= $pelaporan['created_at'] ?>
+                            </td>
+                            <td>
+                              <?php
+                                  $created_at = $pelaporan['created_at'];
+                                  $max_proses = date('Y-m-d H:i:s', strtotime($created_at. ' + 24 hours'));                                
+                                  echo $max_proses;
+                                ?>
                             </td>
                             <td>
                               <?php
@@ -128,19 +142,26 @@
                               <!-- Action -->
                               <?php
                               if ($pelaporan['status_pelaporan'] == "belum dikirim") { // Jika status pelaporan belum di kirim
+                              // $datetime_now = date("Y-m-d H:i:s")
+                              if(new DateTime(date("Y-m-d H:i:s")) < new DateTime($max_proses)){ ?>
+
+                                  <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
+                                    <i class="ti-arrow-top-right"></i>
+                                    Kirim
+                                  </a>
+                                  <a href="<?= $url ?>/?pelaporan_masyarakat=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
+                                    <i class="ti-pencil-alt"></i>
+                                    Edit
+                                  </a>
+
+                              <?php
+                              }
                               ?>
-                                <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
-                                  <i class="ti-arrow-top-right"></i>
-                                  Kirim
-                                </a>
-                                <a href="<?= $url ?>/?pelaporan_masyarakat=edit&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
-                                  <i class="ti-pencil-alt"></i>
-                                  Edit
-                                </a>
+
                               <?php
                               } elseif ($pelaporan['status_pelaporan'] == "batal kirim") { // Jika status_pelaporan batal dikirim
-                              ?>
-                                <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
+                                if(new DateTime(date("Y-m-d H:i:s")) < new DateTime($max_proses)){ ?>
+                                    <a href="<?= $url ?>/?pelaporan_masyarakat=kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-primary btn-outline-white btn-sm text-white">
                                   <i class="ti-arrow-top-right"></i>
                                   Kirim
                                 </a>
@@ -148,7 +169,8 @@
                                   <i class="ti-pencil-alt"></i>
                                   Edit
                                 </a>
-                              <?php
+                                <?php
+                                }
                               } elseif ($pelaporan['status_pelaporan'] == "terkirim") { // Jika status_pelaporan terkirim
                               ?>
                                 <a href="<?= $url ?>/?pelaporan_masyarakat=batal_kirim&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-secondary btn-outline-white btn-sm text-dark">

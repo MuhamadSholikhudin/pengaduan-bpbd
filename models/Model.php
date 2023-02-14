@@ -1,7 +1,7 @@
 <?php 
 class Model {
     public function Db(){
-        $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbd");
+        $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbdv2");
         return $koneksi;
     }
     

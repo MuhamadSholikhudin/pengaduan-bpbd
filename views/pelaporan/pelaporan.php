@@ -81,6 +81,7 @@
                             </td>
                             <td>
                               <?= $pelaporan['tanggal_pelaporan'] ?>
+                              
                             </td>
                             <td>
                               <?php

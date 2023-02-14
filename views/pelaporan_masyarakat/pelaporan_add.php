@@ -33,8 +33,9 @@
               }
               ?>
                 <span class="text-primary">! INFO :</span>
-                Halaman ini digunakan untuk menambahkan data pelaporan bencana data yang di tambahkan akan di prosess 1 X 24 jam 
-                atau jika dalam keadaan mendesak anda dapat langsung hubungi <a href="tel:+"> <?= $no_hp ?></a>
+                Halaman ini digunakan untuk menambahkan data pelaporan bencana data yang di tambahkan akan di prosess selama 1 X 24 jam dari anda mulai membuat pelaporan ini jika dalam waktu 1x24 jam belum di proses maka pelaporan tidak dapat di lanjutkan ke tahap berikutnya. <br>
+                1. Setelah anda mengisi data pelaporan pada form pelaporan di bawah ini maka kirim laporan ke petugas BPBD dengan klik tombol kirim di halaman pelaporan.<br>
+                2. Jika dalam keadaan mendesak atau anda belum terbiasa dengan aplikasi ini anda dapat langsung hubungi.<a href="tel:+"> <?= $no_hp ?></a> untuk diarahkan dalam proses pelaporan bencana
               </p>
             </div>
           </div>
