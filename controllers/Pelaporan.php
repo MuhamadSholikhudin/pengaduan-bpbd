@@ -29,26 +29,39 @@ class Pelaporan
             $lokasi = $file['gambar_pelapor']['tmp_name'];
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_pelapor);
         }
-       
 
         $sql = "INSERT INTO `pelaporan` 
             ( `id_pelapor`, `tanggal_pelaporan`, `id_bencana`, `id_wilayah`, `pelaporan`, `link_maps`, `status_pelaporan`, `gambar_bencana`, `gambar_lokasi_bencana`, `gambar_pelapor`, `created_at`,`updated_at`)
             VALUES 
             ( 
-                ".$request['id_pelapor'].", 
-                '".$request['tanggal_pelaporan']."', 
-                ".$request['id_bencana'].",
-                ".$request['id_wilayah'].",
-                '".$request['pelaporan']."',
-                '".$request['link_maps']."',
-                '".$request['status_pelaporan']."',
-                '".$gambar_bencana."',
-                '".$gambar_lokasi_bencana."',
-                '".$gambar_pelapor."',
-                '".date("Y-m-d H:i:s")."',
-                '".date("Y-m-d H:i:s")."'
+                " . $request['id_pelapor'] . ", 
+                '" . $request['tanggal_pelaporan'] . "', 
+                " . $request['id_bencana'] . ",
+                " . $request['id_wilayah'] . ",
+                '" . $request['pelaporan'] . "',
+                '" . $request['link_maps'] . "',
+                '" . $request['status_pelaporan'] . "',
+                '" . $gambar_bencana . "',
+                '" . $gambar_lokasi_bencana . "',
+                '" . $gambar_pelapor . "',
+                '" . date("Y-m-d H:i:s") . "',
+                '" . date("Y-m-d H:i:s") . "'
             )";
         $this->Model()->Execute($sql);
+
+        // Menampilkan data pelaporan yang terakhir di tambahkan
+        $tampil_pelaporan = Querysatudata("SELECT * FROM pelaporan ORDER BY id_pelaporan DESC ");
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+        ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+        VALUES
+        ( 'add', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $tampil_pelaporan['id_pelaporan'] . ", '', 'menambahkan data pelaporan', " . $_SESSION['id_user'] . ") 
+        ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Pelaporan Berhasil Di Tambah");
     }
 
@@ -60,7 +73,7 @@ class Pelaporan
             unlink("./gambar/pelaporan/" . $gambar_bencana);
             $gambar_bencana = str_replace(" ", "", (strtotime("now") . $file['gambar_bencana']['name']));
             $lokasi = $file['gambar_bencana']['tmp_name'];
-            move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_bencana);            
+            move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_bencana);
         }
         $gambar_lokasi_bencana = $pelaporan['gambar_lokasi_bencana'];
         if ($file['gambar_lokasi_bencana']['name'] !== "") {
@@ -77,6 +90,7 @@ class Pelaporan
             move_uploaded_file($lokasi, "./gambar/pelaporan/" . $gambar_pelapor);
         }
 
+        // Query update data pelaporan
         $sql = "UPDATE  `pelaporan` 
                 SET   id_pelapor =  " . $request['id_pelapor'] . ", 
                       tanggal_pelaporan =  '" . $request['tanggal_pelaporan'] . "', 
@@ -88,43 +102,91 @@ class Pelaporan
                       gambar_bencana = '" . $gambar_bencana . "',
                       gambar_lokasi_bencana ='" . $gambar_lokasi_bencana . "',
                       gambar_pelapor = '" . $gambar_pelapor . "',
-                      updated_at = '".date("Y-m-d H:i:s")."'
+                      updated_at = '" . date("Y-m-d H:i:s") . "'
                     WHERE id_pelaporan = " . $request['id_pelaporan'] . "
             ";
         $this->Model()->Execute($sql);
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+        ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+        VALUES
+        ( 'update', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id_pelaporan'] . ", '', 'mengubah data pelaporan', " . $_SESSION['id_user'] . ") 
+        ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Ubah");
     }
 
     public function Kirim($request)
     {
+        // Query kirm data pelaporan dengan update status_pelaporan
         $sql = "UPDATE `pelaporan` 
                 SET status_pelaporan =  'terkirim',
-                updated_at = '".date("Y-m-d H:i:s")."'
+                updated_at = '" . date("Y-m-d H:i:s") . "'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
+        //Execute Query
         $this->Model()->Execute($sql);
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+                ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+                VALUES
+                ( 'send', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id'] . ", '', 'kirim data pelaporan ke petugas bpbd', " . $_SESSION['id_user'] . ") 
+                ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Kirim");
     }
     public function Batal_kirim($request)
     {
+        // Query batal_kirim pelaporan
         $sql = "UPDATE  `pelaporan` 
                 SET status_pelaporan =  'batal kirim',
-                updated_at = '".date("Y-m-d H:i:s")."'
+                updated_at = '" . date("Y-m-d H:i:s") . "'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
+
+        // Execute query
         $this->Model()->Execute($sql);
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+                ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+                VALUES
+                ( 'cancel send', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id'] . ", '', 'batal kirim data pelaporan ke petugas bpbd', " . $_SESSION['id_user'] . ") 
+                ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Kirim");
     }
     public function Validasi($request)
     {
-        $petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd WHERE id_user = ".$_SESSION['id_user']." ");
+        $petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd WHERE id_user = " . $_SESSION['id_user'] . " ");
 
         $sql = "UPDATE  `pelaporan` 
                 SET status_pelaporan =  'tervalidasi',
-                id_petugas_bpbd =  ".$petugas_bpbd["id_petugas_bpbd"].",
-                updated_at = '".date("Y-m-d H:i:s")."'
+                id_petugas_bpbd =  " . $petugas_bpbd["id_petugas_bpbd"] . ",
+                updated_at = '" . date("Y-m-d H:i:s") . "'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+        ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+        VALUES
+        ( 'validate', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id'] . ", '', 'validasi data pelaporan tervalidasi', " . $_SESSION['id_user'] . ") 
+        ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
 
         $this->Model()->Execute($sql);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Di Validasi");
@@ -133,24 +195,46 @@ class Pelaporan
     {
         $sql = "UPDATE  `pelaporan` 
                 SET status_pelaporan =  'tidak valid',
-                updated_at = '".date("Y-m-d H:i:s")."'
+                updated_at = '" . date("Y-m-d H:i:s") . "'
                 WHERE id_pelaporan = " . $request['id'] . "
             ";
         $this->Model()->Execute($sql);
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+                ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+                VALUES
+                ( 'un-validate', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id'] . ", '', 'validasi data pelaporan tidak valid', " . $_SESSION['id_user'] . ") 
+                ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil Tidak divalidasi");
     }
 
     public function CheckValidasi($request)
     {
 
+        // Query Check validasi
         $sql = "UPDATE  `pelaporan` 
-                SET status_pelaporan =  '".$request["status_pelaporan"]."',
-                id_petugas_bpbd =  ".$request["id_petugas_bpbd"].",
-                review_pelaporan =  '".$request["review_pelaporan"]."',
-                updated_at = '".date("Y-m-d H:i:s")."'
+                SET status_pelaporan =  '" . $request["status_pelaporan"] . "',
+                id_petugas_bpbd =  " . $request["id_petugas_bpbd"] . ",
+                review_pelaporan =  '" . $request["review_pelaporan"] . "',
+                updated_at = '" . date("Y-m-d H:i:s") . "'
                 WHERE id_pelaporan = " . $request['id_pelaporan'] . "
-            ";      
+            ";
         $this->Model()->Execute($sql);
-        Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil ".$request["status_pelaporan"]."");
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+        ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+        VALUES
+        ( 'validate', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id'] . ", '', 'validasi data pelaporan " . $request["status_pelaporan"] . "', " . $_SESSION['id_user'] . ") 
+        ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
+        Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil " . $request["status_pelaporan"] . "");
     }
 }

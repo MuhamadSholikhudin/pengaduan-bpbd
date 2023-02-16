@@ -139,3 +139,51 @@ function TanggalIndonesia($tanggal = string){
     }
     return  $date_day_hire. " ". $month_indo_hire . " ". $date_year_hire;
 }
+
+/*
+CREATE TABLE `history` (
+ `id_history` int(11) NOT NULL AUTO_INCREMENT,
+ `action` varchar(20) DEFAULT NULL,
+ `tanggal_history` date DEFAULT NULL,
+ `created_at` timestamp NULL DEFAULT NULL,
+ `updated_at` timestamp NULL DEFAULT NULL,
+ `tabel` varchar(30) DEFAULT NULL,
+ `id_tabel` int(11) DEFAULT NULL,
+ `status_history` varchar(20) DEFAULT NULL,
+ `keterangan` text DEFAULT NULL,
+ `id_user` int(11) DEFAULT NULL,
+ PRIMARY KEY (`id_history`)
+)
+
+
+$key = ["korban_lansia", "korban_balita", "korban_dewasa"];
+$value = [1, 2, 3];
+
+$arr_ket = [];
+for($ik = 0; $ik < count($key); $ik++){
+	$arr_string = $key[$ik] ."=>".$value[$ik];
+	array_push($arr_ket, $arr_string);
+}
+
+print_r($arr_ket);
+
+$imp_ket = implode(";", $arr_ket);
+
+echo $imp_ket;
+
+$exp_arr = explode(";", $imp_ket);
+
+ print_r($exp_arr);
+ 
+ $arr_key = [];
+ $arr_val = [];
+ for($ie = 0; $ie < count($exp_arr); $ie++){
+ 	$exp_ie = explode("=>", $exp_arr[$ie]);
+ 	
+ 	array_push($arr_key, $exp_ie[0]);
+ 	array_push($arr_val, $exp_ie[1]);
+ }
+
+print_r($arr_key);
+print_r($arr_val);
+*/

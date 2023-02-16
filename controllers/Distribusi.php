@@ -11,8 +11,7 @@ class Distribusi
 
     public function Post($request)
     {
-        // print("<pre>".print_r($_POST,true)."</pre>"); 
-
+        // Query Insert data distribusi
         $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`,  `tanggal_distribusi`, `keterangan_distribusi`)
         VALUES 
         ( 
@@ -20,10 +19,9 @@ class Distribusi
             '" . $request['tanggal_distribusi'] . "',
             '" . $request['keterangan_distribusi'] . "'            
         )";
-        // // Insert data distribusi
-        // print("<pre>".print_r($sql_distribusi,true)."</pre>");
-        $this->Model()->Execute($sql_distribusi);
+        $this->Model()->Execute($sql_distribusi); // Execute Query
 
+        //Menampilkan data distribusi yang terakhir diinsert
         $distribusi = Querysatudata("SELECT * FROM distribusi WHERE  id_peninjauan =" . $request['id_peninjauan'] . " AND  tanggal_distribusi  =  '" . $request['tanggal_distribusi'] . "' AND keterangan_distribusi = '" . $request['keterangan_distribusi'] . "' ");
 
         for ($i = 0; $i < count($request['stok_bantuan_id']); $i++) {
@@ -37,11 +35,8 @@ class Distribusi
                 " . $i . ",
                 " . $i . "
             )";
-            // print("<pre>".print_r($sql_distribusi_bantuan,true)."</pre>"); 
             $this->Model()->Execute($sql_distribusi_bantuan);
         }
-        // die();
-
         Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Berhasil Di Tambah");
     }
 

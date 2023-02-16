@@ -186,6 +186,12 @@ if ($_GET) {
                 $posko->Update($_POST, $_FILES);
             } elseif ($param_val == 'update_status') {
                 // $posko->UpdateStatus($_POST);
+            } elseif ($param_val == 'detail') {
+                $conf->TemplateAdmin('views/posko/posko_detail.php');
+            }elseif ($param_val == 'ajax_post_posko') {
+                $posko->AjaxPostPosko($_POST);
+            }elseif ($param_val == 'detail_edit') {
+                $conf->TemplateAdmin('views/posko/posko_detail_edit.php');
             }
         break;
 

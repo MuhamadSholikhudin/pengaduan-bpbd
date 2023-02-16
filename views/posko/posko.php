@@ -100,9 +100,13 @@ if($_SESSION['level'] == "petugas_logistik"){
                               } ?>
                             </td>
                             <td>
-                            <a href="<?= $url ?>/?posko=edit&id=<?= $posko['id_posko'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
-                                      <i class="ti-pencil-alt"></i>
-                                      Edit
+                              <a href="<?= $url ?>/?posko=edit&id=<?= $posko['id_posko'] ?>" class="btn btn-warning btn-outline-white btn-sm text-white">
+                                        <i class="ti-pencil-alt"></i>
+                                        Edit
+                                      </a>
+                            <a href="<?= $url ?>/?posko=detail&id=<?= $posko['id_posko'] ?>" class="btn btn-info btn-outline-white btn-sm text-white">
+                                      <i class="ti-eye"></i>
+                                      detail
                                     </a>
                               
 

@@ -137,5 +137,93 @@ $posko = Querysatudata("SELECT * FROM posko WHERE id_posko = ".$id ." ");
               </div>
             </div>
 
+            <div class="col-lg-6">
+
+            <!-- Percobaan Insert hitoris -->
+              <span id="add_history" class="btn btn-primary badge">Add</span>
+              <div class="content_history" id="content_history">
+                <input type="text" name="" id="url_id" value="<?= $_GET['id'] ?>">
+                <input type="text" name="" id="id_user" value="<?= $_SESSION['id_user'] ?>">
+                <table>
+                  <tbody id="body_history">
+
+                  </tbody>
+                </table>
+
+              </div>
+              <span id="process_history" class="btn btn-primary badge">Process</span>
+
+            <script>
+
+            $("#add_history").on('click', function(){
+              var input = '<tr><td><input type="text" name="key_history[]" class="key_history" id="key_history" ></td><td><input type="text" name="value_history[]" class="value_history" id="value_history" ></td><td> <a class="badge btn-danger"><i class="ti-trash"></i></a> </td>                 </tr>'
+              $("#body_history").append(input);
+            });
+
+            $("#process_history").on('click', function(){
+              var id = document.getElementById("url_id").value;
+              var id_user = document.getElementById("id_user").value;
+              var key_history = document.getElementsByName("key_history[]");
+              var value_history = document.getElementsByName("value_history[]");
+
+              var arr_key = [];
+              var arr_val = [];
+              for (var i = 0; i < value_history.length; i++) {
+                arr_key.push(key_history[i].value);
+                arr_val.push(value_history[i].value);
+              }
+
+              $.ajax({
+                type: "POST",
+                url: "http://localhost/pengaduan-bpbd/?posko=ajax_post_posko",
+                dataType: "json",
+                data: {
+                  id: id,
+                  id_user: id_user,
+                  arr_key: arr_key,
+                  arr_val: arr_val
+                },
+                success: function (data) {
+                  location.replace("http://localhost/pengaduan-bpbd/?posko=detail&id="+id);
+                },
+                error() {
+                  console.log("Error");
+                },
+              });
+            });
+            </script>
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>keterangan</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                    $no = 1;
+                    $historys = Querybanyak("SELECT * FROM history WHERE tabel = 'posko' AND id_tabel = ".$_GET['id']."  ");
+                    foreach($historys as $history){
+                  ?>
+                    <tr>
+                      <td><?= $no++ ?></td>
+                      <td><?= $history['tanggal_history'] ?></td>
+                      <td><?= $history['keterangan'] ?></td>
+                      <td>
+                        <a href="http://localhost/pengaduan-bpbd/?posko=detail_edit&id=<?= $history['id_history'] ?>">
+                      Edit</a>
+                      </td>
+                    </tr>
+                  <?php
+                    }
+                  ?>
+                </tbody>
+              </table>
+
+            </div>
+
           </div>
         </div>
