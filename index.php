@@ -192,7 +192,9 @@ if ($_GET) {
                 $posko->AjaxPostPosko($_POST);
             }elseif ($param_val == 'detail_edit') {
                 $conf->TemplateAdmin('views/posko/posko_detail_edit.php');
-            }
+            }elseif ($param_val == 'ajax_update_history_posko') {       
+                $posko->AjaxUpdateHistoryPosko($_POST);
+            }            
         break;
 
         case 'stok_bantuan':
@@ -219,6 +221,11 @@ if ($_GET) {
                 $conf->TemplateAdmin(
                     'views/stok_bantuan/stok_bantuan_keluar.php'
                 );
+            }
+            break;
+        case 'history':
+            if ($param_val == 'history') {
+                $conf->TemplateAdmin('views/history/history.php');
             }
             break;
 

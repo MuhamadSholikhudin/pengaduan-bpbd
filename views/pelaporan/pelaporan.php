@@ -11,7 +11,7 @@
                     </div>
                   </div>
                   <div class="table-responsive">
-                    <table id="myTable" class="table table-striped">
+                    <table id="myTable" class="table">
                       <thead>
                         <tr>
                           <th>
@@ -19,6 +19,9 @@
                           </th>
                           <th>
                             Tanggal Pelaporan
+                          </th>
+                          <th>
+                            Tanggal Max Proses
                           </th>
                           <th>
                             Bencana
@@ -52,13 +55,13 @@
                           case "petugas_bpbd": // jika session levelnya petugas bpbd
 
                             //Query Menampilkan data pelaporan berdasarkan kriteria  status_pelaporan yang tidak belum dikirim dan batal kirim
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' AND status_pelaporan != 'batal kirim' ORDER BY id_pelaporan, tanggal_pelaporan DESC";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' AND status_pelaporan != 'batal kirim' ORDER BY id_pelaporan DESC";
                             break;
 
                           case "petugas_kajian": // jika session levelnya petugas kajian
 
                             // Query Menampilkan data pelaporan berdasarkan kriteria yang status_pelaporan tervalidasi
-                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan, tanggal_pelaporan DESC";
+                            $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi'  ORDER BY id_pelaporan DESC";
                             
                             // Menampilkan data petugas_kajian yang session levelnya petugas kajian
                             $petugas_peninjaun = Querysatudata("SELECT * FROM petugas_kajian WHERE id_user = ".$_SESSION['id_user']." "); 
@@ -69,19 +72,31 @@
                             break;
                         }
                         $pelaporans = Querybanyak($query_pelapolaran);
-                        foreach ($pelaporans as $pelaporan) { ?>
-                          <tr>
+                        foreach ($pelaporans as $pelaporan) { 
+                          $created_at = $pelaporan['created_at'];
+                          $max_proses = date('Y-m-d H:i:s', strtotime($created_at. ' + 24 hours'));   
+
+                          $color_tr = "";
+                          if(date('Y-m-d H:i:s') < $max_proses){
+                            $color_tr = "background-color:red; color:white;";
+                          }                         
+
+                          ?>
+                          <tr style="<?=  $color_tr ?>">
                             <td>
                               <?php
-
                               // Menampilkan nama pelapor dari tabel pelapor berdasarkan id_pelapor dari pelaporan
                               $pelapor = Querysatudata("SELECT nama_pelapor FROM pelapor WHERE id_pelapor = " . $pelaporan['id_pelapor'] . "")
                               ?>
                               <?= $pelapor['nama_pelapor'] ?>
                             </td>
                             <td>
-                              <?= $pelaporan['tanggal_pelaporan'] ?>
-                              
+                              <?= $pelaporan['created_at'] ?>
+                            </td>
+                            <td>
+                              <?php                             
+                                 echo $max_proses;
+                              ?>                              
                             </td>
                             <td>
                               <?php

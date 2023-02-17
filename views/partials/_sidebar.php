@@ -32,18 +32,21 @@
                     case 'kepala_bpbd':
                     ?>              
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("distribusi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
-
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("history"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?history=history">historys</a></li>
+                    
                     <?php
                     break;
                     case 'petugas_bpbd':
                     ?>
                       <li class="nav-item  <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("pelaporan"): "" ?>"><a class="nav-link" href="<?= $url ?>/?pelaporan=pelaporan">Pelapor</a></li>            
-                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("bencana"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("distribusi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?distribusi=distribusi">Distribusi</a></li>
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("posko"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?posko=posko">Posko</a></li>
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("bencana"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?bencana=bencana">Bencana</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("wilayah"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?wilayah=wilayah">Wilayah</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("publikasi"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?publikasi=publikasi">Publikasi</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("user"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
-
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("history"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?history=history">historys</a></li>
+                    
                     <?php
                     break;
                     case 'petugas_logistik':
@@ -53,6 +56,8 @@
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("bantuan"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("stok_bantuan"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan=stok_bantuan">Stok Masuk Bantuan</a></li>
                       <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("stok_bantuan_keluar"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?stok_bantuan_keluar=stok_bantuan_keluar">Stok Keluar Bantuan</a></li>
+                      <li class="nav-item <?= !isset($_GET['laporan']) && !isset($_GET['dashboard']) ? sidemenu("history"): "" ?>"> <a class="nav-link" href="<?= $url ?>/?history=history">historys</a></li>
+                    
                     <?php
                     break;
                     case 'petugas_kajian':
@@ -71,6 +76,7 @@
                   }
 
                 }?>
+
                 <!-- 
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?user=user">Users</a></li>
                 <li class="nav-item"> <a class="nav-link" href="<?= $url ?>/?bantuan=bantuan">Bantuan</a></li>

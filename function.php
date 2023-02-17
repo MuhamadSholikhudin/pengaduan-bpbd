@@ -186,4 +186,66 @@ $exp_arr = explode(";", $imp_ket);
 
 print_r($arr_key);
 print_r($arr_val);
+
 */
+function SendWA($nomer_tujuan, $pesan){
+    $dataSending = Array();
+    $dataSending["api_key"] = "xxxx";
+    $dataSending["number_key"] = "xxxx";
+    $dataSending["phone_no"] = $nomer_tujuan;
+    $dataSending["message"] = $pesan;
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => 'https://api.watzap.id/v1/send_message',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'POST',
+    CURLOPT_POSTFIELDS => json_encode($dataSending),
+    CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+    ),
+    ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    return $response;
+}
+
+        /*
+        // Iniasiasi WA
+        $pesan = "";
+        
+        if($_SESSION['level'] == 'pelapor'){
+            // Menampilkan data pelapor
+            $pelapor = Querysatudara("SELECT * FROM pelapor WHERE id_user = ".$_SESSION['id_user']."");
+
+            // definisikan nomer pelapor
+            $nomer_pelapor = $pelapor['nomer_pelapor'];
+
+            // Fungsion kirim WA
+            SendWA($nomer_pelapor, $pesan);
+        }
+        
+        $petugas_bpbd = Querysatudara("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd DESC ");
+        $nomer_petugas_bpbd = $petugas_bpbd['nomer'];
+        SendWA($nomer_petugas_bpbd, $pesan);
+
+        $petugas_kajian = Querysatudara("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian DESC ");
+        $nomer_petugas_kajian = $petugas_kajian['nomer'];
+        SendWA($nomer_petugas_kajian, $pesan);
+
+        $petugas_logistik = Querysatudara("SELECT * FROM petugas_logistik ORDER BY id_petugas_logistik DESC ");
+        $nomer_petugas_logistik = $petugas_logistik['nomer'];
+        SendWA($nomer_petugas_logistik, $pesan);
+
+        $kepala_bpbd = Querysatudara("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd DESC ");
+        $nomer_kepala_bpbd = $kepala_bpbd['nomer'];
+        SendWA($nomer_kepala_bpbd, $pesan);
+
+        */
+
+
+

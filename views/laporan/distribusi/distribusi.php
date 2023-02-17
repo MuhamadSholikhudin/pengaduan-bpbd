@@ -173,11 +173,11 @@
                                     PDF
                                 </a> -->
                                 &nbsp; 
-                                <a href="http://localhost/pengaduan-bpbd/?laporan=distribusi_excel<?= $link ?>" class="btn btn-success btn-sm">
+                                <!-- <a href="http://localhost/pengaduan-bpbd/?laporan=distribusi_excel<?= $link ?>" class="btn btn-success btn-sm">
                                     <i class="ti-file"></i>
                                     &nbsp; 
                                     EXCEL
-                                </a>                                
+                                </a>                                 -->
                             </div>
                         </div>
                         <div class="table-responsive">

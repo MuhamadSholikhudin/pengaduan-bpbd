@@ -40,6 +40,21 @@ class Posko
                     ";
 
         $this->Model()->Execute($sql);
+
+        // Menampilkan data posko yang terakhir di tambahkan
+        $tampil_posko = Querysatudata("SELECT * FROM posko ORDER BY id_posko DESC ");
+        
+        $imp_ket = "Nama Posko=>" . $request['nama_posko'] . ";Status posko=>" . $request['status_posko'] . ";jumlah jiwa=>" . $request['jumlah_jiwa'] . ";balita=>" . $request['balita'] . ";remaja=>" . $request['remaja'] . ";dewasa=>" . $request['dewasa'] . ";lanjut usia=>" . $request['lanjut_usia'] . "";
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+            ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+                VALUES
+            ( 'update posko', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'posko', " . $tampil_posko['id_posko'] . ", '', '".$imp_ket."', " . $_SESSION['id_user'] . ") 
+        ";
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
         Redirect("http://localhost/pengaduan-bpbd/?posko=posko", "Data Berhasil Di Tambah");
     }
 
@@ -106,4 +121,34 @@ class Posko
 
         echo json_encode($insert_history);
     }
+
+    public function AjaxUpdateHistoryPosko($request){
+
+        $key = $request["arr_key"];
+        $value = $request["arr_val"];
+
+        $arr_ket = [];
+        for ($ik = 0; $ik < count($key); $ik++) {
+            $arr_string = $key[$ik] . "=>" . $value[$ik];
+            array_push($arr_ket, $arr_string);
+        }
+
+        $imp_ket = implode(";", $arr_ket);
+
+        //Query insert data history
+        $update_history = "UPDATE `history` SET 
+           `action`='".$request['action']."',
+           `tanggal_history`='".$request['tanggal_history']."',
+           `updated_at`='".$request['updated_at']."',
+           `status_history`='".$request['status_history']."',
+           `keterangan`='".$imp_ket."',
+           `id_user`=".$request['id_user']."        
+       WHERE `id_history`= ".$request['id']."";
+
+       // Exec data query
+       $this->Model()->Execute($update_history);
+
+       echo json_encode($request);
+    }
+
 }

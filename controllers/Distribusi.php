@@ -37,12 +37,24 @@ class Distribusi
             )";
             $this->Model()->Execute($sql_distribusi_bantuan);
         }
+
+        $kajian = Querysatudata("SELECT * FROM user WHERE level = 'petugas_kajian' ");
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+        ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+        VALUES
+        ( 'add', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'distribusi', " . $request['id_distribusi'] . ", '', 'tambah data distribusi', " . $kajian['id_user'] . ") 
+        ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
+
         Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Berhasil Di Tambah");
     }
 
     public function Update($request)
     {
-
         $sql_distribusi = "UPDATE  `distribusi` 
                 SET id_peninjauan = " . $request['id_peninjauan'] . ",
                     tanggal_distribusi = '" . $request['tanggal_distribusi'] . "',
@@ -731,6 +743,18 @@ class Distribusi
         }else{
             $message = "Data pengajuan distribusi tidak di setujui";
         }
+
+        $kepala = Querysatudata("SELECT * FROM user WHERE level = 'kepala_bpbd' ");
+
+        //Query insert data history
+        $insert_history = "INSERT INTO `history`
+        ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
+        VALUES
+        ( 'setujui', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'distribusi', " . $request['id_distribusi'] . ", '', 'persetujuan distribusi', " . $kepala['id_user'] . ") 
+        ";
+
+        // Exec data query
+        $this->Model()->Execute($insert_history);
         
         echo json_encode($message);
     }
