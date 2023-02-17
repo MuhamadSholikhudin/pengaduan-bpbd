@@ -43,7 +43,10 @@
                         <?php
                         $wilayahs = Querybanyak('SELECT * FROM wilayah');
                         foreach ($wilayahs as $wilayah) { ?>
-                          <?php if ($wilayah['id_wilayah'] ==  $satu_pelaporan['id_wilayah']) { ?>
+                          <?php if (
+                            $wilayah['id_wilayah'] ==
+                            $satu_pelaporan['id_wilayah']
+                          ) { ?>
                             <option value="<?= $wilayah['id_wilayah'] ?>" selected><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
                           <?php } else { ?>
                             <option value="<?= $wilayah['id_wilayah'] ?>"><?= $wilayah['desa'] ?> / <?= $wilayah['kecamatan'] ?></option>
@@ -81,10 +84,6 @@
                         <a href="<?= $satu_pelaporan['link_maps'] ?>">Klik Link Ini</a>
                       </div>
                     <?php } ?>
-                    <?php
-                    // Menampilkan data tabel wilayah berdasarkan id_wilayah dari pelaporan
-                    $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = " . $satu_pelaporan['id_wilayah'] . "")
-                    ?>
 
                     <h3 class="text-center">Hubungi Penanggung Jawab : <a href="tel:+<?= $wilayah['no_telp'] ?>"><?= $wilayah['no_telp'] ?></a></h3>
                     <br>
@@ -122,9 +121,12 @@
                               <h4>* Review pelaporan</h4>
                             </label>
                             <textarea class="form-control" id="review_pelaporan" name="review_pelaporan" style="height: 300px;" required><?= $satu_pelaporan['review_pelaporan'] ?></textarea>
-                          
                           </div>
-                          <button type="submit" class="btn btn-primary">Process</button>
+                          <?php if($_SESSION['level'] == "petugas_bpbd"){ ?>
+                            <button type="submit" class="btn btn-primary">Process</button>
+                          <?php 
+                          }
+                          ?>
                         </form>
                       </div>
 

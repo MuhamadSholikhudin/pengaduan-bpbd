@@ -29,7 +29,13 @@
                     '".date("Y-m-d H:i:s")."'
                 )";
             $this->Model()->Execute($sql_publikasi);
-            Redirect("http://localhost/pengaduan-bpbd/?publikasi=publikasi", "Data Berhasil Di Tambah");
+
+            if($_SESSION['level'] == "petugas_logistik"){
+                Redirect("http://localhost/pengaduan-bpbd/?distribusi=distribusi", "Data Berhasil Di Tambah");
+            }else{
+                Redirect("http://localhost/pengaduan-bpbd/?publikasi=publikasi", "Data Berhasil Di Tambah");
+            }
+
         }
 
         public function Update($request, $file){

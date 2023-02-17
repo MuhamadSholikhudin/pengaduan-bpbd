@@ -68,6 +68,10 @@
                                 <i class="ti-pencil-alt"></i>
                                 Edit
                               </a>
+                              <a href="<?= $url ?>/?publikasi=lihat&id=<?= $publikasi['id_publikasi'] ?>" class="btn btn-sm btn-sm btn-outline-success btn-icon-text">
+                              <i class="ti-eye"></i>      
+                              lihat
+                                  </a>
                             </td>
                           </tr>
                         <?php

@@ -79,8 +79,11 @@
                           $color_tr = "";
                           if(date('Y-m-d H:i:s') < $max_proses){
                             $color_tr = "background-color:red; color:white;";
-                          }                         
+                            if($pelaporan['status_pelaporan'] == "tervalidasi"){
+                              $color_tr = "background-color:green; color:white;";
 
+                            }
+                          }                         
                           ?>
                           <tr style="<?=  $color_tr ?>">
                             <td>
@@ -179,6 +182,12 @@
                                   break;
 
                                 case "petugas_kajian": // Jika levelnya petugas_kajian
+                                  ?>
+                                    <a href="<?= $url ?>/?pelaporan=lihat&id=<?= $pelaporan['id_pelaporan'] ?>" class="btn btn-danger btn-outline-white btn-sm text-white">
+                                      <i class="ti-eye"></i>
+                                      Lihat
+                                    </a>
+                                  <?php 
                                   if ($cek_peninjauan < 1) {
                                   ?>
                                     <a href="#" id="<?= $pelaporan['id_pelaporan'] ?>" data-id="<?= $pelaporan['id_pelaporan'] ?>" data-idbencana="<?= $pelaporan['id_bencana'] ?>" data-idwilayah="<?= $pelaporan['id_wilayah'] ?>" class="tambahpeninjauan btn btn-primary btn-outline-dark btn-sm text-white" data-toggle="modal" data-target="#modalSaya">

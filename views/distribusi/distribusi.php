@@ -76,7 +76,7 @@
                               <?php
                               // Colomn status_distribusi
                               if ($_SESSION['level'] == "petugas_logistik" ) { // petugas logistik 
-                                if($distribusi['status_distribusi'] == "Setujui" || $distribusi['status_distribusi'] == "Sedang dalam perjalanan" || $distribusi['status_distribusi'] == "Sudah sampai" || $distribusi['status_distribusi'] == "Selesai" ){
+                                if($distribusi['status_distribusi'] == "Setujui" || $distribusi['status_distribusi'] == "Sedang di proses" || $distribusi['status_distribusi'] == "Sedang dalam perjalanan" || $distribusi['status_distribusi'] == "Sudah sampai" || $distribusi['status_distribusi'] == "Selesai" ){
                                   ?>
                                   <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
                                     <?= $distribusi['status_distribusi'] ?>
@@ -85,8 +85,6 @@
                                 }else{
                                   echo $distribusi['status_distribusi'];
                                 }
-
-
                               } elseif ($_SESSION['level'] == "petugas_kajian") { // Petugas kajian
                                 if($distribusi['status_distribusi'] == "Sedang dalam perjalanan" || $distribusi['status_distribusi'] == "Sudah sampai" || $distribusi['status_distribusi'] == "Selesai"){
                               ?>
@@ -130,6 +128,14 @@
                                 ?>
                                   <a href="<?= $url ?>/?distribusi=add_publikasi&id=<?= $distribusi['id_distribusi'] ?>" class="btn btn-sm btn-sm btn-outline-success btn-icon-text">
                                     + Publikasi
+                                  </a>
+                                <?php
+                                }else{
+                                  $publikasi = Querysatudata("SELECT * FROM publikasi WHERE id_distribusi = " . $distribusi['id_distribusi'] . "");
+
+                                  ?>
+                                  <a href="<?= $url ?>/?publikasi=lihat&id=<?= $publikasi['id_publikasi'] ?>" class="btn btn-sm btn-sm btn-outline-success btn-icon-text">
+                                    lihat Publikasi
                                   </a>
                                 <?php
                                 }
