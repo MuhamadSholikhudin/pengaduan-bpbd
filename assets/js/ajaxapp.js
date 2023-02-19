@@ -551,3 +551,10 @@ $(".status_peninjauan").on("click", function () {
   $("#edit_id_peninjauan").val(id);
   $("#status_peninjauan").val(status);
 });
+
+
+//============== open review pelaporan
+$(".view_review_pelaporan").on("click", function(){
+  var data_review = $(this).data("review");
+  alert(data_review);
+});

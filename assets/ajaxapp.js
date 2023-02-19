@@ -11,11 +11,10 @@ $(".tambahpeninjauan").on("click", function () {
   $("#id_bencana").val(id_bencana);
 });
 
-//
+// Modal tambah distribusi pada tampilan peninjauan
 $(".addpeninjauan").on("click", function () {
   var id_peninjauan = $(this).data("id");
   document.getElementById("id_peninjauan").value = id_peninjauan;
-
   $.ajax({
     type: "POST",
     url: url_web + "/?distribusi=ajax_click_peninjauan",
@@ -28,12 +27,34 @@ $(".addpeninjauan").on("click", function () {
       document.getElementById("keterangan_peninjauan").value = data[1];
     },
     error() {
-      console.error();
+      alert("error");
     },
   });
-
 });
 
+
+// Modal tambah distribusi pada tampilan distribusi_add
+$("#add_id_peninjauan").on("change", function () {
+  var id_peninjauan = $("#add_id_peninjauan").val();
+  document.getElementById("id_peninjauan").value = id_peninjauan;
+  $.ajax({
+    type: "POST",
+    url: url_web + "/?distribusi=ajax_click_peninjauan",
+    dataType: "json",
+    data: {
+      id_peninjauan: id_peninjauan
+    },
+    success: function (data) {
+      document.getElementById("bencana").value = data[0];
+      document.getElementById("keterangan_peninjauan").value = data[1];
+    },
+    error() {
+      alert("Data peninjauan tidak boleh kosong!!!");
+    },
+  });
+});
+
+/*
 // DISTRIBUSI => SEARCH INSERT BANTUAN
 $("#search_distribusi").keyup(function () {
   var search = document.getElementById("search_distribusi").value;
@@ -207,7 +228,7 @@ function ProcessUpdateLogistik() {
     },
   });
 }
-
+*/
 // ========================= Distribusi data bantuan =====================
 // DISTRIBUSI => SEARCH INSERT DISTRIBUSI STOK BANTUAN
 $("#search_distribusi_stok_bantuan").keyup(function () {
@@ -267,9 +288,10 @@ $("#tablleresult").on("click", "#trash_stok_bantuan_edit", function () {
 });
 
 
+
 // DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI
 function ProcessInsertLogistikStok() {
-  var id_user = document.getElementById("id_user").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
   var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
   var id_peninjauan = document.getElementById("id_peninjauan").value;
   var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
@@ -281,32 +303,36 @@ function ProcessInsertLogistikStok() {
   }
   var payload = JSON.stringify({
     id_peninjauan: id_peninjauan,
-    id_user: id_user,
+    id_petugas_logistik: id_petugas_logistik,
     tanggal_distribusi: tanggal_distribusi,
     keterangan_distribusi: keterangan_distribusi,
     data: gabbantuan,
   });
-  
-  $.ajax({
-    type: "POST",
-    url: url_web + "/?distribusi=ajax_insert_distribusi_stok",
-    dataType: "json",
-    data: {
-      id_peninjauan: id_peninjauan,
-      id_user: id_user,
-      tanggal_distribusi: tanggal_distribusi,
-      keterangan_distribusi: keterangan_distribusi,
-      data: gabbantuan,
-    },
-    success: function (success) {
-      alert(success);
-      window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
-    },
-    error() {
-      console.error();
-    },
-  });
-  
+
+  if(id_peninjauan == "" ){
+    alert("Pilihan peninjauan Tidak boleh kosong");
+  }else{  
+    $.ajax({
+      type: "POST",
+      url: url_web + "/?distribusi=ajax_insert_distribusi_stok",
+      dataType: "json",
+      data: {
+        id_peninjauan: id_peninjauan,
+        id_petugas_logistik: id_petugas_logistik,
+        tanggal_distribusi: tanggal_distribusi,
+        keterangan_distribusi: keterangan_distribusi,
+        data: gabbantuan,
+      },
+      success: function (success) {
+        alert(success);
+        window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
+      },
+      error() {
+        console.error();
+      },
+    });
+    
+  }
 }
 
 
@@ -369,7 +395,7 @@ $("#editbodydistribusi").on("click", "#trash_stok_bantuan_edit", function () {
 // DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI STOK
 function ProcessUpdateLogistikStokbantuan() {
   var id_distribusi = document.getElementById("id_distribusi").value;
-  var id_user = document.getElementById("id_user").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
   var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
   var id_peninjauan = document.getElementById("id_peninjauan").value;
   var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
@@ -382,7 +408,7 @@ function ProcessUpdateLogistikStokbantuan() {
   var payload = JSON.stringify({
     id_distribusi: id_distribusi,
     id_peninjauan: id_peninjauan,
-    id_user: id_user,
+    id_petugas_logistik: id_petugas_logistik,
     tanggal_distribusi: tanggal_distribusi,
     keterangan_distribusi: keterangan_distribusi,
     data: gabbantuan,
@@ -395,14 +421,104 @@ function ProcessUpdateLogistikStokbantuan() {
     data: {
       id_distribusi: id_distribusi,
       id_peninjauan: id_peninjauan,
-      id_user: id_user,
+      id_petugas_logistik: id_petugas_logistik,
       tanggal_distribusi: tanggal_distribusi,
       keterangan_distribusi: keterangan_distribusi,
       data: gabbantuan,
     },
     success: function (success) {
       alert(success);
-      // window.location.href ="http://localhost/pengaduan-bpbd/?distribusi=distribusi";
+      location.replace("http://localhost/pengaduan-bpbd/?distribusi=distribusi");
+    },
+    error() {
+      console.error();
+    },
+  });
+}
+
+// DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI STOK
+function ProcessPersetujuan() {
+  var id_distribusi = document.getElementById("id_distribusi").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
+  var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
+  var id_peninjauan = document.getElementById("id_peninjauan").value;
+  var status_distribusi = document.getElementById("status_distribusi").value;
+  var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
+  var stok_bantuan_id = document.getElementsByName("stok_bantuan_id[]");
+  var jumlah_bantuan = document.getElementsByName("jumlah_bantuan[]");
+  var gabbantuan = {};
+  for (var i = 0; i < stok_bantuan_id.length; i++) {
+    gabbantuan[stok_bantuan_id[i].value] = jumlah_bantuan[i].value;
+  }
+  var payload = JSON.stringify({
+    id_distribusi: id_distribusi,
+    id_peninjauan: id_peninjauan,
+    id_petugas_logistik: id_petugas_logistik,
+    tanggal_distribusi: tanggal_distribusi,
+    keterangan_distribusi: keterangan_distribusi,
+    status_distribusi: status_distribusi,
+    data: gabbantuan,
+  });
+  $.ajax({
+    type: "POST",
+    url: url_web + "/?distribusi=ajax_persetujuan",
+    dataType: "json",
+    data: {
+      id_distribusi: id_distribusi,
+      id_peninjauan: id_peninjauan,
+      id_petugas_logistik: id_petugas_logistik,
+      tanggal_distribusi: tanggal_distribusi,
+      status_distribusi: status_distribusi,
+      keterangan_distribusi: keterangan_distribusi,
+      data: gabbantuan,
+    },
+    success: function (success) {
+      alert(success);
+      location.replace("http://localhost/pengaduan-bpbd/?distribusi=distribusi");
+    },
+    error() {
+      console.error();
+    },
+  });
+}
+
+
+// DISTRIBUSI =>  UPDATE DATA DISTRIBUSI DAN BANTUAN DISTRIBUSI STOK PADA KAJIAN
+function ProcessUpdateLogistikStokbantuankajian() {
+  var id_distribusi = document.getElementById("id_distribusi").value;
+  var id_petugas_logistik = document.getElementById("id_petugas_logistik").value;
+  var tanggal_distribusi = document.getElementById("tanggal_distribusi").value;
+  var id_peninjauan = document.getElementById("id_peninjauan").value;
+  var keterangan_distribusi = document.getElementById("keterangan_distribusi").value;
+  var stok_bantuan_id = document.getElementsByName("stok_bantuan_id[]");
+  var jumlah_bantuan = document.getElementsByName("jumlah_bantuan[]");
+  var gabbantuan = {};
+  for (var i = 0; i < stok_bantuan_id.length; i++) {
+    gabbantuan[stok_bantuan_id[i].value] = jumlah_bantuan[i].value;
+  }
+  var payload = JSON.stringify({
+    id_distribusi: id_distribusi,
+    id_peninjauan: id_peninjauan,
+    id_petugas_logistik: id_petugas_logistik,
+    tanggal_distribusi: tanggal_distribusi,
+    keterangan_distribusi: keterangan_distribusi,
+    data: gabbantuan,
+  });
+  
+  $.ajax({
+    type: "POST",
+    url: url_web + "/?distribusi=ajax_update_distribusi_stok_kajian",
+    dataType: "json",
+    data: {
+      id_distribusi: id_distribusi,
+      id_peninjauan: id_peninjauan,
+      id_petugas_logistik: id_petugas_logistik,
+      tanggal_distribusi: tanggal_distribusi,
+      keterangan_distribusi: keterangan_distribusi,
+      data: gabbantuan,
+    },
+    success: function (success) {
+      alert(success);
       location.replace("http://localhost/pengaduan-bpbd/?distribusi=distribusi");
     },
     error() {
@@ -416,6 +532,29 @@ function ProcessUpdateLogistikStokbantuan() {
 $(".status_distribusi").on("click", function () {
   var id = $(this).data("id");
   var status = $(this).data("status");
+  if(status == "Sudah sampai" || status == "Selesai"){
+    $("#form-distribusi").show();    
+  }else{
+    $("#form-distribusi").hide();
+  }
+  
   $("#edit_id_distribusi").val(id);
   $("#status_distribusi").val(status);
+});
+
+
+/// ================= Status peninjauan ===============
+// PENINJAUAN MODAL FORM PEMINJAUAN
+$(".status_peninjauan").on("click", function () {
+  var id = $(this).data("id");
+  var status = $(this).data("status");
+  $("#edit_id_peninjauan").val(id);
+  $("#status_peninjauan").val(status);
+});
+
+
+//============== open review pelaporan
+$(".view_review_pelaporan").on("click", function(){
+  var data_review = $(this).data("review");
+  alert(data_review);
 });

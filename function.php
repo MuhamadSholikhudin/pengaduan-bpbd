@@ -213,7 +213,6 @@ function SendWA($nomer_tujuan, $pesan){
     curl_close($curl);
     return $response;
 }
-
         /*
         // Iniasiasi WA
         $pesan = "";
@@ -244,6 +243,12 @@ function SendWA($nomer_tujuan, $pesan){
         $kepala_bpbd = Querysatudara("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd DESC ");
         $nomer_kepala_bpbd = $kepala_bpbd['nomer'];
         SendWA($nomer_kepala_bpbd, $pesan);
+
+        */
+
+
+        /*
+
 
         */
 

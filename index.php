@@ -164,6 +164,8 @@ if ($_GET) {
                 $conf->TemplateAdmin('views/peninjauan/peninjauan_add.php');
             } elseif ($param_val == 'edit') {
                 $conf->TemplateAdmin('views/peninjauan/peninjauan_edit.php');
+            } elseif ($param_val == 'lihat') {
+                $conf->TemplateAdmin('views/peninjauan/peninjauan_lihat.php');
             } elseif ($param_val == 'post') {
                 $peninjauan->Post($_POST, $_FILES);
             } elseif ($param_val == 'update') {

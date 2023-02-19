@@ -51,7 +51,7 @@
                         <input type="date" class="form-control" id="batch" name="batch" value="<?= $stok_bantuan['batch'] ?>" required>
                       </div>
                       <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success"> <i class="ti-pencil-alt"></i> Update</button>
                       </div>
                     </form>
                   </div>

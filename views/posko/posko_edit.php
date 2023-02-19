@@ -125,7 +125,7 @@ $posko = Querysatudata("SELECT * FROM posko WHERE id_posko = ".$id ." ");
                           <textarea class="form-control" id="keterangan" style="height:100px;" name="keterangan"><?= $posko['keterangan'] ?></textarea>
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-success"> <i class="ti-pencil-alt"></i> Update</button>
                         </div>
                       </div>
                     </form>

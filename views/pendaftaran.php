@@ -38,10 +38,8 @@
                 </a>
               </div>
               <h6 class="fw-light text-center">Daftar Untuk Mengakses.</h6>
-              <form class="pt-3" action="<?= $url ?>/?auth=pendaftaran" method="POST" enctype="multipart/form-data">
+              <form class="pt-3 form" action="<?= $url ?>/?auth=pendaftaran" method="POST" enctype="multipart/form-data">
                 <div class="row">
-
-
                   <div class="col-lg-6">
                     <div class="form-group">
                       <input type="date" class="d-none" id="tanggal_daftar" name="tanggal_daftar" value="<?= date("Y-m-d") ?>" required>
@@ -61,12 +59,11 @@
                     </div>
                   </div>
 
-
-
+                  <!-- Batas kanan dan kiri -->
 
                   <div class="col-lg-6">
                     <div class="form-group">
-                      <select class="js-example-basic-single form-control" name="id_wilayah">
+                      <select class="js-example-basic-single form-control"  name="id_wilayah">
                         <?php
                         $wilayahs = Querybanyak("SELECT * FROM wilayah");
                         foreach ($wilayahs as $wilayah) { ?>

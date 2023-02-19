@@ -36,7 +36,7 @@ if($_SESSION['level'] == "petugas_logistik"){
                   <div class="table-responsive">
                     <table id="myTable" class="table table-striped">
                       <thead>
-                        <tr>
+                        <tr >
                           <th>
                             Pelapor
                           </th>
@@ -55,7 +55,7 @@ if($_SESSION['level'] == "petugas_logistik"){
                           <th>
                             Status Peninjauan
                           </th>
-                          <th>
+                          <th class="text-center">
                             Action
                           </th>
                         </tr>
@@ -102,6 +102,10 @@ if($_SESSION['level'] == "petugas_logistik"){
                               } ?>
                             </td>
                             <td>
+                              <a href="<?= $url ?>/?peninjauan=lihat&id=<?= $peninjauan['id_peninjauan'] ?>" class="btn btn-sm btn-sm btn-outline-danger btn-icon-text">
+                                <i class="ti-eye"></i>
+                                Lihat
+                              </a>
                               <?php if ($_SESSION['level'] == "petugas_logistik" && $peninjauan['status_peninjauan'] != "selesai") { ?>
                                 <button class="btn btn-sm btn-sm btn-outline-primary btn-icon-text addpeninjauan" data-toggle="modal" data-id="<?= $peninjauan['id_peninjauan'] ?>" data-target="#modaldistribusi">
                                   <i class="ti-plus"></i>
@@ -110,16 +114,15 @@ if($_SESSION['level'] == "petugas_logistik"){
                               <?php } elseif ($_SESSION['level'] == "petugas_logistik" && $peninjauan['status_peninjauan'] == "selesai") { 
                                 
                               }elseif ($_SESSION['level'] == "petugas_kajian") { ?>
-                                <a class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
-                                  <i class="ti-alert"></i>
-                                  Beritahu
-                                </a>
                                 <a href="<?= $url ?>/?peninjauan=edit&id=<?= $peninjauan['id_peninjauan'] ?>" class="btn btn-sm btn-sm btn-outline-secondary btn-icon-text">
                                   <i class="ti-pencil-alt"></i>
                                   Edit
                                 </a>
+                                <a class="btn btn-sm btn-sm btn-outline-warning btn-icon-text">
+                                  <i class="ti-alert"></i>
+                                  Beritahu
+                                </a>
                               <?php } ?>
-
                             </td>
                           </tr>
                         <?php

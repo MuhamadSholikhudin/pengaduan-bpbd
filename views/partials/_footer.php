@@ -15,7 +15,7 @@
         <!-- page-body-wrapper ends -->
         </div>
 
-        <script src="<?= $url ?>/assets/js/ajaxapp.js"></script>
+        <script src="<?= $url ?>/assets/ajaxapp.js"></script>
 
         <!-- container-scroller -->
         <!-- plugins:js -->

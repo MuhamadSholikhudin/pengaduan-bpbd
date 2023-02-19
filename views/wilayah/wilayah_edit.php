@@ -31,15 +31,10 @@
                           <input type="text" class="form-control p-input" id="no_telp" name="no_telp" placeholder="no_telp" value="<?= $satu_wilayah['no_telp'] ?>" required>
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-success"> <i class="ti-pencil-alt"></i> Update</button>
                         </div>
                       </form>
-
                     </div>
-
-
-
-
                   </div>
                   <div class="card-footer">
 

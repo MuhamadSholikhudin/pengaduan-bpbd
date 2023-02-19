@@ -22,7 +22,7 @@
               <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-header">
-                    <h2><?= strtoupper("Edit data " . array_keys($_GET)[0]) ?></h2>
+                    <h2><?= strtoupper("Lihat data " . array_keys($_GET)[0]) ?></h2>
                   </div>
                   <div class="card-body">
                     <div class="row">
@@ -199,7 +199,8 @@
                           </div><!--col-sm-4 -->
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-success"><i class="ti-pencil-alt"></i> Update</button>
+                          <a href="<?= $url ?>?peninjauan=peninjauan" class="badge badge-success"> <i class="ti-arrow"></i> Kembali</a>
+                      
                         </div>
                       </form>
 

@@ -11,13 +11,18 @@ class Distribusi
 
     public function Post($request)
     {
+
+        //Menampilkan data petugas logistik
+        $petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik ORDER BY id_petugas_logistik DESC LIMIT 1");
+
         // Query Insert data distribusi
-        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`,  `tanggal_distribusi`, `keterangan_distribusi`)
+        $sql_distribusi = "INSERT INTO `distribusi` (  `id_peninjauan`,  `tanggal_distribusi`, `keterangan_distribusi`, `id_petugas_logistik`)
         VALUES 
         ( 
             " . $request['id_peninjauan'] . ",
             '" . $request['tanggal_distribusi'] . "',
-            '" . $request['keterangan_distribusi'] . "'            
+            '" . $request['keterangan_distribusi'] . "',
+            ".$petugas_logistik['id_petugas_logistik']."         
         )";
         $this->Model()->Execute($sql_distribusi); // Execute Query
 

@@ -118,7 +118,9 @@
                               
                             </td>
                             <td style="width: 40px; ">
-                                <?= $pelaporan["review_pelaporan"] ?>                             
+                                <span id="view_review_pelaporan" class="view_review_pelaporan" data-review="<?= $pelaporan["review_pelaporan"] ?>">
+                                  <?= substr($pelaporan["review_pelaporan"],0,11);  ?>                             
+                                </span>
                             </td>
                             <td>
                               <?php 
@@ -153,7 +155,6 @@
                                     <i class="ti-pencil-alt"></i>
                                     Edit
                                   </a>
-
                               <?php
                               }
                               ?>

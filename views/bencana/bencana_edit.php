@@ -22,18 +22,12 @@
                           <input type="text" class="form-control p-input" id="nama_bencana" name="nama_bencana" value="<?= $satu_bencana['nama_bencana'] ?>" placeholder="nama_bencana">
                       </div>                    
                       <div class="col-12">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success"> <i class="ti-pencil-alt"></i> Update</button>
                       </div>
                   </form>
-
-                  </div>
-
-            
-                  
-
+                  </div>        
                 </div>
                 <div class="card-footer">
-
                 </div>
               </div>
             </div>

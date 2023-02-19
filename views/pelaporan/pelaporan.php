@@ -81,7 +81,6 @@
                             $color_tr = "background-color:red; color:white;";
                             if($pelaporan['status_pelaporan'] == "tervalidasi"){
                               $color_tr = "background-color:green; color:white;";
-
                             }
                           }                         
                           ?>
@@ -146,13 +145,13 @@
                               ?>
 
                             </td>
-
                             <td>
-                              <?= $pelaporan['review_pelaporan'] ?>
+                              <span id="view_review_pelaporan" class="view_review_pelaporan" data-review="<?= $pelaporan["review_pelaporan"] ?>">
+                                  <?= substr($pelaporan["review_pelaporan"],0,11);  ?> ...                            
+                                </span>
                             </td>
 
                             <td>
-
                               <?php
                               switch ($_SESSION['level']) { /// Check yang level user
                                 case "petugas_bpbd": // Jika levelnya petugas_bpbd
@@ -208,6 +207,7 @@
                     </table>
                   </div>
                 </div>
+
                 <div class="card-footer">
                   <!-- Modal Add Peninjauan -->
                   <div class="modal  fade" id="modalSaya" tabindex="-1" role="dialog" aria-labelledby="modalSayaLabel" aria-hidden="true">
@@ -392,3 +392,4 @@
 
           </div>
         </div>
+

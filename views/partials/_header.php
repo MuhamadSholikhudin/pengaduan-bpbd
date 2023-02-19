@@ -2,6 +2,8 @@
 if (!isset($_SESSION['id_user'])) {
   Redirect("http://localhost/pengaduan-bpbd/", "Silahkan Login Terlebih Dahulu");
 }
+// Turn off all error reporting
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="en">

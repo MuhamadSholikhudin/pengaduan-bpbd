@@ -85,7 +85,10 @@
                                 }else{
                                   echo $distribusi['status_distribusi'];
                                 }
-                              } elseif ($_SESSION['level'] == "petugas_kajian") { // Petugas kajian
+                              } 
+                              
+                              
+                              elseif ($_SESSION['level'] == "petugas_kajian") { // Petugas kajian
                                 if($distribusi['status_distribusi'] == "Sedang dalam perjalanan" || $distribusi['status_distribusi'] == "Sudah sampai" || $distribusi['status_distribusi'] == "Selesai"){
                               ?>
                                 <a href="#" data-id="<?= $distribusi['id_distribusi'] ?>" data-status="<?= $distribusi['status_distribusi'] ?>" class="status_distribusi badge bg-primary btn-outline-danger text-white" data-toggle="modal" data-target="#modaleditstatusdistribusi">
@@ -95,9 +98,10 @@
                                 }else{
                                   echo $distribusi['status_distribusi'];
                                 }
-
-
-                              } else {
+                              } 
+                              
+                              // session level selain petugas kajian dan petugas logistik
+                              else {
                                 echo $distribusi['status_distribusi'];
                               }                              
                               ?>

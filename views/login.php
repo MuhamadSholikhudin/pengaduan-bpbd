@@ -36,7 +36,7 @@
                 </a>
               </div>
               <h6 class="fw-light text-center">Sign in to continue.</h6>
-              <form class="pt-3" action="<?= $url ?>/?auth=login" method="POST" enctype="multipart/form-data">
+              <form class="pt-3 " action="<?= $url ?>/?auth=login" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="Username">
                 </div>

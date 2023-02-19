@@ -64,15 +64,10 @@
                           <textarea class="form-control" id="isi" name="isi" style="height: 500px;" required><?= $satu_publikasi['isi'] ?></textarea>
                         </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary">Submit</button>
+                          <button type="submit" class="btn btn-success"> <i class="ti-pencil-alt"></i> Submit</button>
                         </div>
                       </form>
-
                     </div>
-
-
-
-
                   </div>
                   <div class="card-footer">
 

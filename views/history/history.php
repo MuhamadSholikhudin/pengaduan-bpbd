@@ -24,25 +24,25 @@
                             No
                           </th>
                           <th>
-                            action
+                            Action
                           </th>
                           <th>
-                            tanggal_history
+                            Tanggal History
                           </th>
                           <th>
-                            created_at
+                            Created At
                           </th>
                           <th>
-                            updated_at
+                            Updated At
                           </th>
                           <th>
-                            tabel
+                            Tabel
                           </th>
                           <th>
-                            status_history
+                            Status History
                           </th>
                           <th>
-                            keterangan
+                            Keterangan
                           </th>
                           <th>
                             User

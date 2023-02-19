@@ -119,7 +119,8 @@
                         </script>
                       </div>
                       <div class="col-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success"> <i class="ti-pencil-alt"></i> Update</button>
+
                       </div>
                     </form>
 
