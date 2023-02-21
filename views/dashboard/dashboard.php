@@ -93,7 +93,7 @@
                           <div>
                             <p class="text-small mb-2">Total Pelaporan</p>
                             <?php
-                              $pelaporan = NumRows("SELECT * FROM pelaporan");
+                              $pelaporan = NumRows("SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' OR status_pelaporan = 'tidak valid' OR status_pelaporan = 'kirim'");
                               if($_SESSION['level'] == "pelapor"){
                                 $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_user = ".$_SESSION['id_user']." ");
                                 $pelaporan = NumRows("SELECT * FROM pelaporan WHERE id_pelapor = ".$pelapor['id_pelapor']." ");
@@ -105,9 +105,84 @@
                       </div>
                     </div>
                   </div>
+
+                  <?php 
+                    if($_SESSION['level'] != "pelapor"){
+                      //pelaporan belum di proses
+                       $pelaporan_belum_prosess = NumRows("SELECT * FROM pelaporan WHERE status_pelaporan = 'kirim' ");
+                      ?>
+                      <div class="col-md-3 mb-3">
+                        <div class="card card-rounded shadow">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center ">
+                              <div class="circle-progress-width">
+                                <i class="fa fa-phone fa-5x"></i>
+                              </div>
+                              <div>
+                                <p class="text-small mb-2"> Pelaporan belum di proses</p>                                
+                                <h3 class="mb-0 fw-bold"><?= $pelaporan_belum_prosess ?></h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                  ?>
+
+                  <?php 
+                    if($_SESSION['level'] != "pelapor"){
+                      //pelaporan tervalidasi
+                       $pelaporan_tervalidasi = NumRows("SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ");
+                      ?>
+                      <div class="col-md-3 mb-3">
+                        <div class="card card-rounded shadow">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center ">
+                              <div class="circle-progress-width">
+                                <i class="fa fa-phone fa-5x"></i>
+                              </div>
+                              <div>
+                                <p class="text-small mb-2">Pelaporan Tervalidasi</p>                                
+                                <h3 class="mb-0 fw-bold"><?= $pelaporan_tervalidasi ?></h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                  ?>
+                  <?php 
+                    if($_SESSION['level'] != "pelapor"){
+                      //pelaporan belum di tinjau
+                       $pelaporan_tervalidasi = NumRows("SELECT * FROM pelaporan WHERE status_pelaporan = 'tervalidasi' ");
+                       $peninjauan = NumRows("SELECT * FROM peninjauan  ");
+
+                       $belum_ditinjau = $pelaporan_tervalidasi - $peninjauan;
+                      ?>
+                      <div class="col-md-3 mb-3">
+                        <div class="card card-rounded shadow">
+                          <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center ">
+                              <div class="circle-progress-width">
+                                <i class="fa fa-phone fa-5x"></i>
+                              </div>
+                              <div>
+                                <p class="text-small mb-2">Pelaporan Belum ditinjau</p>                                
+                                <h3 class="mb-0 fw-bold"><?= $belum_ditinjau ?></h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <?php
+                    }
+                  ?>
                 <?php
                 }
                 ?>
+
 
                 <?php
                 if (in_array("peninjauan", $user_dashboard[$_SESSION['level']])) {
@@ -131,7 +206,86 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                </div>
+                <?php
+                  if($_SESSION['level'] != "pelapor"){
+                      //peninjauan dalam di proses
+                       $peninjauan_sudah_meninjau = NumRows("SELECT * FROM peninjauan WHERE status_peninjauan = 'sudah meninjau' ");
+                       ?>
+                       <div class="col-md-3 mb-3">
+                         <div class="card card-rounded shadow">
+                           <div class="card-body">
+                             <div class="d-flex justify-content-between align-items-center ">
+                               <div class="circle-progress-width">
+                                 <!-- <i class="fa fa-phone fa-5x"></i> -->
+                                 <!-- <i class="fa fa-phone"></i> -->
+                                 <i class="fa fa-list-alt  fa-5x"></i>
+                               </div>
+                               <div>
+                                 <p class="text-small mb-2 text-center">Peninjauan Sudah Meninjau</p>
+                                 <h3 class="mb-0 fw-bold text-center"><?= $peninjauan_sudah_meninjau ?></h3>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     <?php
+
+                    }  ?>
+
+                <?php
+                  if($_SESSION['level'] != "pelapor"){
+                      //peninjauan dalam di proses
+                       $peninjauan_dalam_prosess = NumRows("SELECT * FROM peninjauan WHERE status_peninjauan = 'dalam proses' ");
+                       ?>
+                       <div class="col-md-3 mb-3">
+                         <div class="card card-rounded shadow">
+                           <div class="card-body">
+                             <div class="d-flex justify-content-between align-items-center ">
+                               <div class="circle-progress-width">
+                                 <!-- <i class="fa fa-phone fa-5x"></i> -->
+                                 <!-- <i class="fa fa-phone"></i> -->
+                                 <i class="fa fa-list-alt  fa-5x"></i>
+                               </div>
+                               <div>
+                                 <p class="text-small mb-2">Peninjauan Process</p>
+                                 <h3 class="mb-0 fw-bold"><?= $peninjauan_dalam_prosess ?></h3>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     <?php
+
+                    }  ?>
+
+                  
+
+                  <?php
+                  if($_SESSION['level'] != "pelapor"){
+                      //peninjauan dalam di proses
+                       $peninjauan_selesai = NumRows("SELECT * FROM peninjauan WHERE status_peninjauan = 'selesai' ");
+                       ?>
+                       <div class="col-md-3 mb-3">
+                         <div class="card card-rounded shadow">
+                           <div class="card-body">
+                             <div class="d-flex justify-content-between align-items-center ">
+                               <div class="circle-progress-width">
+                                 <!-- <i class="fa fa-phone fa-5x"></i> -->
+                                 <!-- <i class="fa fa-phone"></i> -->
+                                 <i class="fa fa-list-alt  fa-5x"></i>
+                               </div>
+                               <div>
+                                 <p class="text-small mb-2">Peninjauan Selesai</p>
+                                 <h3 class="mb-0 fw-bold"><?= $peninjauan_selesai ?></h3>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     <?php
+
+                    }  ?>
                 <?php
                 }
                 ?>
