@@ -189,14 +189,13 @@ print_r($arr_val);
 
 */
 function SendWA($nomer_tujuan, $pesan){
-    $dataSending = Array();
-    $dataSending["api_key"] = "xxxx";
-    $dataSending["number_key"] = "xxxx";
-    $dataSending["phone_no"] = $nomer_tujuan;
-    $dataSending["message"] = $pesan;
+    $token = "xxxx";
+    $phone= "62812xxxxxx"; //untuk group pakai groupid contoh: 62812xxxxxx-xxxxx
+    $message = "Testing by API ruangwa";
+
     $curl = curl_init();
     curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://api.watzap.id/v1/send_message',
+    CURLOPT_URL => 'https://app.ruangwa.id/api/send_message',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -204,16 +203,19 @@ function SendWA($nomer_tujuan, $pesan){
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => json_encode($dataSending),
-    CURLOPT_HTTPHEADER => array(
-        'Content-Type: application/json'
-    ),
+    CURLOPT_POSTFIELDS => 'token='.$token.'&number='.$phone.'&message='.$message,
     ));
     $response = curl_exec($curl);
     curl_close($curl);
     return $response;
 }
         /*
+
+        Nama Lengkap = Rahajeng Wulansari
+        Nomer WA = 083849607677
+        username = rahajeng
+        password = rahajeng1234
+
         // Iniasiasi WA
         $pesan = "";
         
@@ -248,7 +250,158 @@ function SendWA($nomer_tujuan, $pesan){
 
 
         /*
+        WA 
 
+        pelaporan => kirim
+
+        $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$request['id_pelapor']."");
+        $wilayah = Querysatudata("SELECT * FROM wilayah WEHRE id_wilayah = ".$request['id_wilayah']."");
+        $bencana = Querysatudata("SELECT * FROM bencana WEHRE id_bencana = ".$request['id_bencana']."");
+        $pesan="
+            BPBD KABUPATEN KUDUS 
+            Menginformasikan adanya pelaporan dari masyarakat :
+
+            pelapor:". $pelapor['nama_pelapor'] . "
+            bencana:". $bencana['nama_bencana'] . "
+            wilayah:". $wilayah['desa'] . "." / ". ". $wilayah['kecamatan'] . "
+            tanggal_pelaporan:". $request['tanggal_pelaporan'] . "
+            pelaporan:". $request['pelaporan'] . "
+            link_maps:". $request['link_maps'] . "
+            
+            created_at:". $request['created_at'] . "
+            updated_at:". $request['updated_at'] . "
+
+            Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+            Terima kasih.
+            ";
+
+
+        pelaporan => Checkvalidasi        
+
+        $info = "";
+        if($request["status_pelaporan"] == "tervalidasi"){
+            $info = "Untuk pelapor nama harap tunggu, petugas bpbd akan kirim tim peninjauan untuk dapat memantau melihat kondisi dari bencana.";
+        }
+
+        $pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = ".$request['id_pelapor']."");
+        $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+        $wilayah = Querysatudata("SELECT * FROM wilayah WEHRE id_wilayah = ".$pelaporan['id_wilayah']."");
+        $bencana = Querysatudata("SELECT * FROM bencana WEHRE id_bencana = ".$pelaporan['id_bencana']."");
+
+        $pesan="
+        BPBD KABUPATEN KUDUS 
+            Menginformasikan adanya pelaporan dari masyarakat :
+            pelapor:". $pelapor['nama_pelapor'] . "
+            bencana:". $bencana['nama_bencana'] . "
+            wilayah:". $wilayah['desa'] . "." / ". ". $wilayah['kecamatan'] . "
+            tanggal_pelaporan:". $pelaporan['tanggal_pelaporan'] . "
+            pelaporan:". $pelaporan['pelaporan'] . "
+            link_maps:". $pelaporan['link_maps'] . "            
+            created_at:". $pelaporan['created_at'] . "
+            updated_at:". $pelaporan['updated_at'] . "
+
+            Bahwa pelaporan yang di kirim dinyatakan status pelaporannya : ". $request['status_pelaporan'] . "
+            Serta review dari pelaporan sebagai berkut : review_pelaporan:". $request['review_pelaporan'] . "
+            ".$info."
+
+            Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+            Terima kasih.
+        ";
+
+
+        PENINJAUAN 
+        $pesan = "
+        BPBD KABUPATEN KUDUS 
+            Menginformasikan adanya posko dari petugas kajian bencana sebagai berikut:
+            id_posko:". $request['id_posko'] . "
+            id_peninjauan:". $request['id_peninjauan'] . "
+            nama_posko:". $request['nama_posko'] . "
+            jumlah_jiwa:". $request['jumlah_jiwa'] . "
+            balita:". $request['balita'] . "
+            remaja:". $request['remaja'] . "
+            dewasa:". $request['dewasa'] . "
+            lanjut_usia:". $request['lanjut_usia'] . "
+            status_posko:". $request['status_posko'] . "
+            tanggal_posko:". $request['tanggal_posko'] . "
+            tanggal_selesai:". $request['tanggal_selesai'] . "
+            keterangan:". $request['keterangan'] . "
+            gambar_posko:". $request['gambar_posko'] . "
+            created_at:". $request['created_at'] . "
+            updated_at:". $request['updated_at'] . "
+
+            Untuk pihak yang berkaitan dengan penanganan bencan untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+            Terima kasih
+        ";
+
+
+        POSKO
+        $pesan = "
+            BPBD KABUPATEN KUDUS 
+            Menginformasikan adanya posko dari petugas kajian bencana sebagai berikut:
+            id_posko:". $request['id_posko'] . "
+            id_peninjauan:". $request['id_peninjauan'] . "
+            nama_posko:". $request['nama_posko'] . "
+            jumlah_jiwa:". $request['jumlah_jiwa'] . "
+            balita:". $request['balita'] . "
+            remaja:". $request['remaja'] . "
+            dewasa:". $request['dewasa'] . "
+            lanjut_usia:". $request['lanjut_usia'] . "
+            status_posko:". $request['status_posko'] . "
+            tanggal_posko:". $request['tanggal_posko'] . "
+            tanggal_selesai:". $request['tanggal_selesai'] . "
+            keterangan:". $request['keterangan'] . "
+            gambar_posko:". $request['gambar_posko'] . "
+            created_at:". $request['created_at'] . "
+            updated_at:". $request['updated_at'] . "
+
+            Untuk pihak yang berkaitan dengan penanganan bencan untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+            Terima kasih
+        ";
+
+
+        DISTRIBUSI
+        BPBD KABUPATEN KUDUS 
+        $pesan = "
+            Menginformasikan adanya distribusi bantuan dari petugas logistik bencana sebagai berikut:
+            id_distribusi:". $request['id_distribusi'] . "
+            id_peninjauan:". $request['id_peninjauan'] . "
+            tanggal_distribusi:". $request['tanggal_distribusi'] . "
+            keterangan_distribusi:". $request['keterangan_distribusi'] . "
+            status_distribusi:". $request['status_distribusi'] . "
+            bukti_distribusi:". $request['bukti_distribusi'] . "
+            id_petugas_logistik:". $request['id_petugas_logistik'] . "
+
+            Untuk pihak yang berkaitan dengan penanganan bencan untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+            Terima kasih
+        ";
+
+        BANTUAN_DISTRIBUSI
+
+        id_bantuan_distribusi:". $request['id_bantuan_distribusi'] . "
+        id_distribusi:". $request['id_distribusi'] . "
+        id_stok_bantuan:". $request['id_stok_bantuan'] . "
+        jumlah:". $request['jumlah'] . "
+        satuan:". $request['satuan'] . "
+        batch:". $request['batch'] . "
+
+        id_stok_bantuan:". $request['id_stok_bantuan'] . "
+        id_bantuan:". $request['id_bantuan'] . "
+        tanggal_masuk:". $request['tanggal_masuk'] . "
+        tanggal_kadaluarsa:". $request['tanggal_kadaluarsa'] . "
+        stok_masuk:". $request['stok_masuk'] . "
+        stok_tersedia:". $request['stok_tersedia'] . "
+        batch:". $request['batch'] . "
+        satuan:". $request['satuan'] . "
+
+
+        BANTUAN:". $request['BANTUAN'] . "
+        id_bantuan:". $request['id_bantuan'] . "
+        nama_bantuan:". $request['nama_bantuan'] . "
+        kategori:". $request['kategori'] . "
+        satuan:". $request['satuan'] . "
+        stok:". $request['stok'] . "
+
+             
 
         */
 
