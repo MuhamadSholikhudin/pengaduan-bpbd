@@ -189,13 +189,10 @@ print_r($arr_val);
 
 */
 function SendWA($nomer_tujuan, $pesan){
-    $token = "xxxx";
-    $phone= "62812xxxxxx"; //untuk group pakai groupid contoh: 62812xxxxxx-xxxxx
-    $message = "Testing by API ruangwa";
-
     $curl = curl_init();
+
     curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://app.ruangwa.id/api/send_message',
+    CURLOPT_URL => 'https://api.fonnte.com/send',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -203,9 +200,18 @@ function SendWA($nomer_tujuan, $pesan){
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => 'POST',
-    CURLOPT_POSTFIELDS => 'token='.$token.'&number='.$phone.'&message='.$message,
+    CURLOPT_POSTFIELDS => array(
+    'target' => $nomer_tujuan,
+    'message' => $pesan, 
+    'countryCode' => '62', //optional
+    ),
+    CURLOPT_HTTPHEADER => array(
+        'Authorization: 1Q24f_ivR6BK#j9R4x1_' //change TOKEN to your actual token
+    ),
     ));
+
     $response = curl_exec($curl);
+
     curl_close($curl);
     return $response;
 }
@@ -215,7 +221,14 @@ function SendWA($nomer_tujuan, $pesan){
         Nomer WA = 083849607677
         username = rahajeng
         password = rahajeng1234
+        token = "6Zr2WnX4FVFe3cvGpJboeWUy5i69t36Qw2BgQTtnj3RBavoK75"
 
+
+        WA fonnte
+        Nama Lengkap = Rahajeng Wulansari
+        username = 083849607677
+        password = ht@bIa
+        token = 1Q24f_ivR6BK#j9R4x1_
         // Iniasiasi WA
         $pesan = "";
         

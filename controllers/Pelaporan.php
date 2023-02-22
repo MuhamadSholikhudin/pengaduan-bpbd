@@ -141,6 +141,44 @@ class Pelaporan
         // Exec data query
         $this->Model()->Execute($insert_history);
 
+        $pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = " . $request['id'] . " ");
+        $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+        $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']."");
+        $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']."");
+
+$pesan="
+BPBD KABUPATEN KUDUS 
+Menginformasikan adanya pelaporan dari masyarakat :\n
+
+pelapor     : ". $pelapor['nama_pelapor'] . "\n
+bencana     : ". $bencana['nama_bencana'] . "\n
+wilayah     : ". $wilayah['desa'] . " /  ". $wilayah['kecamatan'] . "\n
+tanggal_pelaporan : ". $pelaporan['tanggal_pelaporan'] . "\n
+pelaporan   : ". $pelaporan['pelaporan'] . "\n
+link_maps   : ". $pelaporan['link_maps'] . "\n
+dibuat pada : ". $pelaporan['created_at'] . "\n
+
+Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku\n
+Terima kasih.
+";
+
+$petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd  DESC ");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian  DESC ");
+$kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd  DESC ");
+
+$nomer_pelapor = $pelapor['no_telp_pelapor'];
+SendWA($nomer_pelapor, $pesan);
+
+$nomer_petugas_bpbd = $petugas_bpbd['no_telp'];
+SendWA($nomer_petugas_bpbd, $pesan);
+
+$nomer_petugas_kajian = $petugas_kajian['no_telp'];
+SendWA($nomer_petugas_kajian, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan_masyarakat=pelaporan", "Data Berhasil Di Kirim");
     }
     public function Batal_kirim($request)
@@ -229,11 +267,56 @@ class Pelaporan
         $insert_history = "INSERT INTO `history`
         ( `action`, `tanggal_history`, `created_at`, `updated_at`, `tabel`, `id_tabel`, `status_history`, `keterangan`, `id_user`) 
         VALUES
-        ( 'validate', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id'] . ", '', 'validasi data pelaporan " . $request["status_pelaporan"] . "', " . $_SESSION['id_user'] . ") 
+        ( 'validate', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'pelaporan', " . $request['id_pelaporan'] . ", '', 'validasi data pelaporan " . $request["status_pelaporan"] . "', " . $_SESSION['id_user'] . ") 
         ";
 
         // Exec data query
         $this->Model()->Execute($insert_history);
+
+        $pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = ".$request['id_pelaporan']."");
+        $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+        $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']."");
+        $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']."");
+
+$info = "";
+if($request["status_pelaporan"] == "tervalidasi"){
+    $info = "Untuk pelapor ".$pelapor['nama_pelapor']." harap tunggu, petugas bpbd akan mengirim tim peninjauan untuk dapat meninjau melihat kondisi dari bencana.";
+}
+
+$pesan="
+BPBD KABUPATEN KUDUS 
+Menginformasikan adanya pelaporan dari masyarakat :
+
+Pelapor : ". $pelapor['nama_pelapor'] . "
+Bencana : ". $bencana['nama_bencana'] . "
+Wilayah : ". $wilayah['desa'] . " / ". $wilayah['kecamatan'] . "
+Tanggal Pelaporan : ". $pelaporan['tanggal_pelaporan'] . "
+Pelaporan : ". $pelaporan['pelaporan'] . "
+Link maps : ". $pelaporan['link_maps'] . "            
+dibuat : ". $pelaporan['created_at'] . "
+
+Bahwa pelaporan yang di kirim dinyatakan status pelaporannya : *". $request['status_pelaporan'] . "*
+Serta review dari pelaporan sebagai berkut : ". $request['review_pelaporan'] . " ".$info."
+
+Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+Terima kasih.
+";
+
+$petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd  DESC ");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian  DESC ");
+$kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd  DESC ");
+
+$nomer_pelapor = $pelapor['no_telp_pelapor'];
+SendWA($nomer_pelapor, $pesan);
+
+$nomer_petugas_bpbd = $petugas_bpbd['no_telp'];
+SendWA($nomer_petugas_bpbd, $pesan);
+
+$nomer_petugas_kajian = $petugas_kajian['no_telp'];
+SendWA($nomer_petugas_kajian, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
 
         Redirect("http://localhost/pengaduan-bpbd/?pelaporan=pelaporan", "Data Berhasil " . $request["status_pelaporan"] . "");
     }

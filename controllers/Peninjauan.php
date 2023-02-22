@@ -25,29 +25,30 @@ class Peninjauan
             move_uploaded_file($lokasi, "./gambar/bukti_peninjauan/" . $bukti_peninjauan);
         }
         $sql_peninjauan = "INSERT INTO `peninjauan` ( `id_pelaporan`, `id_petugas_kajian`, `id_wilayah`,`id_bencana`, `tanggal_peninjauan`, `jumlah_korban`, `kategori_bencana`, `level_bencana`, `keterangan_peninjauan`, `status_peninjauan`, `bukti_peninjauan`, dusun, rt, rw, jumlah_kk, jumlah_rumah, sebab, akibat, upaya_penanganan, lain_lain)
-                    VALUES 
-                    ( 
-                        " . $request['id_pelaporan'] . ", 
-                        '" . $request['id_petugas_kajian'] . "', 
-                        " . $request['id_wilayah'] . ",
-                        " . $request['id_bencana'] . ",
-                        '" . $request['tanggal_peninjauan'] . "',
-                        " . $request['jumlah_korban'] . ",
-                        '" . $request['kategori_bencana'] . "',
-                        " . $request['level_bencana'] . ",
-                        '" . $request['keterangan_peninjauan'] . "',
-                        'dalam proses',
-                        '" . $bukti_peninjauan . "',
-                        '" . $request['dusun'] . "',
-                        '" . $request['rt'] . "',
-                        '" . $request['rw'] . "',
-                        " . $request['jumlah_kk'] . ",
-                        " . $request['jumlah_rumah'] . ",
-                        '" . $request['sebab'] . "',
-                        '" . $request['akibat'] . "',
-                        '" . $request['upaya_penanganan'] . "',
-                        '" . $request['lain_lain'] . "'
-                    )";
+            VALUES 
+            ( 
+                " . $request['id_pelaporan'] . ", 
+                '" . $request['id_petugas_kajian'] . "', 
+                " . $request['id_wilayah'] . ",
+                " . $request['id_bencana'] . ",
+                '" . $request['tanggal_peninjauan'] . "',
+                " . $request['jumlah_korban'] . ",
+                '" . $request['kategori_bencana'] . "',
+                " . $request['level_bencana'] . ",
+                '" . $request['keterangan_peninjauan'] . "',
+                'dalam proses',
+                '" . $bukti_peninjauan . "',
+                '" . $request['dusun'] . "',
+                '" . $request['rt'] . "',
+                '" . $request['rw'] . "',
+                " . $request['jumlah_kk'] . ",
+                " . $request['jumlah_rumah'] . ",
+                '" . $request['sebab'] . "',
+                '" . $request['akibat'] . "',
+                '" . $request['upaya_penanganan'] . "',
+                '" . $request['lain_lain'] . "'
+            )";
+
         $this->Model()->Execute($sql_peninjauan);
 
         // Menampilkan data peninjauan yang terakhir di tambahkan
@@ -59,6 +60,65 @@ class Peninjauan
         VALUES
         ( 'add', '" . date("Y-m-d") . "', '" . date("Y-m-d H:i:s") . "', '" . date("Y-m-d H:i:s") . "', 'peninjauan', " . $tampil_peninjauan['id_peninjauan'] . ", '', 'menambahkan data peninjauan', " . $_SESSION['id_user'] . ") 
         ";
+
+
+
+        $pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = ".$request['id_pelaporan']."");
+        $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+        $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']."");
+        $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']."");
+        $petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian WHERE id_petugas_kajian = ". $request['id_petugas_kajian']."");
+
+$pesan = "
+BPBD KABUPATEN KUDUS 
+Menginformasikan adanya peninjauan dari petugas kajian bencana sebagai berikut:
+
+Petugas kajian : ". $petugas_kajian['nama'] . "
+Pelapor :". $pelapor['nama_pelapor'] . "
+Bencana :". $bencana['nama_bencana'] . "
+Wilayah :". $wilayah['desa'] . " / ". $wilayah['kecamatan'] . "
+Kategori bencana : ". $request['kategori_bencana'] . "
+Level bencana : ". $request['level_bencana'] . "
+Tanggal peninjauan : ". $request['tanggal_peninjauan'] . "
+Jumlah korban : ". $request['jumlah_korban'] . "
+Keterangan peninjauan : ". $request['keterangan_peninjauan'] . "
+Status peninjauan : *dalam proses*
+Dusun : ". $request['dusun'] . "
+Rt : ". $request['rt'] . "
+Rw : ". $request['rw'] . "
+Jumlah KK terdampak : ". $request['jumlah_kk'] . "
+Jumlah rumah terdampak : ". $request['jumlah_rumah'] . "
+Sebab : ". $request['sebab'] . "
+Akibat : ". $request['akibat'] . "
+Upaya penanganan : ". $request['upaya_penanganan'] . "
+Lain lain : ". $request['lain_lain'] . "
+
+Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+Terima kasih.
+";
+
+$petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd  DESC ");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian  DESC ");
+$kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd  DESC ");
+$petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik ORDER BY id_petugas_logistik  DESC ");
+
+$nomer_pelapor = $pelapor['no_telp_pelapor'];
+SendWA($nomer_pelapor, $pesan);
+
+$nomer_petugas_bpbd = $petugas_bpbd['no_telp'];
+SendWA($nomer_petugas_bpbd, $pesan);
+
+$nomer_petugas_kajian = $petugas_kajian['no_telp'];
+SendWA($nomer_petugas_kajian, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($petugas_logistik, $pesan);
 
         // Exec data query
         $this->Model()->Execute($insert_history);
@@ -130,6 +190,65 @@ class Peninjauan
                 ";
         // Exec data query
         $this->Model()->Execute($insert_history);
+
+        $peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = ".$request['id_peninjauan']."");
+
+        $pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = ".$peninjauan['id_pelaporan']."");
+        $pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+        $wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']."");
+        $bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']."");
+        $petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian WHERE id_petugas_kajian = ". $peninjauan['id_petugas_kajian']."");
+
+$pesan = "
+BPBD KABUPATEN KUDUS 
+Menginformasikan adanya peninjauan dari petugas kajian bencana sebagai berikut:
+
+Petugas kajian : ". $petugas_kajian['nama'] . "
+Pelapor:". $pelapor['nama_pelapor'] . "
+Bencana:". $bencana['nama_bencana'] . "
+Wilayah:". $wilayah['desa'] . " / ". $wilayah['kecamatan'] . "
+Kategori bencana : ". $peninjauan['kategori_bencana'] . "
+Level bencana : ". $peninjauan['level_bencana'] . "
+Tanggal peninjauan : ". $peninjauan['tanggal_peninjauan'] . "
+Jumlah korban : ". $peninjauan['jumlah_korban'] . "
+Keterangan peninjauan : ". $peninjauan['keterangan_peninjauan'] . "
+Status peninjauan : *". $request['status_peninjauan'] . "*
+Dusun : ". $peninjauan['dusun'] . "
+Rt : ". $peninjauan['rt'] . "
+Rw : ". $peninjauan['rw'] . "
+Jumlah_kk : ". $peninjauan['jumlah_kk'] . "
+Jumlah_rumah : ". $peninjauan['jumlah_rumah'] . "
+Sebab : ". $peninjauan['sebab'] . "
+Akibat : ". $peninjauan['akibat'] . "
+Upaya_penanganan : ". $peninjauan['upaya_penanganan'] . "
+Lain_lain : ". $peninjauan['lain_lain'] . "
+
+Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+Terima kasih
+";
+
+$petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd  DESC ");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian  DESC ");
+$kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd  DESC ");
+$petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik ORDER BY id_petugas_logistik  DESC ");
+
+$nomer_pelapor = $pelapor['no_telp_pelapor'];
+SendWA($nomer_pelapor, $pesan);
+
+$nomer_petugas_bpbd = $petugas_bpbd['no_telp'];
+SendWA($nomer_petugas_bpbd, $pesan);
+
+$nomer_petugas_kajian = $petugas_kajian['no_telp'];
+SendWA($nomer_petugas_kajian, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($petugas_logistik, $pesan);
 
         Redirect("http://localhost/pengaduan-bpbd/?peninjauan=peninjauan", "Data Berhasil Di Prosess");
     }
