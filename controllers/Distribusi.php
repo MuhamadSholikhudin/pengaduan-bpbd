@@ -431,6 +431,29 @@ class Distribusi
             )";
             $this->Model()->Execute($sql_distribusi_bantuan);
         }
+
+/*
+DISTRIBUSI
+BPBD KABUPATEN KUDUS 
+$pesan = "
+Menginformasikan adanya distribusi bantuan dari petugas logistik bencana sebagai berikut:
+id_distribusi:". $request['id_distribusi'] . "
+id_peninjauan:". $request['id_peninjauan'] . "
+tanggal_distribusi:". $request['tanggal_distribusi'] . "
+keterangan_distribusi:". $request['keterangan_distribusi'] . "
+status_distribusi:". $request['status_distribusi'] . "
+bukti_distribusi:". $request['bukti_distribusi'] . "
+id_petugas_logistik:". $request['id_petugas_logistik'] . "
+
+Untuk pihak yang berkaitan dengan penanganan bencan untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+Terima kasih
+";
+
+
+*/
+
+
+
         echo json_encode("Data Distribusi Bantuan berhasil di tambahkan");
     }
 
