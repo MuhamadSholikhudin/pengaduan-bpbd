@@ -63,13 +63,13 @@
                               <?= $history['action'] ?>
                             </td>
                             <td>
-                              <?= $history['tanggal_history'] ?>
+                              <?= TanggalIndonesia($history['tanggal_history']) ?>
                             </td>
                             <td>
-                              <?= $history['created_at'] ?>
+                              <?= TanggalIndonesiaTime($history['created_at']) ?>
                             </td>
                             <td>
-                              <?= $history['updated_at'] ?>
+                              <?= TanggalIndonesiaTime($history['updated_at']) ?>
                             </td>
                             <td>
                               <?= $history['tabel'] ?>

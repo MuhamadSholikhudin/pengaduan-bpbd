@@ -218,7 +218,7 @@
                                                 <?= $petugas_logistik['nama'] ?>
                                             </td>
                                             <td>
-                                                <?= $distribusi['tanggal_distribusi'] ?>
+                                                <?= TanggalIndonesia($distribusi['tanggal_distribusi']) ?>
                                             </td>
                                             <td>
                                                 <?= $bencana['nama_bencana'] ?>

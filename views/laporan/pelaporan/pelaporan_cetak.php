@@ -1,7 +1,7 @@
 <?php 
     if (isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])) {
         $sql_pelaporan = "SELECT * FROM pelaporan WHERE tanggal_pelaporan BETWEEN '" . $_GET['tanggal_awal'] . "' AND '" . $_GET['tanggal_akhir'] . "' AND status_pelaporan != 'belum dikirim' ";
-        $hal = "dari tanggal ". $_GET['tanggal_awal']. " Sampai ".$_GET['tanggal_akhir'];
+        $hal = "dari tanggal ". TanggalIndonesia($_GET['tanggal_awal']). " Sampai ".TanggalIndonesia($_GET['tanggal_akhir']);
     } elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) {
         $sql_pelaporan = "SELECT * FROM pelaporan WHERE MONTH(tanggal_pelaporan) = " . $_GET['bulan'] . " AND YEAR(tanggal_pelaporan) = '" . $_GET['tahun'] . "' AND  status_pelaporan != 'belum dikirim' ";
         $hal = " bulan ". BulanIndonesia($_GET['bulan'])." Tahun ". $_GET['tahun'];
@@ -85,24 +85,24 @@
     <span class="text-center" style="font-size: 16xpx; font-weight:700;">NOTA DINAS</span>
         <table style="text-align: left;">
             <tr>
-                <td>Kepada Yth</td>
-                <td> : </td>
-                <td>BUPATI KUDUS</td>
+                <td valign="top">Kepada Yth</td>
+                <td valign="top"> : </td>
+                <td valign="top">BUPATI KUDUS</td>
             </tr>
             <tr>
-                <td>Dari</td>
-                <td> : </td>
-                <td>Kepala Badan Penanggukangan Bencana Daerah Kab. Kudus</td>
+                <td valign="top">Dari</td>
+                <td valign="top"> : </td>
+                <td valign="top">Kepala Badan Penanggukangan Bencana Daerah Kab. Kudus</td>
             </tr>
             <tr>
-                <td>Tanggal</td>
-                <td> : </td>
-                <td> <?= TanggalIndonesia(date("Y-m-d")) ?></td>
+                <td valign="top">Tanggal</td>
+                <td valign="top"> : </td>
+                <td valign="top"> <?= TanggalIndonesia(date("Y-m-d")) ?></td>
             </tr>
             <tr>
-                <td>Hal</td>
-                <td> : </td>
-                <td>Laporan Pelaporan Data Bencana Kab. Kudus <?= $hal ?></td>
+                <td valign="top">Hal</td>
+                <td valign="top"> : </td>
+                <td valign="top">Laporan Pelaporan Data Bencana Kab. Kudus <?= $hal ?></td>
             </tr>
         </table>
         <br>
@@ -142,7 +142,7 @@
                             <?= $pelapor['nama_pelapor'] ?>
                         </td>
                         <td>
-                            <?= $pelaporan['tanggal_pelaporan'] ?>
+                            <?= TanggalIndonesia($pelaporan['tanggal_pelaporan']) ?>
                         </td>
                         <td>
                             <?= $bencana['nama_bencana'] ?>

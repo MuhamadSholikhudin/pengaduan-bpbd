@@ -56,7 +56,7 @@
 
                             //Query Menampilkan data pelaporan berdasarkan kriteria  status_pelaporan yang tidak belum dikirim dan batal kirim
                             $query_pelapolaran = "SELECT * FROM pelaporan WHERE status_pelaporan != 'belum dikirim' AND status_pelaporan != 'batal kirim' ORDER BY id_pelaporan DESC";
-                            break;
+                          break;
 
                           case "petugas_kajian": // jika session levelnya petugas kajian
 
@@ -69,7 +69,7 @@
                             // Merubah data id_petugas_kajian dan nama_petugas_kajian
                             $id_petugas_kajian = $petugas_peninjaun['id_petugas_kajian'];
                             $nama_petugas_kajian = $petugas_peninjaun['nama'];
-                            break;
+                          break;
                         }
                         $pelaporans = Querybanyak($query_pelapolaran);
                         foreach ($pelaporans as $pelaporan) { 
@@ -93,11 +93,11 @@
                               <?= $pelapor['nama_pelapor'] ?>
                             </td>
                             <td>
-                              <?= $pelaporan['created_at'] ?>
+                              <?= TanggalIndonesiaTime($pelaporan['created_at']) ?>
                             </td>
                             <td>
                               <?php                             
-                                 echo $max_proses;
+                                 echo TanggalIndonesiaTime($max_proses);
                               ?>                              
                             </td>
                             <td>
@@ -128,7 +128,7 @@
                                 case "terkirim": // status_pelaporan datanya terkirim
                                   // Tampilkan  
                                   echo '<button class="btn badge-danger text">data pelaporan belum di proses</button>';
-                                  break;
+                                break;
 
                                 case "tervalidasi": // status_pelaporan datanya tervalidasi
                                   if ($_SESSION['level'] == "petugas_kajian") {
@@ -136,7 +136,7 @@
                                   } else {
                                     echo $pelaporan['status_pelaporan'];
                                   }
-                                  break;
+                                break;
 
                                 default: // default status_pelaporan atau jika tidak ada yang memenuhi
                                   echo $pelaporan['status_pelaporan'];
@@ -178,7 +178,7 @@
                                       valid
                                     </a>
                                   <?php }
-                                  break;
+                                break;
 
                                 case "petugas_kajian": // Jika levelnya petugas_kajian
                                   ?>

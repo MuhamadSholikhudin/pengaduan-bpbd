@@ -78,7 +78,7 @@ if ($_SESSION['level'] == "petugas_logistik") {
                         <?= $posko['tanggal_posko'] ?>
                       </td>
                       <td>
-                        <?= $posko['tanggal_posko'] ?>
+                        <?= $posko['jumlah_jiwa'] ?>
                       </td>
                       <td>
                         <?php

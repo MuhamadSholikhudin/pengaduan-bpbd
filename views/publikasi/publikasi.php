@@ -58,7 +58,7 @@
                               <?= $publikasi['kategori']; ?>
                             </td>
                             <td>
-                              <?= $publikasi['tanggal_publikasi']; ?>
+                              <?= TanggalIndonesia($publikasi['tanggal_publikasi']) ?>
                             </td>
                             <td>
                               <img class="img" height="50" src="<?= $url ?>/gambar/publikasi/<?= $publikasi['gambar'] ?>" alt="">

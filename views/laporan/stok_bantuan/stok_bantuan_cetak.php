@@ -132,10 +132,10 @@
                             <?= $bantuan['nama_bantuan'] ?>
                         </td>
                         <td>
-                            <?= $stok_bantuan['tanggal_masuk'] ?>
+                            <?= TanggalIndonesia($stok_bantuan['tanggal_masuk']) ?>
                         </td>
                         <td>
-                            <?= $stok_bantuan['tanggal_kadaluarsa'] ?>
+                            <?= TanggalIndonesia($stok_bantuan['tanggal_kadaluarsa']) ?>
                         </td>
                         <td>
                             <?= $stok_bantuan['stok_masuk'] ?>
