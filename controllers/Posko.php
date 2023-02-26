@@ -221,7 +221,7 @@ $nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
 SendWA($petugas_logistik, $pesan);
 
 
-*/
+
 
 
         Redirect("http://localhost/pengaduan-bpbd/?posko=posko", "Data Berhasil Di Ubah");

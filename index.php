@@ -42,14 +42,12 @@ $posko = new Posko();
 if ($_GET) {
     $param_key = array_keys($_GET)[0];
     $param_val = $_GET[array_keys($_GET)[0]];
-
     switch ($param_key) {
         case 'dashboard':
             if ($param_val == 'dashboard') {
                 $conf->TemplateAdmin('views/dashboard/dashboard.php');
             }
             break;
-
         case 'user':
             if ($param_val == 'user') {
                 $conf->TemplateAdmin('views/users/user.php');

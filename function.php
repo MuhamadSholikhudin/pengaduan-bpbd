@@ -42,6 +42,11 @@ function NumRows($query){
     return $cek;
 }
 
+function Execute($sql){
+    $koneksi = mysqli_connect("localhost","root","","pengaduan-bpbdv2");
+    mysqli_query($koneksi, $sql);
+}
+
 function Redirect($link, $notif) {
     echo $output = "<script>alert('".$notif."')</script><meta http-equiv='refresh' content='0; url=".$link. "'>";
     return $output;
