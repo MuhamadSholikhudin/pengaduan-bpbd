@@ -223,7 +223,6 @@ function SendWA($nomer_tujuan, $pesan){
         password = rahajeng1234
         token = "6Zr2WnX4FVFe3cvGpJboeWUy5i69t36Qw2BgQTtnj3RBavoK75"
 
-
         WA fonnte
         Nama Lengkap = Rahajeng Wulansari
         username = 083849607677
