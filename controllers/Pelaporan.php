@@ -156,7 +156,7 @@ wilayah     : ". $wilayah['desa'] . " /  ". $wilayah['kecamatan'] . "\n
 tanggal_pelaporan : ". $pelaporan['tanggal_pelaporan'] . "\n
 pelaporan   : ". $pelaporan['pelaporan'] . "\n
 link_maps   : ". $pelaporan['link_maps'] . "\n
-dibuat pada : ". $pelaporan['created_at'] . "\n
+dibuat pada : ". TanggalIndonesiaTime($pelaporan['created_at']) . "\n
 
 Untuk pihak yang berkaitan dengan penanganan bencana untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku\n
 Terima kasih.
@@ -293,7 +293,7 @@ Wilayah : ". $wilayah['desa'] . " / ". $wilayah['kecamatan'] . "
 Tanggal Pelaporan : ". $pelaporan['tanggal_pelaporan'] . "
 Pelaporan : ". $pelaporan['pelaporan'] . "
 Link maps : ". $pelaporan['link_maps'] . "            
-dibuat : ". $pelaporan['created_at'] . "
+dibuat : ". TanggalIndonesiaTime($pelaporan['created_at']) . "
 
 Bahwa pelaporan yang di kirim dinyatakan status pelaporannya : *". $request['status_pelaporan'] . "*
 Serta review dari pelaporan sebagai berkut : ". $request['review_pelaporan'] . " ".$info."

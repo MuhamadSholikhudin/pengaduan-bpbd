@@ -74,7 +74,7 @@ if($_SESSION['level'] == "petugas_logistik"){
                               <?= $pelapor['nama'] ?>
                             </td>
                             <td>
-                              <?= $peninjauan['tanggal_peninjauan'] ?>
+                              <?= TanggalIndonesia($peninjauan['tanggal_peninjauan']) ?>
                             </td>
                             <td>
                               <?php

@@ -55,6 +55,70 @@ class Posko
         // Exec data query
         $this->Model()->Execute($insert_history);
 
+
+// POSKO
+
+$peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = ".$request['id_peninjauan']."");
+
+$pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = ".$peninjauan['id_pelaporan']."");
+$pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+$wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']."");
+$bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']."");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian WHERE id_petugas_kajian = ". $peninjauan['id_petugas_kajian']."");
+
+$pesan = "
+BPBD KABUPATEN KUDUS 
+Menginformasikan adanya posko dari petugas kajian bencana sebagai berikut :
+Peninjauan : ". $petugas_kajian['nama'] . "
+Pelapor:". $pelapor['nama_pelapor'] . "
+Bencana:". $bencana['nama_bencana'] . "
+Wilayah:". $wilayah['desa'] . " / ". $wilayah['kecamatan'] . "
+Kategori bencana : ". $peninjauan['kategori_bencana'] . "
+Level bencana : ". $peninjauan['level_bencana'] . "
+Nama Posko : ". $request['nama_posko'] . "
+
+Jumlah jiwa : ". $request['jumlah_jiwa'] . "
+balita : ". $request['balita'] . "
+remaja : ". $request['remaja'] . "
+dewasa : ". $request['dewasa'] . "
+Lanjut usia : ". $request['lanjut_usia'] . "
+
+Status posko : ". $request['status_posko'] . "
+Tanggal posko : ". TanggalIndonesia($request['tanggal_posko']) . "
+keterangan : ". $request['keterangan'] . "
+di buat : ". TanggalIndonesiaTime($request['created_at']) . "
+
+Untuk pihak yang berkaitan dengan penanganan bencan untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+Terima kasih
+";
+
+
+$petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd  DESC ");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian  DESC ");
+$kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd  DESC ");
+$petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik ORDER BY id_petugas_logistik  DESC ");
+
+$nomer_pelapor = $pelapor['no_telp_pelapor'];
+SendWA($nomer_pelapor, $pesan);
+
+$nomer_petugas_bpbd = $petugas_bpbd['no_telp'];
+SendWA($nomer_petugas_bpbd, $pesan);
+
+$nomer_petugas_kajian = $petugas_kajian['no_telp'];
+SendWA($nomer_petugas_kajian, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($petugas_logistik, $pesan);
+
+
+
+
         Redirect("http://localhost/pengaduan-bpbd/?posko=posko", "Data Berhasil Di Tambah");
     }
 
@@ -93,6 +157,73 @@ class Posko
             ";
 
         $this->Model()->Execute($sql);
+
+
+// POSKO
+
+$peninjauan = Querysatudata("SELECT * FROM peninjauan WHERE id_peninjauan = ".$request['id_peninjauan']."");
+
+$pelaporan = Querysatudata("SELECT * FROM pelaporan WHERE id_pelaporan = ".$peninjauan['id_pelaporan']."");
+$pelapor = Querysatudata("SELECT * FROM pelapor WHERE id_pelapor = ".$pelaporan['id_pelapor']."");
+$wilayah = Querysatudata("SELECT * FROM wilayah WHERE id_wilayah = ".$pelaporan['id_wilayah']."");
+$bencana = Querysatudata("SELECT * FROM bencana WHERE id_bencana = ".$pelaporan['id_bencana']."");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian WHERE id_petugas_kajian = ". $peninjauan['id_petugas_kajian']."");
+
+$pesan = "
+BPBD KABUPATEN KUDUS 
+Menginformasikan adanya posko dari petugas kajian bencana sebagai berikut :
+Peninjauan : ". $petugas_kajian['nama'] . "
+Pelapor:". $pelapor['nama_pelapor'] . "
+Bencana:". $bencana['nama_bencana'] . "
+Wilayah:". $wilayah['desa'] . " / ". $wilayah['kecamatan'] . "
+Kategori bencana : ". $peninjauan['kategori_bencana'] . "
+Level bencana : ". $peninjauan['level_bencana'] . "
+Nama Posko : ". $request['nama_posko'] . "
+
+Jumlah jiwa : ". $request['jumlah_jiwa'] . "
+balita : ". $request['balita'] . "
+remaja : ". $request['remaja'] . "
+dewasa : ". $request['dewasa'] . "
+Lanjut usia : ". $request['lanjut_usia'] . "
+
+Status posko : ". $request['status_posko'] . "
+Tanggal posko : ". TanggalIndonesia($request['tanggal_posko']) . "
+keterangan : ". $request['keterangan'] . "
+di buat : ". TanggalIndonesiaTime($request['created_at']) . "
+di update : ". TanggalIndonesiaTime($request['updated_at']) . "
+
+Untuk pihak yang berkaitan dengan penanganan bencan untuk dapat menjalankan kewajibannya sesuai dengan aturan yang berlaku
+Terima kasih
+";
+
+
+$petugas_bpbd = Querysatudata("SELECT * FROM petugas_bpbd ORDER BY id_petugas_bpbd  DESC ");
+$petugas_kajian = Querysatudata("SELECT * FROM petugas_kajian ORDER BY id_petugas_kajian  DESC ");
+$kepala_bpbd = Querysatudata("SELECT * FROM kepala_bpbd ORDER BY id_kepala_bpbd  DESC ");
+$petugas_logistik = Querysatudata("SELECT * FROM petugas_logistik ORDER BY id_petugas_logistik  DESC ");
+
+$nomer_pelapor = $pelapor['no_telp_pelapor'];
+SendWA($nomer_pelapor, $pesan);
+
+$nomer_petugas_bpbd = $petugas_bpbd['no_telp'];
+SendWA($nomer_petugas_bpbd, $pesan);
+
+$nomer_petugas_kajian = $petugas_kajian['no_telp'];
+SendWA($nomer_petugas_kajian, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($nomer_kepala_bpbd, $pesan);
+
+$nomer_kepala_bpbd = $kepala_bpbd['no_telp'];
+SendWA($petugas_logistik, $pesan);
+
+
+
+
+
         Redirect("http://localhost/pengaduan-bpbd/?posko=posko", "Data Berhasil Di Ubah");
     }
 

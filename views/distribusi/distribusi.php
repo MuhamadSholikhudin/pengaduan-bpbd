@@ -60,7 +60,7 @@
                               $peninjauan = Querysatudata("SELECT * FROM peninjauan LEFT JOIN bencana ON peninjauan.id_bencana = bencana.id_bencana JOIN wilayah ON peninjauan.id_wilayah = wilayah.id_wilayah WHERE peninjauan.id_peninjauan = " . $distribusi['id_peninjauan'] . " ");
                               $petugas_kajian = Querysatudata("SELECT nama FROM petugas_kajian WHERE id_petugas_kajian = " . $peninjauan['id_petugas_kajian'] . " ");
                               ?>
-                              <?= $petugas_kajian['nama'] ?> , <?= $peninjauan['tanggal_peninjauan'] ?>
+                              <?= $petugas_kajian['nama'] ?> , <?= TanggalIndonesia($peninjauan['tanggal_peninjauan']) ?>
                             </td>
                             <td>
                               <?= $peninjauan['nama_bencana'] ?>
@@ -69,7 +69,7 @@
                               <?= $peninjauan['kecamatan'] ?> / <?= $peninjauan['desa'] ?>
                             </td>
                             <td>
-                              <?= $distribusi['tanggal_distribusi'] ?>
+                              <?= TanggalIndonesia($distribusi['tanggal_distribusi']) ?>
                             </td>
                             <td>
                               <!-- STATUS DISTRIBUSI -->

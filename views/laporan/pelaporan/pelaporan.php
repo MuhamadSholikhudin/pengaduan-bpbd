@@ -70,7 +70,6 @@
                                             Tahun
                                         </td>
                                         <td>
-
                                             <select class="form-control" name="tahun" id="tahun">
                                                 <?php $mulai = date('Y') - 20;
                                                 for ($i = $mulai; $i < $mulai + 21; $i++) {
@@ -217,7 +216,7 @@
                                                 <?= $pelapor['nama_pelapor'] ?>
                                             </td>
                                             <td>
-                                                <?= $pelaporan['tanggal_pelaporan'] ?>
+                                                <?= TanggalIndonesia($pelaporan['tanggal_pelaporan']) ?>
                                             </td>
                                             <td>
                                                 <?= $bencana['nama_bencana'] ?>

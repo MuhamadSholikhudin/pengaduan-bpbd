@@ -40,7 +40,7 @@ if (isset($_GET['tanggal_awal']) && isset($_GET['tanggal_akhir'])) { // jika ter
     $sql_distribusi = "SELECT * FROM distribusi WHERE tanggal_distribusi BETWEEN '" . $_GET['tanggal_awal'] . "' AND '" . $_GET['tanggal_akhir'] . "' ";
     
     // Membuat perihal dengan memasukkan tanggal awal dan tanggal_akhir
-    $hal = "dari tanggal ". $_GET['tanggal_awal']. " Sampai ".$_GET['tanggal_akhir'];
+    $hal = "dari tanggal ". tanggalIndonesia($_GET['tanggal_awal']). " Sampai ".tanggalIndonesia($_GET['tanggal_akhir']);
 
 } elseif (isset($_GET['bulan']) && isset($_GET['tahun'])) { //Jika terdapat GET bulan dan tahun
 
@@ -109,24 +109,24 @@ $Bantuan_logistik = NumRows($sql_distribusi);
     <span class="text-center" style="font-size: 16xpx; font-weight:700;">NOTA DINAS</span>
         <table style="text-align: left;">
             <tr>
-                <td>Kepada Yth</td>
-                <td> : </td>
-                <td>BUPATI KUDUS</td>
+                <td valign="top">Kepada Yth</td>
+                <td valign="top"> : </td>
+                <td valign="top">BUPATI KUDUS</td>
             </tr>
             <tr>
-                <td>Dari</td>
-                <td> : </td>
-                <td>Kepala Badan Penanggukangan Bencana Daerah Kab. Kudus</td>
+                <td valign="top">Dari</td>
+                <td valign="top"> : </td>
+                <td valign="top">Kepala Badan Penanggukangan Bencana Daerah Kab. Kudus</td>
             </tr>
             <tr>
-                <td>Tanggal</td>
-                <td> : </td>
-                <td> <?= TanggalIndonesia(date("Y-m-d")) ?></td>
+                <td valign="top">Tanggal</td>
+                <td valign="top"> : </td>
+                <td valign="top"> <?= TanggalIndonesia(date("Y-m-d")) ?></td>
             </tr>
             <tr>
-                <td>Hal</td>
-                <td> : </td>
-                <td>Laporan Distribusi Kejadian Benca dan Kedaruratan di Kab. Kudus <?= $hal ?></td>
+                <td valign="top">Hal</td>
+                <td valign="top"> : </td>
+                <td valign="top">Laporan Distribusi Kejadian Benca dan Kedaruratan di Kab. Kudus <?= $hal ?></td>
             </tr>
         </table>
         <br>
@@ -134,12 +134,12 @@ $Bantuan_logistik = NumRows($sql_distribusi);
         <p style="text-align:justify; ">KEMAJUAN/PROGRESS PENDISTRIBUSIAN BANTUAN KEDARURATAN  BANTUAN TERDAMPAK.</p>
         <table style="text-align: left;">
             <tr>
-                <td>a.</td>
-                <td>Penanganan kedaruratan  berjumlah <?= $Penanganan_kedaruratan ?> Kejadian</td>
+                <td valign="top">a.</td>
+                <td valign="top">Penanganan kedaruratan  berjumlah <?= $Penanganan_kedaruratan ?> Kejadian</td>
             </tr>
             <tr>
-                <td>b.</td>
-                <td>Bantuan logistik kepada terdampak : <?= $Bantuan_logistik ?> kegiatan</td>
+                <td valign="top">b.</td>
+                <td valign="top">Bantuan logistik kepada terdampak : <?= $Bantuan_logistik ?> kegiatan</td>
             </tr>
         </table>
         <p style="text-align: justify;">Adapun progress penanganan pendistribusian bantuan sebagai berikut : <p>
@@ -173,7 +173,7 @@ $Bantuan_logistik = NumRows($sql_distribusi);
                                 <?= $petugas_logistik['nama'] ?>
                             </td>
                             <td>
-                                <?= $distribusi['tanggal_distribusi'] ?>
+                                <?= tanggalIndonesia($distribusi['tanggal_distribusi']) ?>
                             </td>
                             <td>
                                 <?= $bencana['nama_bencana'] ?>
