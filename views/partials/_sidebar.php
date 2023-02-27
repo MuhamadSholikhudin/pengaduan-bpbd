@@ -111,6 +111,7 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item <?= isset($_GET['laporan']) ? sidelaporan("pelaporan")  : "" ?> "> <a class="nav-link " href="<?= $url ?>/?laporan=pelaporan">Pelaporan</a></li>
                 <li class="nav-item <?= isset($_GET['laporan']) ? sidelaporan("peninjauan")  : "" ?> "> <a class="nav-link " href="<?= $url ?>/?laporan=peninjauan">Peninjauan</a></li>
+                <li class="nav-item <?= isset($_GET['laporan']) ? sidelaporan("posko")  : "" ?> "> <a class="nav-link " href="<?= $url ?>/?laporan=posko">Posko</a></li>
                 <li class="nav-item <?= isset($_GET['laporan']) ? sidelaporan("distribusi")  : "" ?> "> <a class="nav-link" href="<?= $url ?>/?laporan=distribusi">Pendistribusian </a></li>
                 <li class="nav-item <?= isset($_GET['laporan']) ? sidelaporan("stok_bantuan")  : "" ?>"> <a class="nav-link" href="<?= $url ?>/?laporan=stok_bantuan">Persediaan </a></li>
               </ul>

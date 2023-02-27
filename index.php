@@ -351,6 +351,27 @@ if ($_GET) {
                 include 'views/laporan/peninjauan/peninjauan_pdf.php';
             }
 
+            // ================== posko =======
+            if ($param_val == 'posko') {
+            if (isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])) {
+                Redirect('http://localhost/pengaduan-bpbd/?laporan=posko&tanggal_awal='.$_POST['tanggal_awal'].'&tanggal_akhir='.$_POST['tanggal_akhir'] .'','Data Berhasil di proses');
+            } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
+                Redirect('http://localhost/pengaduan-bpbd/?laporan=posko&bulan='.$_POST['bulan'].'&tahun='.$_POST['tahun'].'','Data Berhasil di proses' );
+            } elseif (isset($_POST['tahun'])) {
+                Redirect('http://localhost/pengaduan-bpbd/?laporan=posko&tahun='.$_POST['tahun'].'', 'Data Berhasil di proses');
+            } else {
+                $conf->TemplateAdmin(
+                    'views/laporan/posko/posko.php'
+                );
+            }
+            } elseif ($param_val == 'posko_cetak') {
+                include 'views/laporan/posko/posko_cetak.php';
+            } elseif ($param_val == 'posko_excel') {
+                include 'views/laporan/posko/posko_excel.php';
+            } elseif ($param_val == 'posko_pdf') {
+                include 'views/laporan/posko/posko_pdf.php';
+            }
+
             // ================== distribusi =======
             if ($param_val == 'distribusi') {
                 if (
