@@ -310,34 +310,12 @@ if ($_GET) {
         case 'laporan':
             // ================== Pelaporan =======
             if ($param_val == 'pelaporan') {
-                if (
-                    isset($_POST['tanggal_awal']) &&
-                    isset($_POST['tanggal_akhir'])
-                ) {
-                    Redirect(
-                        'http://localhost/pengaduan-bpbd/?laporan=pelaporan&tanggal_awal=' .
-                            $_POST['tanggal_awal'] .
-                            '&tanggal_akhir=' .
-                            $_POST['tanggal_akhir'] .
-                            '',
-                        'Data Berhasil di proses'
-                    );
+                if (isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])) {
+                    Redirect('http://localhost/pengaduan-bpbd/?laporan=pelaporan&tanggal_awal='.$_POST['tanggal_awal'].'&tanggal_akhir='.$_POST['tanggal_akhir'] .'','Data Berhasil di proses');
                 } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
-                    Redirect(
-                        'http://localhost/pengaduan-bpbd/?laporan=pelaporan&bulan=' .
-                            $_POST['bulan'] .
-                            '&tahun=' .
-                            $_POST['tahun'] .
-                            '',
-                        'Data Berhasil di proses'
-                    );
+                    Redirect('http://localhost/pengaduan-bpbd/?laporan=pelaporan&bulan='.$_POST['bulan'].'&tahun='.$_POST['tahun'].'','Data Berhasil di proses' );
                 } elseif (isset($_POST['tahun'])) {
-                    Redirect(
-                        'http://localhost/pengaduan-bpbd/?laporan=pelaporan&tahun=' .
-                            $_POST['tahun'] .
-                            '',
-                        'Data Berhasil di proses'
-                    );
+                    Redirect('http://localhost/pengaduan-bpbd/?laporan=pelaporan&tahun='.$_POST['tahun'].'', 'Data Berhasil di proses');
                 } else {
                     $conf->TemplateAdmin(
                         'views/laporan/pelaporan/pelaporan.php'
@@ -349,6 +327,28 @@ if ($_GET) {
                 include 'views/laporan/pelaporan/pelaporan_excel.php';
             } elseif ($param_val == 'pelaporan_pdf') {
                 include 'views/laporan/pelaporan/pelaporan_pdf.php';
+            }
+
+
+            // ================== peninjauan =======
+            if ($param_val == 'peninjauan') {
+            if (isset($_POST['tanggal_awal']) && isset($_POST['tanggal_akhir'])) {
+                Redirect('http://localhost/pengaduan-bpbd/?laporan=peninjauan&tanggal_awal='.$_POST['tanggal_awal'].'&tanggal_akhir='.$_POST['tanggal_akhir'] .'','Data Berhasil di proses');
+            } elseif (isset($_POST['bulan']) && isset($_POST['tahun'])) {
+                Redirect('http://localhost/pengaduan-bpbd/?laporan=peninjauan&bulan='.$_POST['bulan'].'&tahun='.$_POST['tahun'].'','Data Berhasil di proses' );
+            } elseif (isset($_POST['tahun'])) {
+                Redirect('http://localhost/pengaduan-bpbd/?laporan=peninjauan&tahun='.$_POST['tahun'].'', 'Data Berhasil di proses');
+            } else {
+                $conf->TemplateAdmin(
+                    'views/laporan/peninjauan/peninjauan.php'
+                );
+            }
+            } elseif ($param_val == 'peninjauan_cetak') {
+                include 'views/laporan/peninjauan/peninjauan_cetak.php';
+            } elseif ($param_val == 'peninjauan_excel') {
+                include 'views/laporan/peninjauan/peninjauan_excel.php';
+            } elseif ($param_val == 'peninjauan_pdf') {
+                include 'views/laporan/peninjauan/peninjauan_pdf.php';
             }
 
             // ================== distribusi =======
